@@ -21,3 +21,4 @@ dist/
 
 # logs
 *.log
+.edgeone/

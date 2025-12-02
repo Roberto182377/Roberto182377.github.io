@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@edgeone/astro": "^1.0.4",
     "astro": "^5.16.3",
     "marked": "^17.0.1"
   },
