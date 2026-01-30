@@ -4,7 +4,7 @@ description: "Marco conceptual para responder a la pregunta que se hacen tantas 
 date: "2024-01-19"
 readTime: ""
 image: "/assets/images/posts/post2.jpg"
-slug: "api-security"
+slug: "que_es_SGSI"
 ---
 
 # SISTEMAS DE GESTIÓN DE LA SEGURIDAD DE LA INFORMACIÓN (SGSI)

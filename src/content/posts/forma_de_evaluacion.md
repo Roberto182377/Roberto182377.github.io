@@ -4,7 +4,7 @@ description: "Ponderaciones y forma de trabajar"
 date: "2026-19-01"
 readTime: ""
 image: ""
-slug: "accessibility-guide"
+slug: "forma_evaluar"
 ---
 
 # Portafolio de la materia
