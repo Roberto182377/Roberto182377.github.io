@@ -3,9 +3,9 @@ export const siteConfig = {
   title: "Portafolio REMH",
   description: "Sis",
   social: {
-    github: "https://github.com/tomcomtang/astro-multiplepage-portfolio",
-    twitter: "https://x.com/astrodotbuild",
-    email: "mailto:364786053@qq.com",
+    github: "https://github.com/Roberto182377",
+    twitter: "https://x.com/astrodohttps://x.com/UPSLP_MX?s=20tbuild",
+    email: "182377@upslp.edu.mx",
   },
 };
 
