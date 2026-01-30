@@ -12,7 +12,7 @@ export const siteConfig = {
 export const homeContent = {
   title: "Bienvenidos",
   description:
-    "El siguiente sitio web es un portafolio que busca evidenciar el aprendizaje adquirido en el curso deCNO V: Seguridad Informática, a traves de apuntes, actividades y proyectos realizados en este semestre",
+    "El siguiente sitio web es un portafolio que busca evidenciar el aprendizaje adquirido en el curso de CNO V: Seguridad Informática, a traves de apuntes, actividades y proyectos realizados en este semestre",
   buttons: {
     about: {
       text: "Mi Perfil",
