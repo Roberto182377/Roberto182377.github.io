@@ -77,24 +77,24 @@ export const aboutContent = {
     ],
   },
   connect: {
-    title: "Let's Connect",
+    title: "Contacto",
     description:
-      "Feel free to reach out if you want to collaborate or just say hi! You can find us on social media or drop us an",
+      "Cualquier consulta o mensaje que desees enviarme, puede ser atrves de mi correo: ",
     email: {
-      text: "email",
-      href: "mailto:364786053@qq.com",
+      text: "Roberto Morales",
+      href: "182377@upslp.edu.mx",
     },
   },
 };
 
 export const projectsContent = {
   meta: {
-    title: "Projects - Your Portfolio",
-    description: "Showcase of my best work and projects",
+    title: "Actividades de PArciales",
+    description: "Recopilacion de actividades, tareas y proyectos",
   },
-  title: "Our Projects",
+  title: "Parciales",
   description:
-    "Here you can showcase your best work. Each project should include a brief description, the technologies used, and any notable achievements. This helps potential clients or employers understand your capabilities.",
+    "En los siguientes modulos se encuentran la recopilación de las actividades, tareas y proyectos realizados durante cada parcial.",
   projects: [
     {
       title: "Parcial I",
