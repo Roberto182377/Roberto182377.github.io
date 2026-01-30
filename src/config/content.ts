@@ -45,8 +45,8 @@ export const aboutContent = {
     "MySQL",
   ],
   image: {
-    src: "/assets/images/about/coder.jpg",
-    alt: "Profile",
+    src: "/assets/images/about/perfil.jpg",
+    alt: "Perfil",
   },
   experience: {
     title: "Certificados",
