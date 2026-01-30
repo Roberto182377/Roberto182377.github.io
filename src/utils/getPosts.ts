@@ -50,7 +50,7 @@ export function getAllPosts(): Post[] {
       title: frontmatter.title || '',
       description: frontmatter.description || '',
       date: frontmatter.date || '',
-      readTime: frontmatter.readTime || '5 min read',
+      readTime: frontmatter.readTime || '',
       image: frontmatter.image || '/assets/images/posts/post1.jpg',
       slug: slug,
       href: `/posts/${slug}`,
