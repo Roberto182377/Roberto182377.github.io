@@ -20,7 +20,7 @@ export const homeContent = {
     },
     posts: {
       text: "Apuntes",
-      href: "/posts/",
+      href: "/apuntes/",
     },
   },
   images: {
