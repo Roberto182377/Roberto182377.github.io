@@ -34,45 +34,45 @@ export const aboutContent = {
     title: "About - Your Portfolio",
     description: "Learn more about my background, skills, and experience",
   },
-  title: "About Me",
+  title: "Acerca de mí",
   description:
-    "This is where you can introduce yourself or your company. Share your story, mission, and values. Explain what makes you unique and why people should be interested in your work. Keep it concise but engaging.",
-  skills: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Tailwind CSS",
-    "Node.js",
-    "Docker",
-    "Git",
-    "AWS",
+    "Estudiante en Ingeniería en Tecnologías de la Información, en busqueda del dominio de diferentes lenguajes y conocimientos escenciales de redes",
+    skills: [
+    "C, C++",
+    "Java",
+    "HTML, CSS",
+    "Kotlin",
+    "MySQL",
   ],
   image: {
     src: "/assets/images/about/coder.jpg",
     alt: "Profile",
   },
   experience: {
-    title: "Experience",
+    title: "Certificados",
     items: [
       {
-        period: "2022 - Present",
-        position: "Senior Frontend Developer",
-        company: "Tencent Cloud",
+        //NDG Linux Essentials | Cisco (Enero 2025)
+        period: "Enero 2025",
+        position: "NDG Linux Essentials",
+        company: "Cisco",
         description:
-          "Leading frontend development for EdgeOne platform and templates.",
+          "Fundamentos de Linux, código abierto y la línea de comandos..",
       },
       {
-        period: "2020 - 2022",
-        position: "Frontend Developer",
-        company: "Tencent Cloud",
+        //CCNA: Introduction to Networks | Cisco (Enero 2026)
+        period: "Enero 2026",
+        position: "CCNA: Introduction to Networks",
+        company: "Cisco",
         description:
-          "Developed and maintained multiple web applications and tools.",
+          "Habilidades para instalar, configurar, operar y solucionar problemas de redes empresariales",
       },
       {
-        period: "2018 - 2020",
-        position: "Junior Developer",
-        company: "Tencent Cloud",
-        description: "Worked on various client projects and internal tools.",
+        //Introduction to Data Science | Cisco (Enero 2026)
+        period: "Enero 2026",
+        position: "Introduction to Data Science",
+        company: "Cisco",
+        description: "Uso de estadística, inteligencia artificial e ingeniería de computación para analizar grandes volúmenes de dato.",
       },
     ],
   },
@@ -97,30 +97,23 @@ export const projectsContent = {
     "Here you can showcase your best work. Each project should include a brief description, the technologies used, and any notable achievements. This helps potential clients or employers understand your capabilities.",
   projects: [
     {
-      title: "Project One",
+      title: "Parcial I",
       description:
-        "A brief description of your first project. Explain what it does and what technologies you used.",
+        "Fundamentos del Hackin Ético",
       image: "/assets/images/projects/project1.jpg",
       href: "#",
     },
     {
-      title: "Project Two",
+      title: "Parcial II",
       description:
-        "Describe your second project here. Highlight the key features and your role in development.",
+        "Técnicas de explotación de vulnerabilidades y seguridad en entornos tecnológicos.",
       image: "/assets/images/projects/project2.jpg",
       href: "#",
     },
     {
-      title: "Project Three",
+      title: "Parcial III",
       description:
-        "Share details about your third project. What problems did it solve? What was the outcome?",
-      image: "/assets/images/projects/project3.png",
-      href: "#",
-    },
-    {
-      title: "Project Four",
-      description:
-        "Share details about your third project. What problems did it solve? What was the outcome?",
+        "Post-explotación y reportes de seguridad",
       image: "/assets/images/projects/project3.png",
       href: "#",
     },
