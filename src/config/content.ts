@@ -36,7 +36,7 @@ export const aboutContent = {
   },
   title: "Acerca de mí",
   description:
-    "Estudiante en Ingeniería en Tecnologías de la Información, en busqueda del dominio de diferentes lenguajes y conocimientos escenciales de redes",
+    "Estudiante en Ingeniería en Tecnologías de la Información, en busqueda del dominio de diferentes lenguajes y conocimientos escenciales en TI",
     skills: [
     "C, C++",
     "Java",

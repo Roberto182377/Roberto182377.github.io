@@ -1,7 +1,7 @@
 ---
 title: "Tipos de atacantes"
 description: "Tipos de hackers existentes, claisificados"
-date: "2024-01-20"
+date: "2026-01-20"
 readTime: ""
 image: "/assets/images/posts/post1.jpg"
 slug: "tipos_atacantes"

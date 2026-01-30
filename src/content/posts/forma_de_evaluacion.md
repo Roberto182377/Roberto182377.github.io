@@ -1,7 +1,7 @@
 ---
 title: "Forma de Evaluación"
 description: "Ponderaciones y forma de trabajar"
-date: "2026-19-01"
+date: "2026-01-19"
 readTime: ""
 image: ""
 slug: "forma_evaluar"

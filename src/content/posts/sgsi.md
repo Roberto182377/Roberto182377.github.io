@@ -1,7 +1,7 @@
 ---
 title: "SGSI"
 description: "Marco conceptual para responder a la pregunta que se hacen tantas empresas sobre si están invirtiendo mucho o poco en"
-date: "2024-01-19"
+date: "2026-01-19"
 readTime: ""
 image: "/assets/images/posts/post2.jpg"
 slug: "que_es_SGSI"
