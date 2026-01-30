@@ -1,95 +1,32 @@
 ---
-title: "Web Accessibility: A Comprehensive Guide"
-description: "Make your web applications accessible to all users"
-date: "2024-04-02"
-readTime: "8 min read"
-image: "/assets/images/posts/post1.jpg"
+title: "Forma de Evaluación"
+description: "Ponderaciones y forma de trabajar"
+date: "19-01-2026"
+readTime: ""
+image: ""
 slug: "accessibility-guide"
 ---
 
-# Web Accessibility: A Comprehensive Guide
+# Portafolio de la materia
 
-Web accessibility ensures that websites and applications can be used by everyone, including people with disabilities. It's not just the right thing to do—it's also required by law in many jurisdictions.
+El portafolio digital constituye el compendio integral de las actividades,prácticas y proyectos desarrollados por el estudiantea lo largo de la asignatura.
+Su finalidad es documentar de manera estructurada  ysistemática el proceso de aprendizaje, así como las competencias técnicas adquiridas en materia de seguridad informática
 
-## Why Accessibility Matters
+## Fecha de examenes
 
-- Legal compliance (ADA, WCAG)
-- Broader user base
-- Better SEO
-- Improved UX for all users
+- Parcial I: martes 17 de febrero de 2026.
+- Parcial II: martes 24 de marzo de 2026.
+- Parcial III: martes 19 de mayo de 2026.
+- Final:martes 26 de mayo de 2026 (por confirmar)
 
-## WCAG Guidelines
+## Ponderacion Parciales
 
-The Web Content Accessibility Guidelines (WCAG) define four principles:
+- Actividades: 60%
+- Proyecto: 30%
+- Examen: 10%
 
-### 1. Perceivable
+## Ponderacion Final
 
-Information must be presentable to users in ways they can perceive:
-- Alt text for images
-- Captions for videos
-- Sufficient color contrast
+- Protafolio - 100%
 
-### 2. Operable
 
-Interface components must be operable:
-- Keyboard navigation
-- No seizure-inducing content
-- Adequate time limits
-
-### 3. Understandable
-
-Information and UI operation must be understandable:
-- Readable text
-- Predictable functionality
-- Input assistance
-
-### 4. Robust
-
-Content must be robust enough for assistive technologies:
-- Valid HTML
-- Proper semantic markup
-- ARIA attributes when needed
-
-## Common Practices
-
-### Semantic HTML
-
-Use proper HTML elements:
-```html
-<nav> for navigation
-<main> for main content
-<article> for articles
-<button> for buttons (not div)
-```
-
-### ARIA Attributes
-
-Use ARIA when HTML isn't sufficient:
-- `aria-label`: Descriptive label
-- `aria-labelledby`: Reference to labeling element
-- `aria-hidden`: Hide decorative elements
-
-### Keyboard Navigation
-
-Ensure all functionality is keyboard accessible:
-- Tab order makes sense
-- Focus indicators are visible
-- Skip links for navigation
-
-### Color Contrast
-
-Maintain sufficient contrast ratios:
-- Normal text: 4.5:1
-- Large text: 3:1
-- UI components: 3:1
-
-## Testing Tools
-
-- WAVE browser extension
-- axe DevTools
-- Lighthouse accessibility audit
-- Screen readers (NVDA, JAWS, VoiceOver)
-
-## Conclusion
-
-Accessibility should be built into your development process from the start. It benefits everyone and creates a more inclusive web.
