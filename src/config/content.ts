@@ -1,7 +1,7 @@
 export const siteConfig = {
-  name: "Your Portfolio",
-  title: "Someone's Portfolio",
-  description: "A showcase of my work and thoughts",
+  name: "Roberto Morales",
+  title: "Portafolio REMH",
+  description: "Sis",
   social: {
     github: "https://github.com/tomcomtang/astro-multiplepage-portfolio",
     twitter: "https://x.com/astrodotbuild",
@@ -10,16 +10,16 @@ export const siteConfig = {
 };
 
 export const homeContent = {
-  title: "Hello, I'm Your Name",
+  title: "Bienvenidos",
   description:
-    "A passionate frontend developer with a keen eye for design and a love for creating beautiful, functional web experiences.",
+    "El siguiente sitio web es un portafolio que busca evidenciar el aprendizaje adquirido en el curso deCNO V: Seguridad Informática, a traves de apuntes, actividades y proyectos realizados en este semestre",
   buttons: {
     about: {
-      text: "View About",
+      text: "Mi Perfil",
       href: "/about/",
     },
     posts: {
-      text: "Read Posts",
+      text: "Apuntes",
       href: "/posts/",
     },
   },
