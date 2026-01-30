@@ -117,6 +117,13 @@ export const projectsContent = {
       image: "/assets/images/projects/project3.png",
       href: "#",
     },
+    {
+      title: "Project Four",
+      description:
+        "Share details about your third project. What problems did it solve? What was the outcome?",
+      image: "/assets/images/projects/project3.png",
+      href: "#",
+    },
   ],
 };
 
