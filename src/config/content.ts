@@ -31,8 +31,8 @@ export const homeContent = {
 
 export const aboutContent = {
   meta: {
-    title: "About - Your Portfolio",
-    description: "Learn more about my background, skills, and experience",
+    title: "Acerca de mi perfilo",
+    description: "Habilidades,meta, concimientos",
   },
   title: "Acerca de mí",
   description:
