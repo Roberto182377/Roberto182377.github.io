@@ -16,7 +16,7 @@ export const homeContent = {
   buttons: {
     about: {
       text: "Mi Perfil",
-      href: "/about/",
+      href: "/perfil/",
     },
     posts: {
       text: "Apuntes",
