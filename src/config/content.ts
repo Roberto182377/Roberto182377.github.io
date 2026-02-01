@@ -82,14 +82,14 @@ export const aboutContent = {
       "Cualquier consulta o mensaje que desees enviarme, puede ser atrves de mi correo: ",
     email: {
       text: "Roberto Morales",
-      href: "182377@upslp.edu.mx",
+      href: "mailto:182377@upslp.edu.mx",
     },
   },
 };
 
 export const projectsContent = {
   meta: {
-    title: "Actividades de PArciales",
+    title: "Actividades de Parciales",
     description: "Recopilacion de actividades, tareas y proyectos",
   },
   title: "Parciales",
