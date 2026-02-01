@@ -5,7 +5,7 @@ export const siteConfig = {
   social: {
     github: "https://github.com/Roberto182377",
     twitter: "https://x.com/astrodohttps://x.com/UPSLP_MX?s=20tbuild",
-    email: "182377@upslp.edu.mx",
+    email: "mailto:182377@upslp.edu.mx",
   },
 };
 
