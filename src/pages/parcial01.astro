@@ -68,9 +68,9 @@ const postsData = JSON.stringify(allPosts);
 
         function getPageUrl(page) {
           if (page === 1) {
-            return "/posts/";
+            return "/parcial01/";
           }
-          return `/posts/?page=${page}`;
+          return `/parcial01/?page=${page}`;
         }
 
         function renderPosts(page) {
@@ -270,7 +270,7 @@ const postsData = JSON.stringify(allPosts);
           if (!target || !target.href) return;
 
           const href = target.getAttribute("href");
-          if (href && href.startsWith("/posts") && href.includes("?page=")) {
+          if (href && href.startsWith("/parcial01") && href.includes("?page=")) {
             e.preventDefault();
             const url = new URL(href, window.location.origin);
             const page = url.searchParams.get("page") || "1";
