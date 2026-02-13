@@ -53,7 +53,7 @@ export function getAllPosts(): Post[] {
       readTime: frontmatter.readTime || '',
       image: frontmatter.image || '/assets/images/posts/post1.jpg',
       slug: slug,
-      href: `/posts/${slug}`,
+      href: `/parcial01/${slug}`,
     });
   }
 
