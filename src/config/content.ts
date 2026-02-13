@@ -19,7 +19,7 @@ export const homeContent = {
       href: "/perfil/",
     },
     posts: {
-      text: "Apuntes",
+      text: "Actividades",
       href: "/parciales/",
     },
   },
