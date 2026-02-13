@@ -101,7 +101,7 @@ export const projectsContent = {
       description:
         "Fundamentos del Hackin Ético",
       image: "/assets/images/projects/project1.jpg",
-      href: "/apuntes/",
+      href: "/parcial01/",
     },
     {
       title: "Parcial II",
