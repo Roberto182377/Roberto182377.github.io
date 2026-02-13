@@ -57,12 +57,11 @@ export function getAllPosts(): Post[] {
     });
   }
 
-  // Sort by date (newest first)
-  posts.sort((a, b) => {
-    const dateA = new Date(a.date).getTime();
-    const dateB = new Date(b.date).getTime();
-    return dateB - dateA;
-  });
+  // Sort by slug (act1, act2, act10...)
+  posts.sort((a, b) =>
+    a.slug.localeCompare(b.slug, undefined, { numeric: true })
+  );
+
 
   return posts;
 }
