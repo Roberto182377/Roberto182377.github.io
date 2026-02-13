@@ -10,7 +10,7 @@ slug: "act04-182377"
 
 Teniendo en cuenta la topología de red mostrada completa la tabla con las reglas de iptables que deberían aplicarse en el Firewall para llevar a cabo las acciones solicitadas. Las reglas, siempre que sea posible, deben determinar protocolo, dirección IP origen y destino, puerto/s origen y destino y el estado de la conexión. 
 
-![](public/assets/images/posts/act04_img.png)
+![Act 04](/assets/images/posts/act04_img.png)
 
 
 
