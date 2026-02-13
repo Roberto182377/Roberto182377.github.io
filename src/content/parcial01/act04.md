@@ -16,8 +16,8 @@ Teniendo en cuenta la topología de red mostrada completa la tabla con las regla
 
 |**regla** |**COMANDO** |
 | - | - |
-|**1** |```iptables -A INPUT -j DROP``` |
-|**2** |```iptables -A INPUT -p tcp -m state ESTABLISHED -j ACCEPT``` |
+|**1** |`iptables -A INPUT -j DROP`|
+|**2** |`iptables -A INPUT -p tcp -m state ESTABLISHED -j ACCEPT`|
 |**3** |```iptables -A OUTPUT -p tcp --sport 53 -j ACCEPT``` |
 |**4** |```iptables -A INTPUT -p tcp -s 192.1.2.10 -d 0.0.0.0 -- -j ACCEPT``` |
 |**5** |```iptables -A OUTPUT -p tcp -s 192.1.2.10 -j ACCEPT``` |
