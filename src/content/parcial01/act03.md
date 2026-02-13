@@ -53,6 +53,11 @@ d. ***Ver reglas con contadores (paquetes y bytes)***
 *Crear una regla para la tabla FILTRER, la regla se añade al final, el paquete que pase por la interfaz eth0 de un protocolo tcp ya sea un estado de conexión establecido o nuevo será aceptado por los puertos 22()SSH), 80(HTTP) o 443(HTTPS).*
 
 7. **Permitir tráfico HHTP entrante**
+```
+feat: Add user authentication
+fix: Resolve memory leak in data processing
+docs: Update API documentation
+```
 `iptables -A INPUT -p tcp –dport 80 -j ACCEPT`
 
 
