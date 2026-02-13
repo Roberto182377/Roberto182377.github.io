@@ -24,9 +24,8 @@ slug: "act03-182377"
 |**SECURITY**|*Aplicar tablas con permisos*|*Ciertos paquetes solo son manejados por algo/alguien*|
 
 3. **Anatomía de un comando iptables:**
-```
-Iptables -A INPUT -p tcp -m multiport –dports 80,443 -j ACCEPT
-```
+
+Iptables -A `INPUT` -p tcp -m `multiport` –dports 80,443 -j `ACCEPT`
 
 
 4. **Este comando permite:**
