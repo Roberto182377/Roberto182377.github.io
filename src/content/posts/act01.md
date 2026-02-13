@@ -1,20 +1,11 @@
 ---
-title: "ACTIVIDAD 01 -Análisis en grupo de un ciberataque real y su impacto empresarial"
+title: "Actividad 01 -Análisis en grupo de un ciberataque real y su impacto empresarial"
 description: "Investigación realizada en equipo sobre el ataque de NotPetya– Maersk  sucedido en el 2017"
 date: "2026-01-30"
 readTime: ""
 image: ""
 slug: "act01-Equipo01"
 ---
-![]
-
-![PLAN DE APERTURA UPSLP - Conjunto de datos - Datos Abiertos]
-
-
-7 | Página
-
-
-
 
 <a name="_hlk161919639"></a>**INTRODUCCIÓN**
 
