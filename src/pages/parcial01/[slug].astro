@@ -13,20 +13,20 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 
 if (!slug) {
-  return Astro.redirect("/posts/");
+  return Astro.redirect("/parcial01/");
 }
 
 const post = getPostBySlug(slug);
 
 if (!post) {
-  return Astro.redirect("/posts/");
+  return Astro.redirect("/parcial01/");
 }
 
 const { frontmatter, Content } = post;
 
 if (!Content) {
   console.error(`Content component not found for slug: ${slug}`);
-  return Astro.redirect("/posts/");
+  return Astro.redirect("/parcial01/");
 }
 ---
 
