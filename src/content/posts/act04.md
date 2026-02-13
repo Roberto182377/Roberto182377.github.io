@@ -1,0 +1,25 @@
+---
+title: "Actividad 04 -  Mecanismos de defensa en red"
+description: "Brindar el comando corrcto para cumplir la funcion sitada"
+date: "2026-02-04"
+readTime: ""
+image: "/assets/images/posts/post1.jpg"
+slug: "act04-182377"
+---
+**ACTIVIDAD 04** 
+
+Teniendo en cuenta la topología de red mostrada completa la tabla con las reglas de iptables que deberían aplicarse en el Firewall para llevar a cabo las acciones solicitadas. Las reglas, siempre que sea posible, deben determinar protocolo, dirección IP origen y destino, puerto/s origen y destino y el estado de la conexión. 
+
+![](public/assets/images/posts/act04_img.png)
+
+
+
+|**regla** |**COMANDO** |
+| - | - |
+|**1** |Iptables -A INPUT -j DROP |
+|**2** |Iptables -A INPUT -p tcp -m state ESTABLISHED -j ACCEPT |
+|**3** |Iptables -A OUTPUT -p tcp --sport 53 -j ACCEPT |
+|**4** |Iptables -A INTPUT -p tcp -s 192.1.2.10 -d 0.0.0.0 -- -j ACCEPT |
+|**5** |Iptables -A OUTPUT -p tcp -s 192.1.2.10 -j ACCEPT |
+|**6** |Iptables -A INPUT -p tcp --dport 80 -d 192.1.2.11 -s 0.0.0.0 -j ACCEPT |
+|**7** |Iptables -A INPUT -p tcp -d 0.0.0.0-j ACCEPT |

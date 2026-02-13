@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Roberto Morales",
   title: "Portafolio REMH",
-  description: "Sis",
+  description: "Portafolio virtual de CNO V: Seguridad Informática",
   social: {
     github: "https://github.com/Roberto182377",
     twitter: "https://x.com/astrodohttps://x.com/UPSLP_MX?s=20tbuild",
@@ -20,7 +20,7 @@ export const homeContent = {
     },
     posts: {
       text: "Actividades",
-      href: "/parciales/",
+      href: "/actividades/",
     },
   },
   images: {
