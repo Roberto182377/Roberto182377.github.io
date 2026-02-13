@@ -20,7 +20,7 @@ export const homeContent = {
     },
     posts: {
       text: "Apuntes",
-      href: "/apuntes/",
+      href: "/parciales/",
     },
   },
   images: {
@@ -101,7 +101,7 @@ export const projectsContent = {
       description:
         "Fundamentos del Hackin Ético",
       image: "/assets/images/projects/project1.jpg",
-      href: "#",
+      href: "/apuntes/",
     },
     {
       title: "Parcial II",
