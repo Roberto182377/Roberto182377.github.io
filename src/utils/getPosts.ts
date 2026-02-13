@@ -8,7 +8,7 @@ const allMarkdownModules = import.meta.glob<{
     slug?: string;
   };
   default: any;
-}>('../content/posts/*.md', { eager: true });
+}>('../content/parcial01/*.md', { eager: true });
 
 export interface Post {
   title: string;
