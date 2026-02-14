@@ -12,6 +12,8 @@ slug: "act05-182377"
 
 ## CARTOGRAFIANDO EL PENTESTING
 
+![Act 05](/assets/images/posts/img_Act05_portada.jpg)
+
 ### Introducción
 
 Las pruebas de penetración y la evaluación de la seguridad informática son actividades fundamentales para identificar debilidades técnicas, fallas de configuración y deficiencias en los controles de seguridad de los sistemas de información. Para llevar a cabo estos procesos de forma estructurada y profesional, existen diversas metodologías y marcos de referencia que proporcionan guías, fases y criterios estandarizados.   

@@ -12,6 +12,8 @@ slug: "act01-Equipo01"
 
 ## ATAQUE A NOTPETYA – MAERSK
 
+![Act 01](/assets/images/posts/img_Act01_portada.jpg)
+
 ### INTRODUCCIÓN
 
 En el contexto de la digitalización global, una de las principales amenazas a las que se enfrentan las empresas y los gobiernos son los ciberataques, los cuales pueden afectar infraestructura crítica a escala internacional. Estos incidentes pueden tener motivaciones económicas, políticas, estratégicas o de sabotaje, provocando interrupciones graves en servicios esenciales y pérdidas económicas millonarias.

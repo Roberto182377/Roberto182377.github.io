@@ -18,6 +18,8 @@ El control del tráfico de red es un componente esencial de la seguridad inform�
 
 Mediante el uso de tablas, cadenas y reglas, iptables permite implementar políticas de seguridad precisas, controlar accesos a servicios, proteger sistemas frente a accesos no autorizados y gestionar el flujo del tráfico entrante y saliente. Comprender su arquitectura y el flujo que sigue un paquete resulta clave para diseñar configuraciones de firewall eficaces y seguras.
 
+![Act 03](/assets/images/posts/img_Act03_portada.jpg)
+
 ### Ejercicios
 
 1. **Completa los espacios conforme se explica el flujo del paquete**

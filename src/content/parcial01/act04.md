@@ -37,5 +37,7 @@ Teniendo en cuenta la topología de red mostrada completa la tabla con las regla
 
 El diseño de reglas de iptables basado en una política restrictiva demuestra la importancia de permitir solo lo estrictamente necesario, en lugar de confiar en configuraciones permisivas. El uso del seguimiento de estados de conexión mejora tanto la seguridad como el rendimiento del firewall, evitando reglas redundantes y bloqueos innecesarios.
 
+![Act 04](/assets/images/posts/img_Act04_portada.jpg)
+
 ### Referencias
 - Servando L. (s.f.), CNO V: Seguridad Informática, <a href="/assets/images/actividades_presentaciones_P1/S02-UPSLP_SI2026-v01-NUEVA VERSION.pdf">Presentación CNO V: Seguridad Informática</a>
