@@ -3,7 +3,7 @@ title: "Actividad 01 -Análisis en grupo de un ciberataque real y su impacto emp
 description: "Investigación realizada en equipo sobre el ataque de NotPetya– Maersk  sucedido en el 2017"
 date: "2026-01-30"
 readTime: ""
-image: ""
+image: "/assets/images/posts/img_Act01_portada.jpg"
 slug: "act01-Equipo01"
 ---
 <div align="right" style="margin-bottom: 1rem;">

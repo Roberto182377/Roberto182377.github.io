@@ -3,7 +3,7 @@ title: "Actividad 03 - Interpretación y traducción de políticas de filtrado e
 description: "Resolver los ejercicios planteados en base a lo visto del tema de IPtabls"
 date: "2026-02-03"
 readTime: ""
-image: "/assets/images/posts/post1.jpg"
+image: "/assets/images/posts/img_Act03_portada.jpg"
 slug: "act03-182377"
 ---
 <div align="right" style="margin-bottom: 1rem;">

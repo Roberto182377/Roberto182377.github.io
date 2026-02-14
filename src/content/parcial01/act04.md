@@ -3,7 +3,7 @@ title: "Actividad 04 -  Mecanismos de defensa en red"
 description: "Brindar el comando corrcto para cumplir la funcion sitada"
 date: "2026-02-04"
 readTime: ""
-image: "/assets/images/posts/post1.jpg"
+image: "/assets/images/posts/img_Act04_portada.jpg"
 slug: "act04-182377"
 ---
 <div align="right" style="margin-bottom: 1rem;">

@@ -3,7 +3,7 @@ title: "Actividad 02 - Análisis de servicios de seguridad (X.800 y RFC 4949)"
 description: "Haciendo uso del modelo ITU-T X.800 y apoyado del lenguaje técnico del glosario RFC4949 (Internet Security Glossary), partiendo de estas bases se presentan 10 escenarios"
 date: "2026-01-27"
 readTime: ""
-image: "/assets/images/posts/post2.jpg"
+image: "/assets/images/posts/img_Act02_portada.png"
 slug: "act02-182377"
 ---
 <div align="right" style="margin-bottom: 1rem;">
