@@ -24,4 +24,4 @@ Teniendo en cuenta la topología de red mostrada completa la tabla con las regla
 |**6** |`iptables -A INPUT -p tcp --dport 80 -d 192.1.2.11 -s 0.0.0.0 -j ACCEPT`: |
 |**7** |<code>iptables -A INPUT -p tcp -d 0.0.0.0-j ACCEPT</code>  |
 
-<code>iptables -A INPUT -j DROP</code> 
+

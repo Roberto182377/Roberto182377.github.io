@@ -55,9 +55,7 @@ d. ***Ver reglas con contadores (paquetes y bytes)***
 
 6. **¿Qué hace esta regla?**
 
-***Iptables -A INPUT -i eth0 -p tcp -m multiport –dports 22,80,443 \***
-
-***-m state –state NEW, ESTABLISHED -j ACCEPT***
+***Iptables -A INPUT -i eth0 -p tcp -m multiport –dports 22,80,443 -m state –state NEW, ESTABLISHED -j ACCEPT***
 
 *Crear una regla para la tabla FILTRER, la regla se añade al final, el paquete que pase por la interfaz eth0 de un protocolo tcp ya sea un estado de conexión establecido o nuevo será aceptado por los puertos 22()SSH), 80(HTTP) o 443(HTTPS).*
 
