@@ -26,6 +26,7 @@ Mediante el uso de tablas, cadenas y reglas, iptables permite implementar polít
 *Cuando un paquete llega al sistema, primero pasa por una tabla, después por una cadena y finalmente se ejecuta una acción.*
 
 2. **Relaciona cada tabla con su propósito principal**
+
 |**Tabla**|**Propósito principal**|**Ejemplo de uso**|
 | :- | :- | :- |
 |**FILTER**|*Filtrar paquetes*|*Bloqueo al tráfico excepto SSH*|
