@@ -6,6 +6,9 @@ readTime: ""
 image: "/assets/images/posts/post1.jpg"
 slug: "act03-182377"
 ---
+<div align="right" style="margin-bottom: 1rem;">
+  <a href="/assets/images/docs_P1/act03-182377.pdf">📄PDF Actividad III</a>
+</div>
 
 ## IPTABLES
 
@@ -84,7 +87,8 @@ El uso de iptables demuestra que la seguridad de red no depende únicamente de b
 Además, la práctica evidencia la importancia del orden de las reglas, del uso adecuado de módulos como state o multiport, y de mecanismos de registro para auditoría y monitoreo. En conjunto, iptables se consolida como una herramienta poderosa que, bien utilizada, fortalece significativamente la postura de seguridad de un sistema Linux.
 
 ### Referencias
-- Servando L. (s.f.), CNO V: Seguridad Informática, [Presentación CNO V: Seguridad Informática](/assets/images/actividades_presentaciones_P1/S02-UPSLP_SI2026-v01-NUEVA VERSION.pdf)
+- Servando L. (s.f.), CNO V: Seguridad Informática, <a href="/assets/images/actividades_presentaciones_P1/S02-UPSLP_SI2026-v01-NUEVA VERSION.pdf">Presentación CNO V: Seguridad Informática</a>
+
 
 
 

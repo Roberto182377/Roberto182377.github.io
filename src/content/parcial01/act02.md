@@ -7,7 +7,7 @@ image: "/assets/images/posts/post2.jpg"
 slug: "act02-182377"
 ---
 <div align="right" style="margin-bottom: 1rem;">
-  📄PDF Actividad II <a href="/assets/images/docs_P1/182377-act02.pdf">Descargar PDF</a>
+  <a href="/assets/images/docs_P1/182377-act02.pdf">📄PDF Actividad II</a>
 </div>
 
 ## ANÁLISIS DE SERVICIOS DE SEGURIDAD

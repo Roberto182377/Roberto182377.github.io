@@ -6,6 +6,10 @@ readTime: ""
 image: "/assets/images/posts/post1.jpg"
 slug: "act05-182377"
 ---
+<div align="right" style="margin-bottom: 1rem;">
+  <a href="/assets/images/docs_P1/act05-182377.pdf">📄PDF Actividad V</a>
+</div>
+
 ## CARTOGRAFIANDO EL PENTESTING
 
 ### Introducción

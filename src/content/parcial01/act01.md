@@ -7,10 +7,12 @@ image: ""
 slug: "act01-Equipo01"
 ---
 <div align="right" style="margin-bottom: 1rem;">
-  📄PDF Actividad II <a href="/assets/images/docs_P1/act01-Equipo01.pdf">Descargar PDF</a>
+  <a href="/assets/images/docs_P1/act01-Equipo01.pdf">📄PDF Actividad I</a>
 </div>
 
-<a name="_hlk161919639"></a>**INTRODUCCIÓN**
+## ATAQUE A NOTPETYA – MAERSK
+
+### INTRODUCCIÓN
 
 En el contexto de la digitalización global, una de las principales amenazas a las que se enfrentan las empresas y los gobiernos son los ciberataques, los cuales pueden afectar infraestructura crítica a escala internacional. Estos incidentes pueden tener motivaciones económicas, políticas, estratégicas o de sabotaje, provocando interrupciones graves en servicios esenciales y pérdidas económicas millonarias.
 
@@ -103,7 +105,7 @@ El incidente de NotPetya evidenció la importancia de aplicar de forma efectiva 
 
 
 
-**LECCIONES APRENDIDAS Y RECOMENDACIONES**
+### LECCIONES APRENDIDAS Y RECOMENDACIONES
 
 El ataque NotPetya dejó lecciones clave para Maersk y para organizaciones con infraestructuras digitales complejas:
 
@@ -115,7 +117,7 @@ El ataque NotPetya dejó lecciones clave para Maersk y para organizaciones con i
 
 En el contexto mexicano y latinoamericano, donde muchas empresas dependen de software fiscal o gubernamental obligatorio, resulta fundamental auditar a proveedores tecnológicos, fortalecer controles de seguridad y fomentar una cultura organizacional de ciberseguridad.
 
-**REFERENCIAS**
+### REFERENCIAS
 
 - CNBC. (2017, 16 de agosto). Maersk says NotPetya cyberattack could cost $300 million. <https://www.cnbc.com/2017/08/16/maersk-says-notpetya-cyberattack-could-cost-300-million.html> 
 - Computer Weekly. (2017, 16 de agosto). NotPetya attack cost up to $300m, says Maersk. <https://www.computerweekly.com/news/450424559/NotPetya-attack-cost-up-to-300m-says-Maersk>
