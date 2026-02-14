@@ -6,7 +6,15 @@ readTime: ""
 image: "/assets/images/posts/post1.jpg"
 slug: "act05-182377"
 ---
+## CARTOGRAFIANDO EL PENTESTING
 
+### Introducción
+
+Las pruebas de penetración y la evaluación de la seguridad informática son actividades fundamentales para identificar debilidades técnicas, fallas de configuración y deficiencias en los controles de seguridad de los sistemas de información. Para llevar a cabo estos procesos de forma estructurada y profesional, existen diversas metodologías y marcos de referencia que proporcionan guías, fases y criterios estandarizados.   
+
+Cada metodología de pentesting tiene un enfoque distinto, ya sea ofensivo, defensivo o evaluativo. Algunas priorizan la simulación de ataques reales, otras se enfocan en la medición objetiva de la seguridad, mientras que algunas sirven como marcos de conocimiento para detección y respuesta. Comprender estas diferencias permite seleccionar la metodología más adecuada según el tipo de sistema, el objetivo de la evaluación y el contexto organizacional.
+
+### Tabla Comparativa
 |**Metodología** |**Descripción** |**Fases** |**Objetivo** |**Escenarios** |**Orientación** |**Autores (URL)** |**Certificaciones** |**Versiones** |
 | - | - | - | - | - | - | - | - | - |
 |**MTRE ATT&CK** |Marco de conocimiento que documenta tácticas, técnicas y procedimientos (TTPs) utilizados por atacantes reales, basado en observación de amenazas. |No define fases secuenciales; se organiza en tácticas (Initial Access, Execution, Persistence, etc.) y técnicas. |Identificar y analizar técnicas de ataque reales y mejorar la detección y respuesta. |SOC, threat hunting, red teaming, evaluación de defensas. |Defensa / evaluación |<p>MITRE </p><p>[https://attack.mitre.org](https://attack.mitre.org/)</p>|No certificaciones directas (usado como referencia en varias). |Actualización continua (Enterprise, Mobile, ICS). |
@@ -21,4 +29,17 @@ slug: "act05-182377"
 |**ISSAF** |Marco integral para pruebas de seguridad con enfoque técnico y procedimental. |Planeación, evaluación, explotación, reporte. |Identificar debilidades técnicas y organizacionales. |Pentesting clásico, auditorías de seguridad. |Ataque / evaluación |OISSG [https://www.oissg.org/issaf](https://www.oissg.org/issaf/)|No certificaciones vigentes ampliamente reconocidas. |Marco estable (poca actualización reciente). |
 |||||||[/ ](https://www.oissg.org/issaf/)|||
 
+### Conclusión
+
+El análisis comparativo demuestra que no existe una única metodología universal para todas las evaluaciones de seguridad. Cada marco responde a necesidades específicas y contextos distintos. Metodologías como PTES y OWASP WSTG son ideales para pruebas técnicas ofensivas, mientras que NIST SP 800-115 y OSSTMM resultan más apropiadas para auditorías formales y evaluaciones estructuradas.
+
+Por otro lado, MITRE ATT&CK complementa estas metodologías al proporcionar una visión realista del comportamiento de los atacantes, fortaleciendo la detección y la respuesta a incidentes. En conjunto, estas metodologías permiten al profesional de seguridad adoptar un enfoque integral, combinando ataque, evaluación y defensa para mejorar la postura de seguridad de las organizaciones.
+
+### Referencias bibliográficas
+- MITRE. (s.f.). MITRE ATT&CK Framework. <https://attack.mitre.org> 
+- OWASP. (s.f.). Web Security Testing Guide (WSTG). <https://owasp.org/www-project-web-security-testing-guide/> 
+- NIST. (2008). Special Publication 800-115: Technical Guide to Information Security Testing and Assessment. <https://csrc.nist.gov/publications/detail/sp/800-115/final> 
+- ISECOM. (s.f.). OSSTMM v3 – Open Source Security Testing Methodology Manual. <https://www.isecom.org> 
+- PTES Technical Guidelines. (s.f.). Penetration Testing Execution Standard. <http://www.pentest-standard.org> 
+- OISSG. (s.f.). Information Systems Security Assessment Framework (ISSAF). <https://www.oissg.org/issaf/> 
 
