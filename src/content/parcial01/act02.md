@@ -6,16 +6,19 @@ readTime: ""
 image: "/assets/images/posts/post2.jpg"
 slug: "act02-182377"
 ---
+<div align="right" style="margin-bottom: 1rem;">
+  📄PDF Actividad II <a href="/assets/images/docs_P1/182377-act02.pdf">Descargar PDF</a>
+</div>
 
-**ANÁLISIS DE SERVICIOS DE SEGURIDAD**
+## ANÁLISIS DE SERVICIOS DE SEGURIDAD
 
-**Introducción**
+### Introducción
 
 Al realizar un análisis en la índole de la ciberseguridad, es necesario el emplear normativas y estándares ya preestablecidos, entrando en juego el ITU-T X.800 el cual proporciona un modelo fundamental al definir los servicios de seguridad (autenticación, control de acceso, confidencialidad, integridad, no repudio y disponibilidad), sirviendo como base que nos permite identificar que cosas se ven comprometidas en la seguridad.
 
 De misma manera el RFC 4949 (Internet Security Glossary), establece un glosario técnico que permite dar una mayor idea de la conceptualización a la hora de describir el caso que se presenta, un documento de apoyo, esencial para comprender el contexto que se llegue a presentar.
 
-**Análisis de Casos**
+### Análisis de Casos
 
 |***CASO***|***Servicios X.800 comprometidos***|***Definición(es) aplicable(s) RFC 4949.***|***Tipo de amenaza***|***Vector de ataque***|***Impacto técnico / operativo***|***Medida de control recomendada***|
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -30,13 +33,11 @@ De misma manera el RFC 4949 (Internet Security Glossary), establece un glosario 
 |***09***|<p>Autenticación</p><p>Confidencialidad</p>|<p>- **Masquerade**: suplantación de identidad de una entidad legítima. </p><p>- **Social** **Engineering**: manipulación de usuarios para eludir controles técnicos.</p>|Externa|Correos electrónicos fraudulentos y sitios web falsos|<p>- Compromiso de credenciales e información personal</p><p>- riesgo de accesos no autorizados posteriores</p>|<p>- Autenticación fuerte</p><p>- concientización de usuarios</p><p>- monitoreo de dominios fraudulentos.</p>|
 |***10***|<p>Confidencialidad</p><p>Integridad</p><p>Disponibilidad</p>|<p>- **Destructive** **Attack**: ataque cuyo objetivo es causar daño irreversible.</p><p>- **Data** **Exfiltration**: extracción no autorizada de información.</p><p>- **Data** **Destruction**: eliminación deliberada de datos y sistemas.</p>|Externa|Acciones destructivas ejecutadas tras acceso no autorizado|<p>- Pérdida total de información y sistemas</p><p>- Imposibilidad de recuperación </p><p>- consecuencias operativas extremas</p>|<p>- Detección temprana</p><p>- segmentación de red</p><p>- controles de acceso estrictos</p><p>- respaldos inmutables</p>|
 
-
-
-**Conclusiones**
+### Conclusiones
 
 Como podemos observar existe un sin número de posibilidades en las que un sistema se ve vulnerado, no solo por atacantes/ amenazas externas, si no, que incluso pueden ser no intencionales dentro de un mismo equipo, por lo que tener un enfoque y conciencia de las probables consecuencias existentes en estos ciberataques o problemas que pueden ocurrir es esencial para mantener los servicios de seguridad existentes, e incluso la base de la ciberseguridad, el modelo CIA (Confiabilidad, Integridad y Disponibilidad).
 
-**Referencias**
+### Referencias
 
 - ITU-T. (1991). Recommendation X.800: Security Architecture for Open Systems Interconnection. International Telecommunication Union.
 - IETF. (2007). RFC 4949 – Internet Security Glossary, Version 2. <https://datatracker.ietf.org/doc/html/rfc4949>

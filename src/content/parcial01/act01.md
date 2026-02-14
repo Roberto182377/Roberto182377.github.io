@@ -6,6 +6,9 @@ readTime: ""
 image: ""
 slug: "act01-Equipo01"
 ---
+<div align="right" style="margin-bottom: 1rem;">
+  📄PDF Actividad II <a href="/assets/images/docs_P1/act01-Equipo01.pdf">Descargar PDF</a>
+</div>
 
 <a name="_hlk161919639"></a>**INTRODUCCIÓN**
 
