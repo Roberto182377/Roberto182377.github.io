@@ -24,5 +24,25 @@ Teniendo en cuenta la topología de red mostrada completa la tabla con las regla
 |**6** |`iptables -A INPUT -p tcp --dport 80 -d 192.1.2.11 -s 0.0.0.0 -j ACCEPT`: |
 |**7** |`iptables -A INPUT -p tcp -d 0.0.0.0-j ACCEPT`: |
 
-- `hotfix/critical-security-patch`
-- `docs/readme-update`
+
+# Effective Git Workflow Strategies
+
+A good Git workflow is essential for team collaboration. Learn strategies that work for different team sizes and project types.
+
+## Common Workflow Models
+
+### Git Flow
+
+Traditional branching model with:
+- `main`: Production-ready code
+- `develop`: Integration branch
+- `feature/*`: New features
+- `release/*`: Preparing releases
+- `hotfix/*`: Emergency fixes
+
+### GitHub Flow
+
+Simpler model:
+- `main`: Always deployable
+- Feature branches: Created from main
+- Merge via pull requests
