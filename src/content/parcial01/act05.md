@@ -12,7 +12,7 @@ slug: "act05-182377"
 
 ## CARTOGRAFIANDO EL PENTESTING
 
-![Act 05](/assets/images/posts/img_Act05_portada.jpg)
+![Act 05](/assets/images/posts/20.jpg)
 
 ### Introducción
 
