@@ -13,13 +13,6 @@ slug: "act01-Equipo01"
   </a>
 </div>
 
-<embed 
-  src="/assets/images/docs_P1/act01-Equipo01.pdf" 
-  type="application/pdf" 
-  width="100%" 
-  height="600px"
-/>
-
 ---
 
 ## 💾 Introducción
@@ -53,10 +46,10 @@ El impacto económico estimado para Maersk fue de **250 a 300 millones de dólar
 La empresa tuvo que reinstalar miles de servidores y estaciones de trabajo, además de enfrentar costos elevados por recuperación tecnológica y pérdidas operativas.
 
 ### Impacto en el Modelo CIA
-| :- | :- |
-|**Confidencialidad**|Comprometida por la posible filtración de credenciales y datos internos durante la propagación.|
-|**Integridad**|Gravemente afectada al sobrescribirse sistemas, discos y estructuras de arranque.|
-|**Disponibilidad**|Servicios críticos quedaron inoperables durante varios días a nivel global.|
+| :--- | :--- |
+| **Confidencialidad** | Comprometida por la posible filtración de credenciales y datos internos durante la propagación |
+| **Integridad** | Gravemente afectada al sobrescribirse sistemas, discos y estructuras de arranque |
+| **Disponibilidad** |Servicios críticos quedaron inoperables durante varios días a nivel global.|
 
 ---
 ## 💾 Material Multimedia
@@ -72,6 +65,15 @@ La empresa tuvo que reinstalar miles de servidores y estaciones de trabajo, adem
 El impacto causado por el malware NotPetya evidencia el alto riesgo de confiar en sistemas de terceros para funciones críticas dentro de una organización. En este caso, el software MeDoc actuó como el principal vector de propagación, afectando a todas las empresas y organismos que lo utilizaban de forma legítima.
 
 Este incidente deja claro que la seguridad informática no depende únicamente de reforzar los servicios internos, sino también de evaluar cuidadosamente qué software se utiliza y bajo qué condiciones. De poco sirve implementar firewalls robustos o controles avanzados si, al instalar una aplicación de un proveedor mal asegurado, se le otorgan privilegios suficientes para comprometer toda la infraestructura.
+
+---
+## 💾 PDF
+<embed 
+  src="/assets/images/docs_P1/act01-Equipo01.pdf" 
+  type="application/pdf" 
+  width="100%" 
+  height="600px"
+/>
 
 ---
 ## 💾 Referencias
