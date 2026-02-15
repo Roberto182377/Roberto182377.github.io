@@ -54,11 +54,11 @@ La empresa tuvo que reinstalar miles de servidores y estaciones de trabajo, adem
 
 | :--- | :--- |
 
-|**Tabla**|**Propósito principal**|**Ejemplo de uso**|
-| :- | :- | :- |
+|**Tabla**|**Propósito principal**|
+| :- | :- |
 |**Confidencialidad**|Comprometida por la posible filtración de credenciales y datos internos durante la propagación|
-|**Integridad**|*Traducir direcciones*|*Varios dispositivos comparten una IP pública*|
-|**Disponibilidad**|*Modificar paquetes*|*Marcar un paquete como alta prioridad* |
+|**Integridad**|*Traducir direcciones*|
+|**Disponibilidad**|*Modificar paquetes*|
 
 ---
 ## 💾 Material Multimedia
