@@ -83,8 +83,8 @@ Es posible limpiar y restablecer iptables a los valores predeterminados utilizan
 ### Ejemplo de comando
 ![Act 03.2](/assets/images/posts/IPtables04.png)
 
-
 ---
+
 ## 💾 Reflexión
 
 El uso de iptables demuestra que la seguridad de red no depende únicamente de bloquear tráfico, sino de definir reglas coherentes y bien ordenadas que respondan al comportamiento esperado del sistema. La correcta selección de tablas, cadenas y estados de conexión permite aplicar políticas de seguridad granulares y eficientes.

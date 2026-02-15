@@ -83,6 +83,7 @@ Esta configuración se enfoca, principalmente en la capa de enlace y de transpor
 
 ### Aplicación práctica de IPTables en una topología controlada
 </iframe> <br/> <iframe width="560" height="315" src="https://youtu.be/NsSr7ajQqYE?si=7qJhJhjpAuFux7VX" title="NotPetya Maersk Case Study" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe>
+
 ---
 
 ### 💾 Reflexión
@@ -90,9 +91,10 @@ Esta configuración se enfoca, principalmente en la capa de enlace y de transpor
 El diseño de reglas de iptables basado en una política restrictiva demuestra la importancia de permitir solo lo estrictamente necesario, en lugar de confiar en configuraciones permisivas. El uso del seguimiento de estados de conexión mejora tanto la seguridad como el rendimiento del firewall, evitando reglas redundantes y bloqueos innecesarios.
 
 ---
+
 ## 💾 PDF
 <embed 
-  src="/assets/images/docs_P1/act03-182377.pdf" 
+  src="/assets/images/docs_P1/182377-act04.pdf.pdf" 
   type="application/pdf" 
   width="100%" 
   height="600px"
