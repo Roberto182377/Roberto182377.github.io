@@ -48,17 +48,17 @@ La empresa tuvo que reinstalar miles de servidores y estaciones de trabajo, adem
 ### Impacto en el Modelo CIA
 
 | :-: | :- |
-|<p>**Confidencialidad**</p>|<p>Comprometida por la posible filtración de credenciales y datos internos durante la propagación</p>|
-|**Integridad**|<p>Gravemente afectada al sobrescribirse sistemas, discos y estructuras de arranque</p>|
-|**Disponibilidad**|<p>Servicios críticos quedaron inoperables durante varios días a nivel global</p>|
+|<p>****</p>|<p></p>|
+|****|<p>Gravemente afectada al sobrescribirse sistemas, discos y estructuras de arranque</p>|
+|****|<p>Servicios críticos quedaron inoperables durante varios días a nivel global</p>|
 
 | :--- | :--- |
 
 |**Tabla**|**Propósito principal**|**Ejemplo de uso**|
 | :- | :- | :- |
-|**FILTER**|*Filtrar paquetes*|*Bloqueo al tráfico excepto SSH*|
-|**NAT**|*Traducir direcciones*|*Varios dispositivos comparten una IP pública*|
-|**MANGLE**|*Modificar paquetes*|*Marcar un paquete como alta prioridad* |
+|**Confidencialidad**|Comprometida por la posible filtración de credenciales y datos internos durante la propagación|
+|**Integridad**|*Traducir direcciones*|*Varios dispositivos comparten una IP pública*|
+|**Disponibilidad**|*Modificar paquetes*|*Marcar un paquete como alta prioridad* |
 
 ---
 ## 💾 Material Multimedia
