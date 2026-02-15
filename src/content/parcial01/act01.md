@@ -46,10 +46,13 @@ El impacto económico estimado para Maersk fue de **250 a 300 millones de dólar
 La empresa tuvo que reinstalar miles de servidores y estaciones de trabajo, además de enfrentar costos elevados por recuperación tecnológica y pérdidas operativas.
 
 ### Impacto en el Modelo CIA
+
+| :-: | :- |
+|<p>**Confidencialidad**</p>|<p>Comprometida por la posible filtración de credenciales y datos internos durante la propagación</p>|
+|**Integridad**|<p>Gravemente afectada al sobrescribirse sistemas, discos y estructuras de arranque</p>|
+|**Disponibilidad**|<p>Servicios críticos quedaron inoperables durante varios días a nivel global</p>|
+
 | :--- | :--- |
-| **Confidencialidad** | Comprometida por la posible filtración de credenciales y datos internos durante la propagación |
-| **Integridad** | Gravemente afectada al sobrescribirse sistemas, discos y estructuras de arranque |
-| **Disponibilidad** |Servicios críticos quedaron inoperables durante varios días a nivel global.|
 
 ---
 ## 💾 Material Multimedia
