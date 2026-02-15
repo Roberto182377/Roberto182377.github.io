@@ -5,11 +5,14 @@ date: "2026-01-27"
 readTime: ""
 image: "/assets/images/posts/img_Act02_portada.png"
 slug: "act02-182377"
----
-<div align="right" style="margin-bottom: 1rem;">
-  <a href="/assets/images/docs_P1/182377-act02.pdf">📄Descargar PDF</a>
-</div>
 
+---
+
+<div align="right">
+  <a href="/assets/images/docs_P1/182377-act02.pdf" download>
+    📄Descargar PDF
+  </a>
+</div>
 
 ---
 

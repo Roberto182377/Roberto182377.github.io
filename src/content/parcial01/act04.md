@@ -6,8 +6,11 @@ readTime: ""
 image: "/assets/images/posts/img_Act04_portada.jpg"
 slug: "act04-182377"
 ---
-<div align="right" style="margin-bottom: 1rem;">
-  <a href="/assets/images/docs_P1/182377-act04.pdf">📄Descargar PDF</a>
+
+<div align="right">
+  <a href="/assets/images/docs_P1/182377-act04.pdf" download>
+    📄Descargar PDF
+  </a>
 </div>
 
 ---
@@ -28,7 +31,6 @@ Iptables se usa para IPv4 e ip6tables para IPv6 . Tanto iptables como ip6tables 
 
   Si el paquete IP llega al final de una cadena integrada, incluida una cadena vacía, entonces el objetivo de la política de la cadena determina el destino final del paquete IP. iptables es la utilidad de usuario que le permite trabajar con estas cadenas/reglas (tabla, cadena, reglas, masinformacion en la actividad pasada).
 
-  ![Act 04](/assets/images/posts/act04_img.png)
 
 ### Ejemplo de uso
 * Permitir la conectividad de un servidor de paquetes entrantes solamente a los puertos 80/TCP y 443/TCP (Servidor Web) y por otro lado restringiendo el acceso de todos los paquetes entrantes al puerto 22/TCP (Donde se encuentra el servicio SSH) excepto para una dirección IP determinada (que puede ser una maquina de administración remota)
@@ -94,7 +96,7 @@ El diseño de reglas de iptables basado en una política restrictiva demuestra l
 
 ## 💾 PDF
 <embed 
-  src="/assets/images/docs_P1/182377-act04.pdf.pdf" 
+  src="/assets/images/docs_P1/182377-act04.pdf" 
   type="application/pdf" 
   width="100%" 
   height="600px"

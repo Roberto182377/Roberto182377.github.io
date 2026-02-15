@@ -6,8 +6,11 @@ readTime: ""
 image: "/assets/images/posts/img_Act03_portada.jpg"
 slug: "act03-182377"
 ---
-<div align="right" style="margin-bottom: 1rem;">
-  <a href="/assets/images/docs_P1/act03-182377.pdf">📄Descargar PDF</a>
+
+<div align="right">
+  <a href="/assets/images/docs_P1/act03-182377.pdf" download>
+    📄Descargar PDF
+  </a>
 </div>
 
 ---
