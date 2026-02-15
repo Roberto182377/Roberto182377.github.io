@@ -17,7 +17,9 @@ slug: "act02-182377"
 
 En el área de la seguridad informática, el **RFC 4949** constituye un glosario fundamental que proporciona una conceptualización clara y estandarizada de los términos técnicos utilizados en este ámbito. Su propósito principal es evitar ambigüedades y facilitar una comprensión común del vocabulario relacionado con la seguridad de la información.
 
+
 Por su parte el **ITU-T X.800** establece un marco para la implementación de servicios y mecanismos de seguridad necesarios, que permitan proteger los sistemas y redes de información frente a amenazas potenciales.
+
 ---
 ## 💾 Desarrollo Técnico
 ### Servicios de Seguridad según el ITU-T X.800
