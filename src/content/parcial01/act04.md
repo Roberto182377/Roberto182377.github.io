@@ -88,7 +88,7 @@ Esta configuración se enfoca, principalmente en la capa de enlace y de transpor
 
 ---
 
-### 💾 Reflexión
+## 💾 Reflexión
 
 El diseño de reglas de iptables basado en una política restrictiva demuestra la importancia de permitir solo lo estrictamente necesario, en lugar de confiar en configuraciones permisivas. El uso del seguimiento de estados de conexión mejora tanto la seguridad como el rendimiento del firewall, evitando reglas redundantes y bloqueos innecesarios.
 
@@ -104,7 +104,7 @@ El diseño de reglas de iptables basado en una política restrictiva demuestra l
 
 ---
 
-### 💾 Referencias
+## 💾 Referencias
 * Arch Linux (s.f.), Iptables. https://wiki-archlinux-org.translate.goog/title/Iptables?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc
 * Cloud (Diciembre, 2024). Configurar el firewall de Linux con iptables, https://help.ovhcloud.com/csm/es-dedicated-servers-firewall-iptables?id=kb_article_view&sysparm_article=KB0043437
 * Sánchez J. (Abril, 2016). Linux: Tutorial IPTABLES - Un firewall fiable - Capítulo 1, https://www.sysadmit.com/2016/04/linux-tutorial-iptables-un-firewall-fiable-Capitulo-1.html
