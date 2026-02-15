@@ -9,7 +9,7 @@ slug: "act01-Equipo01"
 
 <div align="right">
   <a href="/assets/images/docs_P1/act01-Equipo01.pdf" download>
-    📄 Descargar PDF
+    📄Descargar PDF
   </a>
 </div>
 

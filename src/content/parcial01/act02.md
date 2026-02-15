@@ -7,40 +7,59 @@ image: "/assets/images/posts/img_Act02_portada.png"
 slug: "act02-182377"
 ---
 <div align="right" style="margin-bottom: 1rem;">
-  <a href="/assets/images/docs_P1/182377-act02.pdf">📄PDF Actividad II</a>
+  <a href="/assets/images/docs_P1/182377-act02.pdf">📄Descargar PDF</a>
 </div>
 
-## ANÁLISIS DE SERVICIOS DE SEGURIDAD
 
-### Introducción
+---
 
-Al realizar un análisis en la índole de la ciberseguridad, es necesario el emplear normativas y estándares ya preestablecidos, entrando en juego el ITU-T X.800 el cual proporciona un modelo fundamental al definir los servicios de seguridad (autenticación, control de acceso, confidencialidad, integridad, no repudio y disponibilidad), sirviendo como base que nos permite identificar que cosas se ven comprometidas en la seguridad.
+## 💾 Introducción
 
-De misma manera el RFC 4949 (Internet Security Glossary), establece un glosario técnico que permite dar una mayor idea de la conceptualización a la hora de describir el caso que se presenta, un documento de apoyo, esencial para comprender el contexto que se llegue a presentar.
+En el área de la seguridad informática, el **RFC 4949** constituye un glosario fundamental que proporciona una conceptualización clara y estandarizada de los términos técnicos utilizados en este ámbito. Su propósito principal es evitar ambigüedades y facilitar una comprensión común del vocabulario relacionado con la seguridad de la información.
 
-### Análisis de Casos
+Por su parte el **ITU-T X.800** establece un marco para la implementación de servicios y mecanismos de seguridad necesarios, que permitan proteger los sistemas y redes de información frente a amenazas potenciales.
+---
+## 💾 Desarrollo Técnico
+### Servicios de Seguridad según el ITU-T X.800
 
-|***CASO***|***Servicios X.800 comprometidos***|***Definición(es) aplicable(s) RFC 4949.***|***Tipo de amenaza***|***Vector de ataque***|***Impacto técnico / operativo***|***Medida de control recomendada***|
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-|***01***|<p>- Confidencialidad</p><p>- Integridad</p><p>- Disponibilidad</p><p>- Control de acceso.</p>|<p>- **Ransomware**: tipo de malware que cifra datos para exigir un rescate.</p><p>- **Data Breach**: divulgación no autorizada de información sensible.</p><p>- **Multi-stage** **attack**: ataque ejecutado en múltiples fases con distintos objetivos.</p><p>- **Availability Attack**: ataque que degrada o impide el acceso a sistemas o datos.</p>|Externa|Acceso inicial no autorizado|<p>- Cifrado dentro de los servidores</p><p>- Pérdida total de disponibilidad</p><p>- Exposición de información sensible</p><p>- Daño de reputación y legal</p>|<p>- Implementación de backups inmutables y offline</p><p>- Monitoreo continuo</p><p>- Segmentación de la red</p>|
-|***02***|<p>- Confidencialidad</p><p>- Control de acceso</p>|<p>- **Misconfiguration**: configuración incorrecta de un sistema que expone recursos.</p><p>- **Exposure**: condición en la que la información queda accesible sin autorización.</p><p></p>|No intencional |Acceso público directo a servicios|<p>- Pérdida de confidencialidad de los datos</p><p>- Riesgos legales y regulatorios</p><p>- Daño de reputación</p>|<p>- Auditorías Periódicas De Configuración</p><p>- Validaciones Automáticas De Seguridad En La Nube.</p><p>- Controles De Acceso Por Defecto</p>|
-|***03***|<p>- Integridad</p><p>- Confidencialidad Control de acceso</p>|<p>- **Supply Chain Attack:** ataque que compromete componentes confiables para distribuir código malicioso</p><p>- **Relationship Abuse:** uso indebido de relaciones de confianza entre sistemas.</p>|Externa|<p>Actualización de software de un proveedor confiable</p><p>(similar al caso NotPetya - 2017)</p>|<p>- Compromiso masivo de sistemas</p><p>- Pérdida de confianza en el proveedor</p>|<p>- Verificación de integridad después de instalación</p><p>- Segmentación de privilegios de aplicaciones</p>|
-|***04***|<p>- Autenticación</p><p>- Control de acceso</p>|<p>- **Credential Compromise**: obtención no autorizada de credenciales válidas.</p><p>- **Phishing**: técnica de ingeniería social para robar información de autenticación.</p><p>- **Authentication Failure**: fallo del servicio de autenticación pese a su correcto funcionamiento técnico.</p>|Externa|Campañas de phishing dirigidas a usuarios|<p>- Acceso prolongado no autorizado</p><p>- Riesgo de escalamiento de privilegio</p>|<p>- Monitoreo de comportamiento de usuario</p><p>- Detección de accesos anómalos</p><p>- Concientización en seguridad.</p>|
-|***05***|<p>Disponibilidad</p><p>Integridad</p>|<p>- **Data Destruction:** eliminación o daño deliberado de datos.</p><p>- **Availability Attack:** acción destinada a impedir el acceso legítimo a sistemas o información.</p>|Externa|Ejecución de ransomware con acceso previo|<p>- Interrupción prolongada de operaciones</p><p>- Dependencia de reconstrucción en los sistemas.</p>|<p>- Implementación de respaldos offline</p><p>- pruebas periódicas de recuperación.</p>|
-|***06***|Confidencialidad, Control de acceso|<p>- **Insider** Threat: amenaza originada por una entidad interna con acceso legítimo.</p><p>- **Data** **Leakage**: divulgación no autorizada de información sensible.</p><p>- **Authorization** **Failure**: asignación inadecuada de privilegios.</p>|Interna|Uso indebido de accesos legítimo|<p>- Pérdida de información sensible</p><p>- Consecuencias legales y reputacionales</p><p>- Deterioro de la confianza empresarial</p>|<p>- Aplicación del principio de mínimo privilegio</p><p>- monitoreo de actividades internas</p><p>- auditorías periódicas</p>|
-|***07***|<p>Integridad</p><p>No repudio</p>|<p>- **Evidentiary** **Integrity**: preservación de la validez probatoria de los datos.</p><p>- **Audit** **Trail**: registros que permiten reconstruir eventos de seguridad.</p><p>- **Data** **Modification**: alteración no autorizada de información.</p>|Externa|Manipulación directa de registros del sistema|<p>- Imposibilidad de reconstruir la secuencia de eventos</p><p>- Pérdida de evidencia digital </p><p>- Problemas en las investigaciones legales y forenses.</p>|<p>- centralización de registros</p><p>- Controles de integridad</p><p>- monitoreo continuo.</p>|
-|***08***|Disponibilidad|<p>- Operational Failure: falla causada por errores internos en procesos o ejecución.</p><p>- Service Outage: interrupción no planificada de un servicio.</p>|No intencional|Actualización de software mal ejecutada|<p>- Interrupción masiva de servicios</p><p>- Afectación a operaciones críticas</p><p>- Pérdida de confianza en la estabilidad</p>|<p>- Pruebas previas en entornos controlados</p><p>- planes de rollback</p>|
-|***09***|<p>Autenticación</p><p>Confidencialidad</p>|<p>- **Masquerade**: suplantación de identidad de una entidad legítima. </p><p>- **Social** **Engineering**: manipulación de usuarios para eludir controles técnicos.</p>|Externa|Correos electrónicos fraudulentos y sitios web falsos|<p>- Compromiso de credenciales e información personal</p><p>- riesgo de accesos no autorizados posteriores</p>|<p>- Autenticación fuerte</p><p>- concientización de usuarios</p><p>- monitoreo de dominios fraudulentos.</p>|
-|***10***|<p>Confidencialidad</p><p>Integridad</p><p>Disponibilidad</p>|<p>- **Destructive** **Attack**: ataque cuyo objetivo es causar daño irreversible.</p><p>- **Data** **Exfiltration**: extracción no autorizada de información.</p><p>- **Data** **Destruction**: eliminación deliberada de datos y sistemas.</p>|Externa|Acciones destructivas ejecutadas tras acceso no autorizado|<p>- Pérdida total de información y sistemas</p><p>- Imposibilidad de recuperación </p><p>- consecuencias operativas extremas</p>|<p>- Detección temprana</p><p>- segmentación de red</p><p>- controles de acceso estrictos</p><p>- respaldos inmutables</p>|
-
-### Conclusiones
-
-Como podemos observar existe un sin número de posibilidades en las que un sistema se ve vulnerado, no solo por atacantes/ amenazas externas, si no, que incluso pueden ser no intencionales dentro de un mismo equipo, por lo que tener un enfoque y conciencia de las probables consecuencias existentes en estos ciberataques o problemas que pueden ocurrir es esencial para mantener los servicios de seguridad existentes, e incluso la base de la ciberseguridad, el modelo CIA (Confiabilidad, Integridad y Disponibilidad).
-
-### Referencias
-
-- ITU-T. (1991). Recommendation X.800: Security Architecture for Open Systems Interconnection. International Telecommunication Union.
-- IETF. (2007). RFC 4949 – Internet Security Glossary, Version 2. <https://datatracker.ietf.org/doc/html/rfc4949>
+| | |
+| :- | :- |
+|**Confidencialidad**|Protección de la información contra la divulgación no autorizada.|
+|**Integridad**|Garantiza que la información no sea modificada de forma indebida, ya sea de manera accidental o maliciosa.|
+|**Disponibilidad**|Asegura que los recursos y servicios estén accesibles cuando los usuarios autorizados los requieran.|
+|**Autenticación**|Verifica la identidad de usuarios, sistemas o entidades que interactúan en una red.|
+|**Control de acceso**|Restringe el uso de recursos únicamente a entidades autorizadas.|
+|**No repudio**|Impide que una entidad niegue haber realizado una acción previamente ejecutada.|
 
 
+---
+## 💾 Material Multimedia
+### T-REC-X.800
+<embed 
+  src="/assets/images/docs_P1/T-REC-X.800-199103-I!!PDF-S (1).pdf" 
+  type="application/pdf" 
+  width="100%" 
+  height="600px"
+/>
 
+---
+## 💾 Reflexión
+
+Los fundamentos establecidos en el ITU-T X.800 resultan esenciales para la implementación de la seguridad informática, ya que definen de manera precisa los servicios que deben proteger a los sistemas de información, complementandose con los conceptos del RFC 4949, se logra comprender del lenguaje técnico utilizado en este campo.
+
+Esto demuestra que la seguridad no depende únicamente del uso de herramientas, sino también de la correcta comprensión y aplicación de arquitecturas bien definidas que permitan anticipar, prevenir y mitigar amenazas de forma efectiva.
+
+---
+## 💾 PDF
+<embed 
+  src="/assets/images/docs_P1/182377-act02.pdf" 
+  type="application/pdf" 
+  width="100%" 
+  height="600px"
+/>
+
+---
+## 💾 Referencias
+
+* ITU-T. (1991). X.800 – Security Architecture for Open Systems Interconnection.
+* Shirey, R. (2007). RFC 4949 – Internet Security Glossary, Version 2.
