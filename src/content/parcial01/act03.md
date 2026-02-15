@@ -20,8 +20,11 @@ Mediante el uso de tablas, cadenas y reglas, iptables permite implementar polít
 
 ---
 ## 💾 Desarrollo Técnico
+### IPTables
+Iptables se utiliza para inspeccionar, modificar, reenviar, redirigir y/o descartar paquetes IP. El código para filtrar paquetes IP ya está integrado en el núcleo y está organizado en una colección de tablas. A continuación su arquitectura:
+
 ### Tablas
-Cada tabla tiene un propósito específico
+Las tablas se componen de un conjunto de cadenas predefinidas, cada tabla tiene un propósito específico
 
 | **TABLA** | **PROPOSITO** |
 | :- | :- |
@@ -32,7 +35,7 @@ Cada tabla tiene un propósito específico
 |**SECURITY**|Aplicar etiquetas de seguridad SELinux|
  
 ### Cadenas
-Son los momentos del tráfico
+Las cadenas contienen reglas que se recorren en orden, son los momentos del tráfico
 
 | **CADENA** | **PROPOSITO** |
 | :- | :- |
@@ -43,6 +46,7 @@ Son los momentos del tráfico
 |**POSTROUTING**|Modificaciones después del ruteo (NAT)|
 
 ### Reglas y Políticas
+Cada regla consta de un predicado de posibles coincidencias y una acción correspondiente (llamada objetivo) que se ejecuta si el predicado es verdadero; es decir, se cumplen las condiciones.
 
 | **REGLA** | **PROPOSITO** |
 | :- | :- |
@@ -53,13 +57,31 @@ Son los momentos del tráfico
 |**DNAT**|Redirigir destino (usado en NAT)|
 |**SNAT / MASQUERADE**|Modificar IP de origen (salida a Internet)|
 
+### Restablecer reglas
+Es posible limpiar y restablecer iptables a los valores predeterminados utilizando estos comandos:
+ ```
+ iptables -F
+ iptables -X
+ iptables -t nat -F
+ iptables -t nat -X
+ iptables -t mangle -F
+ iptables -t mangle -X
+ iptables -t raw -F
+ iptables -t raw -X
+ iptables -t security -F
+ iptables -t security -X
+ iptables -P INPUT ACCEPT
+ iptables -P FORWARD ACCEPT
+ iptables -P OUTPUT ACCEPT
+ ```
+
 ---
 ## 💾 Material Multimedia
 ### Flujo de IPTables
-![Act 01](/assets/images/posts/IPtables05.png)
+![Act 03.1](/assets/images/posts/IPtables05.png)
 
 ### Ejemplo de comando
-![Act 01](/assets/images/posts/IPtables04.png)
+![Act 03.2](/assets/images/posts/IPtables04.png)
 
 
 ---
@@ -80,3 +102,5 @@ Además, la práctica evidencia la importancia del orden de las reglas, del uso 
 
 ## 💾 Referencias
 - Servando L. (s.f.), CNO V: Seguridad Informática, <a href="/assets/images/actividades_presentaciones_P1/S02-UPSLP_SI2026-v01-NUEVA VERSION.pdf">Presentación CNO V: Seguridad Informática</a>
+* Sánchez J. (Abril, 2016). Linux: Tutorial IPTABLES - Un firewall fiable - Capítulo 1, https://www.sysadmit.com/2016/04/linux-tutorial-iptables-un-firewall-fiable-Capitulo-1.html
+* Cloud (Diciembre, 2024). Configurar el firewall de Linux con iptables, https://help.ovhcloud.com/csm/es-dedicated-servers-firewall-iptables?id=kb_article_view&sysparm_article=KB0043437
