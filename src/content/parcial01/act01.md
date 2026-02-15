@@ -54,6 +54,12 @@ La empresa tuvo que reinstalar miles de servidores y estaciones de trabajo, adem
 
 | :--- | :--- |
 
+|**Tabla**|**Propósito principal**|**Ejemplo de uso**|
+| :- | :- | :- |
+|**FILTER**|*Filtrar paquetes*|*Bloqueo al tráfico excepto SSH*|
+|**NAT**|*Traducir direcciones*|*Varios dispositivos comparten una IP pública*|
+|**MANGLE**|*Modificar paquetes*|*Marcar un paquete como alta prioridad* |
+
 ---
 ## 💾 Material Multimedia
 ### Video explicativo – NotPetya (YouTube)
