@@ -8,7 +8,7 @@ slug: "act05-182377"
 ---
 
 <div align="right">
-  <a href="/assets/images/docs_P1/act05-182377.pdf" download>
+  <a href="/assets/images/docs_P1/182377-act05.pdf" download>
     📄Descargar PDF
   </a>
 </div>
