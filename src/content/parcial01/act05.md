@@ -41,8 +41,10 @@ Cada una de estas brinda un objetivo diferente, pero compartiendo el alcance de 
 
 ### Certificaciones y organizaciones sin fines de lucro
 
-Se puede observar cada metodolopgía no brinda una certificación propia, exceptuando **OSSTMM** (al ser parte de **ISECOM**), pero son parte escencial del desarrollo de la seguridad informática en el ambito del desarrollo de pruebas.
+Se puede observar cada metodolopgía no brinda una certificación propia, exceptuando **OSSTMM** (al ser parte de **ISECOM**), pero son parte escencial del desarrollo de la seguridad informática en el ambito del desarrollo de pruebas.  
+
 Ante esto se deja en claro como la mayoría de estas metodologías parte de la propia comunidad, que en busqueda de la evolucion y desarrollo de sistemas, el conocimiento es compartido, brindando la posibilidad de mejorar y comprender el impacto de esta rama en la ingeniería.
+
 ---
 
 ## 💾 Material Multimedia
