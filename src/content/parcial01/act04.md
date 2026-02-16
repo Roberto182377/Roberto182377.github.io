@@ -24,7 +24,9 @@ En esta actividad se analiza una topología de red compuesta por una red local, 
 
 ## 💾 Desarrollo Técnico
 ### Firewall e IPTables
- Los firewalls crean una barrera entre una red de confianza y una red no fiable, esto funciona al establer reglas que regulan el tráfico autorizado y el que está bloqueado. Por lo que en Linux el firewall utilitario desarrollado es iptables, una utilidad de línea de comandos para configurar el firewall del kernel de Linux, implementada en el proyecto Netfilter (vistas en la actividad pasada).
+ Los firewalls crean una barrera entre una red de confianza y una red no fiable, esto funciona al establer reglas que regulan el tráfico autorizado y el que está bloqueado. Por lo que en Linux el firewall utilitario desarrollado es iptables..
+
+  Siendo una potente herramienta de cortafuegos (firewall) basada en reglas para sistemas Linux, encargada de filtrar, bloquear o permitir el tráfico de red. Funciona a nivel de núcleo (kernel) mediante el módulo Netfilter, controlando paquetes entrantes, salientes y de reenvío, siendo esencial para la seguridad perimetral y la gestión de la traducción de direcciones de red (NAT). 
 
 ### IPV4 e IPV6
 Iptables se usa para IPv4 e ip6tables para IPv6 . Tanto iptables como ip6tables comparten la misma sintaxis, pero algunas opciones son específicas de IPv4 o IPv6.

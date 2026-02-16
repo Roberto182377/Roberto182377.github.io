@@ -47,12 +47,19 @@ La empresa tuvo que reinstalar miles de servidores y estaciones de trabajo, adem
 
 ### Impacto en el Modelo CIA
 
-
 | | |
 | :- | :- |
 |**Confidencialidad**|Comprometida por la posible filtración de credenciales y datos internos durante la propagación|
 |**Integridad**|Gravemente afectada al sobrescribirse sistemas, discos y estructuras de arranque|
 |**Disponibilidad**|Servicios críticos quedaron inoperables durante varios días a nivel global*|
+
+### Modelos Normativos
+Los marcos normativos son escenciales para la aplicación de la seguridad informatica en organizaciones para prevenir cualquier posible ataque que pueda suceder, entre esos marcos se encuentran:
+| | |
+| :- | :- |
+|**ISO/IEC 27001**|Controles como A.12 (gestión de vulnerabilidades), A.13 (seguridad en redes y segmentación) y A.17 (continuidad del negocio) pudieron haber mitigado la propagación del malware y reducido el impacto global.|
+|**NIST Cybersecurity Framework**|Las funciones Identify y Protect fallaron al no evaluar adecuadamente riesgos de terceros; Detect fue limitada debido a la propagación acelerada; Respond y Recover demostraron la importancia de planes de respuesta y respaldos offline|
+|**BCP y DRP**|La ausencia de respaldos completamente aislados incrementó el tiempo de recuperación, evidenciando la necesidad de planes robustos de continuidad y recuperación ante desastres.|
 
 ---
 ## 💾 Material Multimedia

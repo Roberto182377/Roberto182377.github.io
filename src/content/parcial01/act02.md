@@ -36,6 +36,21 @@ Por su parte el **ITU-T X.800** establece un marco para la implementación de se
 |**Control de acceso**|Restringe el uso de recursos únicamente a entidades autorizadas.|
 |**No repudio**|Impide que una entidad niegue haber realizado una acción previamente ejecutada.|
 
+### Terminología brindada por el RF4949
+| **Término** | **Conceptualización** |
+| :- | :- |
+|**Data Breach**| Divulgación no autorizada de información sensible.|
+|**Misconfiguration**| Configuración incorrecta de un sistema que expone recursos.|
+|**Phishing**| Técnica de ingeniería social para robar información de autenticación.|
+|**Relationship Abuse**| Uso indebido de relaciones de confianza entre sistemas.|
+|**Supply Chain Attack**|Ataque que compromete componentes confiables para distribuir código malicioso|
+|**Multi-stage attack**|Ataque ejecutado en múltiples fases con distintos objetivos.|
+|**Availability Attack**|Ataque que degrada o impide el acceso a sistemas o datos..|
+
+### Relación entre ITU-T X.800 t RF4949
+La ITU-T X.800 y la RFC 4949 están íntimamente relacionadas al definir el marco conceptual de la seguridad de la información, X.800 establece la arquitectura técnica (servicios y mecanismos), mientras que la RFC 4949 proporciona el glosario de términos unificado necesario para entender dicha arquitectura.
+
+En otras palabras, el X.800 estructura el qué y el cómo de la seguridad, mientras que la RFC 4949 define con qué palabras se describe, siendo la RFC 4949 un documento de referencia clave para la terminología de seguridad de la IETF, a menudo compatible con los estándares de la UIT-T.  
 
 ---
 ## 💾 Material Multimedia
