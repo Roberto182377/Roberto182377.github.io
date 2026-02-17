@@ -92,9 +92,9 @@ export const projectsContent = {
     title: "Actividades de Parciales",
     description: "Recopilacion de actividades, tareas y proyectos",
   },
-  title: "/assets/images/projects/descripcitionParciales.md",
+  title: "Atividades en parciales",
   description:
-    "En los siguientes modulos se encuentran la recopilación de las actividades que se han realizados durante cada parcial,",
+    "En los siguientes modulos se encuentran recopiladas las actividades realizadas, divididas por cada parcial de la materia de CNO V: Seguridad Informática, haciendo evidencia del trabajo elaborado y conocimientos aquiridos tras el aprendizaje de nuevos temas.",
   projects: [
     {
       title: "Parcial I",
