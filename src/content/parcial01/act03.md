@@ -26,7 +26,7 @@ Mediante el uso de tablas, cadenas y reglas, iptables permite implementar polít
 ### IPTables
 Iptables se utiliza para inspeccionar, modificar, reenviar, redirigir y/o descartar paquetes IP. El código para filtrar paquetes IP ya está integrado en el núcleo y está organizado en una colección de tablas. A continuación su arquitectura:
 
-### Tablas
+* ### Tablas
 Las tablas se componen de un conjunto de cadenas predefinidas, cada tabla tiene un propósito específico
 
 | **TABLA** | **PROPOSITO** |
@@ -37,7 +37,7 @@ Las tablas se componen de un conjunto de cadenas predefinidas, cada tabla tiene 
 |**RAW**|Excepciones al seguimiento de conexiones|
 |**SECURITY**|Aplicar etiquetas de seguridad SELinux|
  
-### Cadenas
+* ### Cadenas
 Las cadenas contienen reglas que se recorren en orden, son los momentos del tráfico
 
 | **CADENA** | **PROPOSITO** |
@@ -48,7 +48,7 @@ Las cadenas contienen reglas que se recorren en orden, son los momentos del trá
 |**PREROUTING**|Modificaciones antes de rutear el paquete (NAT)|
 |**POSTROUTING**|Modificaciones después del ruteo (NAT)|
 
-### Reglas y Políticas
+* ### Reglas y Políticas
 Cada regla consta de un predicado de posibles coincidencias y una acción correspondiente (llamada objetivo) que se ejecuta si el predicado es verdadero; es decir, se cumplen las condiciones.
 
 | **REGLA** | **PROPOSITO** |

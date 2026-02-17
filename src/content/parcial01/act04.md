@@ -28,7 +28,7 @@ En esta actividad se analiza una topología de red compuesta por una red local, 
 
   Siendo una potente herramienta de cortafuegos (firewall) basada en reglas para sistemas Linux, encargada de filtrar, bloquear o permitir el tráfico de red. Funciona a nivel de núcleo (kernel) mediante el módulo Netfilter, controlando paquetes entrantes, salientes y de reenvío, siendo esencial para la seguridad perimetral y la gestión de la traducción de direcciones de red (NAT). 
 
-### IPV4 e IPV6
+### IPTables en IPV4 o IPV6
 Iptables se usa para IPv4 e ip6tables para IPv6 . Tanto iptables como ip6tables comparten la misma sintaxis, pero algunas opciones son específicas de IPv4 o IPv6.
 
   Si el paquete IP llega al final de una cadena integrada, incluida una cadena vacía, entonces el objetivo de la política de la cadena determina el destino final del paquete IP. iptables es la utilidad de usuario que le permite trabajar con estas cadenas/reglas (tabla, cadena, reglas, masinformacion en la actividad pasada).

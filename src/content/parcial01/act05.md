@@ -1,7 +1,7 @@
 ---
-title: "Actividad 05 -Cartografiando el pentesting: análisis comparativo de metodologías de seguridad informática"
+title: "Actividad 05 - Cartografiando el pentesting: análisis comparativo de metodologías de seguridad informática"
 description: "Analizar y comparar de manera estructurada las principales metodologías y marcos de referencia en seguridad informática."
-date: "2026-02-09"
+date: "2026-02-16"
 readTime: ""
 image: "/assets/images/posts/img_Act05_portada.jpg"
 slug: "act05-182377"
