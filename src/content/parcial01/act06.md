@@ -87,11 +87,17 @@ En el modo de transporte, la carga útil de cada paquete se cifra, pero no el en
 | `set pfs`                    | Habilita Perfect Forward Secrecy |
 | `match address`              | Asocia ACL al túnel              |
 | `access-list permit ip`      | Define tráfico cifrado           |
-| `show crypto isakmp sa`      | Verifica fase 1                  |
-| `show crypto ipsec sa`       | Verifica fase 2                  |
+| ```bash
+show crypto isakmp sa
+``` | Verifica fase 1 |
+| ```bash
+show crypto ipsec sa
+``` | Verifica fase 2 |
 
 
-
+```
+comando
+```
 `comando`
 
 
