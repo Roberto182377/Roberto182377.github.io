@@ -3,7 +3,7 @@ title: "Actividad 06 - Implementación de IPSec VPN"
 description: "Creación de topología en Packet Tracer implmentando IPSec"
 date: "2026-02-16"
 readTime: ""
-image: "/assets/images/posts/post1.jpg"
+image: "/assets/images/posts/ipsecVPN.png"
 slug: "act06-182377"
 ---
 
