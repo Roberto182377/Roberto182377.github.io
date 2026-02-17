@@ -90,6 +90,12 @@ En el modo de transporte, la carga útil de cada paquete se cifra, pero no el en
 | `show crypto isakmp sa`      | Verifica fase 1                  |
 | `show crypto ipsec sa`       | Verifica fase 2                  |
 
+
+
+`comando`
+
+
+
 ---
 
 ## 💾 Material Multimedia
