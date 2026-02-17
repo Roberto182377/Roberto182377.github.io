@@ -101,7 +101,7 @@ export const projectsContent = {
       description:
         "Fundamentos del Hackin Ético",
       image: "/assets/images/projects/parcial01.png",
-      href: "/parcial01/",
+      href: "https://roberto182377.github.io/parcial01/",
     },
     {
       title: "Parcial II",
