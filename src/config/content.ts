@@ -92,29 +92,29 @@ export const projectsContent = {
     title: "Actividades de Parciales",
     description: "Recopilacion de actividades, tareas y proyectos",
   },
-  title: "Parciales",
+  title: "/assets/images/projects/descripcitionParciales.md",
   description:
-    "En los siguientes modulos se encuentran la recopilación de las actividades, tareas y proyectos realizados durante cada parcial.",
+    "En los siguientes modulos se encuentran la recopilación de las actividades que se han realizados durante cada parcial,",
   projects: [
     {
       title: "Parcial I",
       description:
         "Fundamentos del Hackin Ético",
-      image: "/assets/images/projects/project1.jpg",
+      image: "/assets/images/projects/parcial01.png",
       href: "/parcial01/",
     },
     {
       title: "Parcial II",
       description:
         "Técnicas de explotación de vulnerabilidades y seguridad en entornos tecnológicos.",
-      image: "/assets/images/projects/project2.jpg",
+      image: "/assets/images/projects/parcial02.png",
       href: "#",
     },
     {
       title: "Parcial III",
       description:
         "Post-explotación y reportes de seguridad",
-      image: "/assets/images/projects/project3.png",
+      image: "/assets/images/projects/parcial03.png",
       href: "#",
     },
   ],
