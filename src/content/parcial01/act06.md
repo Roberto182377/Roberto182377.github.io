@@ -6,9 +6,6 @@ readTime: ""
 image: "/assets/images/posts/post1.jpg"
 slug: "act06-182377"
 ---
-<<<<<<< HEAD
-
-=======
 
 <div align="right">
   <a href="/assets/images/docs_P1/182377-act06.pdf" download>
@@ -73,10 +70,10 @@ En el modo de transporte, la carga útil de cada paquete se cifra, pero no el en
 
 ### Glosario de comandos
 
-| Comando                      | Función                          |
+| **Comando**                  | **Función**                          |
 | ---------------------------- | -------------------------------- |
-| `hostname`                   | Asigna un nombre al router       |
-| `interface g0/x`             | Accede a una interfaz            |
+| ```hostname```                   | Asigna un nombre al router       |
+| ```interface g0/x```             | Accede a una interfaz            |
 | `ip address`                 | Configura IP y máscara           |
 | `no shutdown`                | Activa la interfaz               |
 | `ip route 0.0.0.0 0.0.0.0`   | Define ruta por defecto          |
@@ -101,7 +98,7 @@ En el modo de transporte, la carga útil de cada paquete se cifra, pero no el en
 
 ![Act 06](/assets/images/posts/topologia-act06.png)
 
-### Manual Coamndos IPSec
+### Manual Comandos IPSec
 <embed 
   src="/assets/images/docs_P1/14140-manual.pdf" 
   type="application/pdf" 
@@ -135,4 +132,3 @@ Al realizar la topología planteada se puede observar que aunque lleve un tiempo
 https://www.cisco.com/c/es_mx/support/docs/security-vpn/ipsec-negotiation-ikeprotocols/217432-understand-ipsec-ikev1-protocol.html#toc-hId--1746390828
 * CloudFlare (s.f.), What is IPsec? | How IPsec VPNs work.
 https://www.cloudflare.com/learning/network-layer/what-is-ipsec/
->>>>>>> 03bb23bc91e64a8d161db9b8cd66d29e364e451d
