@@ -72,7 +72,7 @@ En el modo de transporte, la carga útil de cada paquete se cifra, pero no el en
 
 | **Comando**                  | **Función**                          |
 | ---------------------------- | -------------------------------- |
-| ```hostname```                   | Asigna un nombre al router       |
+| <code>hostname</code>                   | Asigna un nombre al router       |
 | ```interface g0/x```             | Accede a una interfaz            |
 | `ip address`                 | Configura IP y máscara           |
 | `no shutdown`                | Activa la interfaz               |
