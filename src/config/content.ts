@@ -119,3 +119,23 @@ export const proyectosContent = {
     },
   ],
 };
+
+
+export const roadToHofFContent = {
+  meta: {
+    title: "ROAD TO HALL OF FAME",
+    description: "Modulo del desarrollo de practicas y laboratorios especializados de seguridad informatica",
+  },
+  title: "ROAD TO HALL OF FAME",
+  description:
+    "Modulo del desarrollo de practicas y laboratorios especializados de seguridad informatica complementarios a la materia de CNO V: Seguridad Informática",
+  projects: [
+    {
+      title: "SQL Injection",
+      description:
+        "Recopilación de los laboratorios realizados en la Web Security Academy de PortSwigger, haciendo uso de conocimientos de pentesting en la rama de SQLi, empleando la herramienta BurpSuite",
+      image: "/assets/images/projects/sqli.png",
+      href: "#",
+    },
+  ],
+};

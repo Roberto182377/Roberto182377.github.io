@@ -1,7 +1,7 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-import { proyectosContent } from "../config/content.ts";
+import { roadToHofFContent } from "../config/content.ts";
 ---
 
 <html lang="en">
@@ -10,8 +10,8 @@ import { proyectosContent } from "../config/content.ts";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{proyectosContent.meta.title}</title>
-    <meta name="description" content={proyectosContent.meta.description} />
+    <title>{roadToHofFContent.meta.title}</title>
+    <meta name="description" content={roadToHofFContent.meta.description} />
     <script is:inline>
       (function () {
         const savedTheme = localStorage.getItem("theme") || "dark";
@@ -119,17 +119,17 @@ import { proyectosContent } from "../config/content.ts";
           <h2
             class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl lg:text-4xl"
           >
-            {proyectosContent.title}
+            {roadToHofFContent.title}
           </h2>
           <p
             class="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg"
           >
-            {proyectosContent.description}
+            {roadToHofFContent.description}
           </p>
 
           <div class="z-50 grid items-stretch w-full grid-cols-1 my-8 gap-7">
             {
-              proyectosContent.projects.map((project) => (
+              roadToHofFContent.projects.map((project) => (
                 <a
                   href={project.href}
                   target="_self"
