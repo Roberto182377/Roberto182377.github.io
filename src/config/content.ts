@@ -108,7 +108,7 @@ export const proyectosContent = {
       description:
         "El eslabón más débil: diseño ético de una campaña de ingeniería social.",
       image: "/assets/images/projects/parcial02.png",
-      href: "#",
+      href: "https://roberto182377.github.io/proyectos/pr02",
     },
     {
       title: "PR03",
