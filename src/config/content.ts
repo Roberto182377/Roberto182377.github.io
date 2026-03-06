@@ -99,7 +99,7 @@ export const proyectosContent = {
     {
       title: "PR01",
       description:
-        "Fundamentos del Hackin Ético",
+        "De la teoría a la práctica: walkthrough en acción (guía y video).",
       image: "/assets/images/projects/parcial01.png",
       href: "https://roberto182377.github.io/proyectos/pr01",
     },
