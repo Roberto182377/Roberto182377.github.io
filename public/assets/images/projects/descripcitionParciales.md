@@ -1,1 +1,0 @@
-En los siguientes modulos se encuentran recopiladas las actividades realizadas, divididas por cada parcial de la materia de CNO V: Seguridad Informática, haciendo evidencia del trabajo elaborado y conocimientos aquiridos tras el aprendizaje de nuevos temas.

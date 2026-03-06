@@ -1,7 +1,7 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-import { projectsContent } from "../config/content.ts";
+import { actividadesContent } from "../config/content.ts";
 ---
 
 <html lang="en">
@@ -10,8 +10,8 @@ import { projectsContent } from "../config/content.ts";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{projectsContent.meta.title}</title>
-    <meta name="description" content={projectsContent.meta.description} />
+    <title>{actividadesContent.meta.title}</title>
+    <meta name="description" content={actividadesContent.meta.description} />
     <script is:inline>
       (function () {
         const savedTheme = localStorage.getItem("theme") || "dark";
@@ -119,19 +119,19 @@ import { projectsContent } from "../config/content.ts";
           <h2
             class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl lg:text-4xl"
           >
-            {projectsContent.title}
+            {actividadesContent.title}
           </h2>
           <p
             class="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg"
           >
-            {projectsContent.description}
+            {actividadesContent.description}
           </p>
 
           <div
             class="z-50 grid items-stretch w-full grid-cols-1 my-8 gap-7 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3"
           >
             {
-              projectsContent.projects.map((project) => (
+              actividadesContent.projects.map((project) => (
                 <a
                   href={project.href}
                   target="_self"

@@ -87,12 +87,12 @@ export const aboutContent = {
   },
 };
 
-export const projectsContent = {
+export const actividadesContent = {
   meta: {
     title: "Actividades de Parciales",
     description: "Recopilacion de actividades, tareas y proyectos",
   },
-  title: "Atividades en parciales",
+  title: "Actividades en parciales",
   description:
     "En los siguientes modulos se encuentran recopiladas las actividades realizadas, divididas por cada parcial de la materia de CNO V: Seguridad Informática, haciendo evidencia del trabajo elaborado y conocimientos aquiridos tras el aprendizaje de nuevos temas.",
   projects: [
