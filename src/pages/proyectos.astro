@@ -1,12 +1,7 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-import { getAllPosts } from "../utils/getPosts";
-
-const POSTS_PER_PAGE = 6; // Cambiado a 6 para que siempre queden filas de 3 perfectas 
-const allPosts = getAllPosts(); [cite: 2]
-
-const postsData = JSON.stringify(allPosts);
+import { proyectosContent } from "../config/content.ts";
 ---
 
 <html lang="en">
@@ -15,195 +10,193 @@ const postsData = JSON.stringify(allPosts);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>Evidencia Parcial I</title>
-    <meta name="description" content="Recopilacion de actividades en clases" />
-    
+    <title>{proyectosContent.meta.title}</title>
+    <meta name="description" content={proyectosContent.meta.description} />
     <script is:inline>
       (function () {
-        const savedTheme = localStorage.getItem("theme") || "dark"; [cite: 3]
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches; [cite: 3]
-        const initialTheme = savedTheme === "system" ? (prefersDark ? "dark" : "light") : savedTheme; [cite: 3]
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const initialTheme =
+          savedTheme === "system"
+            ? prefersDark
+              ? "dark"
+              : "light"
+            : savedTheme;
 
         if (initialTheme === "dark") {
-          document.documentElement.classList.add("dark"); [cite: 4]
+          document.documentElement.classList.add("dark");
         } else {
-          document.documentElement.classList.remove("dark"); [cite: 4]
+          document.documentElement.classList.remove("dark");
         }
       })();
     </script>
-
-    <script define:vars={{ postsData, POSTS_PER_PAGE }}>
+    <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const allPosts = JSON.parse(postsData); [cite: 7]
-        const postsPerPage = POSTS_PER_PAGE; [cite: 7]
-        const totalPosts = allPosts.length; [cite: 7]
-        const totalPages = Math.ceil(totalPosts / postsPerPage); [cite: 7]
-
-        function getCurrentPage() {
-          const urlParams = new URLSearchParams(window.location.search); [cite: 8]
-          const page = urlParams.get("page"); [cite: 8]
-          return page ? parseInt(page, 10) : 1; [cite: 8]
-        }
-
-        function getPageUrl(page) {
-          return page === 1 ? "/parcial01/" : `/parcial01/?page=${page}`; [cite: 8]
-        }
-
-        function renderPosts(page) {
-          const currentPage = Math.max(1, Math.min(page, totalPages)); [cite: 9]
-          const startIndex = (currentPage - 1) * postsPerPage; [cite: 9]
-          const endIndex = startIndex + postsPerPage; [cite: 9]
-          const postsToShow = allPosts.slice(startIndex, endIndex); [cite: 9]
-          const postsContainer = document.getElementById("posts-container"); [cite: 10]
-          
-          if (!postsContainer) return; [cite: 10]
-
-          postsContainer.innerHTML = postsToShow
-            .map(
-              (post) => `
-            <a href="${post.href}" class="group relative p-[1px] rounded-2xl transition-all duration-300">
-              <div class="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-orange-500/40 to-orange-500/0 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 rounded-2xl"></div>
-              
-              <div class="relative h-full flex flex-col p-6 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 bg-transparent hover:border-orange-500/50 transition-colors duration-300">
-                
-                <h2 class="text-lg font-bold mb-4 text-neutral-900 dark:text-neutral-100 min-h-[3.5rem] line-clamp-2">
-                  ${post.title} [cite: 15]
-                </h2>
-
-                <div class="relative h-40 w-full mb-5 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800">
-                  <img
-                    src="${post.image}"
-                    alt="${post.title}" [cite: 34]
-                    class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" [cite: 35]
-                  />
-                </div>
-
-                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6 line-clamp-3">
-                  ${post.description} [cite: 27]
-                </p>
-
-                <div class="mt-auto pt-4 border-t border-dashed border-neutral-200 dark:border-neutral-800 flex items-center justify-between text-[11px] uppercase tracking-wider font-semibold text-neutral-500">
-                  <span>${post.date}</span> [cite: 28]
-                  <span class="flex items-center">
-                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    ${post.readTime} [cite: 32]
-                  </span>
-                </div>
-              </div>
-            </a>
-          `
-            )
-            .join(""); [cite: 36]
-        }
-
-        function renderPagination(page) {
-          const currentPage = Math.max(1, Math.min(page, totalPages)); [cite: 37]
-          const paginationContainer = document.getElementById("pagination-container"); [cite: 38]
-          if (!paginationContainer || totalPages <= 1) { [cite: 39]
-            if(paginationContainer) paginationContainer.innerHTML = "";
-            return;
-          }
-
-          let paginationHTML = '<div class="flex justify-center items-center gap-4 mt-16">'; [cite: 40]
-          
-          // Botón Previous
-          paginationHTML += currentPage > 1 
-            ? `<a href="${getPageUrl(currentPage - 1)}" class="text-sm font-bold text-neutral-500 hover:text-orange-500 transition-colors">← PREV</a>` [cite: 41]
-            : `<span class="text-sm font-bold text-neutral-300 dark:text-neutral-700 cursor-not-allowed">← PREV</span>`; [cite: 43]
-
-          // Números
-          for (let i = 1; i <= totalPages; i++) { [cite: 45]
-            const isCurrent = i === currentPage;
-            paginationHTML += `
-              <a href="${getPageUrl(i)}" class="w-8 h-8 flex items-center justify-center rounded-lg text-xs font-bold transition-all ${
-                isCurrent ? "bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900 shadow-lg" : "text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-              }">${i}</a>
-            `; [cite: 46]
-          }
-
-          // Botón Next
-          paginationHTML += currentPage < totalPages 
-            ? `<a href="${getPageUrl(currentPage + 1)}" class="text-sm font-bold text-neutral-500 hover:text-orange-500 transition-colors">NEXT →</a>` [cite: 49]
-            : `<span class="text-sm font-bold text-neutral-300 dark:text-neutral-700 cursor-not-allowed">NEXT →</span>`; [cite: 51]
-
-          paginationHTML += "</div>";
-          paginationContainer.innerHTML = paginationHTML; [cite: 53]
-        }
-
-        // Lógica de navegación sin recarga
-        function handlePaginationClick(e) {
-          const target = e.target.closest("a"); [cite: 54]
-          if (!target || !target.href || !target.href.includes("?page=")) return; [cite: 55]
-
-          e.preventDefault();
-          const url = new URL(target.href); [cite: 56]
-          const page = parseInt(url.searchParams.get("page") || "1", 10); [cite: 57]
-          
-          window.history.pushState({ page }, "", target.href); [cite: 56]
-          renderPosts(page); [cite: 57]
-          renderPagination(page); [cite: 57]
-          window.scrollTo({ top: 0, behavior: "smooth" }); [cite: 57]
-        }
-
-        const initialPage = getCurrentPage(); [cite: 58]
-        renderPosts(initialPage); [cite: 59]
-        renderPagination(initialPage); [cite: 59]
-
-        document.getElementById("pagination-container")?.addEventListener("click", handlePaginationClick); [cite: 60]
-        window.addEventListener("popstate", () => {
-          const page = getCurrentPage();
-          renderPosts(page);
-          renderPagination(page);
-        });
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (e) => {
+            if (localStorage.getItem("theme") === "system") {
+              if (e.matches) {
+                document.documentElement.classList.add("dark");
+              } else {
+                document.documentElement.classList.remove("dark");
+              }
+            }
+          });
       });
     </script>
-
     <style>
-      html, body { margin: 0; padding: 0; height: 100%; overflow-x: hidden; } [cite: 62, 63]
-      body { display: flex; flex-direction: column; min-height: 100vh; } [cite: 63, 64]
-      main { flex: 1; } [cite: 64]
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow-x: hidden;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      main {
+        flex: 1;
+      }
+      section[class*="text-gray-700"] {
+        margin: 0;
+        padding: 0;
+        flex-shrink: 0;
+      }
 
       .dot-hexagon-light {
-        background-image: radial-gradient(circle, #80808030 1px, transparent 1px), radial-gradient(circle, #80808030 1px, transparent 1px); [cite: 66]
-        background-size: 24px 41.57px; background-position: 0 0, 12px 20.78px; [cite: 67]
+        background-image: radial-gradient(
+            circle,
+            #80808045 1px,
+            transparent 1px
+          ),
+          radial-gradient(circle, #80808045 1px, transparent 1px);
+        background-size: 24px 41.57px;
+        background-position:
+          0 0,
+          12px 20.78px;
       }
 
       .dot-hexagon-dark {
-        background-image: radial-gradient(circle, #ffffff20 1px, transparent 1px), radial-gradient(circle, #ffffff20 1px, transparent 1px); [cite: 68]
-        background-size: 24px 41.57px; background-position: 0 0, 12px 20.78px; [cite: 69]
+        background-image: radial-gradient(
+            circle,
+            #ffffff35 1px,
+            transparent 1px
+          ),
+          radial-gradient(circle, #ffffff35 1px, transparent 1px);
+        background-size: 24px 41.57px;
+        background-position:
+          0 0,
+          12px 20.78px;
       }
     </style>
   </head>
-
   <body class="bg-white dark:bg-neutral-900 transition-colors duration-300">
     <div class="fixed inset-0 z-0 pointer-events-none">
-      <div class="absolute inset-0 -z-10 dot-hexagon-light dark:dot-hexagon-dark"></div> [cite: 70]
-      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(255,255,255,0.8)_80%,white_100%)] dark:bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(23,23,23,0.8)_80%,rgb(23,23,23)_100%)] -z-10"></div> [cite: 70]
+      <div
+        class="absolute inset-0 -z-10 dot-hexagon-light dark:dot-hexagon-dark"
+      >
+      </div>
+      <div
+        class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,rgba(255,255,255,0.5)_60%,rgba(255,255,255,0.9)_85%,white_100%)] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,rgba(23,23,23,0.5)_60%,rgba(23,23,23,0.9)_85%,rgb(23,23,23)_100%)] -z-10"
+      >
+      </div>
+      <div
+        class="absolute left-0 right-0 top-0 -z-10 m-auto h-[1200px] w-[1200px] rounded-full bg-neutral-400 opacity-10 blur-[100px]"
+      >
+      </div>
     </div>
 
-    <main class="relative z-10 flex flex-col">
+    <main class="flex-1 relative z-10">
       <Navigation />
-      
-      <section class="w-full max-w-7xl mx-auto mt-24 px-6 pb-20">
-        <div class="flex flex-col mb-16">
-          <h2 class="text-3xl font-black tracking-tighter text-neutral-900 dark:text-neutral-100 sm:text-5xl">
-            Actividades Parcial I [cite: 72]
+      <section class="relative z-20 max-w-4xl mx-auto mt-32 mb-12 px-7 lg:px-0">
+        <div class="relative z-20 w-full mx-auto lg:mx-0">
+          <h2
+            class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl lg:text-4xl"
+          >
+            {proyectosContent.title}
           </h2>
-          <div class="h-1 w-20 bg-orange-500 mt-4"></div>
-        </div>
+          <p
+            class="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg"
+          >
+            {proyectosContent.description}
+          </p>
 
-        <div
-          id="posts-container"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
-        >
+          <div
+            class="z-50 grid items-stretch w-full grid-cols-1 my-8 gap-7 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {
+              proyectosContent.projects.map((project) => (
+                <a
+                  href={project.href}
+                  target="_self"
+                  class="relative flex flex-col items-stretch duration-300 ease-out p-7 sm:p-3 group rounded-2xl"
+                >
+                  <span class="absolute inset-0 z-20 block w-full h-full duration-300 ease-out bg-transparent border border-transparent border-dashed group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:border group-hover:border-neutral-300 dark:group-hover:border-neutral-600 group-hover:border-dashed rounded-2xl group-hover:bg-white dark:group-hover:bg-neutral-950" />
+                  <span class="absolute inset-0 z-10 block w-full h-full duration-300 ease-out border border-dashed rounded-2xl border-neutral-300 dark:border-neutral-600 group-hover:translate-x-1 group-hover:translate-y-1" />
+                  <span class="relative z-30 block duration-300 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1">
+                    <span class="block w-full">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        class="w-full h-auto rounded-lg aspect-[16/9] object-cover"
+                      />
+                    </span>
+                    <span class="block w-full px-1 mt-5 mb-1 sm:mt-3">
+                      <span class="flex items-center mb-0 text-base font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+                        <span>{project.title}</span>
+                        <svg
+                          class="group-hover:translate-x-0 group-hover:translate-y-0 -rotate-45 translate-y-1 -translate-x-1 w-2.5 h-2.5 stroke-current ml-1 transition-all ease-in-out duration-200 transform"
+                          viewBox="0 0 13 15"
+                        >
+                          <g
+                            stroke="none"
+                            stroke-width="1"
+                            fill="none"
+                            fill-rule="evenodd"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <g
+                              transform="translate(0.666667, 2.333333)"
+                              stroke="currentColor"
+                              stroke-width="2.4"
+                            >
+                              <g>
+                                <polyline
+                                  class="transition-all duration-200 ease-out opacity-0 delay-0 group-hover:opacity-100"
+                                  points="5.33333333 0 10.8333333 5.5 5.33333333 11"
+                                />
+                                <line
+                                  class="transition-all duration-200 ease-out transform -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 group-hover:ml-0"
+                                  x1="10.8333333"
+                                  y1="5.5"
+                                  x2="0.833333333"
+                                  y2="5.16666667"
+                                />
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                      </span>
+                      <span class="text-sm text-neutral-600 dark:text-neutral-400 block truncate">
+                        {project.description}
+                      </span>
+                    </span>
+                  </span>
+                </a>
+              ))
+            }
           </div>
-
-        <div id="pagination-container"></div> [cite: 72]
+        </div>
       </section>
     </main>
 
-    <Footer /> [cite: 73]
+    <Footer />
   </body>
 </html>
