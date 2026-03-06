@@ -87,40 +87,6 @@ export const aboutContent = {
   },
 };
 
-export const actividadesContent = {
-  meta: {
-    title: "Actividades de Parciales",
-    description: "Recopilacion de actividades, tareas y proyectos",
-  },
-  title: "Actividades en parciales",
-  description:
-    "En los siguientes modulos se encuentran recopiladas las actividades realizadas, divididas por cada parcial de la materia de CNO V: Seguridad Informática, haciendo evidencia del trabajo elaborado y conocimientos aquiridos tras el aprendizaje de nuevos temas.",
-  projects: [
-    {
-      title: "Parcial I",
-      description:
-        "Fundamentos del Hackin Ético",
-      image: "/assets/images/projects/parcial01.png",
-      href: "https://roberto182377.github.io/parcial01/",
-    },
-    {
-      title: "Parcial II",
-      description:
-        "Técnicas de explotación de vulnerabilidades y seguridad en entornos tecnológicos.",
-      image: "/assets/images/projects/parcial02.png",
-      href: "#",
-    },
-    {
-      title: "Parcial III",
-      description:
-        "Post-explotación y reportes de seguridad",
-      image: "/assets/images/projects/parcial03.png",
-      href: "#",
-    },
-  ],
-};
-
-
 export const proyectosContent = {
   meta: {
     title: "Proyectos",

@@ -8,7 +8,7 @@ const allMarkdownModules = import.meta.glob<{
     slug?: string;
   };
   default: any;
-}>('../content/parcial01/*.md', { eager: true });
+}>('../content/actividadesSI/*.md', { eager: true });
 
 export interface Post {
   title: string;
@@ -53,7 +53,7 @@ export function getAllPosts(): Post[] {
       readTime: frontmatter.readTime || '',
       image: frontmatter.image || '/assets/images/posts/post1.jpg',
       slug: slug,
-      href: `/parcial01/${slug}`,
+      href: `/actividadesSI/${slug}`,
     });
   }
 
