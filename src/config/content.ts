@@ -120,3 +120,36 @@ export const actividadesContent = {
   ],
 };
 
+
+export const proyectosContent = {
+  meta: {
+    title: "Proyectos",
+    description: "Modulo con la inclusión de los proyectos desarrollados durante la materia",
+  },
+  title: "Proyectos",
+  description:
+    "En el presente modulo se encuentra la inclusión de los proyectos desarrollados durante la materia de CNO V: Seguridad Informática, haciendo evidencia del trabajo elaborado y conocimientos aquiridos tras el aprendizaje de nuevos temas.",
+  projects: [
+    {
+      title: "PR01",
+      description:
+        "Fundamentos del Hackin Ético",
+      image: "/assets/images/projects/parcial01.png",
+      href: "https://roberto182377.github.io/parcial01/",
+    },
+    {
+      title: "PR02",
+      description:
+        "El eslabón más débil: diseño ético de una campaña de ingeniería social.",
+      image: "/assets/images/projects/parcial02.png",
+      href: "#",
+    },
+    {
+      title: "PR03",
+      description:
+        "En espera...",
+      image: "/assets/images/projects/parcial03.png",
+      href: "#",
+    },
+  ],
+};
