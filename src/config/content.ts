@@ -20,7 +20,7 @@ export const homeContent = {
     },
     posts: {
       text: "Actividades",
-      href: "/actividades/",
+      href: "/actividadesSI/",
     },
   },
   images: {
