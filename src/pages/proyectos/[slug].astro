@@ -67,9 +67,56 @@ const { Content, frontmatter } = post;
   </body>
 </html>
 
-<style is:global>
-  /* Estilos básicos para que el MD se vea bien */
-  .prose h2 { @apply text-2xl font-bold mt-8 mb-4; }
-  .prose p { @apply mb-4 leading-relaxed; }
-  .prose ul { @apply list-disc ml-6 mb-4; }
-</style>
+<style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow-x: hidden;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      main {
+        flex: 1;
+      }
+      section[class*="text-gray-700"] {
+        margin: 0;
+        padding: 0;
+        flex-shrink: 0;
+      }
+      .prose h1:first-of-type,
+      .prose > h1:first-child,
+      article .prose h1:first-child {
+        display: none !important;
+      }
+
+      .dot-hexagon-light {
+        background-image: radial-gradient(
+            circle,
+            #80808045 1px,
+            transparent 1px
+          ),
+          radial-gradient(circle, #80808045 1px, transparent 1px);
+        background-size: 24px 41.57px;
+        background-position:
+          0 0,
+          12px 20.78px;
+      }
+
+      .dot-hexagon-dark {
+        background-image: radial-gradient(
+            circle,
+            #ffffff35 1px,
+            transparent 1px
+          ),
+          radial-gradient(circle, #ffffff35 1px, transparent 1px);
+        background-size: 24px 41.57px;
+        background-position:
+          0 0,
+          12px 20.78px;
+      }
+    </style>
