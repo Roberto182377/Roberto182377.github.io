@@ -12,18 +12,12 @@ import { roadToHofFContent } from "../config/content.ts";
     <meta name="generator" content={Astro.generator} />
     <title>{roadToHofFContent.meta.title}</title>
     <meta name="description" content={roadToHofFContent.meta.description} />
+    
     <script is:inline>
       (function () {
         const savedTheme = localStorage.getItem("theme") || "dark";
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        const initialTheme =
-          savedTheme === "system"
-            ? prefersDark
-              ? "dark"
-              : "light"
-            : savedTheme;
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const initialTheme = savedTheme === "system" ? (prefersDark ? "dark" : "light") : savedTheme;
 
         if (initialTheme === "dark") {
           document.documentElement.classList.add("dark");
@@ -32,141 +26,95 @@ import { roadToHofFContent } from "../config/content.ts";
         }
       })();
     </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        window
-          .matchMedia("(prefers-color-scheme: dark)")
-          .addEventListener("change", (e) => {
-            if (localStorage.getItem("theme") === "system") {
-              if (e.matches) {
-                document.documentElement.classList.add("dark");
-              } else {
-                document.documentElement.classList.remove("dark");
-              }
-            }
-          });
-      });
-    </script>
+
     <style>
-  /* 1. Definición de variables para control total del tono */
-  :root {
-    --bg-main: #ffffff;
-    --text-main: #171717;
-    --dot-color: #80808045; /* Puntos para modo claro */
-  }
+      /* 1. Variables Dinámicas */
+      :root {
+        --bg-main: #ffffff;
+        --text-main: #171717;
+        --dot-color: #80808030;
+      }
 
-  /* Este es el tono oscuro exacto que aplicamos anteriormente */
-  .dark {
-    --bg-main: #0a0a0a;
-    --text-main: #ededed;
-    --dot-color: #ffffff20; /* Puntos sutiles para modo oscuro */
-  }
+      .dark {
+        --bg-main: #0a0a0a;
+        --text-main: #ededed;
+        --dot-color: #ffffff20;
+      }
 
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow-x: hidden;
-  }
+      /* 2. Reset y Fondo Base */
+      html, body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
 
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    
-    /* 2. Aplicación del estilo de fondo dinámico */
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    transition: background-color 0.3s ease, color 0.3s ease;
+      body {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--bg-main) !important; /* !important asegura que Tailwind no lo sobreescriba */
+        color: var(--text-main);
+        transition: background-color 0.3s ease;
+        
+        /* El patrón de puntos hexagonal */
+        background-image: 
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px),
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+        background-size: 24px 41.57px;
+        background-position: 0 0, 12px 20.78px;
+        background-attachment: fixed;
+      }
 
-    /* Patrón de puntos hexagonales integrado */
-    background-image: 
-      radial-gradient(circle, var(--dot-color) 1px, transparent 1px),
-      radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
-    background-size: 24px 41.57px;
-    background-position: 0 0, 12px 20.78px;
-    background-attachment: fixed; /* Mantiene los puntos estáticos al hacer scroll */
-  }
+      main {
+        flex: 1;
+        width: 100%;
+      }
 
-  main {
-    flex: 1;
-    position: relative;
-    z-index: 1; /* Asegura que el contenido flote sobre el fondo */
-  }
-
-  /* Optimizando secciones de texto */
-  section[class*="text-gray-700"] {
-    margin: 0;
-    padding: 0;
-    flex-shrink: 0;
-  }
-
-  /* 3. Clases de utilidad por si necesitas aplicarlo a contenedores específicos */
-  .dot-hexagon-dark {
-    background-color: #0a0a0a;
-    background-image: radial-gradient(circle, #ffffff20 1px, transparent 1px),
-                      radial-gradient(circle, #ffffff20 1px, transparent 1px);
-    background-size: 24px 41.57px;
-    background-position: 0 0, 12px 20.78px;
-  }
-</style>
+      /* Estilo para los contenedores de los proyectos para que no sean transparentes */
+      .project-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .dark .project-card {
+        background: #151515;
+        border: 1px solid #33333380;
+      }
+    </style>
   </head>
-  <body class="bg-white dark:bg-neutral-900 transition-colors duration-300">
-    <div class="fixed inset-0 z-0 pointer-events-none">
-      <div
-        class="absolute inset-0 -z-10 dot-hexagon-light dark:dot-hexagon-dark"
-      >
-      </div>
-      <div
-        class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,rgba(255,255,255,0.5)_60%,rgba(255,255,255,0.9)_85%,white_100%)] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,rgba(23,23,23,0.5)_60%,rgba(23,23,23,0.9)_85%,rgb(23,23,23)_100%)] -z-10"
-      >
-      </div>
-      <div
-        class="absolute left-0 right-0 top-0 -z-10 m-auto h-[1200px] w-[1200px] rounded-full bg-neutral-400 opacity-10 blur-[100px]"
-      >
-      </div>
-    </div>
+  
+  <body>
+    <Navigation />
+    
+    <main class="flex-grow pt-24">
+      <section class="max-w-4xl mx-auto px-6 mb-12">
+        <h1 class="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+          {roadToHofFContent.header.title}
+        </h1>
+        <p class="text-lg text-neutral-600 dark:text-neutral-400">
+          {roadToHofFContent.header.description}
+        </p>
+      </section>
 
-    <main class="flex-1 relative z-10">
-      <Navigation />
-      <section class="relative z-20 max-w-4xl mx-auto mt-32 mb-12 px-7 lg:px-0">
-        <div class="relative z-20 w-full mx-auto lg:mx-0">
-          <h2
-            class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl lg:text-4xl"
-          >
-            {roadToHofFContent.title}
-          </h2>
-          <p
-            class="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg"
-          >
-            {roadToHofFContent.description}
-          </p>
-
-          <div class="z-50 grid items-stretch w-full grid-cols-1 my-8 gap-7">
-            {
-              roadToHofFContent.projects.map((project) => (
-                <a
-                  href={project.href}
-                  target="_self"
-                  /* 2. Cambiamos 'flex-col' por 'sm:flex-row' para que en pantallas grandes la imagen y el texto estén alineados horizontalmente */
-                  class="relative flex flex-col sm:flex-row items-center duration-300 ease-out p-7 sm:p-5 group rounded-2xl gap-6"
-                >
-                  <span class="absolute inset-0 z-20 block w-full h-full duration-300 ease-out bg-transparent border border-transparent border-dashed group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:border group-hover:border-neutral-300 dark:group-hover:border-neutral-600 group-hover:border-dashed rounded-2xl group-hover:bg-white dark:group-hover:bg-neutral-950" />
-                  <span class="absolute inset-0 z-10 block w-full h-full duration-300 ease-out border border-dashed rounded-2xl border-neutral-300 dark:border-neutral-600 group-hover:translate-x-1 group-hover:translate-y-1" />
-                  
-                  <span class="relative z-30 flex flex-col sm:flex-row items-center w-full duration-300 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1 gap-6">
-                    <span class="block w-full sm:w-64 flex-shrink-0">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        class="w-full h-auto rounded-lg aspect-[16/9] object-cover"
-                      />
-                    </span>
-
-                    <span class="block w-full px-1 mt-0">
-                      <span class="flex items-center mb-1 text-lg font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-                        <span>{project.title}</span>
+      <section class="max-w-4xl mx-auto px-6 pb-20">
+        <div class="space-y-12">
+          {
+            roadToHofFContent.sections.map((section) => (
+              <div>
+                <h2 class="text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-6 border-b border-neutral-200 dark:border-neutral-800 pb-2">
+                  {section.title}
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {section.items.map((item) => (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="group project-card p-4 rounded-xl transition-all duration-300 hover:scale-[1.02]"
+                    >
+                      <span class="flex items-center text-lg font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-blue-500 transition-colors">
+                        {item.title}
                         <svg
                           class="group-hover:translate-x-0 group-hover:translate-y-0 -rotate-45 translate-y-1 -translate-x-1 w-3 h-3 stroke-current ml-2 transition-all duration-200"
                           viewBox="0 0 13 15"
@@ -181,19 +129,19 @@ import { roadToHofFContent } from "../config/content.ts";
                           </g>
                         </svg>
                       </span>
-                      <span class="text-base text-neutral-600 dark:text-neutral-400 block">
-                        {project.description}
+                      <span class="text-base text-neutral-600 dark:text-neutral-400 block mt-1">
+                        {item.description}
                       </span>
-                    </span>
-                  </span>
-                </a>
-              ))
-            }
-          </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
         </div>
       </section>
     </main>
-
+    
     <Footer />
   </body>
 </html>
