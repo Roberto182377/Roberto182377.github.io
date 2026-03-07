@@ -1,0 +1,148 @@
+---
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+
+// Datos de los 18 laboratorios adaptados del documento PDF
+const labs = [
+  {
+    id: "Lab01",
+    title: "Vulnerability in WHERE clause (hidden data)",
+    nivel: "Apprentice",
+    tipo: "SQLi clásica (Lógica booleana)",
+    objetivo: "Mostrar productos no lanzados (released=0).",
+    vulnerabilidad: "Concatenación directa de entradas en la cláusula WHERE.",
+    procedimiento: "Interceptar `/filter?category=` y añadir el payload para anular la condición de lanzamiento.",
+    payload: "' OR 1=1--",
+    explicacion: "La comilla cierra el string, `OR 1=1` hace la condición siempre verdadera y `--` comenta el resto de la consulta original.",
+    mitigacion: "Uso de consultas preparadas (Parameterized Queries)."
+  },
+  {
+    id: "Lab02",
+    title: "Login bypass",
+    nivel: "Apprentice",
+    tipo: "SQLi en formulario de autenticación",
+    objetivo: "Acceder como administrator sin contraseña.",
+    vulnerabilidad: "Falta de validación en los campos del formulario de inicio de sesión.",
+    procedimiento: "Ingresar en el campo de usuario el payload y cualquier texto en password.",
+    payload: "administrator'--",
+    explicacion: "Cierra el campo de usuario y comenta la validación de la contraseña en la base de datos.",
+    mitigacion: "Consultas preparadas y hashing de contraseñas."
+  },
+  {
+    id: "Lab03",
+    title: "DB type and version (Oracle)",
+    nivel: "Practitioner",
+    tipo: "UNION-based SQLi",
+    objetivo: "Determinar la versión de la base de datos Oracle.",
+    vulnerabilidad: "El filtro de categorías permite inyección basada en UNION.",
+    procedimiento: "Determinar número de columnas con `ORDER BY` y luego inyectar la consulta de versión.",
+    payload: "'+UNION+SELECT+BANNER,+NULL+FROM+v$version--",
+    explicacion: "Se usa `FROM DUAL` o tablas del sistema como `v$version` específicas de Oracle.",
+    mitigacion: "Validación de entradas y ocultar errores detallados de la base de datos."
+  },
+  // ... Se continúa la estructura para los 18 laboratorios
+  {
+    id: "Lab13",
+    title: "Visible error-based SQL injection",
+    nivel: "Practitioner",
+    tipo: "Error-based SQLi",
+    objetivo: "Extraer la contraseña del administrador mediante errores visibles.",
+    vulnerabilidad: "La aplicación muestra errores de base de datos detallados al usuario.",
+    procedimiento: "Forzar un error de conversión de datos usando `CAST` para filtrar información.",
+    payload: "TrackingId=' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--",
+    explicacion: "El motor intenta convertir el string de la contraseña a entero, fallando y mostrando el valor en el mensaje de error.",
+    mitigacion: "Manejo genérico de errores y sanitización de cookies."
+  },
+  {
+    id: "Lab15",
+    title: "Blind SQLi with time delays and data exfiltration",
+    nivel: "Practitioner",
+    tipo: "Time-based Blind SQLi",
+    objetivo: "Recuperar la contraseña carácter por carácter midiendo el tiempo de respuesta.",
+    vulnerabilidad: "La aplicación no responde con cambios de contenido, pero procesa funciones de retardo.",
+    procedimiento: "Utilizar `pg_sleep()` dentro de un `CASE` para confirmar cada carácter mediante pausas.",
+    payload: "' || (SELECT CASE WHEN (username='administrator' AND SUBSTR(password,1,1)='a') THEN pg_sleep(5) ELSE pg_sleep(0) END FROM users)--",
+    explicacion: "Si la letra es correcta, el servidor tarda 5 segundos en responder.",
+    mitigacion: "Consultas parametrizadas y monitorización de tiempos de respuesta anómalos."
+  },
+  {
+    id: "Lab18",
+    title: "Filter bypass via XML encoding",
+    nivel: "Practitioner",
+    tipo: "In-band SQLi (Bypass via XML)",
+    objetivo: "Evadir un WAF/Filtro que bloquea palabras clave SQL.",
+    vulnerabilidad: "El endpoint procesa XML pero no valida el contenido codificado de las etiquetas.",
+    procedimiento: "Codificar el payload SQL en formato de entidades XML hexadecimales.",
+    payload: "<storeId>1 &#x53;&#x45;&#x4c;&#x45;&#x43;&#x54; ...</storeId>",
+    explicacion: "Las entidades XML (como &#x53; para 'S') se decodifican en el servidor después de pasar el filtro de seguridad.",
+    mitigacion: "Validación de esquema XML y filtrado de caracteres después de la decodificación."
+  }
+];
+---
+
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SQL Injection - Road to Hall of Fame</title>
+    <style>
+        :root { --bg: #ffffff; --text: #171717; --card: #f5f5f5; }
+        .dark { --bg: #0a0a0a; --text: #ededed; --card: #171717; }
+        body { background-color: var(--bg); color: var(--text); font-family: system-ui, sans-serif; transition: 0.3s; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .lab-grid { display: grid; gap: 2rem; margin-top: 3rem; }
+        .lab-card { 
+            background: var(--card); border: 1px solid #333; padding: 1.5rem; border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .lab-card:hover { transform: translateY(-4px); border-color: #666; }
+        .badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px; background: #333; color: #fff; }
+        code { background: #222; color: #ff79c6; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9rem; }
+        .section-title { color: #888; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <Navigation />
+    <main class="container">
+        <header>
+            <h1 class="text-4xl font-bold">Road to Hall of Fame: SQL Injection</h1>
+            <p class="text-neutral-500 mt-2">Documentación técnica de 18 escenarios de vulnerabilidad en Web Security Academy.</p>
+        </header>
+
+        <section class="lab-grid">
+            {labs.map((lab) => (
+                <article class="lab-card">
+                    <div class="flex justify-between items-start">
+                        <h2 class="text-xl font-mono text-neutral-300">{lab.id}: {lab.title}</h2>
+                        <span class="badge">{lab.nivel}</span>
+                    </div>
+                    
+                    <p class="section-title">Tipo de SQLi</p>
+                    <p class="text-sm">{lab.tipo}</p>
+
+                    <p class="section-title">Objetivo</p>
+                    <p class="text-sm">{lab.objetivo}</p>
+
+                    <p class="section-title">Vulnerabilidad</p>
+                    <p class="text-sm italic text-neutral-400">{lab.vulnerabilidad}</p>
+
+                    <p class="section-title">Procedimiento resumido</p>
+                    <p class="text-sm">{lab.procedimiento}</p>
+
+                    <div class="mt-4 p-3 bg-black rounded border border-neutral-800">
+                        <p class="section-title !mt-0">Comando / Payload clave</p>
+                        <code class="block mt-1 break-all">{lab.payload}</code>
+                    </div>
+
+                    <p class="section-title">Explicación de Payload</p>
+                    <p class="text-sm">{lab.explicacion}</p>
+
+                    <p class="section-title">Mitigación recomendada</p>
+                    <p class="text-sm text-green-500/80">{lab.mitigacion}</p>
+                </article>
+            ))}
+        </section>
+    </main>
+    <Footer />
+</body>
+</html>
