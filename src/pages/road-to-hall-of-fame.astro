@@ -2,6 +2,12 @@
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import { roadToHofFContent } from "../config/content.ts";
+
+// Validación de seguridad para el build de Astro
+const title = roadToHofFContent?.meta?.title || "Road to Hall of Fame";
+const description = roadToHofFContent?.meta?.description || "Documentación técnica";
+const header = roadToHofFContent?.header || { title: "Road to Hall of Fame", description: "" };
+const sections = roadToHofFContent?.sections || [];
 ---
 
 <html lang="en">
@@ -10,8 +16,8 @@ import { roadToHofFContent } from "../config/content.ts";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{roadToHofFContent.meta.title}</title>
-    <meta name="description" content={roadToHofFContent.meta.description} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     
     <script is:inline>
       (function () {
@@ -28,7 +34,6 @@ import { roadToHofFContent } from "../config/content.ts";
     </script>
 
     <style>
-      /* 1. Variables Dinámicas */
       :root {
         --bg-main: #ffffff;
         --text-main: #171717;
@@ -41,22 +46,21 @@ import { roadToHofFContent } from "../config/content.ts";
         --dot-color: #ffffff20;
       }
 
-      /* 2. Reset y Fondo Base */
       html, body {
         margin: 0;
         padding: 0;
         min-height: 100vh;
-        overflow-x: hidden;
       }
 
       body {
         display: flex;
         flex-direction: column;
-        background-color: var(--bg-main) !important; /* !important asegura que Tailwind no lo sobreescriba */
+        /* Forzamos el color de fondo para evitar conflictos con Tailwind */
+        background-color: var(--bg-main) !important;
         color: var(--text-main);
         transition: background-color 0.3s ease;
         
-        /* El patrón de puntos hexagonal */
+        /* Patrón de puntos hexagonales */
         background-image: 
           radial-gradient(circle, var(--dot-color) 1px, transparent 1px),
           radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
@@ -70,16 +74,21 @@ import { roadToHofFContent } from "../config/content.ts";
         width: 100%;
       }
 
-      /* Estilo para los contenedores de los proyectos para que no sean transparentes */
       .project-card {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(128, 128, 128, 0.05);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(128, 128, 128, 0.1);
+        transition: all 0.3s ease;
       }
       
       .dark .project-card {
-        background: #151515;
-        border: 1px solid #33333380;
+        background: rgba(23, 23, 23, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .project-card:hover {
+        border-color: #3b82f6; /* Azul sutil al pasar el mouse */
+        transform: translateY(-2px);
       }
     </style>
   </head>
@@ -87,22 +96,22 @@ import { roadToHofFContent } from "../config/content.ts";
   <body>
     <Navigation />
     
-    <main class="flex-grow pt-24">
+    <main class="pt-24">
       <section class="max-w-4xl mx-auto px-6 mb-12">
-        <h1 class="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
-          {roadToHofFContent.header.title}
+        <h1 class="text-4xl font-bold mb-4">
+          {header.title}
         </h1>
         <p class="text-lg text-neutral-600 dark:text-neutral-400">
-          {roadToHofFContent.header.description}
+          {header.description}
         </p>
       </section>
 
       <section class="max-w-4xl mx-auto px-6 pb-20">
         <div class="space-y-12">
           {
-            roadToHofFContent.sections.map((section) => (
+            sections.map((section) => (
               <div>
-                <h2 class="text-2xl font-semibold text-neutral-800 dark:text-neutral-200 mb-6 border-b border-neutral-200 dark:border-neutral-800 pb-2">
+                <h2 class="text-2xl font-semibold mb-6 border-b border-neutral-200 dark:border-neutral-800 pb-2">
                   {section.title}
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -111,9 +120,9 @@ import { roadToHofFContent } from "../config/content.ts";
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="group project-card p-4 rounded-xl transition-all duration-300 hover:scale-[1.02]"
+                      class="group project-card p-5 rounded-xl block"
                     >
-                      <span class="flex items-center text-lg font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-blue-500 transition-colors">
+                      <span class="flex items-center text-lg font-medium group-hover:text-blue-500 transition-colors">
                         {item.title}
                         <svg
                           class="group-hover:translate-x-0 group-hover:translate-y-0 -rotate-45 translate-y-1 -translate-x-1 w-3 h-3 stroke-current ml-2 transition-all duration-200"
