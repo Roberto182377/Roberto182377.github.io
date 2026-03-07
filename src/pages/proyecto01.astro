@@ -1,0 +1,219 @@
+---
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+
+const metrics = [
+  {
+    title: "Click Rate",
+    label: "Tasa de Apertura",
+    desc: "Mide el porcentaje de usuarios que caen en la simulación. Insuficiente por sí sola.",
+    icon: "🖱️"
+  },
+  {
+    title: "Reporting Rate",
+    label: "Tasa de Reporte",
+    desc: "La métrica más crítica. Indica una cultura activa de defensa y uso de herramientas de alerta.",
+    icon: "🚩"
+  },
+  {
+    title: "Risk Score",
+    label: "Puntuación de Riesgo",
+    desc: "Algoritmo que predice la probabilidad de un incidente real basado en comportamiento histórico.",
+    icon: "📊"
+  }
+];
+
+const platforms = [
+  { name: "Cofense", enfoque: "Recompensa / Respuesta a incidentes", fortaleza: "Integración con SOC maduro", limite: "Administración compleja" },
+  { name: "Hoxhunt", enfoque: "Gamificación / IA", fortaleza: "Rutas personalizadas y alta retención", limite: "Curva de aprendizaje" },
+  { name: "KnowBe4", enfoque: "Contenido Educativo", fortaleza: "Base de datos de plantillas masiva", limite: "Menos automatización de IA" },
+  { name: "NINJIO", enfoque: "Storytelling / Humor", fortaleza: "Contenido audiovisual de alto impacto", limite: "Menos control manual" },
+  { name: "Phished", enfoque: "Automatización total", fortaleza: "No requiere intervención manual (IA)", limite: "Dependencia del gateway" }
+];
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Análisis: Gestión del Riesgo Humano</title>
+    
+    <script is:inline>
+      (function () {
+        const theme = localStorage.getItem("theme") || "dark";
+        if (theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --accent: #3b82f6;
+        --text: #ededed;
+        --card-bg: rgba(23, 23, 23, 0.6);
+        --dot-color: rgba(255, 255, 255, 0.1);
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', system-ui, sans-serif;
+        background-image: 
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px),
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+        background-size: 24px 41.57px;
+        background-position: 0 0, 12px 20.78px;
+        background-attachment: fixed;
+        margin: 0;
+      }
+
+      .glass-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+      }
+
+      .glass-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-4px);
+      }
+
+      .title-gradient {
+        background: linear-gradient(to right, #fff, #666);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .tech-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+      }
+
+      .tech-table th {
+        text-align: left;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .tech-table td {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .download-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.75rem 1.5rem;
+        background: var(--accent);
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: opacity 0.2s;
+      }
+
+      .download-btn:hover { opacity: 0.9; }
+    </style>
+  </head>
+  <body>
+    <Navigation />
+    
+    <main class="max-w-5xl mx-auto px-6 pt-32 pb-20">
+      <header class="mb-16">
+        <div class="flex items-center gap-2 text-blue-500 font-mono mb-4 text-sm tracking-widest uppercase">
+          <span>Metodologías de Seguridad</span>
+          <span class="h-px w-12 bg-blue-500/50"></span>
+          <span>PR02</span>
+        </div>
+        <h1 class="text-5xl font-bold mb-6 title-gradient">Análisis Comparativo de Plataformas de Phishing</h1>
+        <p class="text-xl text-neutral-400 max-w-3xl leading-relaxed">
+          La gestión del riesgo humano ha evolucionado de un modelo de cumplimiento a uno de resiliencia, 
+          enfocándose en el comportamiento activo del usuario.
+        </p>
+      </header>
+
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+        {metrics.map(m => (
+          <div class="glass-card p-8">
+            <div class="text-3xl mb-4">{m.icon}</div>
+            <h3 class="text-blue-400 font-mono text-xs uppercase tracking-tighter mb-1">{m.title}</h3>
+            <h2 class="text-xl font-bold mb-3">{m.label}</h2>
+            <p class="text-neutral-400 text-sm leading-relaxed">{m.desc}</p>
+          </div>
+        ))}
+      </section>
+
+      <section class="mb-20 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold mb-6 italic">El Enfoque Ético</h2>
+          <div class="space-y-4 text-neutral-300 leading-relaxed">
+            <p>
+              El diseño de estas plataformas debe basarse en el <span class="text-blue-400">refuerzo positivo</span> y el consentimiento informado. 
+              El objetivo no es castigar al empleado, sino utilizar el "momento de aprendizaje".
+            </p>
+            <p>
+              La transparencia es clave: los usuarios deben saber que están siendo evaluados para mejorar la seguridad colectiva, 
+              no para ser monitoreados de forma punitiva.
+            </p>
+          </div>
+        </div>
+        <div class="glass-card p-8 border-l-4 border-l-blue-500">
+           <p class="text-sm font-mono text-blue-500 mb-2">// Privacy by Design</p>
+           <p class="italic text-lg">"La simulación debe ser una herramienta de crecimiento profesional y no una métrica para sanciones."</p>
+        </div>
+      </section>
+
+      <section class="mb-20">
+        <h2 class="text-2xl font-bold mb-8 flex items-center gap-4">
+          Comparativa de Soluciones
+          <span class="h-px flex-1 bg-neutral-800"></span>
+        </h2>
+        <div class="glass-card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="tech-table">
+              <thead>
+                <tr>
+                  <th>Plataforma</th>
+                  <th>Enfoque Estratégico</th>
+                  <th>Fortaleza Principal</th>
+                  <th>Limitación</th>
+                </tr>
+              </thead>
+              <tbody>
+                {platforms.map(p => (
+                  <tr class="hover:bg-white/5 transition-colors">
+                    <td class="font-bold text-white">{p.name}</td>
+                    <td class="text-neutral-400">{p.enfoque}</td>
+                    <td class="text-blue-300/80">{p.fortaleza}</td>
+                    <td class="text-neutral-500 italic">{p.limite}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <footer class="text-center bg-neutral-900/50 p-12 rounded-3xl border border-white/5">
+        <h2 class="text-2xl font-bold mb-4">¿Deseas profundizar en la investigación?</h2>
+        <p class="text-neutral-400 mb-8 max-w-xl mx-auto">
+          El documento completo incluye el análisis detallado de métricas de resiliencia y el estado del phishing en 2024.
+        </p>
+        <a href="/assets/proyectos/182377_PR02_Parte I.pdf" download class="download-btn gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Descargar PDF Completo
+        </a>
+      </footer>
+    </main>
+
+    <Footer />
+  </body>
+</html>
