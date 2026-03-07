@@ -48,54 +48,69 @@ import { roadToHofFContent } from "../config/content.ts";
       });
     </script>
     <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow-x: hidden;
-      }
-      body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-      main {
-        flex: 1;
-      }
-      section[class*="text-gray-700"] {
-        margin: 0;
-        padding: 0;
-        flex-shrink: 0;
-      }
+  /* 1. Definición de variables para control total del tono */
+  :root {
+    --bg-main: #ffffff;
+    --text-main: #171717;
+    --dot-color: #80808045; /* Puntos para modo claro */
+  }
 
-      .dot-hexagon-light {
-        background-image: radial-gradient(
-            circle,
-            #80808045 1px,
-            transparent 1px
-          ),
-          radial-gradient(circle, #80808045 1px, transparent 1px);
-        background-size: 24px 41.57px;
-        background-position:
-          0 0,
-          12px 20.78px;
-      }
+  /* Este es el tono oscuro exacto que aplicamos anteriormente */
+  .dark {
+    --bg-main: #0a0a0a;
+    --text-main: #ededed;
+    --dot-color: #ffffff20; /* Puntos sutiles para modo oscuro */
+  }
 
-      .dot-hexagon-dark {
-        background-color: #0a0a0a;
-        background-image: radial-gradient(
-            circle,
-            #0a0a0a 1px,
-            transparent 1px
-          ),
-          radial-gradient(circle, #ffffff35 1px, transparent 1px);
-        background-size: 24px 41.57px;
-        background-position:
-          0 0,
-          12px 20.78px;
-      }
-    </style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+    /* 2. Aplicación del estilo de fondo dinámico */
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    /* Patrón de puntos hexagonales integrado */
+    background-image: 
+      radial-gradient(circle, var(--dot-color) 1px, transparent 1px),
+      radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+    background-size: 24px 41.57px;
+    background-position: 0 0, 12px 20.78px;
+    background-attachment: fixed; /* Mantiene los puntos estáticos al hacer scroll */
+  }
+
+  main {
+    flex: 1;
+    position: relative;
+    z-index: 1; /* Asegura que el contenido flote sobre el fondo */
+  }
+
+  /* Optimizando secciones de texto */
+  section[class*="text-gray-700"] {
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  /* 3. Clases de utilidad por si necesitas aplicarlo a contenedores específicos */
+  .dot-hexagon-dark {
+    background-color: #0a0a0a;
+    background-image: radial-gradient(circle, #ffffff20 1px, transparent 1px),
+                      radial-gradient(circle, #ffffff20 1px, transparent 1px);
+    background-size: 24px 41.57px;
+    background-position: 0 0, 12px 20.78px;
+  }
+</style>
   </head>
   <body class="bg-white dark:bg-neutral-900 transition-colors duration-300">
     <div class="fixed inset-0 z-0 pointer-events-none">
