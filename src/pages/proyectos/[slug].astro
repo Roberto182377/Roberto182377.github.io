@@ -204,15 +204,10 @@ const { Content, frontmatter } = post;
       }
 
       .dot-hexagon-dark {
-        background-image: radial-gradient(
-            circle,
-            #ffffff35 1px,
-            transparent 1px
-          ),
-          radial-gradient(circle, #ffffff35 1px, transparent 1px);
+        /* Bajamos un poco la opacidad de los puntos para que luzcan mejor en el fondo ultra negro */
+        background-image: radial-gradient(circle, #ffffff15 1px, transparent 1px),
+          radial-gradient(circle, #ffffff15 1px, transparent 1px);
         background-size: 24px 41.57px;
-        background-position:
-          0 0,
-          12px 20.78px;
+        background-position: 0 0, 12px 20.78px;
       }
     </style>

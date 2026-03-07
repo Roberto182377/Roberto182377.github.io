@@ -82,9 +82,9 @@ import { siteConfig, homeContent } from "../config/content.ts";
       }
 
       .dot-hexagon-dark {
-        background-color: #0a0a0a; /* Fondo oscuro base */
-        background-image: radial-gradient(circle, #ffffff20 1px, transparent 1px),
-          radial-gradient(circle, #ffffff20 1px, transparent 1px);
+        /* Bajamos un poco la opacidad de los puntos para que luzcan mejor en el fondo ultra negro */
+        background-image: radial-gradient(circle, #ffffff15 1px, transparent 1px),
+          radial-gradient(circle, #ffffff15 1px, transparent 1px);
         background-size: 24px 41.57px;
         background-position: 0 0, 12px 20.78px;
       }
@@ -98,7 +98,8 @@ import { siteConfig, homeContent } from "../config/content.ts";
         <div class="absolute inset-0 dot-hexagon-light dark:dot-hexagon-dark">
         </div>
         <div
-          class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,rgba(255,255,255,0.5)_60%,rgba(255,255,255,0.9)_85%,white_100%)] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,rgba(23,23,23,0.5)_60%,rgba(23,23,23,0.9)_85%,rgb(23,23,23)_100%)]"
+          class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,rgba(255,255,255,0.5)_60%,rgba(255,255,255,0.9)_85%,white_100%)] 
+          dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_0%,rgba(10,10,10,0.5)_60%,rgba(10,10,10,0.9)_85%,#0a0a0a_100%)] -z-10"
         >
         </div>
         <div
