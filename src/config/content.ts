@@ -135,7 +135,7 @@ export const roadToHofFContent = {
       description:
         "Recopilación de los laboratorios realizados en la Web Security Academy de PortSwigger, haciendo uso de conocimientos de pentesting en la rama de SQLi, empleando la herramienta BurpSuite",
       image: "/assets/images/posts/sqli.png",
-      href: "/SQL-Injection.astro/",
+      href: "/perfil/",
     },
   ],
 };
