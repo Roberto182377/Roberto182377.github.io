@@ -2,71 +2,16 @@
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 
+// Datos de las plataformas (Copiado íntegramente del MD)
 const platforms = [
-  {
-    name: "Hoxhunt",
-    logo: "/assets/images/posts/pr01-1.png",
-    tech: "IA adaptativa personalizada.",
-    metrics: "Automatización, alta tasa de reporte, gamificación.",
-    ethic: "Refuerzo Positivo: Premia el reporte con rankings.",
-    limit: "Requiere base grande de usuarios"
-  },
-  {
-    name: "Proofpoint",
-    logo: "/assets/images/posts/pr01-2.png",
-    tech: "Threat Intelligence real.",
-    metrics: "Identificación de VAPs e integración técnica.",
-    ethic: "Protección Proactiva: Blinda a los más vulnerables.",
-    limit: "Alto costo"
-  },
-  {
-    name: "KnowBe4",
-    logo: "/assets/images/posts/pr01-3.png",
-    tech: "Biblioteca masiva (+1000 plantillas).",
-    metrics: "Risk Score y comparativa por industria.",
-    ethic: "Transparencia: Entendimiento de vulnerabilidad real.",
-    limit: "Administración compleja"
-  },
-  {
-    name: "Cofense",
-    logo: "/assets/images/posts/pr01-4.png",
-    tech: "Condicionamiento de respuesta rápida.",
-    metrics: "Integración con SOC y análisis de respuesta.",
-    ethic: "Empoderamiento: El usuario es un sensor de defensa.",
-    limit: "Menos contenido creativo"
-  },
-  {
-    name: "Phished",
-    logo: "/assets/images/posts/pr01-5.png",
-    tech: "Algoritmos IA 100% automatizados.",
-    metrics: "Análisis predictivo y micro-aprendizajes.",
-    ethic: "Eficiencia no Intrusiva: Evita la fatiga de seguridad.",
-    limit: "Menor control manual"
-  },
-  {
-    name: "NINJIO",
-    logo: "/assets/images/posts/pr01-6.png",
-    tech: "Storytelling (episodios animados).",
-    metrics: "Alta retención y compatibilidad LMS.",
-    ethic: "Empatía Social: Conciencia emocional.",
-    limit: "No simula ataques reales"
-  },
-  {
-    name: "Mimecast",
-    logo: "/assets/images/posts/pr01-7.png",
-    tech: "Humor y videos cortos persistentes.",
-    metrics: "Integración nativa con Gateway de correo.",
-    ethic: "Cultura No Punitiva: Reduce fricción con TI.",
-    limit: "Dependencia del gateway"
-  },
-  {
-    name: "Infosec IQ",
-    logo: "/assets/images/posts/pr01-8.png",
-    tech: "Rutas personalizadas por rol.",
-    metrics: "Mapeo con marcos como NIST.",
-    ethic: "Relevancia Profesional: Contenido adaptado.",
-    limit: "Curva de aprendizaje"
-  }
+  { name: "Hoxhunt", logo: "/assets/images/posts/pr01-1.png", desc: "Plataforma basada en IA que personaliza las simulaciones según el comportamiento del usuario. Su enfoque es la gamificación y el refuerzo positivo." },
+  { name: "Proofpoint (PSAT)", logo: "/assets/images/posts/pr01-2.png", desc: "Utiliza inteligencia de amenazas real para crear simulaciones. Se centra en identificar a los usuarios más atacados (Very Attacked People - VAPs)." },
+  { name: "KnowBe4", logo: "/assets/images/posts/pr01-3.png", desc: "Es la plataforma más grande del mercado. Ofrece una biblioteca masiva de contenido educativo y herramientas de simulación altamente personalizables." },
+  { name: "Cofense", logo: "/assets/images/posts/pr01-4.png", desc: "Se especializa en la detección y respuesta. Su enfoque principal es convertir a los empleados en una red de sensores de amenazas activa." },
+  { name: "Phished", logo: "/assets/images/posts/pr01-5.png", desc: "Utiliza algoritmos de IA para automatizar completamente el entrenamiento, eliminando la necesidad de intervención manual en la creación de campañas." },
+  { name: "NINJIO", logo: "/assets/images/posts/pr01-6.png", desc: "Se enfoca en el storytelling mediante episodios de micro-aprendizaje animados basados en brechas de seguridad reales de la última semana." },
+  { name: "Mimecast", logo: "/assets/images/posts/pr01-7.png", desc: "Utiliza contenido humorístico y persistente para mejorar la retención de los conceptos de seguridad, integrándose directamente con sus soluciones de seguridad de correo." },
+  { name: "Infosec IQ", logo: "/assets/images/posts/pr01-8.png", desc: "Ofrece rutas de aprendizaje personalizadas basadas en el rol del empleado y su nivel de conocimiento previo." }
 ];
 ---
 
@@ -74,7 +19,7 @@ const platforms = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Metodologías de Seguridad - Análisis Comparativo</title>
+    <title>Análisis comparativo de metodologías de seguridad informática</title>
     <script is:inline>
       (function () {
         const savedTheme = localStorage.getItem("theme") || "dark";
@@ -82,8 +27,8 @@ const platforms = [
       })();
     </script>
     <style>
-      :root { --bg: #ffffff; --text: #171717; --card: #f9f9f9; --accent: #2563eb; --dot: #80808030; }
-      .dark { --bg: #0a0a0a; --text: #ededed; --card: #151515; --accent: #60a5fa; --dot: #ffffff15; }
+      :root { --bg: #ffffff; --text: #171717; --card: #f9f9f9; --accent: #2563eb; --dot: #80808030; --border: #e5e7eb; }
+      .dark { --bg: #0a0a0a; --text: #ededed; --card: #151515; --accent: #60a5fa; --dot: #ffffff15; --border: #333333; }
 
       body {
         background-color: var(--bg);
@@ -95,180 +40,116 @@ const platforms = [
         background-attachment: fixed;
       }
 
-      .container { max-width: 1100px; margin: 0 auto; padding: 5rem 1.5rem; }
+      .container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
       
-      .glass-card {
+      .section-card {
         background: var(--card);
-        border: 1px solid #33333340;
+        border: 1px solid var(--border);
         border-radius: 16px;
-        padding: 2rem;
-        margin-bottom: 2rem;
+        padding: 2.5rem;
+        margin-bottom: 3rem;
       }
+
+      .pdf-link {
+        display: inline-flex;
+        align-items: center;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+        margin-bottom: 2rem;
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--accent);
+        border-radius: 8px;
+        transition: 0.2s;
+      }
+
+      .pdf-link:hover { background: var(--accent); color: white; }
+
+      h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.2; }
+      h2 { font-size: 1.8rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1.5rem; color: var(--accent); }
+      h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; }
+
+      p { line-height: 1.7; margin-bottom: 1.2rem; opacity: 0.9; }
+      ul { margin-bottom: 1.5rem; list-style-type: none; padding-left: 0; }
+      li { margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; }
+      li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
 
       .platform-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 1.5rem;
+        margin-top: 2rem;
       }
 
       .platform-card {
-        position: relative;
-        padding: 1.5rem;
         background: var(--card);
+        border: 1px dashed var(--border);
+        padding: 1.5rem;
         border-radius: 12px;
-        border: 1px dashed transparent;
-        transition: all 0.3s ease;
+        transition: 0.3s;
       }
 
-      .platform-card:hover {
-        border-color: var(--accent);
-        transform: translateY(-5px);
+      .platform-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+      .platform-logo {
+        height: 50px;
+        width: auto;
+        margin-bottom: 1rem;
+        display: block;
+        /* No background here as requested */
       }
 
-      .badge {
-        font-size: 0.7rem;
-        padding: 0.2rem 0.6rem;
-        border-radius: 99px;
-        background: var(--accent);
-        color: white;
-        text-transform: uppercase;
-        font-weight: bold;
-      }
-
-      .table-container {
+      .table-wrapper {
         overflow-x: auto;
+        border: 1px solid var(--border);
         border-radius: 12px;
-        border: 1px solid #333340;
+        margin: 2rem 0;
       }
 
       table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
+        background: var(--card);
       }
 
       th, td {
         padding: 1rem;
         text-align: left;
-        border-bottom: 1px solid #333340;
+        border-bottom: 1px solid var(--border);
+        border-right: 1px solid var(--border);
       }
 
-      th { background: #111; color: var(--accent); }
+      th { background: rgba(0,0,0,0.2); font-weight: bold; color: var(--accent); }
 
       .btn-next {
-        display: inline-flex;
-        align-items: center;
-        margin-top: 3rem;
-        padding: 1rem 2rem;
-        border: 1px dashed var(--accent);
-        border-radius: 99px;
+        display: block;
+        width: fit-content;
+        margin: 4rem auto 0;
+        padding: 1rem 2.5rem;
+        background: transparent;
+        border: 2px dashed var(--accent);
         color: var(--accent);
+        border-radius: 50px;
         text-decoration: none;
+        font-weight: bold;
         transition: 0.3s;
       }
 
       .btn-next:hover {
         background: var(--accent);
         color: white;
-        box-shadow: 0 0 20px var(--accent);
+        box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
       }
+
+      code { background: rgba(128,128,128,0.1); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
     </style>
   </head>
   <body>
     <Navigation />
     <main class="container">
-      <header class="mb-12 text-center">
-        <h1 class="text-4xl font-bold mb-4">Análisis Comparativo de Metodologías</h1>
-        <p class="text-neutral-500">Gestión del riesgo humano: Del cumplimiento a la resiliencia</p>
-      </header>
-
-      <section class="glass-card grid md:grid-cols-3 gap-8">
-        <div>
-          <h3 class="font-bold text-blue-500">Click Rate</h3>
-          <p class="text-sm opacity-80">Mide el porcentaje de usuarios que caen en la simulación. Insuficiente por sí sola.</p>
-        </div>
-        <div>
-          <h3 class="font-bold text-green-500">Reporting Rate</h3>
-          <p class="text-sm opacity-80">La métrica de éxito más crítica. Mide la cultura activa de defensa.</p>
-        </div>
-        <div>
-          <h3 class="font-bold text-purple-500">Risk Score</h3>
-          <p class="text-sm opacity-80">Algoritmo predictivo basado en comportamiento, rol y departamento.</p>
-        </div>
-      </section>
-
-      <h2 class="text-2xl font-bold mb-6">Plataformas de Simulación (SAT)</h2>
-      <div class="platform-grid">
-        {platforms.map((p) => (
-          <div class="platform-card group">
-            <div class="flex justify-between items-start mb-4">
-              <img src={p.logo} alt={p.name} class="h-12 w-auto object-contain bg-white p-1 rounded" />
-              <span class="badge">Activo</span>
-            </div>
-            <h3 class="text-xl font-bold mb-2">{p.name}</h3>
-            <p class="text-sm mb-4 opacity-70">{p.tech}</p>
-            <div class="space-y-2">
-              <p class="text-xs"><strong>Ética:</strong> {p.ethic}</p>
-              <p class="text-xs text-red-400"><strong>Limitación:</strong> {p.limit}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <h2 class="text-2xl font-bold mt-12 mb-6">Comparativa Técnica Deep-Dive</h2>
-      <div class="table-container bg-[#050505]">
-        <table>
-          <thead>
-            <tr>
-              <th>Criterio</th>
-              <th>Hoxhunt</th>
-              <th>Proofpoint</th>
-              <th>Knowbe4</th>
-              <th>Cofense</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Simulación</td>
-              <td>IA Adaptativa</td>
-              <td>Amenazas Reales</td>
-              <td>Plantillas</td>
-              <td>Reporte SOC</td>
-            </tr>
-            <tr>
-              <td>Analítica</td>
-              <td>Alta</td>
-              <td>Muy Alta</td>
-              <td>Alta</td>
-              <td>Media</td>
-            </tr>
-            <tr>
-              <td>Integración</td>
-              <td>M365</td>
-              <td>Ecosistema PP</td>
-              <td>SIEM/AD</td>
-              <td>SOAR</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <section class="mt-12 p-8 border-l-4 border-blue-500 bg-blue-500/5 rounded-r-xl">
-        <h2 class="text-xl font-bold mb-2">Conclusión Estratégica</h2>
-        <p class="text-sm leading-relaxed opacity-90">
-          No existe una plataforma absoluta. La elección depende del **SOC organizacional** (Cofense), el **tamaño de TI** (Phished) o la **necesidad cultural** (NINJIO). La evolución actual se centra en el comportamiento humano, no solo en la métrica del error.
-        </p>
-      </section>
-
-      <div class="flex justify-center mt-12">
-        <a href="/proyectos/nueva-seccion" class="btn-next">
-          <span>Siguiente Fase: Implementación V&V</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </a>
-      </div>
-    </main>
-    <Footer />
-  </body>
-</html>
+      
+      <div align="left">
+        <a href="/assets/proyectos/182377_PR02_Parte I.pdf" download class="pdf-link">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1
