@@ -1,8 +1,7 @@
-----
+---
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 
-// Contenido de los objetivos extraídos del MD
 const objetivos = [
   "Configurar un entorno de virtualización aislado para realizar las pruebas de penetración de forma segura.",
   "Utilizar herramientas de escaneo de puertos y servicios para identificar posibles vectores de ataque.",
@@ -17,7 +16,6 @@ const objetivos = [
   "Explicar cada paso del proceso en detalle, utilizando un lenguaje claro y conciso.",
   "Definir y explicar los términos técnicos utilizados durante el walkthrough."
 ];
----
 
 <html lang="es">
   <head>
@@ -123,7 +121,7 @@ const objetivos = [
     </style>
   </head>
   <body>
-
+    <Navigation />
     <main class="container">
       
       <div class="pdf-container">
