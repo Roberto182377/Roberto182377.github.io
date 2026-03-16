@@ -2,16 +2,16 @@
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 
-// Datos de las plataformas (Copiado íntegramente del MD)
+// Datos de plataformas extraídos exactamente del MD
 const platforms = [
-  { name: "Hoxhunt", logo: "/assets/images/posts/pr01-1.png", desc: "Plataforma basada en IA que personaliza las simulaciones según el comportamiento del usuario. Su enfoque es la gamificación y el refuerzo positivo." },
-  { name: "Proofpoint (PSAT)", logo: "/assets/images/posts/pr01-2.png", desc: "Utiliza inteligencia de amenazas real para crear simulaciones. Se centra en identificar a los usuarios más atacados (Very Attacked People - VAPs)." },
-  { name: "KnowBe4", logo: "/assets/images/posts/pr01-3.png", desc: "Es la plataforma más grande del mercado. Ofrece una biblioteca masiva de contenido educativo y herramientas de simulación altamente personalizables." },
-  { name: "Cofense", logo: "/assets/images/posts/pr01-4.png", desc: "Se especializa en la detección y respuesta. Su enfoque principal es convertir a los empleados en una red de sensores de amenazas activa." },
-  { name: "Phished", logo: "/assets/images/posts/pr01-5.png", desc: "Utiliza algoritmos de IA para automatizar completamente el entrenamiento, eliminando la necesidad de intervención manual en la creación de campañas." },
-  { name: "NINJIO", logo: "/assets/images/posts/pr01-6.png", desc: "Se enfoca en el storytelling mediante episodios de micro-aprendizaje animados basados en brechas de seguridad reales de la última semana." },
-  { name: "Mimecast", logo: "/assets/images/posts/pr01-7.png", desc: "Utiliza contenido humorístico y persistente para mejorar la retención de los conceptos de seguridad, integrándose directamente con sus soluciones de seguridad de correo." },
-  { name: "Infosec IQ", logo: "/assets/images/posts/pr01-8.png", desc: "Ofrece rutas de aprendizaje personalizadas basadas en el rol del empleado y su nivel de conocimiento previo." }
+  { id: "01", name: "Hoxhunt", logo: "/assets/images/posts/pr01-1.png", desc: "Plataforma basada en IA que personaliza las simulaciones según el comportamiento del usuario. Su enfoque es la gamificación y el refuerzo positivo." },
+  { id: "02", name: "Proofpoint (PSAT)", logo: "/assets/images/posts/pr01-2.png", desc: "Utiliza inteligencia de amenazas real para crear simulaciones. Se centra en identificar a los usuarios más atacados (Very Attacked People - VAPs)." },
+  { id: "03", name: "KnowBe4", logo: "/assets/images/posts/pr01-3.png", desc: "Es la plataforma más grande del mercado. Ofrece una biblioteca masiva de contenido educativo y herramientas de simulación altamente personalizables." },
+  { id: "04", name: "Cofense", logo: "/assets/images/posts/pr01-4.png", desc: "Se especializa en la detección y respuesta. Su enfoque principal es convertir a los empleados en una red de sensores de amenazas activa." },
+  { id: "05", name: "Phished", logo: "/assets/images/posts/pr01-5.png", desc: "Utiliza algoritmos de IA para automatizar completamente el entrenamiento, eliminando la necesidad de intervención manual en la creación de campañas." },
+  { id: "06", name: "NINJIO", logo: "/assets/images/posts/pr01-6.png", desc: "Se enfoca en el storytelling mediante episodios de micro-aprendizaje animados basados en brechas de seguridad reales de la última semana." },
+  { id: "07", name: "Mimecast", logo: "/assets/images/posts/pr01-7.png", desc: "Utiliza contenido humorístico y persistente para mejorar la retención de los conceptos de seguridad, integrándose directamente con sus soluciones de seguridad de correo." },
+  { id: "08", name: "Infosec IQ", logo: "/assets/images/posts/pr01-8.png", desc: "Ofrece rutas de aprendizaje personalizadas basadas en el rol del empleado y su nivel de conocimiento previo." }
 ];
 ---
 
@@ -19,7 +19,7 @@ const platforms = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Análisis comparativo de metodologías de seguridad informática</title>
+    <title>Análisis Comparativo - Metodologías de Seguridad</title>
     <script is:inline>
       (function () {
         const savedTheme = localStorage.getItem("theme") || "dark";
@@ -33,123 +33,229 @@ const platforms = [
       body {
         background-color: var(--bg);
         color: var(--text);
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', system-ui, sans-serif;
         background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px), radial-gradient(circle, var(--dot) 1px, transparent 1px);
         background-size: 24px 41.57px;
         background-position: 0 0, 12px 20.78px;
-        background-attachment: fixed;
+        margin: 0;
       }
 
       .container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
       
-      .section-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 2.5rem;
-        margin-bottom: 3rem;
-      }
-
+      /* Botón PDF inicial */
+      .pdf-container { margin-bottom: 3rem; text-align: left; }
       .pdf-link {
-        display: inline-flex;
-        align-items: center;
         color: var(--accent);
         text-decoration: none;
-        font-weight: 500;
-        margin-bottom: 2rem;
-        padding: 0.5rem 1rem;
         border: 1px solid var(--accent);
+        padding: 0.6rem 1.2rem;
         border-radius: 8px;
-        transition: 0.2s;
-      }
-
-      .pdf-link:hover { background: var(--accent); color: white; }
-
-      h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.2; }
-      h2 { font-size: 1.8rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1.5rem; color: var(--accent); }
-      h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; }
-
-      p { line-height: 1.7; margin-bottom: 1.2rem; opacity: 0.9; }
-      ul { margin-bottom: 1.5rem; list-style-type: none; padding-left: 0; }
-      li { margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; }
-      li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
-
-      .platform-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.5rem;
-        margin-top: 2rem;
-      }
-
-      .platform-card {
-        background: var(--card);
-        border: 1px dashed var(--border);
-        padding: 1.5rem;
-        border-radius: 12px;
+        font-weight: 500;
         transition: 0.3s;
       }
+      .pdf-link:hover { background: var(--accent); color: white; }
 
-      .platform-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+      /* Estructura de Secciones */
+      section { margin-bottom: 4rem; }
+      h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem; }
+      h2 { font-size: 1.8rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+      h3 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--accent); }
 
-      .platform-logo {
-        height: 50px;
-        width: auto;
-        margin-bottom: 1rem;
-        display: block;
-        /* No background here as requested */
-      }
+      p { line-height: 1.7; margin-bottom: 1.2rem; }
+      ul { margin-bottom: 1.5rem; list-style: none; padding: 0; }
+      li { margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; }
+      li::before { content: "•"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
 
-      .table-wrapper {
-        overflow-x: auto;
-        border: 1px solid var(--border);
-        border-radius: 12px;
+      /* Grid de Plataformas */
+      .platform-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
         margin: 2rem 0;
       }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.9rem;
+      .platform-card {
         background: var(--card);
+        border: 1px solid var(--border);
+        padding: 1.5rem;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .platform-logo {
+        height: 45px;
+        width: auto;
+        margin-bottom: 1rem;
+        background: transparent !important; /* Asegura que no haya fondo */
       }
 
-      th, td {
-        padding: 1rem;
-        text-align: left;
-        border-bottom: 1px solid var(--border);
-        border-right: 1px solid var(--border);
+      /* Tabla Técnica */
+      .table-overflow { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; margin: 2rem 0; }
+      table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: var(--card); }
+      th, td { padding: 1rem; border: 1px solid var(--border); text-align: left; }
+      th { background: rgba(0,0,0,0.05); color: var(--accent); }
+      .dark th { background: rgba(255,255,255,0.05); }
+
+      /* Botón Siguiente Página */
+      .next-page-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 5rem;
+        padding-top: 2rem;
+        border-top: 1px dashed var(--border);
       }
-
-      th { background: rgba(0,0,0,0.2); font-weight: bold; color: var(--accent); }
-
       .btn-next {
-        display: block;
-        width: fit-content;
-        margin: 4rem auto 0;
         padding: 1rem 2.5rem;
-        background: transparent;
         border: 2px dashed var(--accent);
         color: var(--accent);
-        border-radius: 50px;
         text-decoration: none;
+        border-radius: 50px;
         font-weight: bold;
         transition: 0.3s;
       }
-
       .btn-next:hover {
         background: var(--accent);
         color: white;
-        box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+        box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
       }
-
-      code { background: rgba(128,128,128,0.1); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
     </style>
   </head>
   <body>
     <Navigation />
     <main class="container">
       
-      <div align="left">
+      <div class="pdf-container">
         <a href="/assets/proyectos/182377_PR02_Parte I.pdf" download class="pdf-link">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1
+          📄 Descargar investigación completa
+        </a>
+      </div>
+
+      <h1>Análisis comparativo de metodologías de seguridad informática</h1>
+
+      <section>
+        <h2>Parte I: Investigación comparativa de plataformas</h2>
+        <p>La gestión del riesgo humano ha evolucionado de un modelo de cumplimiento a uno de resiliencia. Para evaluar la efectividad de una plataforma, se toman en cuenta tres métricas fundamentales:</p>
+        <ul>
+          <li><strong>Click Rate (Tasa de Apertura/Clic):</strong> Mide el porcentaje de usuarios que caen en la simulación. Aunque es la métrica más común, por sí sola es insuficiente para medir la cultura de seguridad.</li>
+          <li><strong>Reporting Rate (Tasa de Reporte):</strong> Es la métrica de éxito más crítica. Mide cuántos usuarios utilizaron las herramientas de reporte (botón de alerta) ante una amenaza sospechosa. Una alta tasa de reporte indica una cultura activa de defensa.</li>
+          <li><strong>Risk Score (Puntuación de Riesgo):</strong> Un algoritmo que combina el comportamiento histórico del usuario, su departamento y su rol para predecir la probabilidad de un incidente real.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>📌 El Enfoque Ético</h3>
+        <p>El diseño de estas plataformas debe basarse en el <em>refuerzo positivo</em> y el <em>consentimiento informado</em>. El objetivo no es "atrapar" al empleado para castigarlo, sino utilizar el momento de aprendizaje (teachable moment) justo después del error para educar sin generar conflicto o desconfianza hacia el departamento de TI.</p>
+      </section>
+
+      <section>
+        <h3>📌 Plataformas de simulación de Phishing (SAT)</h3>
+        <div class="platform-grid">
+          {platforms.map((p) => (
+            <div class="platform-card">
+              <img src={p.logo} alt={p.name} class="platform-logo" />
+              <strong class="text-lg mb-2">{p.name}</strong>
+              <p class="text-sm opacity-80">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h3>📌 Tabla Técnica de Comparativa de plataformas SAT</h3>
+        <div class="table-overflow">
+          <table>
+            <thead>
+              <tr>
+                <th>Criterio</th>
+                <th>Hoxhunt</th>
+                <th>Proofpoint</th>
+                <th>Knowbe4</th>
+                <th>Cofense</th>
+                <th>Phished</th>
+                <th>NINJIO</th>
+                <th>Mimecast</th>
+                <th>Infosec IQ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Simulación</strong></td>
+                <td>IA Adaptativa</td>
+                <td>Amenazas Reales</td>
+                <td>Plantillas Variadas</td>
+                <td>Basado en SOC</td>
+                <td>Automatización IA</td>
+                <td>Storytelling</td>
+                <td>Vídeos/Humor</td>
+                <td>Rutas por Rol</td>
+              </tr>
+              <tr>
+                <td><strong>Analítica</strong></td>
+                <td>Individualizada</td>
+                <td>Muy Detallada</td>
+                <td>Completa</td>
+                <td>Enfoque Reporte</td>
+                <td>Predictiva</td>
+                <td>Retención</td>
+                <td>Fricción</td>
+                <td>Nivel NIST</td>
+              </tr>
+              <tr>
+                <td><strong>Foco Principal</strong></td>
+                <td>Gamificación</td>
+                <td>Inteligencia de amenazas</td>
+                <td>Contenido educativo</td>
+                <td>Respuesta a incidentes</td>
+                <td>Automatización IA</td>
+                <td>Storytelling</td>
+                <td>Humor educativo</td>
+                <td>Rutas personalizadas</td>
+              </tr>
+              <tr>
+                <td><strong>Enfoque ético</strong></td>
+                <td>Recompensa</td>
+                <td>Protección VAP</td>
+                <td>Transparencia</td>
+                <td>Empoderamiento</td>
+                <td>No intrusivo</td>
+                <td>Empatía</td>
+                <td>No punitivo</td>
+                <td>Relevancia por rol</td>
+              </tr>
+              <tr>
+                <td><strong>Limitaciones</strong></td>
+                <td>Base grande</td>
+                <td>Alto costo</td>
+                <td>Adm. compleja</td>
+                <td>Menos contenido</td>
+                <td>Menor control</td>
+                <td>No simula ataques</td>
+                <td>Gateway</td>
+                <td>Curva aprendizaje</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h3>📌 Conclusiones</h3>
+        <p>Podemos definir que no existe una mejor plataforma de forma absoluta, sino que su elección depende del contexto de uso:</p>
+        <ul>
+          <li><strong>Para organizaciones con un SOC maduro:</strong> Cofense o Proofpoint son ideales por su capacidad de integrar el reporte del usuario con la respuesta a incidentes.</li>
+          <li><strong>Para PYMES o equipos de TI limitados:</strong> Phished u Hoxhunt ofrecen la mejor eficiencia gracias a su automatización por IA.</li>
+          <li><strong>Para cambiar la cultura desde el entretenimiento:</strong> NINJIO y Mimecast destacan por su alto nivel de retención gracias al contenido audiovisual.</li>
+        </ul>
+        <p>Observando como las plataformas modernas de simulación de phishing han evolucionado hacia modelos centrados en el comportamiento humano, donde el objetivo principal no es únicamente medir errores, sino desarrollar una cultura organizacional de seguridad.</p>
+      </section>
+
+      <div class="next-page-container">
+        <a href="/proyectos/fase-implementacion" class="btn-next">
+          Ir a la siguiente página →
+        </a>
+      </div>
+
+    </main>
+    <Footer />
+  </body>
+</html>
