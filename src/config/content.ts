@@ -101,14 +101,14 @@ export const proyectosContent = {
       description:
         "De la teoría a la práctica: walkthrough en acción (guía y video).",
       image: "/assets/images/projects/parcial01.png",
-      href: "https://roberto182377.github.io/proyectos/pr01",
+      href: "https://roberto182377.github.io/pr01/",
     },
     {
       title: "PR02",
       description:
         "El eslabón más débil: diseño ético de una campaña de ingeniería social.",
       image: "/assets/images/projects/parcial02.png",
-      href: "https://roberto182377.github.io/proyectos/pr02",
+      href: "https://roberto182377.github.io/pr02_p1/",
     },
     {
       title: "PR03",
