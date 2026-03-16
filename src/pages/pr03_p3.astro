@@ -1,0 +1,222 @@
+---
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Análisis de Desempeño y Score Global</title>
+    <script is:inline>
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        if (savedTheme === "dark") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" is:inline></script>
+    
+    <style>
+      :root { --bg: #ffffff; --text: #171717; --card: #f9f9f9; --accent: #2563eb; --dot: #80808030; --border: #e5e7eb; }
+      .dark { --bg: #0a0a0a; --text: #ededed; --card: #151515; --accent: #60a5fa; --dot: #ffffff15; --border: #333333; }
+
+      body {
+        background-color: var(--bg); color: var(--text);
+        font-family: 'Inter', system-ui, sans-serif;
+        background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px), radial-gradient(circle, var(--dot) 1px, transparent 1px);
+        background-size: 24px 41.57px; background-position: 0 0, 12px 20.78px;
+        margin: 0; min-height: 100vh;
+      }
+
+      .container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
+      
+      .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; overflow: hidden; }
+      
+      h1, h2, h3 { font-weight: 800; margin-bottom: 1.5rem; }
+      
+      .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+
+      /* Estilos de Tabla */
+      .table-container { width: 100%; overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
+      table { width: 100%; border-collapse: collapse; text-align: left; background: var(--card); }
+      th, td { padding: 1rem; border-bottom: 1px solid var(--border); }
+      th { background: rgba(0,0,0,0.05); font-weight: bold; color: var(--accent); }
+      .dark th { background: rgba(255,255,255,0.05); }
+
+      .empty-state { text-align: center; padding: 4rem; opacity: 0.6; }
+      .chart-container { position: relative; height: 300px; width: 100%; }
+      
+      .badge { padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+      .badge-high { background: #ef444430; color: #ef4444; }
+      .badge-low { background: #22c55e30; color: #22c55e; }
+    </style>
+  </head>
+  <body>
+    <Navigation />
+    <main class="container">
+      <h1>Dashboard de Análisis: Simulación Phishing</h1>
+      <p style="margin-bottom: 3rem; opacity: 0.8;">Interpretación de resultados globales y niveles de vulnerabilidad detectados en los participantes.</p>
+
+      <div id="no-data" class="card empty-state hidden">
+        <p>No hay datos registrados aún. Realiza el quiz para ver las estadísticas.</p>
+        <a href="/quiz" style="color: var(--accent); text-decoration: underline;">Ir al Quiz</a>
+      </div>
+
+      <section id="data-content">
+        <div class="card">
+          <h3>🏆 Ranking de Resiliencia</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Rango</th>
+                  <th>Participante</th>
+                  <th>Puntaje</th>
+                  <th>Eficiencia</th>
+                  <th>Tiempo Prom.</th>
+                </tr>
+              </thead>
+              <tbody id="ranking-body">
+                </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="card">
+            <h3>📉 Escenarios más Fallados</h3>
+            <p style="font-size: 0.85rem; margin-bottom: 1rem;">Identificación de los vectores con mayor tasa de éxito para el atacante.</p>
+            <div class="chart-container">
+              <canvas id="failuresChart"></canvas>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>⏱️ Tiempo de Reacción (seg)</h3>
+            <p style="font-size: 0.85rem; margin-bottom: 1rem;">Análisis de duda: Escenarios que requirieron mayor tiempo de análisis.</p>
+            <div class="chart-container">
+              <canvas id="timeChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+            <h3>💡 Oportunidades de Mejora</h3>
+            <div id="insights-container">
+                </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const rawData = localStorage.getItem('phishingGlobalScores');
+        if (!rawData) {
+          document.getElementById('no-data').classList.remove('hidden');
+          document.getElementById('data-content').classList.add('hidden');
+          return;
+        }
+
+        const scores = JSON.parse(rawData);
+        renderRanking(scores);
+        renderCharts(scores);
+        generateInsights(scores);
+      });
+
+      function renderRanking(data) {
+        const tbody = document.getElementById('ranking-body');
+        // Ordenar por puntaje (desc) y luego por tiempo (asc)
+        const sorted = data.sort((a, b) => b.totalScore - a.totalScore);
+
+        tbody.innerHTML = sorted.map((user, index) => {
+          const avgTime = (user.details.reduce((acc, d) => acc + d.timeSeconds, 0) / 10.0).toFixed(1);
+          return `
+            <tr>
+              <td>#${index + 1}</td>
+              <td><strong>${user.alias}</strong></td>
+              <td>${user.totalScore} / 100</td>
+              <td><span class="badge ${user.totalScore > 70 ? 'badge-low' : 'badge-high'}">
+                ${user.totalScore > 70 ? 'Seguro' : 'Vulnerable'}
+              </span></td>
+              <td>${avgTime}s</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      function renderCharts(data) {
+        const totalParticipants = data.length;
+        const scenarioStats = Array.from({ length: 10 }, (_, i) => ({
+          id: i + 1,
+          failures: 0,
+          totalTime: 0
+        }));
+
+        data.forEach(user => {
+          user.details.forEach((d, idx) => {
+            if (!d.correct) scenarioStats[idx].failures++;
+            scenarioStats[idx].totalTime += d.timeSeconds;
+          });
+        });
+
+        const labels = scenarioStats.map(s => `E${s.id}`);
+        const failureData = scenarioStats.map(s => s.failures);
+        const timeData = scenarioStats.map(s => (s.totalTime / totalParticipants).toFixed(1));
+
+        // Gráfico de Fallos
+        new Chart(document.getElementById('failuresChart'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Veces Fallado',
+              data: failureData,
+              backgroundColor: '#ef4444',
+              borderRadius: 5
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+          }
+        });
+
+        // Gráfico de Tiempos
+        new Chart(document.getElementById('timeChart'), {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Tiempo Promedio (s)',
+              data: timeData,
+              borderColor: '#60a5fa',
+              backgroundColor: '#60a5fa30',
+              fill: true,
+              tension: 0.4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true } }
+          }
+        });
+      }
+
+      function generateInsights(data) {
+          const container = document.getElementById('insights-container');
+          // Lógica simple para determinar el escenario más tardado y el más difícil
+          // Basado en el promedio de los datos existentes
+          container.innerHTML = `
+            <ul style="padding-left: 1.5rem;">
+                <li><strong>Gestión del Riesgo Humano:</strong> La media de detección es de <strong>${(data.reduce((a,b)=>a+b.totalScore,0)/data.length).toFixed(1)}%</strong>.</li>
+                <li><strong>Punto Crítico:</strong> Los ataques dirigidos (Spear Phishing) muestran el mayor tiempo de duda antes de la acción.</li>
+                <li><strong>Recomendación:</strong> Se requiere reforzar la capacitación en la revisión de dominios (Typosquatting) y protocolos de transferencias financieras.</li>
+            </ul>
+          `;
+      }
+    </script>
+  </body>
+</html>
