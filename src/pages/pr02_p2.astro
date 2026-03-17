@@ -37,6 +37,11 @@ import Footer from "../components/Footer.astro";
       /* Links Inspeccionables */
       .phish-link { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: bold; padding: 0.2rem 0.4rem; background: rgba(59, 130, 246, 0.1); border-radius: 4px; }
       .phish-link:hover { background: rgba(59, 130, 246, 0.2); }
+      
+      /* Estilo para imágenes dentro del contenido */
+      .scenario-img { max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0; display: block; border: 1px solid var(--border); }
+      .img-clickable { cursor: zoom-in; transition: transform 0.2s; }
+      .img-clickable:hover { transform: scale(1.02); }
 
       /* UI Correo */
       .email-ui { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
@@ -84,15 +89,37 @@ import Footer from "../components/Footer.astro";
       <h1>Simulación de Phishing</h1>
 
       <section id="intro-section">
-        <h2>Registro del Participante</h2>
-        <div class="dash-card" style="max-width: 500px; margin: 0 auto;">
-          <label for="username">Ingresa tu Alias / Nombre:</label>
-          <input type="text" id="username" placeholder="Ej. Roberto" required />
-          <label style="display: flex; gap: 0.5rem; align-items: start; font-size: 0.85rem; margin-bottom: 1rem;">
-            <input type="checkbox" id="consent" required />
-            <span>Otorgo mi consentimiento informado para participar. No se capturan credenciales reales.</span>
-          </label>
-          <button class="btn btn-primary" id="btn-start">Comenzar Simulación</button>
+        <h2>Phishing Quiz</h2>
+        <div class="dash-card" style="max-width: 800px; margin: 0 auto; padding: 2.5rem; text-align: center;">
+          <p style="margin-bottom: 2rem; opacity: 0.9; font-size: 1.1rem; line-height: 1.5;">
+            Pon a prueba tus habilidades para detectar correos y mensajes fraudulentos. Analiza 10 escenarios que te pondran a prueba y descubre tu nivel de conocimiento frente a ataques de ingeniería social.
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;">
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">⏱️</span>
+              <strong style="display: block; font-size: 0.9rem;">No te preocupes por hacer clic en los links (puedes hacerlo paracomprobar si es real o falso)</strong>
+              <span style="font-size: 0.8rem; opacity: 0.7;">Tiempo estimado</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">📊</span>
+              <strong style="display: block; font-size: 0.9rem;">Compruba tu resultados y tiempo de reacción</strong>
+              <span style="font-size: 0.8rem; opacity: 0.7;">Análisis de tu nivel de riesgo</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">🛡️</span>
+              <strong style="display: block; font-size: 0.9rem;">Entorno Seguro</strong>
+              <span style="font-size: 0.8rem; opacity: 0.7;">Sin captura de datos reales</span>
+            </div>
+          </div>
+          <div style="text-align: left; max-width: 500px; margin: 0 auto;">
+            <label for="username">Ingresa tu Alias / Nombre:</label>
+            <input type="text" id="username" placeholder="Ej. tester123" required />
+            <label style="display: flex; gap: 0.5rem; align-items: start; font-size: 0.85rem; margin-bottom: 1.5rem;">
+              <input type="checkbox" id="consent" required />
+              <span>Otorgo mi consentimiento informado para participar. [cite: 58] No se capturan credenciales reales. [cite: 59]</span>
+            </label>
+            <button class="btn btn-primary" id="btn-start" style="font-size: 1.1rem; padding: 1rem;">Comenzar Simulación</button>
+          </div>
         </div>
       </section>
 
@@ -136,30 +163,32 @@ import Footer from "../components/Footer.astro";
         </div>
       </section>
 
-      <section id="dashboard-section" class="hidden" style="margin-top: 2rem;">
-        
-        <div id="individual-results" class="dash-card" style="margin-bottom: 2rem; border-color: var(--accent);">
+      <section id="dashboard-section" style="margin-top: 3rem;">
+        <div id="individual-results" class="dash-card hidden" style="margin-bottom: 2rem; border-color: var(--accent);">
           <h2 style="border:none; margin:0; padding:0; text-align:center;">Tu Resultado: <span id="ind-score-value" style="color:var(--accent);"></span></h2>
           <p style="text-align:center; margin:0; opacity:0.8;">Tiempo promedio de análisis: <span id="ind-time-value"></span>s por escenario.</p>
+          <div style="text-align: center; margin-top: 1.5rem;">
+            <button class="btn btn-primary" id="btn-restart" style="max-width: 300px;">Volver al inicio</button>
+          </div>
         </div>
 
-        <h2>🏆 Ranking de Resiliencia</h2>
+        <h2>Ranking Global</h2>
         <div class="table-container">
           <table>
             <thead><tr><th>Rango</th><th>Participante</th><th>Puntaje</th><th>Eficiencia</th><th>Tiempo Prom.</th></tr></thead>
-            <tbody id="ranking-body"><tr><td colspan="5" style="text-align:center;">Cargando datos en tiempo real...</td></tr></tbody>
+            <tbody id="ranking-body"><tr><td colspan="5" style="text-align:center;">Cargando datos en tiempo real... [cite: 68]</td></tr></tbody>
           </table>
         </div>
 
         <div class="dashboard-grid">
           <div class="dash-card">
-            <h3>📉 Escenarios más Fallados</h3>
-            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Identificación de los vectores con mayor tasa de éxito.</p>
+            <h3>Escenarios más Fallados</h3>
+            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Identificación de los vectores con mayor tasa de éxito. [cite: 69]</p>
             <canvas id="failuresChart"></canvas>
           </div>
           <div class="dash-card">
-            <h3>⏱️ Tiempo de Reacción (seg)</h3>
-            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Análisis de duda: Escenarios que requirieron mayor tiempo.</p>
+            <h3>Tiempo de Reacción (seg)</h3>
+            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Análisis de duda: Escenarios que requirieron mayor tiempo. [cite: 70]</p>
             <canvas id="timeChart"></canvas>
           </div>
         </div>
@@ -172,7 +201,6 @@ import Footer from "../components/Footer.astro";
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
       import { getDatabase, ref, push, set, onValue, update, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-      // 1. CONFIGURACIÓN DE FIREBASE
       const firebaseConfig = {
         apiKey: "AIzaSyAV4gRgxAYpgGmHmxwNAOr9f9iOUGtIrBU",
         authDomain: "phishing-quiz-31717.firebaseapp.com",
@@ -185,79 +213,79 @@ import Footer from "../components/Footer.astro";
       const app = initializeApp(firebaseConfig);
       const db = getDatabase(app);
 
-      // Función Helper para los enlaces inspeccionables
-      window.inspectLink = function(realUrl) { alert("Has inspeccionado el enlace.\nURL Real de destino:\n\n" + realUrl); return false; }
+      window.inspectLink = function(realUrl) { 
+        alert("Has inspeccionado el elemento.\nURL Real de destino:\n\n" + realUrl);
+        return false; 
+      }
 
-      // 2. BASE DE DATOS DE ESCENARIOS (Mezcla de Email y SMS)
       const allScenarios = [
         {
-          id: 1, type: "email", senderName: "Equipo de Seguridad de Google", senderEmail: "no-reply@accounts.google.security-alerts.com",
-          subject: "Alerta de seguridad crítica",
-          body: "Hemos detectado un intento de inicio de sesión sospechoso en tu cuenta desde Moscú.\n\nPor favor asegura tu cuenta inmediatamente haciendo clic aquí:\n\n<a href='#' onclick='return inspectLink(\"http://myaccount.google.security-alerts.com/verify\")' class='phish-link' title='Inspeccionar Enlace'>Proteger mi cuenta</a>",
-          isPhishing: true, feedback: ["Subdominio engañoso: 'google.security-alerts.com' no es Google.", "Urgencia: Intenta crear pánico.", "La URL de destino es HTTP, no HTTPS."]
+          id: 1, type: "email", senderName: "Roberto Morales", senderEmail: "182377@upslp.edu.mx",
+          subject: "DONACIÓN: REGALO DE INSTRUMENTOS MUSICALES (PIANO STEINWAY MODELO S 2014)",
+          body: "¡Saludos!\n\nUna de nuestras exalumnas, la Sra. Angela, se muda a una casa más pequeña y desea donar el piano Steinway de su difunto esposo a un hogar donde se le aprecie. Se trata de un piano Steinway del 2014.\n\nPara una respuesta rápida, por favor, contáctela únicamente a través de su correo electrónico personal, no de su correo electrónico universitario ni de su número de teléfono.\n\nInformación de contacto:<a href='#' onclick='return inspectLink(\"http://myaccount.google.security-alerts.com/verify\")' style="color: blue; text-decoration: underline;" class='phish-link'> angelaharris051@outlook.com</a>\n\nSi está interesado/a en coordinar la entrega con una empresa de mudanzas, tenga en cuenta que usted será responsable de llevar el Steinway a su domicilio.\n\nNota: Por favor, responda utilizando su correo electrónico personal, no el de la universidad. Para una respuesta más rápida, puede recomendar a alguien que disfrute tocando el Steinway; se asignará por orden de llegada.\n\nSaludos.",
+          isPhishing: true, feedback: ["Subdominio engañoso: 'google.security-alerts.com' no es Google.", "■ Urgencia: Intenta crear pánico.", "■ La URL de destino es HTTP, no HTTPS.", "■ Quien te regalaría un piano???."]
+          isPhishing: true, feedback: ["", "Urgencia: Intenta crear pánico.", "La URL de destino es HTTP, no HTTPS."]
         },
         {
-          id: 2, type: "email", senderName: "Recursos Humanos", senderEmail: "hr@tuempresa.com",
-          subject: "IMPORTANTE: Política de Vacaciones",
-          body: "Hola a todos,\n\nHemos actualizado nuestra política de vacaciones. Por favor revisen la intranet corporativa o el documento adjunto.\n\nSaludos.",
-          isPhishing: false, feedback: ["Remitente legítimo interno.", "Tono informativo, no exige acciones con urgencia ni pide contraseñas."]
+          id: 2, type: "email", senderName: "Recursos Humanos UPSLP", senderEmail: "hr@upslp.edu.mx",
+          subject: "Actualización de la Política de Evaluación de Software II",
+          body: "Hola Roberto,\n\nTe compartimos el nuevo documento de criterios de evaluación para el proyecto final de Ingeniería de Software II. Es vital que revises los puntos 4 al 7 para asegurar tu calificación.\n\n<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png' style='width:50px' class='scenario-img' alt='Python Logo'>\n\nSaludos cordiales,\nDepartamento Académico.",
+          isPhishing: false, feedback: ["Remitente legítimo institucional.", "Tono informativo, no exige acciones con urgencia ni pide contraseñas."]
         },
         {
-          id: 3, type: "sms", senderName: "Rappi", senderEmail: "5544332211", // Usamos senderEmail como número de teléfono para SMS
+          id: 3, type: "sms", senderName: "Rappi Rewards", senderEmail: "5544332211",
           subject: "",
-          body: "Rappi: Tienes 150 de descuento en Las Alitas, Papa Johns y mas. <a href='#' onclick='return inspectLink(\"https://rappi.promo-app.link/descuento150\")' class='phish-link' title='Inspeccionar'>https://rappi.app.link/5X2a</a> Aplican T&C",
-          isPhishing: true, feedback: ["Smishing (Phishing por SMS).", "El texto visible dice 'rappi.app.link', pero al inspeccionarlo te lleva a 'rappi.promo-app.link', un dominio falso.", "Busca aprovechar el deseo de una recompensa (descuento)."]
+          body: "Rappi: Tienes un cupon de $150 MXN para tu siguiente pedido en Papa Johns o Starbucks.\n\nCanjealo aqui: <a href='#' onclick='return inspectLink(\"https://rappi.promo-app.link/descuento150\")' class='phish-link'>https://rappi.app.link/5X2a</a>\n\n*Valido por 2 horas.",
+          isPhishing: true, feedback: ["Smishing (Phishing por SMS).", "El link visual es diferente al real inspeccionado.", "Usa la urgencia de '2 horas'."]
         },
         {
-          id: 4, type: "email", senderName: "Carlos Director (CEO)", senderEmail: "carlos.director.exec@gmail.com",
-          subject: "Urgente: Transferencia requerida",
-          body: "¿Estás en la oficina?\n\nNecesito que proceses una transferencia internacional a un nuevo proveedor hoy mismo. Respóndeme para darte los datos. No me llames, estoy en reunión.",
-          isPhishing: true, feedback: ["Fraude del CEO (BEC).", "Uso de correo personal (gmail) para temas financieros corporativos.", "Exige saltarse los procedimientos normales pidiendo que no se le contacte para verificar."]
+          id: 4, type: "email", senderName: "Director General (CEO)", senderEmail: "ceo.oficina.presidencia@gmail.com",
+          subject: "SOLICITUD URGENTE: Pago a proveedor externo",
+          body: "¿Te encuentras disponible? Necesito que realices una transferencia internacional de emergencia por $2,500 USD a un nuevo proveedor logístico para liberar un pedido crítico.\n\nNo intentes llamarme, estoy en una conferencia privada con inversionistas. Responde a este correo con el comprobante una vez realizado.\n\n<img src='https://cdn-icons-png.flaticon.com/512/2912/2912761.png' style='width:100px' class='scenario-img' alt='Urgent Seal'>",
+          isPhishing: true, feedback: ["Fraude del CEO (BEC).", "Uso de correo personal (@gmail) para temas financieros corporativos.", "Exige saltarse procedimientos normales."]
         },
         {
           id: 5, type: "email", senderName: "Google Drive", senderEmail: "drive-shares-noreply@google.com",
-          subject: "Proyecto_Final_V2.docx compartido",
-          body: "María te ha invitado a colaborar en el siguiente documento:\n\n<a href='#' onclick='return inspectLink(\"https://docs.google.com/document/d/1A2B3C4D5E/edit\")' class='phish-link' title='Inspeccionar'>Abrir en Docs</a>",
+          subject: "Se ha compartido el archivo: 'Especificaciones_SlyderNet.pdf'",
+          body: "Hola,\n\nUn colaborador externo ha compartido un documento contigo en Google Drive para el proyecto SlyderNet.\n\n<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/2295px-Google_Drive_icon_%282020%29.svg.png' style='width:40px' class='scenario-img'>\n\n<a href='#' onclick='return inspectLink(\"https://docs.google.com/document/d/1A2B3C/view\")' class='phish-link'>Abrir en Docs</a>",
           isPhishing: false, feedback: ["Dominio legítimo (@google.com).", "El enlace inspeccionado lleva a un recurso legítimo HTTPS de docs.google.com."]
         },
         {
-          id: 6, type: "email", senderName: "Administrador de TI", senderEmail: "admin@it-soporte-interno.com",
-          subject: "Actualización de seguridad",
-          body: "Debe instalar el siguiente parche en su equipo antes de las 17:00 hrs para evitar la desconexión de la red.\n\n<a href='#' onclick='return inspectLink(\"http://it-soporte-interno.com/Parche_v2.exe\")' class='phish-link' title='Inspeccionar'>Descargar Parche.exe</a>",
-          isPhishing: true, feedback: ["Amenaza implícita de desconexión.", "Descarga directa de un archivo ejecutable (.exe).", "Dominio externo genérico."]
+          id: 6, type: "email", senderName: "IT Support Center", senderEmail: "admin@it-soporte-interno.com",
+          subject: "AVISO: Parche de seguridad obligatorio para Windows",
+          body: "Su equipo ha sido identificado como vulnerable a una brecha de seguridad activa en la red universitaria. Para evitar la suspensión de su cuenta, descargue e instale el parche adjunto de inmediato.\n\n<img src='https://cdn-icons-png.flaticon.com/512/564/564619.png' style='width:80px' class='scenario-img img-clickable' onclick='return inspectLink(\"http://it-soporte-interno.com/Parche_v2.exe\")' alt='Patch Icon'>\n\n(Haz clic en el icono para inspeccionar la descarga)",
+          isPhishing: true, feedback: ["Amenaza de desconexión.", "Descarga directa de un .exe.", "El logo es un distractor para que hagas clic."]
         },
         {
-          id: 7, type: "sms", senderName: "Banamex", senderEmail: "22626",
+          id: 7, type: "sms", senderName: "Banamex Info", senderEmail: "22626",
           subject: "",
-          body: "Banamex Alerta: Cargo retenido por $1,500 en Amazon. Responde CANCELAR o ingresa para verificar: <a href='#' onclick='return inspectLink(\"http://alertas-banamex-seguridad.com/login\")' class='phish-link' title='Inspeccionar'>https://banco.banamex.com/alertas</a>",
-          isPhishing: true, feedback: ["Falsa alerta de fraude bancario para generar pánico instantáneo.", "El link visible parece seguro, pero la redirección real es a una página HTTP falsa ('alertas-banamex-seguridad.com')."]
+          body: "Banamex Alerta: Se ha detectado un cargo sospechoso por $3,499.00 en Mercado Libre.\n\nSi NO reconoce este cargo, entre aqui para CANCELAR: <a href='#' onclick='return inspectLink(\"http://alertas-banamex-seguridad.com/login\")' class='phish-link'>https://banco.banamex.com/alertas</a>",
+          isPhishing: true, feedback: ["Pánico instantáneo por cargo no reconocido.", "Redirección real a página HTTP falsa."]
         },
         {
-          id: 8, type: "email", senderName: "LinkedIn", senderEmail: "messages-noreply@linkedin.com",
-          subject: "Nueva solicitud de conexión",
-          body: "Hola,\n\nRoberto ha solicitado unirse a tu red profesional.\n\n<a href='#' onclick='return inspectLink(\"https://www.linkedin.com/in/roberto182377\")' class='phish-link' title='Inspeccionar'>Ver perfil</a>",
-          isPhishing: false, feedback: ["Comportamiento esperado y dominio correcto.", "El enlace dirige de forma segura al perfil real dentro de LinkedIn."]
+          id: 8, type: "email", senderName: "LinkedIn Network", senderEmail: "messages-noreply@linkedin.com",
+          subject: "Tienes 1 nueva invitación pendiente de conexión",
+          body: "Hola Roberto,\n\nUn reclutador de IT ha solicitado unirse a tu red profesional para discutir una oportunidad en desarrollo Kotlin/Firebase.\n\n<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/600px-LinkedIn_logo_initials.png' style='width:40px' class='scenario-img'>\n\n<a href='#' onclick='return inspectLink(\"https://www.linkedin.com/in/roberto182377\")' class='phish-link'>Ver perfil completo</a>",
+          isPhishing: false, feedback: ["Comportamiento esperado y dominio correcto.", "El enlace dirige de forma segura al perfil real."]
         },
         {
-          id: 9, type: "sms", senderName: "FedEx Info", senderEmail: "80090012",
+          id: 9, type: "sms", senderName: "FedEx Tracking", senderEmail: "80090012",
           subject: "",
-          body: "FedEx: Su paquete esta retenido en aduana por falta de pago. Pague cuota de $2.99 USD para liberar entrega en: <a href='#' onclick='return inspectLink(\"http://rastreo.fedex-delivery-updates.com/pay\")' class='phish-link' title='Inspeccionar'>fedex.com/tracking</a>",
-          isPhishing: true, feedback: ["Suplantación de marca de paquetería (muy común en SMS).", "Solicita un pago no esperado mediante un enlace fraudulento.", "La URL de destino no es oficial."]
+          body: "FedEx: Su envio con guia #9921 está detenido por falta de pago de impuestos aduanales ($45.00 MXN).\n\nEvite el retorno del paquete pagando aqui: <a href='#' onclick='return inspectLink(\"http://rastreo.fedex-delivery-updates.com/pay\")' class='phish-link'>fedex.com/tracking</a>",
+          isPhishing: true, feedback: ["Suplantación de paquetería.", "Solicita un pago bajo presión.", "URL de destino fraudulenta."]
         },
         {
-          id: 10, type: "email", senderName: "Microsoft 365", senderEmail: "no-reply@microsoft.com",
-          subject: "Contraseña expira en 24h",
-          body: "Tu contraseña corporativa expirará. Mantén tu contraseña actual haciendo clic en el siguiente enlace y confirmando tus datos:\n\n<a href='#' onclick='return inspectLink(\"https://portal.office365-login-secure.com/auth\")' class='phish-link' title='Inspeccionar'>Mantener contraseña</a>",
-          isPhishing: true, feedback: ["Ofrece 'mantener' la contraseña actual confirmando datos, lo cual es ilógico en políticas de seguridad reales.", "Dominio falso ('office365-login-secure.com')."]
+          id: 10, type: "email", senderName: "Microsoft Office 365", senderEmail: "no-reply@microsoft.com",
+          subject: "Acción requerida: Su suscripción anual expira pronto",
+          body: "Su suscripción corporativa a Microsoft 365 caducará en menos de 24 horas. Para evitar la pérdida de datos en OneDrive y acceso a Teams, confirme sus credenciales de pago.\n\n<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Microsoft_Office_logotype_%282013%E2%80%932019%29.svg/2560px-Microsoft_Office_logotype_%282013%E2%80%932019%29.svg.png' style='width:150px' class='scenario-img img-clickable' onclick='return inspectLink(\"https://portal.office365-login-secure.com/auth\")' alt='Office 365'>\n\nPulse en la imagen o el botón para renovar:\n\n<a href='#' onclick='return inspectLink(\"https://portal.office365-login-secure.com/auth\")' class='phish-link'>Renovar Suscripción</a>",
+          isPhishing: true, feedback: ["Usa logos oficiales para dar confianza.", "Dominio falso ('office365-login-secure.com')."]
         }
       ];
 
-      // 3. ESTADO DE LA APP
       let currentUser = "", userEmail = "";
       let currentScenarios = [], currentIndex = 0;
       let score = 0, timeData = [], questionStartTime = 0;
       let scenarioTimes = [], failedScenariosLocal = [];
-
       let chartFallos = null, chartTiempos = null;
 
       function shuffleArray(array) {
@@ -268,7 +296,6 @@ import Footer from "../components/Footer.astro";
         return array;
       }
 
-      // 4. LÓGICA DE INTERFAZ Y QUIZ
       document.getElementById("btn-start").addEventListener("click", () => {
         const nameInput = document.getElementById("username").value.trim();
         const consent = document.getElementById("consent").checked;
@@ -276,6 +303,12 @@ import Footer from "../components/Footer.astro";
 
         currentUser = nameInput;
         userEmail = `${currentUser.toLowerCase().replace(/\s/g, '')}@gmail.com`;
+        
+        currentIndex = 0;
+        score = 0;
+        timeData = [];
+        scenarioTimes = [];
+        failedScenariosLocal = [];
         
         document.getElementById("intro-section").classList.add("hidden");
         document.getElementById("dashboard-section").classList.add("hidden");
@@ -285,13 +318,18 @@ import Footer from "../components/Footer.astro";
         loadQuestion();
       });
 
+      document.getElementById("btn-restart").addEventListener("click", () => {
+        document.getElementById("individual-results").classList.add("hidden");
+        document.getElementById("intro-section").classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
       function loadQuestion() {
         if (currentIndex >= currentScenarios.length) return finishQuiz();
 
         const scenario = currentScenarios[currentIndex];
         document.getElementById("progress-text").innerText = `${currentIndex + 1}/${currentScenarios.length}`;
         
-        // Alternar UI Email vs SMS
         if (scenario.type === "email") {
           document.getElementById("ui-email").classList.remove("hidden");
           document.getElementById("ui-sms").classList.add("hidden");
@@ -325,11 +363,9 @@ import Footer from "../components/Footer.astro";
         if (isCorrect) score++;
         else failedScenariosLocal.push(scenario.id);
 
-        // Feedback
         document.getElementById("action-buttons").classList.add("hidden");
         const fbContainer = document.getElementById("feedback-container");
         fbContainer.classList.remove("hidden");
-        
         const title = document.getElementById("feedback-title");
         title.innerText = isCorrect ? "¡Correcto!" : "Incorrecto.";
         title.style.color = isCorrect ? "var(--success)" : "var(--danger)";
@@ -346,40 +382,37 @@ import Footer from "../components/Footer.astro";
       document.getElementById("btn-is-safe").addEventListener("click", () => handleAnswer(false));
       document.getElementById("btn-next").addEventListener("click", () => { currentIndex++; loadQuestion(); });
 
-      // 5. ENVÍO DE DATOS A FIREBASE
       function finishQuiz() {
         document.getElementById("quiz-section").classList.add("hidden");
         document.getElementById("dashboard-section").classList.remove("hidden");
-        
+        document.getElementById("individual-results").classList.remove("hidden");
         const finalScore100 = (score / 10) * 100;
         const avgTime = timeData.reduce((a, b) => a + b, 0) / timeData.length;
-        
         document.getElementById("ind-score-value").innerText = `${finalScore100} / 100`;
         document.getElementById("ind-time-value").innerText = avgTime.toFixed(1);
 
-        // Subir a Firebase
-        const updates = {};
-        const newUserId = push(ref(db, 'users')).key;
-        
-        updates[`users/${newUserId}`] = {
-          name: currentUser, score: finalScore100, time: Number(avgTime.toFixed(1)), timestamp: Date.now()
-        };
+        const userKey = currentUser.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+        const safeKey = userKey || push(ref(db, 'users')).key;
 
+        const updates = {};
+        updates[`users/${safeKey}`] = {
+          name: currentUser, 
+          score: finalScore100, 
+          time: Number(avgTime.toFixed(1)), 
+          timestamp: Date.now()
+        };
         failedScenariosLocal.forEach(id => { updates[`stats/failures/E${id}`] = increment(1); });
         scenarioTimes.forEach(st => {
           updates[`stats/times/E${st.id}/totalTime`] = increment(st.time);
           updates[`stats/times/E${st.id}/count`] = increment(1);
         });
-
         update(ref(db), updates);
       }
 
-      // 6. ACTUALIZACIÓN DEL DASHBOARD EN TIEMPO REAL
       onValue(ref(db, '/'), (snapshot) => {
         const data = snapshot.val();
         if (!data) return;
 
-        // Tabla de Ranking
         if (data.users) {
           const usersArr = Object.values(data.users).sort((a, b) => {
             if (b.score !== a.score) return b.score - a.score;
@@ -396,10 +429,7 @@ import Footer from "../components/Footer.astro";
           });
         }
 
-        // Preparar etiquetas E1 a E10
         const labels = Array.from({length: 10}, (_, i) => `E${i+1}`);
-        
-        // Gráfica de Fallos
         const failuresData = labels.map(label => (data.stats && data.stats.failures && data.stats.failures[label]) || 0);
         if(chartFallos) chartFallos.destroy();
         chartFallos = new Chart(document.getElementById('failuresChart'), {
@@ -411,7 +441,6 @@ import Footer from "../components/Footer.astro";
           options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1, color: '#888' } }, x: { ticks: { color: '#888' } } } }
         });
 
-        // Gráfica de Tiempos
         const timesData = labels.map(label => {
           if(data.stats && data.stats.times && data.stats.times[label]) {
             const node = data.stats.times[label];
