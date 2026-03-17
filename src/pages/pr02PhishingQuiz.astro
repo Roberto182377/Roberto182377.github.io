@@ -1,0 +1,463 @@
+---
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Phishing Quiz & Global Score</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" is:inline></script>
+    <script is:inline>
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        if (savedTheme === "dark") document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <style>
+      :root { --bg: #ffffff; --text: #171717; --card: #f9f9f9; --accent: #3b82f6; --dot: #80808030; --border: #e5e7eb; --success: #16a34a; --danger: #dc2626; --chart-bg: #1e1e1e; }
+      .dark { --bg: #0a0a0a; --text: #ededed; --card: #151515; --accent: #3b82f6; --dot: #ffffff15; --border: #333333; --success: #22c55e; --danger: #ef4444; --chart-bg: #151515; }
+
+      body { background-color: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px), radial-gradient(circle, var(--dot) 1px, transparent 1px); background-size: 24px 41.57px; background-position: 0 0, 12px 20.78px; margin: 0; }
+      .container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
+      h1, h2, h3 { font-weight: 800; margin-bottom: 1.5rem; }
+      h1 { font-size: 2.5rem; text-align: center; }
+      h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+      .hidden { display: none !important; }
+
+      /* Botones y Formularios */
+      input[type="text"] { width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); margin-bottom: 1rem; }
+      .btn { padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; border: none; }
+      .btn-primary { background: var(--accent); color: white; width: 100%; }
+      .btn-primary:hover { opacity: 0.9; }
+      .btn-phishing { background: var(--danger); color: white; width: 48%; }
+      .btn-safe { background: var(--success); color: white; width: 48%; }
+
+      /* Links Inspeccionables */
+      .phish-link { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: bold; padding: 0.2rem 0.4rem; background: rgba(59, 130, 246, 0.1); border-radius: 4px; }
+      .phish-link:hover { background: rgba(59, 130, 246, 0.2); }
+      
+      /* Estilo para imágenes dentro del contenido */
+      .scenario-img { max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0; display: block; border: 1px solid var(--border); }
+      .img-clickable { cursor: zoom-in; transition: transform 0.2s; }
+      .img-clickable:hover { transform: scale(1.02); }
+
+      /* UI Correo */
+      .email-ui { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
+      .email-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 1rem; }
+      .avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--border); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
+      .email-info p { margin: 0; line-height: 1.4; }
+      .sender-name { font-weight: bold; font-size: 1.1rem; }
+      .sender-email { font-size: 0.85rem; opacity: 0.7; }
+      .email-subject { font-size: 1.3rem; font-weight: bold; padding: 1.5rem 1.5rem 0 1.5rem; }
+      .email-body { padding: 1.5rem; font-size: 0.95rem; white-space: pre-wrap; line-height: 1.6; }
+
+      /* UI SMS */
+      .sms-ui { background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; margin: 0 auto 2rem auto; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+      .sms-header { background: var(--card); padding: 1rem; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+      .sms-avatar { width: 60px; height: 60px; border-radius: 50%; background: #9ca3af; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; }
+      .sms-sender { font-weight: bold; font-size: 1rem; }
+      .sms-number { font-size: 0.8rem; opacity: 0.6; }
+      .sms-body-container { padding: 1.5rem; background: var(--bg); display: flex; flex-direction: column; gap: 1rem; min-height: 200px; }
+      .sms-bubble { background: #3b82f6; color: white; padding: 1rem; border-radius: 18px; border-bottom-left-radius: 4px; max-width: 85%; align-self: flex-start; font-size: 0.95rem; line-height: 1.4; white-space: pre-wrap; }
+      .sms-bubble .phish-link { color: #bfdbfe; background: transparent; text-decoration: underline; padding: 0; }
+
+      /* Dashboard UI */
+      .actions { display: flex; justify-content: space-between; margin-top: 1rem; }
+      .feedback-box { padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid var(--accent); background: var(--card); }
+      .feedback-box ul { margin-top: 1rem; padding-left: 1.5rem; }
+      
+      .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+      @media (max-width: 768px) { .dashboard-grid { grid-template-columns: 1fr; } }
+      .dash-card { background: var(--chart-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+      .dash-card h3 { display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+      
+      /* Tabla Ranking */
+      .table-container { overflow-x: auto; background: var(--chart-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; }
+      table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+      th, td { padding: 1rem 0.5rem; border-bottom: 1px solid var(--border); }
+      th { color: var(--accent); font-weight: bold; }
+      .badge { padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+      .badge.seguro { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+      .badge.vulnerable { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+    </style>
+  </head>
+  <body>
+    <Navigation />
+    <main class="container">
+      <h1>Simulación de Phishing</h1>
+
+      <section id="intro-section">
+        <h2>Phishing Quiz</h2>
+        <div class="dash-card" style="max-width: 800px; margin: 0 auto; padding: 2.5rem; text-align: center;">
+          <p style="margin-bottom: 2rem; opacity: 0.9; font-size: 1.1rem; line-height: 1.5;">
+            Pon a prueba tus habilidades para detectar correos y mensajes fraudulentos. Analiza 10 escenarios que te pondran a prueba y descubre tu nivel de conocimiento frente a ataques de ingeniería social.
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;">
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">⏱️</span>
+              <strong style="display: block; font-size: 0.9rem;">No te preocupes por hacer clic en los links (puedes hacerlo paracomprobar si es real o falso)</strong>
+              <span style="font-size: 0.8rem; opacity: 0.7;">Tiempo estimado</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">📊</span>
+              <strong style="display: block; font-size: 0.9rem;">Compruba tu resultados y tiempo de reacción</strong>
+              <span style="font-size: 0.8rem; opacity: 0.7;">Análisis de tu nivel de riesgo</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">🛡️</span>
+              <strong style="display: block; font-size: 0.9rem;">Entorno Seguro</strong>
+              <span style="font-size: 0.8rem; opacity: 0.7;">Sin captura de datos reales</span>
+            </div>
+          </div>
+          <div style="text-align: left; max-width: 500px; margin: 0 auto;">
+            <label for="username">Ingresa tu Alias / Nombre:</label>
+            <input type="text" id="username" placeholder="Ej. tester123" required />
+            <label style="display: flex; gap: 0.5rem; align-items: start; font-size: 0.85rem; margin-bottom: 1.5rem;">
+              <input type="checkbox" id="consent" required />
+              <span>Otorgo mi consentimiento informado para participar. [cite: 58] No se capturan credenciales reales. [cite: 59]</span>
+            </label>
+            <button class="btn btn-primary" id="btn-start" style="font-size: 1.1rem; padding: 1rem;">Comenzar Simulación</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="quiz-section" class="hidden">
+        <h2>Escenario <span id="progress-text">1/10</span></h2>
+        
+        <div id="ui-email" class="email-ui hidden">
+          <div class="email-header">
+            <div class="avatar" id="avatar-letter">G</div>
+            <div class="email-info">
+              <p class="sender-name" id="ui-sender-name"></p>
+              <p class="sender-email" id="ui-sender-email"></p>
+              <p class="sender-email" style="font-size: 0.75rem;">Para: <span id="ui-recipient"></span></p>
+            </div>
+          </div>
+          <div class="email-subject" id="ui-subject"></div>
+          <div class="email-body" id="ui-body"></div>
+        </div>
+
+        <div id="ui-sms" class="sms-ui hidden">
+          <div class="sms-header">
+            <div class="sms-avatar">👤</div>
+            <div class="sms-sender" id="sms-sender-name"></div>
+            <div class="sms-number" id="sms-sender-number"></div>
+          </div>
+          <div class="sms-body-container">
+            <div class="sms-bubble" id="sms-body"></div>
+          </div>
+        </div>
+
+        <div id="action-buttons" class="actions">
+          <button class="btn btn-phishing" id="btn-is-phishing">Es Phishing</button>
+          <button class="btn btn-safe" id="btn-is-safe">Es Seguro</button>
+        </div>
+
+        <div id="feedback-container" class="feedback-box hidden">
+          <h3 id="feedback-title"></h3>
+          <p id="feedback-desc"></p>
+          <ul id="feedback-points"></ul>
+          <button class="btn btn-primary" id="btn-next" style="margin-top: 1rem;">Siguiente Escenario</button>
+        </div>
+      </section>
+
+      <section id="dashboard-section" style="margin-top: 3rem;">
+        <div id="individual-results" class="dash-card hidden" style="margin-bottom: 2rem; border-color: var(--accent);">
+          <h2 style="border:none; margin:0; padding:0; text-align:center;">Tu Resultado: <span id="ind-score-value" style="color:var(--accent);"></span></h2>
+          <p style="text-align:center; margin:0; opacity:0.8;">Tiempo promedio de análisis: <span id="ind-time-value"></span>s por escenario.</p>
+          <div style="text-align: center; margin-top: 1.5rem;">
+            <button class="btn btn-primary" id="btn-restart" style="max-width: 300px;">Volver al inicio</button>
+          </div>
+        </div>
+
+        <h2>Ranking Global</h2>
+        <div class="table-container">
+          <table>
+            <thead><tr><th>Rango</th><th>Participante</th><th>Puntaje</th><th>Eficiencia</th><th>Tiempo Prom.</th></tr></thead>
+            <tbody id="ranking-body"><tr><td colspan="5" style="text-align:center;">Cargando datos en tiempo real... [cite: 68]</td></tr></tbody>
+          </table>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="dash-card">
+            <h3>Escenarios más Fallados</h3>
+            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Identificación de los vectores con mayor tasa de éxito. [cite: 69]</p>
+            <canvas id="failuresChart"></canvas>
+          </div>
+          <div class="dash-card">
+            <h3>Tiempo de Reacción (seg)</h3>
+            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Análisis de duda: Escenarios que requirieron mayor tiempo. [cite: 70]</p>
+            <canvas id="timeChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <Footer />
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { getDatabase, ref, push, set, onValue, update, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAV4gRgxAYpgGmHmxwNAOr9f9iOUGtIrBU",
+        authDomain: "phishing-quiz-31717.firebaseapp.com",
+        databaseURL: "https://phishing-quiz-31717-default-rtdb.firebaseio.com",
+        projectId: "phishing-quiz-31717",
+        storageBucket: "phishing-quiz-31717.firebasestorage.app",
+        messagingSenderId: "816745611137",
+        appId: "1:816745611137:web:c87b3dc737cd544ca37280"
+      };
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      window.inspectLink = function(realUrl) { 
+        alert("Has inspeccionado el elemento.\nURL Real de destino:\n\n" + realUrl);
+        return false; 
+      }
+
+      const allScenarios = [
+        {
+          id: 1, type: "email", senderName: "Roberto Morales", senderEmail: "182377@upslp.edu.mx",
+          subject: "DONACIÓN: REGALO DE INSTRUMENTOS MUSICALES (PIANO STEINWAY MODELO S 2014)",
+          body: "¡Saludos!\n\nUna de nuestras exalumnas, la Sra. Angela, se muda a una casa más pequeña y desea donar el piano Steinway de su difunto esposo a un hogar donde se le aprecie. Se trata de un piano Steinway del 2014.\n\nPara una respuesta rápida, por favor, contáctela únicamente a través de su correo electrónico personal, no de su correo electrónico universitario ni de su número de teléfono.\n\nInformación de contacto:<a href='#' onclick='return inspectLink(\"http://myaccount.google.security-alerts.com/verify\")' style="color: blue; text-decoration: underline;" class='phish-link'> angelaharris051@outlook.com</a>\n\nSi está interesado/a en coordinar la entrega con una empresa de mudanzas, tenga en cuenta que usted será responsable de llevar el Steinway a su domicilio.\n\nNota: Por favor, responda utilizando su correo electrónico personal, no el de la universidad. Para una respuesta más rápida, puede recomendar a alguien que disfrute tocando el Steinway; se asignará por orden de llegada.\n\nSaludos.",
+          isPhishing: true, feedback: ["Subdominio engañoso: 'google.security-alerts.com' no es Google.", "■ Urgencia: Intenta crear pánico.", "■ La URL de destino es HTTP, no HTTPS.", "■ Quien te regalaría un piano???."]
+          isPhishing: true, feedback: ["", "Urgencia: Intenta crear pánico.", "La URL de destino es HTTP, no HTTPS."]
+        },
+        {
+          id: 2, type: "email", senderName: "Recursos Humanos UPSLP", senderEmail: "hr@upslp.edu.mx",
+          subject: "Actualización de la Política de Evaluación de Software II",
+          body: "Hola Roberto,\n\nTe compartimos el nuevo documento de criterios de evaluación para el proyecto final de Ingeniería de Software II. Es vital que revises los puntos 4 al 7 para asegurar tu calificación.\n\n<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png' style='width:50px' class='scenario-img' alt='Python Logo'>\n\nSaludos cordiales,\nDepartamento Académico.",
+          isPhishing: false, feedback: ["Remitente legítimo institucional.", "Tono informativo, no exige acciones con urgencia ni pide contraseñas."]
+        },
+        {
+          id: 3, type: "sms", senderName: "Rappi Rewards", senderEmail: "5544332211",
+          subject: "",
+          body: "Rappi: Tienes un cupon de $150 MXN para tu siguiente pedido en Papa Johns o Starbucks.\n\nCanjealo aqui: <a href='#' onclick='return inspectLink(\"https://rappi.promo-app.link/descuento150\")' class='phish-link'>https://rappi.app.link/5X2a</a>\n\n*Valido por 2 horas.",
+          isPhishing: true, feedback: ["Smishing (Phishing por SMS).", "El link visual es diferente al real inspeccionado.", "Usa la urgencia de '2 horas'."]
+        },
+        {
+          id: 4, type: "email", senderName: "Director General (CEO)", senderEmail: "ceo.oficina.presidencia@gmail.com",
+          subject: "SOLICITUD URGENTE: Pago a proveedor externo",
+          body: "¿Te encuentras disponible? Necesito que realices una transferencia internacional de emergencia por $2,500 USD a un nuevo proveedor logístico para liberar un pedido crítico.\n\nNo intentes llamarme, estoy en una conferencia privada con inversionistas. Responde a este correo con el comprobante una vez realizado.\n\n<img src='https://cdn-icons-png.flaticon.com/512/2912/2912761.png' style='width:100px' class='scenario-img' alt='Urgent Seal'>",
+          isPhishing: true, feedback: ["Fraude del CEO (BEC).", "Uso de correo personal (@gmail) para temas financieros corporativos.", "Exige saltarse procedimientos normales."]
+        },
+        {
+          id: 5, type: "email", senderName: "Google Drive", senderEmail: "drive-shares-noreply@google.com",
+          subject: "Se ha compartido el archivo: 'Especificaciones_SlyderNet.pdf'",
+          body: "Hola,\n\nUn colaborador externo ha compartido un documento contigo en Google Drive para el proyecto SlyderNet.\n\n<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/2295px-Google_Drive_icon_%282020%29.svg.png' style='width:40px' class='scenario-img'>\n\n<a href='#' onclick='return inspectLink(\"https://docs.google.com/document/d/1A2B3C/view\")' class='phish-link'>Abrir en Docs</a>",
+          isPhishing: false, feedback: ["Dominio legítimo (@google.com).", "El enlace inspeccionado lleva a un recurso legítimo HTTPS de docs.google.com."]
+        },
+        {
+          id: 6, type: "email", senderName: "IT Support Center", senderEmail: "admin@it-soporte-interno.com",
+          subject: "AVISO: Parche de seguridad obligatorio para Windows",
+          body: "Su equipo ha sido identificado como vulnerable a una brecha de seguridad activa en la red universitaria. Para evitar la suspensión de su cuenta, descargue e instale el parche adjunto de inmediato.\n\n<img src='https://cdn-icons-png.flaticon.com/512/564/564619.png' style='width:80px' class='scenario-img img-clickable' onclick='return inspectLink(\"http://it-soporte-interno.com/Parche_v2.exe\")' alt='Patch Icon'>\n\n(Haz clic en el icono para inspeccionar la descarga)",
+          isPhishing: true, feedback: ["Amenaza de desconexión.", "Descarga directa de un .exe.", "El logo es un distractor para que hagas clic."]
+        },
+        {
+          id: 7, type: "sms", senderName: "Banamex Info", senderEmail: "22626",
+          subject: "",
+          body: "Banamex Alerta: Se ha detectado un cargo sospechoso por $3,499.00 en Mercado Libre.\n\nSi NO reconoce este cargo, entre aqui para CANCELAR: <a href='#' onclick='return inspectLink(\"http://alertas-banamex-seguridad.com/login\")' class='phish-link'>https://banco.banamex.com/alertas</a>",
+          isPhishing: true, feedback: ["Pánico instantáneo por cargo no reconocido.", "Redirección real a página HTTP falsa."]
+        },
+        {
+          id: 8, type: "email", senderName: "LinkedIn Network", senderEmail: "messages-noreply@linkedin.com",
+          subject: "Tienes 1 nueva invitación pendiente de conexión",
+          body: "Hola Roberto,\n\nUn reclutador de IT ha solicitado unirse a tu red profesional para discutir una oportunidad en desarrollo Kotlin/Firebase.\n\n<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/600px-LinkedIn_logo_initials.png' style='width:40px' class='scenario-img'>\n\n<a href='#' onclick='return inspectLink(\"https://www.linkedin.com/in/roberto182377\")' class='phish-link'>Ver perfil completo</a>",
+          isPhishing: false, feedback: ["Comportamiento esperado y dominio correcto.", "El enlace dirige de forma segura al perfil real."]
+        },
+        {
+          id: 9, type: "sms", senderName: "FedEx Tracking", senderEmail: "80090012",
+          subject: "",
+          body: "FedEx: Su envio con guia #9921 está detenido por falta de pago de impuestos aduanales ($45.00 MXN).\n\nEvite el retorno del paquete pagando aqui: <a href='#' onclick='return inspectLink(\"http://rastreo.fedex-delivery-updates.com/pay\")' class='phish-link'>fedex.com/tracking</a>",
+          isPhishing: true, feedback: ["Suplantación de paquetería.", "Solicita un pago bajo presión.", "URL de destino fraudulenta."]
+        },
+        {
+          id: 10, type: "email", senderName: "Microsoft Office 365", senderEmail: "no-reply@microsoft.com",
+          subject: "Acción requerida: Su suscripción anual expira pronto",
+          body: "Su suscripción corporativa a Microsoft 365 caducará en menos de 24 horas. Para evitar la pérdida de datos en OneDrive y acceso a Teams, confirme sus credenciales de pago.\n\n<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Microsoft_Office_logotype_%282013%E2%80%932019%29.svg/2560px-Microsoft_Office_logotype_%282013%E2%80%932019%29.svg.png' style='width:150px' class='scenario-img img-clickable' onclick='return inspectLink(\"https://portal.office365-login-secure.com/auth\")' alt='Office 365'>\n\nPulse en la imagen o el botón para renovar:\n\n<a href='#' onclick='return inspectLink(\"https://portal.office365-login-secure.com/auth\")' class='phish-link'>Renovar Suscripción</a>",
+          isPhishing: true, feedback: ["Usa logos oficiales para dar confianza.", "Dominio falso ('office365-login-secure.com')."]
+        }
+      ];
+
+      let currentUser = "", userEmail = "";
+      let currentScenarios = [], currentIndex = 0;
+      let score = 0, timeData = [], questionStartTime = 0;
+      let scenarioTimes = [], failedScenariosLocal = [];
+      let chartFallos = null, chartTiempos = null;
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      document.getElementById("btn-start").addEventListener("click", () => {
+        const nameInput = document.getElementById("username").value.trim();
+        const consent = document.getElementById("consent").checked;
+        if (!nameInput || !consent) return alert("Ingresa tu nombre y acepta el consentimiento.");
+
+        currentUser = nameInput;
+        userEmail = `${currentUser.toLowerCase().replace(/\s/g, '')}@gmail.com`;
+        
+        currentIndex = 0;
+        score = 0;
+        timeData = [];
+        scenarioTimes = [];
+        failedScenariosLocal = [];
+        
+        document.getElementById("intro-section").classList.add("hidden");
+        document.getElementById("dashboard-section").classList.add("hidden");
+        document.getElementById("quiz-section").classList.remove("hidden");
+        
+        currentScenarios = shuffleArray([...allScenarios]);
+        loadQuestion();
+      });
+
+      document.getElementById("btn-restart").addEventListener("click", () => {
+        document.getElementById("individual-results").classList.add("hidden");
+        document.getElementById("intro-section").classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      function loadQuestion() {
+        if (currentIndex >= currentScenarios.length) return finishQuiz();
+
+        const scenario = currentScenarios[currentIndex];
+        document.getElementById("progress-text").innerText = `${currentIndex + 1}/${currentScenarios.length}`;
+        
+        if (scenario.type === "email") {
+          document.getElementById("ui-email").classList.remove("hidden");
+          document.getElementById("ui-sms").classList.add("hidden");
+          document.getElementById("avatar-letter").innerText = scenario.senderName.charAt(0).toUpperCase();
+          document.getElementById("ui-sender-name").innerText = scenario.senderName;
+          document.getElementById("ui-sender-email").innerText = `<${scenario.senderEmail}>`;
+          document.getElementById("ui-recipient").innerText = userEmail;
+          document.getElementById("ui-subject").innerText = scenario.subject;
+          document.getElementById("ui-body").innerHTML = scenario.body.replace(/\n/g, "<br>");
+        } else {
+          document.getElementById("ui-email").classList.add("hidden");
+          document.getElementById("ui-sms").classList.remove("hidden");
+          document.getElementById("sms-sender-name").innerText = scenario.senderName;
+          document.getElementById("sms-sender-number").innerText = scenario.senderEmail;
+          document.getElementById("sms-body").innerHTML = scenario.body;
+        }
+
+        document.getElementById("feedback-container").classList.add("hidden");
+        document.getElementById("action-buttons").classList.remove("hidden");
+        questionStartTime = Date.now();
+      }
+
+      function handleAnswer(userSaidPhishing) {
+        const timeTaken = (Date.now() - questionStartTime) / 1000;
+        const scenario = currentScenarios[currentIndex];
+        
+        timeData.push(timeTaken);
+        scenarioTimes.push({ id: scenario.id, time: timeTaken });
+
+        const isCorrect = userSaidPhishing === scenario.isPhishing;
+        if (isCorrect) score++;
+        else failedScenariosLocal.push(scenario.id);
+
+        document.getElementById("action-buttons").classList.add("hidden");
+        const fbContainer = document.getElementById("feedback-container");
+        fbContainer.classList.remove("hidden");
+        const title = document.getElementById("feedback-title");
+        title.innerText = isCorrect ? "¡Correcto!" : "Incorrecto.";
+        title.style.color = isCorrect ? "var(--success)" : "var(--danger)";
+        document.getElementById("feedback-desc").innerText = scenario.isPhishing ? "Era un ataque de Phishing:" : "Era Legítimo y seguro:";
+        
+        const ul = document.getElementById("feedback-points");
+        ul.innerHTML = "";
+        scenario.feedback.forEach(point => {
+          const li = document.createElement("li"); li.innerText = point; ul.appendChild(li);
+        });
+      }
+
+      document.getElementById("btn-is-phishing").addEventListener("click", () => handleAnswer(true));
+      document.getElementById("btn-is-safe").addEventListener("click", () => handleAnswer(false));
+      document.getElementById("btn-next").addEventListener("click", () => { currentIndex++; loadQuestion(); });
+
+      function finishQuiz() {
+        document.getElementById("quiz-section").classList.add("hidden");
+        document.getElementById("dashboard-section").classList.remove("hidden");
+        document.getElementById("individual-results").classList.remove("hidden");
+        const finalScore100 = (score / 10) * 100;
+        const avgTime = timeData.reduce((a, b) => a + b, 0) / timeData.length;
+        document.getElementById("ind-score-value").innerText = `${finalScore100} / 100`;
+        document.getElementById("ind-time-value").innerText = avgTime.toFixed(1);
+
+        const userKey = currentUser.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+        const safeKey = userKey || push(ref(db, 'users')).key;
+
+        const updates = {};
+        updates[`users/${safeKey}`] = {
+          name: currentUser, 
+          score: finalScore100, 
+          time: Number(avgTime.toFixed(1)), 
+          timestamp: Date.now()
+        };
+        failedScenariosLocal.forEach(id => { updates[`stats/failures/E${id}`] = increment(1); });
+        scenarioTimes.forEach(st => {
+          updates[`stats/times/E${st.id}/totalTime`] = increment(st.time);
+          updates[`stats/times/E${st.id}/count`] = increment(1);
+        });
+        update(ref(db), updates);
+      }
+
+      onValue(ref(db, '/'), (snapshot) => {
+        const data = snapshot.val();
+        if (!data) return;
+
+        if (data.users) {
+          const usersArr = Object.values(data.users).sort((a, b) => {
+            if (b.score !== a.score) return b.score - a.score;
+            return a.time - b.time;
+          });
+          
+          const tbody = document.getElementById("ranking-body");
+          tbody.innerHTML = "";
+          usersArr.forEach((u, index) => {
+            const tr = document.createElement("tr");
+            const efficiency = u.score >= 80 ? '<span class="badge seguro">Seguro</span>' : '<span class="badge vulnerable">Vulnerable</span>';
+            tr.innerHTML = `<td>#${index + 1}</td><td>${u.name}</td><td>${u.score} / 100</td><td>${efficiency}</td><td>${u.time}s</td>`;
+            tbody.appendChild(tr);
+          });
+        }
+
+        const labels = Array.from({length: 10}, (_, i) => `E${i+1}`);
+        const failuresData = labels.map(label => (data.stats && data.stats.failures && data.stats.failures[label]) || 0);
+        if(chartFallos) chartFallos.destroy();
+        chartFallos = new Chart(document.getElementById('failuresChart'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{ label: 'Veces Fallado', data: failuresData, backgroundColor: '#ef4444' }]
+          },
+          options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1, color: '#888' } }, x: { ticks: { color: '#888' } } } }
+        });
+
+        const timesData = labels.map(label => {
+          if(data.stats && data.stats.times && data.stats.times[label]) {
+            const node = data.stats.times[label];
+            return (node.totalTime / node.count).toFixed(1);
+          }
+          return 0;
+        });
+        if(chartTiempos) chartTiempos.destroy();
+        chartTiempos = new Chart(document.getElementById('timeChart'), {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{ label: 'Tiempo Promedio (s)', data: timesData, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.2)', fill: true, tension: 0.4 }]
+          },
+          options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { color: '#888' } }, x: { ticks: { color: '#888' } } } }
+        });
+      });
+    </script>
+  </body>
+</html>
