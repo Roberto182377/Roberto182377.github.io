@@ -4,219 +4,154 @@ import Footer from "../components/Footer.astro";
 ---
 
 <html lang="es">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Análisis de Desempeño y Score Global</title>
-    <script is:inline>
-      (function () {
-        const savedTheme = localStorage.getItem("theme") || "dark";
-        if (savedTheme === "dark") document.documentElement.classList.add("dark");
-      })();
+    <title>SlyderNet - Ranking Global</title>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAV4gRgxAYpgGmHmxwNAOr9f9iOUGtIrBU",
+            authDomain: "phishing-quiz-31717.firebaseapp.com",
+            databaseURL: "https://phishing-quiz-31717-default-rtdb.firebaseio.com",
+            projectId: "phishing-quiz-31717",
+            storageBucket: "phishing-quiz-31717.firebasestorage.app",
+            messagingSenderId: "816745611137",
+            appId: "1:816745611137:web:c87b3dc737cd544ca37280"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        window.db = db;
+        window.collection = collection;
+        window.getDocs = getDocs;
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" is:inline></script>
-    
     <style>
-      :root { --bg: #ffffff; --text: #171717; --card: #f9f9f9; --accent: #2563eb; --dot: #80808030; --border: #e5e7eb; }
-      .dark { --bg: #0a0a0a; --text: #ededed; --card: #151515; --accent: #60a5fa; --dot: #ffffff15; --border: #333333; }
-
-      body {
-        background-color: var(--bg); color: var(--text);
-        font-family: 'Inter', system-ui, sans-serif;
-        background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px), radial-gradient(circle, var(--dot) 1px, transparent 1px);
-        background-size: 24px 41.57px; background-position: 0 0, 12px 20.78px;
-        margin: 0; min-height: 100vh;
-      }
-
-      .container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
-      
-      .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; overflow: hidden; }
-      
-      h1, h2, h3 { font-weight: 800; margin-bottom: 1.5rem; }
-      
-      .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-
-      /* Estilos de Tabla */
-      .table-container { width: 100%; overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
-      table { width: 100%; border-collapse: collapse; text-align: left; background: var(--card); }
-      th, td { padding: 1rem; border-bottom: 1px solid var(--border); }
-      th { background: rgba(0,0,0,0.05); font-weight: bold; color: var(--accent); }
-      .dark th { background: rgba(255,255,255,0.05); }
-
-      .empty-state { text-align: center; padding: 4rem; opacity: 0.6; }
-      .chart-container { position: relative; height: 300px; width: 100%; }
-      
-      .badge { padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
-      .badge-high { background: #ef444430; color: #ef4444; }
-      .badge-low { background: #22c55e30; color: #22c55e; }
+        :root { --bg: #0a0a0a; --text: #ededed; --accent: #60a5fa; --card: #151515; --border: #333; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .card { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { color: var(--accent); }
+        .hidden { display: none; }
+        .badge { padding: 0.3rem 0.6rem; border-radius: 5px; font-size: 0.8rem; }
+        .badge-safe { background: #10b98120; color: #10b981; }
+        .badge-risk { background: #ef444420; color: #ef4444; }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <Navigation />
     <main class="container">
-      <h1>Dashboard de Análisis: Simulación Phishing</h1>
-      <p style="margin-bottom: 3rem; opacity: 0.8;">Interpretación de resultados globales y niveles de vulnerabilidad detectados en los participantes.</p>
-
-      <div id="no-data" class="card empty-state hidden">
-        <p>No hay datos registrados aún. Realiza el quiz para ver las estadísticas.</p>
-        <a href="/quiz" style="color: var(--accent); text-decoration: underline;">Ir al Quiz</a>
-      </div>
-
-      <section id="data-content">
+        
         <div class="card">
-          <h3>🏆 Ranking de Resiliencia</h3>
-          <div class="table-container">
+            <h3>🔍 Buscar Participante</h3>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="searchInput" placeholder="Nombre exacto..." style="flex:1; background:#222; border:1px solid #333; color:white; padding:10px; border-radius:8px;" />
+                <button onclick="searchUser()" style="background:var(--accent); border:none; color:white; padding:10px 20px; border-radius:8px; cursor:pointer;">Ver Análisis</button>
+            </div>
+        </div>
+
+        <div id="personal-section" class="card hidden" style="border-left: 5px solid var(--accent);">
+            <h2 id="user-welcome">Análisis Individual</h2>
+            <div id="user-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div>
+                    <span style="opacity:0.7">Puntaje Obtenido</span>
+                    <div id="u-score" style="font-size: 2rem; font-weight: bold;">0 / 100</div>
+                </div>
+                <div>
+                    <span style="opacity:0.7">Escenario más lento</span>
+                    <div id="u-slowest" style="font-weight: bold; color: #facc15;">-</div>
+                </div>
+            </div>
+            <p id="u-feedback" style="margin-top: 1.5rem; line-height: 1.6;"></p>
+        </div>
+
+        <div class="card">
+            <h2>🏆 Ranking Global (Firestore)</h2>
             <table>
-              <thead>
-                <tr>
-                  <th>Rango</th>
-                  <th>Participante</th>
-                  <th>Puntaje</th>
-                  <th>Eficiencia</th>
-                  <th>Tiempo Prom.</th>
-                </tr>
-              </thead>
-              <tbody id="ranking-body">
+                <thead>
+                    <tr>
+                        <th>Rango</th>
+                        <th>Nombre</th>
+                        <th>Score</th>
+                        <th>Estado</th>
+                        <th>Última Prueba</th>
+                    </tr>
+                </thead>
+                <tbody id="ranking-body">
+                    <tr><td colspan="5">Cargando datos desde Firebase...</td></tr>
                 </tbody>
             </table>
-          </div>
         </div>
-
-        <div class="stats-grid">
-          <div class="card">
-            <h3>📉 Escenarios más Fallados</h3>
-            <p style="font-size: 0.85rem; margin-bottom: 1rem;">Identificación de los vectores con mayor tasa de éxito para el atacante.</p>
-            <div class="chart-container">
-              <canvas id="failuresChart"></canvas>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>⏱️ Tiempo de Reacción (seg)</h3>
-            <p style="font-size: 0.85rem; margin-bottom: 1rem;">Análisis de duda: Escenarios que requirieron mayor tiempo de análisis.</p>
-            <div class="chart-container">
-              <canvas id="timeChart"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-            <h3>💡 Oportunidades de Mejora</h3>
-            <div id="insights-container">
-                </div>
-        </div>
-      </section>
     </main>
-    <Footer />
 
     <script is:inline>
-      document.addEventListener('DOMContentLoaded', () => {
-        const rawData = localStorage.getItem('phishingGlobalScores');
-        if (!rawData) {
-          document.getElementById('no-data').classList.remove('hidden');
-          document.getElementById('data-content').classList.add('hidden');
-          return;
+        async function loadData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userFilter = urlParams.get('user');
+
+            try {
+                const querySnapshot = await window.getDocs(window.collection(window.db, "ranking"));
+                const allUsers = [];
+                querySnapshot.forEach((doc) => allUsers.push(doc.data()));
+
+                // Ordenar por score descendente
+                allUsers.sort((a, b) => b.totalScore - a.totalScore);
+
+                renderTable(allUsers);
+
+                if (userFilter) {
+                    const userData = allUsers.find(u => u.alias.toLowerCase() === userFilter.toLowerCase());
+                    if (userData) showPersonalAnalysis(userData);
+                }
+            } catch (e) {
+                console.error(e);
+            }
         }
 
-        const scores = JSON.parse(rawData);
-        renderRanking(scores);
-        renderCharts(scores);
-        generateInsights(scores);
-      });
+        function renderTable(data) {
+            const tbody = document.getElementById('ranking-body');
+            tbody.innerHTML = data.map((u, i) => `
+                <tr>
+                    <td>#${i + 1}</td>
+                    <td><strong>${u.alias}</strong></td>
+                    <td>${u.totalScore} / 100</td>
+                    <td>
+                        <span class="badge ${u.totalScore >= 70 ? 'badge-safe' : 'badge-risk'}">
+                            ${u.totalScore >= 70 ? 'Seguro' : 'Vulnerable'}
+                        </span>
+                    </td>
+                    <td style="font-size: 0.8rem; opacity: 0.6;">${new Date(u.date).toLocaleDateString()}</td>
+                </tr>
+            `).join('');
+        }
 
-      function renderRanking(data) {
-        const tbody = document.getElementById('ranking-body');
-        // Ordenar por puntaje (desc) y luego por tiempo (asc)
-        const sorted = data.sort((a, b) => b.totalScore - a.totalScore);
+        function showPersonalAnalysis(u) {
+            document.getElementById('personal-section').classList.remove('hidden');
+            document.getElementById('user-welcome').innerText = `Análisis de: ${u.alias}`;
+            document.getElementById('u-score').innerText = `${u.totalScore} / 100`;
 
-        tbody.innerHTML = sorted.map((user, index) => {
-          const avgTime = (user.details.reduce((acc, d) => acc + d.timeSeconds, 0) / 10.0).toFixed(1);
-          return `
-            <tr>
-              <td>#${index + 1}</td>
-              <td><strong>${user.alias}</strong></td>
-              <td>${user.totalScore} / 100</td>
-              <td><span class="badge ${user.totalScore > 70 ? 'badge-low' : 'badge-high'}">
-                ${user.totalScore > 70 ? 'Seguro' : 'Vulnerable'}
-              </span></td>
-              <td>${avgTime}s</td>
-            </tr>
-          `;
-        }).join('');
-      }
+            // Encontrar el escenario más lento (Punto 3 de rúbrica)
+            const slowest = [...u.details].sort((a, b) => b.timeSeconds - a.timeSeconds)[0];
+            document.getElementById('u-slowest').innerText = `${slowest.vector} (${slowest.timeSeconds.toFixed(1)}s)`;
 
-      function renderCharts(data) {
-        const totalParticipants = data.length;
-        const scenarioStats = Array.from({ length: 10 }, (_, i) => ({
-          id: i + 1,
-          failures: 0,
-          totalTime: 0
-        }));
+            const hits = u.details.filter(d => d.correct).length;
+            document.getElementById('u-feedback').innerHTML = `
+                Has superado <strong>${hits} de 10</strong> trampas de seguridad. 
+                Tu tiempo de respuesta en el escenario de <em>${slowest.vector}</em> indica que es el tipo de ataque que más te genera duda. 
+                ${u.totalScore < 70 ? '⚠️ Se recomienda revisar las señales de phishing en correos corporativos.' : '✅ Posees una buena cultura de prevención.'}
+            `;
+        }
 
-        data.forEach(user => {
-          user.details.forEach((d, idx) => {
-            if (!d.correct) scenarioStats[idx].failures++;
-            scenarioStats[idx].totalTime += d.timeSeconds;
-          });
-        });
+        window.searchUser = () => {
+            const val = document.getElementById('searchInput').value.trim();
+            if(val) window.location.href = `?user=${encodeURIComponent(val)}`;
+        };
 
-        const labels = scenarioStats.map(s => `E${s.id}`);
-        const failureData = scenarioStats.map(s => s.failures);
-        const timeData = scenarioStats.map(s => (s.totalTime / totalParticipants).toFixed(1));
-
-        // Gráfico de Fallos
-        new Chart(document.getElementById('failuresChart'), {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Veces Fallado',
-              data: failureData,
-              backgroundColor: '#ef4444',
-              borderRadius: 5
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
-          }
-        });
-
-        // Gráfico de Tiempos
-        new Chart(document.getElementById('timeChart'), {
-          type: 'line',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Tiempo Promedio (s)',
-              data: timeData,
-              borderColor: '#60a5fa',
-              backgroundColor: '#60a5fa30',
-              fill: true,
-              tension: 0.4
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: { y: { beginAtZero: true } }
-          }
-        });
-      }
-
-      function generateInsights(data) {
-          const container = document.getElementById('insights-container');
-          // Lógica simple para determinar el escenario más tardado y el más difícil
-          // Basado en el promedio de los datos existentes
-          container.innerHTML = `
-            <ul style="padding-left: 1.5rem;">
-                <li><strong>Gestión del Riesgo Humano:</strong> La media de detección es de <strong>${(data.reduce((a,b)=>a+b.totalScore,0)/data.length).toFixed(1)}%</strong>.</li>
-                <li><strong>Punto Crítico:</strong> Los ataques dirigidos (Spear Phishing) muestran el mayor tiempo de duda antes de la acción.</li>
-                <li><strong>Recomendación:</strong> Se requiere reforzar la capacitación en la revisión de dominios (Typosquatting) y protocolos de transferencias financieras.</li>
-            </ul>
-          `;
-      }
+        loadData();
     </script>
-  </body>
+</body>
 </html>
