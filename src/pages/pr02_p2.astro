@@ -8,10 +8,17 @@ const scenarios = [
     id: 1,
     type: "phishing",
     vector: "Typosquatting y Urgencia",
-    sender: "Soporte TI <soporte@upsIp.edu.mx>", // La 'I' mayúscula simula una 'l' minúscula
-    subject: "ACCIÓN REQUERIDA: Suspensión de cuenta institucional",
-    content: "Estimado usuario, hemos detectado actividad inusual en su cuenta. Para evitar la suspensión definitiva en los próximos 30 minutos, por favor valide sus credenciales en el siguiente portal de seguridad: <br><br> <a href='#' style='color: #2563eb; text-decoration: underline;'>https://portal-seguridad.upsIp.edu.mx/auth</a>",
-    explanation: "🚨 <strong>Es Phishing.</strong> Observa detenidamente el dominio del remitente y el enlace: utiliza 'upsIp' (con i mayúscula) en lugar de 'upslp' (con L minúscula). Esta técnica se llama Typosquatting. Además, crea un falso sentido de urgencia (30 minutos) para forzar tu error."
+    sender: "Erick Andrés Soto Ortiz <186227@upslp.edu.mx>", //
+    subject: "DONACIÓN: REGALO DE INSTRUMENTOS MUSICALES (PIANO STEINWAY MODELO S 2014)",
+    content:{
+      Una de nuestras exalumnas, la Sra. Angela, se muda a una casa más pequeña y desea donar el piano Steinway de su difunto esposo a un hogar donde se le aprecie. Se trata de un piano Steinway del 2014.
+      Para una respuesta rápida, por favor, contáctela únicamente a través de su correo electrónico personal, no de su correo electrónico universitario ni de su número de teléfono.
+      Información de contacto:  <a href='#' style='color: #2563eb; text-decoration: underline;'>angelaharris051@outlook.com</a>
+      Si está interesado/a en coordinar la entrega con una empresa de mudanzas, tenga en cuenta que usted será responsable de llevar el Steinway a su domicilio.
+      Nota: Por favor, responda utilizando su correo electrónico personal, no el de la universidad. Para una respuesta más rápida, puede recomendar a alguien que disfrute tocando el Steinway; se asignará por orden de llegada.
+      Saludos.
+    },
+    explanation: "<strong>Phishing.</strong> Observa detenidamente el dominio del remitente y el enlace: utiliza 'upsIp' (con i mayúscula) en lugar de 'upslp' (con L minúscula). Esta técnica se llama Typosquatting. Además, crea un falso sentido de urgencia (30 minutos) para forzar tu error."
   },
   {
     id: 2,
@@ -161,12 +168,14 @@ const scenarios = [
     <main class="container">
       
       <div id="consent-screen" class="card fade-in">
-        <h2>Entrenamiento de Concientización en Ciberseguridad</h2>
-        <p>Bienvenido a la simulación interactiva. El objetivo de este ejercicio es evaluar tu capacidad para identificar intentos de ingeniería social.</p>
+        <h1>Entrenamiento de Concientización en Ciberseguridad</h1>
+        <h2>Phishing Quiz</h2>
+        <p>Bienvenido a la simulación interactiva.</p>
+        <p>El objetivo de este ejercicio es evaluar tu capacidad para identificar intentos de ingeniería social.</p>
         
         <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid var(--danger); padding: 1rem; margin-bottom: 1.5rem; border-radius: 0 8px 8px 0;">
           <strong>Consentimiento Ético e Información de Privacidad:</strong>
-          <ul style="margin-top: 0.5rem; padding-left: 1.5rem; font-size: 0.9rem;">
+          <ul>
             <li>Esta prueba <strong>NO capturará contraseñas reales</strong> ni información sensible.</li>
             <li>No ingreses credenciales si un enlace te lo solicita.</li>
             <li>Tus resultados se guardarán de forma local para generar un análisis estadístico anónimo.</li>
@@ -174,8 +183,8 @@ const scenarios = [
         </div>
 
         <label for="userName" style="font-weight: bold; display: block; margin-bottom: 0.5rem;">Ingresa tu nombre para comenzar:</label>
-        <input type="text" id="userName" placeholder="Ej. Emiliano" required />
-        <button id="btnStart" class="btn btn-primary">Acepto los términos y Comenzar</button>
+        <input type="text" id="userName" placeholder="Ej. user123" required />
+        <button id="btnStart" class="btn btn-primary">Acepto los términos vamos a empezar</button>
       </div>
 
       <div id="quiz-screen" class="hidden fade-in">
@@ -204,8 +213,8 @@ const scenarios = [
         </div>
 
         <div id="action-buttons" class="flex-between">
-          <button class="btn btn-phishing" onclick="evaluateAnswer('phishing')">🚨 Es Phishing</button>
-          <button class="btn btn-legitimo" onclick="evaluateAnswer('legitimo')">✅ Es Legítimo</button>
+          <button class="btn btn-phishing" onclick="evaluateAnswer('phishing')">PHISHING</button>
+          <button class="btn btn-legitimo" onclick="evaluateAnswer('legitimo')">LEGÍTIMO</button>
         </div>
 
         <div id="feedback-section" class="">
@@ -216,7 +225,7 @@ const scenarios = [
       </div>
 
       <div id="results-screen" class="card hidden fade-in" style="text-align: center;">
-        <h2>¡Simulación Completada!</h2>
+        <h2>¡Quiz Completado!</h2>
         <p>Gracias por participar en este entrenamiento de seguridad.</p>
         <div style="font-size: 3rem; font-weight: 900; color: var(--accent); margin: 2rem 0;">
           <span id="final-score">0</span> / 100
@@ -224,7 +233,7 @@ const scenarios = [
         <p id="final-message" style="margin-bottom: 2rem;"></p>
         
         <a href="/pr02_p3" class="btn btn-primary" style="display: inline-block; width: auto; text-decoration: none;">
-          📊 Ver Score Global y Análisis
+          Ver Score Global y Análisis
         </a>
       </div>
 
@@ -265,7 +274,7 @@ const scenarios = [
 
         currentUser = nameInput;
         // Generar un correo dinámico basado en el nombre
-        userEmailAlias = `${nameInput.toLowerCase().replace(/\s/g, '.')}@tuempresa.com`;
+        userEmailAlias = `${nameInput.toLowerCase().replace(/\s/g, '.')}@gmail.com`;
         
         screenConsent.classList.add('hidden');
         screenQuiz.classList.remove('hidden');
@@ -305,11 +314,11 @@ const scenarios = [
         feedbackSection.className = isCorrect ? 'feedback-correct' : 'feedback-incorrect';
         
         if (isCorrect) {
-          feedbackTitle.innerHTML = "✅ ¡Correcto!";
+          feedbackTitle.innerHTML = "¡Correcto! :D";
           feedbackTitle.style.color = "var(--success)";
           score += 10; // 10 puntos por acierto
         } else {
-          feedbackTitle.innerHTML = "❌ Cuidado, respuesta incorrecta";
+          feedbackTitle.innerHTML = "Cuidado, respuesta incorrecta :ꓷ";
           feedbackTitle.style.color = "var(--danger)";
         }
 
@@ -340,7 +349,7 @@ const scenarios = [
         document.getElementById('final-score').innerText = score;
 
         let msg = "";
-        if(score >= 90) msg = "¡Excelente instinto! Tienes un nivel muy alto de concientización en ciberseguridad.";
+        if(score >= 90) msg = "¡Excelente! Tienes un nivel muy alto de concientización en tu seguridad digital.";
         else if(score >= 70) msg = "Buen trabajo, pero aún hay vectores de ataque que podrían engañarte. Sigue practicando.";
         else msg = "Tienes un alto riesgo de caer en ataques de ingeniería social. Te recomendamos revisar a detalle los escenarios fallados.";
         document.getElementById('final-message').innerText = msg;
