@@ -257,7 +257,7 @@ import Footer from "../components/Footer.astro";
         {
           id: 1, type: "email", senderName: "Equipo de Seguridad de Google", senderEmail: "no-reply@accounts.google.security-alerts.com",
           subject: "Alerta de seguridad crítica",
-          body: "Hemos detectado un intento de inicio de sesión sospechoso en tu cuenta desde Moscú.\n\nPor favor asegura tu cuenta inmediatamente haciendo clic aquí:\n\n<a href='#' onclick='return inspectLink(\"http://myaccount.google.security-alerts.com/verify\")' class='phish-link' title='Inspeccionar Enlace'>Proteger mi cuenta</a>",
+          body: "Hemos detectado un intento de inicio de sesión sospechoso en tu cuenta desde Moscú.\n\nPor favor asegura tu cuenta inmediatamente haciendo clic aquí:\n\n<a href='http://myaccount.google.security-alerts.com/verify\' style="color: blue; text-decoration: underline;" onclick='return inspectLink(\"http://myaccount.google.security-alerts.com/verify\")' class='phish-link' title='Inspeccionar Enlace'>Proteger mi cuenta</a>",
           isPhishing: true, feedback: ["Subdominio engañoso: 'google.security-alerts.com' no es Google.", "Urgencia: Intenta crear pánico.", "La URL de destino es HTTP, no HTTPS."]
         },
         {
