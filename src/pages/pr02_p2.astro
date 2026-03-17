@@ -7,155 +7,174 @@ import Footer from "../components/Footer.astro";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Simulación de Phishing - Quiz Interactivo</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Phishing Quiz & Global Score</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" is:inline></script>
+    <script is:inline>
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        if (savedTheme === "dark") document.documentElement.classList.add("dark");
+      })();
+    </script>
     <style>
-      :root {
-        --bg: #0a0a0a;
-        --text: #ededed;
-        --card: #151515;
-        --accent: #2563eb;
-        --dot: #ffffff15;
-        --border: #333333;
-        --error: #ef4444;
-        --success: #22c55e;
-      }
+      :root { --bg: #ffffff; --text: #171717; --card: #f9f9f9; --accent: #3b82f6; --dot: #80808030; --border: #e5e7eb; --success: #16a34a; --danger: #dc2626; --chart-bg: #1e1e1e; }
+      .dark { --bg: #0a0a0a; --text: #ededed; --card: #151515; --accent: #3b82f6; --dot: #ffffff15; --border: #333333; --success: #22c55e; --danger: #ef4444; --chart-bg: #151515; }
 
-      body {
-        background-color: var(--bg);
-        color: var(--text);
-        font-family: 'Inter', system-ui, sans-serif;
-        background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px), radial-gradient(circle, var(--dot) 1px, transparent 1px);
-        background-size: 24px 41.57px;
-        background-position: 0 0, 12px 20.78px;
-        margin: 0;
-      }
-
+      body { background-color: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px), radial-gradient(circle, var(--dot) 1px, transparent 1px); background-size: 24px 41.57px; background-position: 0 0, 12px 20.78px; margin: 0; }
       .container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
+      h1, h2, h3 { font-weight: 800; margin-bottom: 1.5rem; }
+      h1 { font-size: 2.5rem; text-align: center; }
+      h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+      .hidden { display: none !important; }
 
-      /* Registro Ampliado */
-      .registration-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        padding: 3rem;
-        border-radius: 16px;
-        max-width: 850px; /* Incrementado para abarcar más pantalla */
-        margin: 2rem auto;
-        text-align: center;
-      }
+      /* Botones y Formularios */
+      input[type="text"] { width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); margin-bottom: 1rem; }
+      .btn { padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; border: none; }
+      .btn-primary { background: var(--accent); color: white; width: 100%; }
+      .btn-primary:hover { opacity: 0.9; }
+      .btn-phishing { background: var(--danger); color: white; width: 48%; }
+      .btn-safe { background: var(--success); color: white; width: 48%; }
 
-      .input-group { margin: 2rem 0; text-align: left; }
-      input[type="text"] {
-        width: 100%;
-        padding: 1rem;
-        background: #000;
-        border: 1px solid var(--border);
-        color: white;
-        border-radius: 8px;
-        font-size: 1.1rem;
-      }
+      /* Links Inspeccionables */
+      .phish-link { color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: bold; padding: 0.2rem 0.4rem; background: rgba(59, 130, 246, 0.1); border-radius: 4px; }
+      .phish-link:hover { background: rgba(59, 130, 246, 0.2); }
 
-      .btn-primary {
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 1rem 2rem;
-        border-radius: 8px;
-        font-weight: bold;
-        cursor: pointer;
-        width: 100%;
-        transition: 0.3s;
-      }
+      /* UI Correo */
+      .email-ui { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
+      .email-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 1rem; }
+      .avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--border); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
+      .email-info p { margin: 0; line-height: 1.4; }
+      .sender-name { font-weight: bold; font-size: 1.1rem; }
+      .sender-email { font-size: 0.85rem; opacity: 0.7; }
+      .email-subject { font-size: 1.3rem; font-weight: bold; padding: 1.5rem 1.5rem 0 1.5rem; }
+      .email-body { padding: 1.5rem; font-size: 0.95rem; white-space: pre-wrap; line-height: 1.6; }
 
-      /* Quiz Styles */
-      .quiz-container { display: none; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; }
-      .scenario-img { width: 100%; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid var(--border); }
+      /* UI SMS */
+      .sms-ui { background: var(--bg); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; margin: 0 auto 2rem auto; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+      .sms-header { background: var(--card); padding: 1rem; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+      .sms-avatar { width: 60px; height: 60px; border-radius: 50%; background: #9ca3af; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; }
+      .sms-sender { font-weight: bold; font-size: 1rem; }
+      .sms-number { font-size: 0.8rem; opacity: 0.6; }
+      .sms-body-container { padding: 1.5rem; background: var(--bg); display: flex; flex-direction: column; gap: 1rem; min-height: 200px; }
+      .sms-bubble { background: #3b82f6; color: white; padding: 1rem; border-radius: 18px; border-bottom-left-radius: 4px; max-width: 85%; align-self: flex-start; font-size: 0.95rem; line-height: 1.4; white-space: pre-wrap; }
+      .sms-bubble .phish-link { color: #bfdbfe; background: transparent; text-decoration: underline; padding: 0; }
+
+      /* Dashboard UI */
+      .actions { display: flex; justify-content: space-between; margin-top: 1rem; }
+      .feedback-box { padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid var(--accent); background: var(--card); }
+      .feedback-box ul { margin-top: 1rem; padding-left: 1.5rem; }
       
-      /* Dashboard / Estadísticas */
-      #dashboard { display: none; margin-top: 4rem; padding-top: 2rem; border-top: 1px dashed var(--border); }
-      .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
-      .stat-card { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; }
+      .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+      @media (max-width: 768px) { .dashboard-grid { grid-template-columns: 1fr; } }
+      .dash-card { background: var(--chart-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+      .dash-card h3 { display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem; }
       
-      table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-      th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); }
-      th { color: var(--accent); }
-      .status-safe { color: var(--success); font-weight: bold; }
-      .status-vulnerable { color: var(--error); font-weight: bold; }
-
-      .hidden { display: none; }
+      /* Tabla Ranking */
+      .table-container { overflow-x: auto; background: var(--chart-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; }
+      table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+      th, td { padding: 1rem 0.5rem; border-bottom: 1px solid var(--border); }
+      th { color: var(--accent); font-weight: bold; }
+      .badge { padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+      .badge.seguro { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+      .badge.vulnerable { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
     </style>
   </head>
   <body>
     <Navigation />
     <main class="container">
-      
-      <div id="registration-section" class="registration-card">
-        <h2 style="color: var(--accent); margin-bottom: 0.5rem;">Registro del Participante</h2>
-        <p style="opacity: 0.7;">Identifícate para comenzar la simulación de ingeniería social.</p>
-        <div class="input-group">
-          <label style="display: block; margin-bottom: 0.5rem;">Ingresa tu Alias / Nombre:</label>
-          <input type="text" id="user-alias" placeholder="Ej. Roberto" />
-        </div>
-        <div style="text-align: left; margin-bottom: 2rem; font-size: 0.9rem;">
-          <input type="checkbox" id="consent"> 
-          <label for="consent">Otorgo mi consentimiento informado para participar. No se capturan credenciales reales.</label>
-        </div>
-        <button id="start-btn" class="btn-primary">Comenzar Simulación</button>
-      </div>
+      <h1>Simulación de Phishing</h1>
 
-      <div id="quiz-section" class="quiz-container">
-        <div id="question-header" style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-          <span id="progress-text">Escenario 1 de 10</span>
-          <span id="timer-text" style="color: var(--accent);">Tiempo: 0s</span>
+      <section id="intro-section">
+        <h2>Registro del Participante</h2>
+        <div class="dash-card" style="max-width: 500px; margin: 0 auto;">
+          <label for="username">Ingresa tu Alias / Nombre:</label>
+          <input type="text" id="username" placeholder="Ej. Roberto" required />
+          <label style="display: flex; gap: 0.5rem; align-items: start; font-size: 0.85rem; margin-bottom: 1rem;">
+            <input type="checkbox" id="consent" required />
+            <span>Otorgo mi consentimiento informado para participar. No se capturan credenciales reales.</span>
+          </label>
+          <button class="btn btn-primary" id="btn-start">Comenzar Simulación</button>
         </div>
-        <div id="scenario-content">
-          <h3 id="scenario-title">Cargando escenario...</h3>
-           <p id="scenario-desc" style="opacity: 0.8; margin-bottom: 1.5rem;"></p>
-           <img id="scenario-image" src="" class="scenario-img" alt="Phishing Evidence" />
-           <div id="options-container" style="display: grid; gap: 1rem;"></div>
-        </div>
-      </div>
+      </section>
 
-      <div id="dashboard">
-        <h2 style="text-align: center; margin-bottom: 2rem;">🏆 Ranking de Resiliencia</h2>
-        <div class="stat-card">
-            <table id="ranking-table">
-                <thead>
-                    <tr>
-                        <th>Rango</th>
-                        <th>Participante</th>
-                        <th>Puntaje</th>
-                        <th>Eficiencia</th>
-                        <th>Tiempo Prom.</th>
-                    </tr>
-                </thead>
-                <tbody id="ranking-body">
-                    </tbody>
-            </table>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>📉 Escenarios más Fallados</h3>
-                <canvas id="failedScenariosChart"></canvas>
+      <section id="quiz-section" class="hidden">
+        <h2>Escenario <span id="progress-text">1/10</span></h2>
+        
+        <div id="ui-email" class="email-ui hidden">
+          <div class="email-header">
+            <div class="avatar" id="avatar-letter">G</div>
+            <div class="email-info">
+              <p class="sender-name" id="ui-sender-name"></p>
+              <p class="sender-email" id="ui-sender-email"></p>
+              <p class="sender-email" style="font-size: 0.75rem;">Para: <span id="ui-recipient"></span></p>
             </div>
-            <div class="stat-card">
-                <h3>⏱️ Tiempo de Reacción (seg)</h3>
-                <canvas id="reactionTimeChart"></canvas>
-            </div>
+          </div>
+          <div class="email-subject" id="ui-subject"></div>
+          <div class="email-body" id="ui-body"></div>
         </div>
-      </div>
+
+        <div id="ui-sms" class="sms-ui hidden">
+          <div class="sms-header">
+            <div class="sms-avatar">👤</div>
+            <div class="sms-sender" id="sms-sender-name"></div>
+            <div class="sms-number" id="sms-sender-number"></div>
+          </div>
+          <div class="sms-body-container">
+            <div class="sms-bubble" id="sms-body"></div>
+          </div>
+        </div>
+
+        <div id="action-buttons" class="actions">
+          <button class="btn btn-phishing" id="btn-is-phishing">Es Phishing</button>
+          <button class="btn btn-safe" id="btn-is-safe">Es Seguro</button>
+        </div>
+
+        <div id="feedback-container" class="feedback-box hidden">
+          <h3 id="feedback-title"></h3>
+          <p id="feedback-desc"></p>
+          <ul id="feedback-points"></ul>
+          <button class="btn btn-primary" id="btn-next" style="margin-top: 1rem;">Siguiente Escenario</button>
+        </div>
+      </section>
+
+      <section id="dashboard-section" class="hidden" style="margin-top: 2rem;">
+        
+        <div id="individual-results" class="dash-card" style="margin-bottom: 2rem; border-color: var(--accent);">
+          <h2 style="border:none; margin:0; padding:0; text-align:center;">Tu Resultado: <span id="ind-score-value" style="color:var(--accent);"></span></h2>
+          <p style="text-align:center; margin:0; opacity:0.8;">Tiempo promedio de análisis: <span id="ind-time-value"></span>s por escenario.</p>
+        </div>
+
+        <h2>🏆 Ranking de Resiliencia</h2>
+        <div class="table-container">
+          <table>
+            <thead><tr><th>Rango</th><th>Participante</th><th>Puntaje</th><th>Eficiencia</th><th>Tiempo Prom.</th></tr></thead>
+            <tbody id="ranking-body"><tr><td colspan="5" style="text-align:center;">Cargando datos en tiempo real...</td></tr></tbody>
+          </table>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="dash-card">
+            <h3>📉 Escenarios más Fallados</h3>
+            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Identificación de los vectores con mayor tasa de éxito.</p>
+            <canvas id="failuresChart"></canvas>
+          </div>
+          <div class="dash-card">
+            <h3>⏱️ Tiempo de Reacción (seg)</h3>
+            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Análisis de duda: Escenarios que requirieron mayor tiempo.</p>
+            <canvas id="timeChart"></canvas>
+          </div>
+        </div>
+      </section>
 
     </main>
     <Footer />
 
-    <script>
-      // Configuración de Firebase (Datos de tu imagen)
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-      import { getFirestore, collection, addDoc, getDocs, query, where, updateDoc, doc, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { getDatabase, ref, push, set, onValue, update, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+      // 1. CONFIGURACIÓN DE FIREBASE
       const firebaseConfig = {
-        apiKey: "AIzaSyAV4gRgxAYPggHmXwNAOr9f9iOUGTiRbU",
+        apiKey: "AIzaSyAV4gRgxAYpgGmHmxwNAOr9f9iOUGtIrBU",
         authDomain: "phishing-quiz-31717.firebaseapp.com",
         databaseURL: "https://phishing-quiz-31717-default-rtdb.firebaseio.com",
         projectId: "phishing-quiz-31717",
@@ -163,185 +182,253 @@ import Footer from "../components/Footer.astro";
         messagingSenderId: "816745611137",
         appId: "1:816745611137:web:c87b3dc737cd544ca37280"
       };
-
       const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
+      const db = getDatabase(app);
 
-      // --- Lógica del Quiz ---
-      let currentStep = 0;
-      let score = 0;
-      let alias = "";
-      let reactionTimes = [];
-      let startTime;
-      let interval;
-      let failedScenarios = new Array(10).fill(0); // Para analítica local antes de subir
+      // Función Helper para los enlaces inspeccionables
+      window.inspectLink = function(realUrl) { alert("Has inspeccionado el enlace.\nURL Real de destino:\n\n" + realUrl); return false; }
 
-      // MOCK DE ESCENARIOS (Sustituye con tus 10 escenarios reales)
-      const scenarios = [
-        { title: "Sms de Rappi", desc: "¿El enlace 'rappi.app.link' es legítimo?", img: "/assets/images/posts/sms-rappi.png", correct: 0, options: ["Legítimo", "Phishing / Smishing"] },
-        // ... agrega los otros 9 aquí
+      // 2. BASE DE DATOS DE ESCENARIOS (Mezcla de Email y SMS)
+      const allScenarios = [
+        {
+          id: 1, type: "email", senderName: "Equipo de Seguridad de Google", senderEmail: "no-reply@accounts.google.security-alerts.com",
+          subject: "Alerta de seguridad crítica",
+          body: "Hemos detectado un intento de inicio de sesión sospechoso en tu cuenta desde Moscú.\n\nPor favor asegura tu cuenta inmediatamente haciendo clic aquí:\n\n<a href='#' onclick='return inspectLink(\"http://myaccount.google.security-alerts.com/verify\")' class='phish-link' title='Inspeccionar Enlace'>Proteger mi cuenta</a>",
+          isPhishing: true, feedback: ["Subdominio engañoso: 'google.security-alerts.com' no es Google.", "Urgencia: Intenta crear pánico.", "La URL de destino es HTTP, no HTTPS."]
+        },
+        {
+          id: 2, type: "email", senderName: "Recursos Humanos", senderEmail: "hr@tuempresa.com",
+          subject: "IMPORTANTE: Política de Vacaciones",
+          body: "Hola a todos,\n\nHemos actualizado nuestra política de vacaciones. Por favor revisen la intranet corporativa o el documento adjunto.\n\nSaludos.",
+          isPhishing: false, feedback: ["Remitente legítimo interno.", "Tono informativo, no exige acciones con urgencia ni pide contraseñas."]
+        },
+        {
+          id: 3, type: "sms", senderName: "Rappi", senderEmail: "5544332211", // Usamos senderEmail como número de teléfono para SMS
+          subject: "",
+          body: "Rappi: Tienes 150 de descuento en Las Alitas, Papa Johns y mas. <a href='#' onclick='return inspectLink(\"https://rappi.promo-app.link/descuento150\")' class='phish-link' title='Inspeccionar'>https://rappi.app.link/5X2a</a> Aplican T&C",
+          isPhishing: true, feedback: ["Smishing (Phishing por SMS).", "El texto visible dice 'rappi.app.link', pero al inspeccionarlo te lleva a 'rappi.promo-app.link', un dominio falso.", "Busca aprovechar el deseo de una recompensa (descuento)."]
+        },
+        {
+          id: 4, type: "email", senderName: "Carlos Director (CEO)", senderEmail: "carlos.director.exec@gmail.com",
+          subject: "Urgente: Transferencia requerida",
+          body: "¿Estás en la oficina?\n\nNecesito que proceses una transferencia internacional a un nuevo proveedor hoy mismo. Respóndeme para darte los datos. No me llames, estoy en reunión.",
+          isPhishing: true, feedback: ["Fraude del CEO (BEC).", "Uso de correo personal (gmail) para temas financieros corporativos.", "Exige saltarse los procedimientos normales pidiendo que no se le contacte para verificar."]
+        },
+        {
+          id: 5, type: "email", senderName: "Google Drive", senderEmail: "drive-shares-noreply@google.com",
+          subject: "Proyecto_Final_V2.docx compartido",
+          body: "María te ha invitado a colaborar en el siguiente documento:\n\n<a href='#' onclick='return inspectLink(\"https://docs.google.com/document/d/1A2B3C4D5E/edit\")' class='phish-link' title='Inspeccionar'>Abrir en Docs</a>",
+          isPhishing: false, feedback: ["Dominio legítimo (@google.com).", "El enlace inspeccionado lleva a un recurso legítimo HTTPS de docs.google.com."]
+        },
+        {
+          id: 6, type: "email", senderName: "Administrador de TI", senderEmail: "admin@it-soporte-interno.com",
+          subject: "Actualización de seguridad",
+          body: "Debe instalar el siguiente parche en su equipo antes de las 17:00 hrs para evitar la desconexión de la red.\n\n<a href='#' onclick='return inspectLink(\"http://it-soporte-interno.com/Parche_v2.exe\")' class='phish-link' title='Inspeccionar'>Descargar Parche.exe</a>",
+          isPhishing: true, feedback: ["Amenaza implícita de desconexión.", "Descarga directa de un archivo ejecutable (.exe).", "Dominio externo genérico."]
+        },
+        {
+          id: 7, type: "sms", senderName: "Banamex", senderEmail: "22626",
+          subject: "",
+          body: "Banamex Alerta: Cargo retenido por $1,500 en Amazon. Responde CANCELAR o ingresa para verificar: <a href='#' onclick='return inspectLink(\"http://alertas-banamex-seguridad.com/login\")' class='phish-link' title='Inspeccionar'>https://banco.banamex.com/alertas</a>",
+          isPhishing: true, feedback: ["Falsa alerta de fraude bancario para generar pánico instantáneo.", "El link visible parece seguro, pero la redirección real es a una página HTTP falsa ('alertas-banamex-seguridad.com')."]
+        },
+        {
+          id: 8, type: "email", senderName: "LinkedIn", senderEmail: "messages-noreply@linkedin.com",
+          subject: "Nueva solicitud de conexión",
+          body: "Hola,\n\nRoberto ha solicitado unirse a tu red profesional.\n\n<a href='#' onclick='return inspectLink(\"https://www.linkedin.com/in/roberto182377\")' class='phish-link' title='Inspeccionar'>Ver perfil</a>",
+          isPhishing: false, feedback: ["Comportamiento esperado y dominio correcto.", "El enlace dirige de forma segura al perfil real dentro de LinkedIn."]
+        },
+        {
+          id: 9, type: "sms", senderName: "FedEx Info", senderEmail: "80090012",
+          subject: "",
+          body: "FedEx: Su paquete esta retenido en aduana por falta de pago. Pague cuota de $2.99 USD para liberar entrega en: <a href='#' onclick='return inspectLink(\"http://rastreo.fedex-delivery-updates.com/pay\")' class='phish-link' title='Inspeccionar'>fedex.com/tracking</a>",
+          isPhishing: true, feedback: ["Suplantación de marca de paquetería (muy común en SMS).", "Solicita un pago no esperado mediante un enlace fraudulento.", "La URL de destino no es oficial."]
+        },
+        {
+          id: 10, type: "email", senderName: "Microsoft 365", senderEmail: "no-reply@microsoft.com",
+          subject: "Contraseña expira en 24h",
+          body: "Tu contraseña corporativa expirará. Mantén tu contraseña actual haciendo clic en el siguiente enlace y confirmando tus datos:\n\n<a href='#' onclick='return inspectLink(\"https://portal.office365-login-secure.com/auth\")' class='phish-link' title='Inspeccionar'>Mantener contraseña</a>",
+          isPhishing: true, feedback: ["Ofrece 'mantener' la contraseña actual confirmando datos, lo cual es ilógico en políticas de seguridad reales.", "Dominio falso ('office365-login-secure.com')."]
+        }
       ];
 
-      const startBtn = document.getElementById('start-btn');
-      const regSection = document.getElementById('registration-section');
-      const quizSection = document.getElementById('quiz-section');
-      const dashboard = document.getElementById('dashboard');
+      // 3. ESTADO DE LA APP
+      let currentUser = "", userEmail = "";
+      let currentScenarios = [], currentIndex = 0;
+      let score = 0, timeData = [], questionStartTime = 0;
+      let scenarioTimes = [], failedScenariosLocal = [];
 
-      startBtn.addEventListener('click', () => {
-        alias = document.getElementById('user-alias').value.trim();
-        const consent = document.getElementById('consent').checked;
+      let chartFallos = null, chartTiempos = null;
 
-        if(!alias || !consent) return alert("Por favor ingresa un nombre y acepta los términos.");
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
 
-        regSection.style.display = 'none';
-        quizSection.style.display = 'block';
-        loadScenario();
+      // 4. LÓGICA DE INTERFAZ Y QUIZ
+      document.getElementById("btn-start").addEventListener("click", () => {
+        const nameInput = document.getElementById("username").value.trim();
+        const consent = document.getElementById("consent").checked;
+        if (!nameInput || !consent) return alert("Ingresa tu nombre y acepta el consentimiento.");
+
+        currentUser = nameInput;
+        userEmail = `${currentUser.toLowerCase().replace(/\s/g, '')}@gmail.com`;
+        
+        document.getElementById("intro-section").classList.add("hidden");
+        document.getElementById("dashboard-section").classList.add("hidden");
+        document.getElementById("quiz-section").classList.remove("hidden");
+        
+        currentScenarios = shuffleArray([...allScenarios]);
+        loadQuestion();
       });
 
-      function loadScenario() {
-        if(currentStep >= scenarios.length) return finishQuiz();
-        
-        startTime = Date.now();
-        const s = scenarios[currentStep];
-        document.getElementById('progress-text').innerText = `Escenario ${currentStep + 1} de ${scenarios.length}`;
-        document.getElementById('scenario-title').innerText = s.title;
-        document.getElementById('scenario-desc').innerText = s.desc;
-        document.getElementById('scenario-image').src = s.img;
-        
-        const container = document.getElementById('options-container');
-        container.innerHTML = '';
-        s.options.forEach((opt, i) => {
-            const btn = document.createElement('button');
-            btn.className = 'btn-primary';
-            btn.style.background = '#222';
-            btn.innerText = opt;
-            btn.onclick = () => handleAnswer(i);
-            container.appendChild(btn);
-        });
-      }
+      function loadQuestion() {
+        if (currentIndex >= currentScenarios.length) return finishQuiz();
 
-      function handleAnswer(index) {
-        const endTime = Date.now();
-        const timeTaken = (endTime - startTime) / 1000;
-        reactionTimes.push(timeTaken);
-
-        if(index === scenarios[currentStep].correct) {
-            score += 10;
+        const scenario = currentScenarios[currentIndex];
+        document.getElementById("progress-text").innerText = `${currentIndex + 1}/${currentScenarios.length}`;
+        
+        // Alternar UI Email vs SMS
+        if (scenario.type === "email") {
+          document.getElementById("ui-email").classList.remove("hidden");
+          document.getElementById("ui-sms").classList.add("hidden");
+          document.getElementById("avatar-letter").innerText = scenario.senderName.charAt(0).toUpperCase();
+          document.getElementById("ui-sender-name").innerText = scenario.senderName;
+          document.getElementById("ui-sender-email").innerText = `<${scenario.senderEmail}>`;
+          document.getElementById("ui-recipient").innerText = userEmail;
+          document.getElementById("ui-subject").innerText = scenario.subject;
+          document.getElementById("ui-body").innerHTML = scenario.body.replace(/\n/g, "<br>");
         } else {
-            failedScenarios[currentStep] = 1;
+          document.getElementById("ui-email").classList.add("hidden");
+          document.getElementById("ui-sms").classList.remove("hidden");
+          document.getElementById("sms-sender-name").innerText = scenario.senderName;
+          document.getElementById("sms-sender-number").innerText = scenario.senderEmail;
+          document.getElementById("sms-body").innerHTML = scenario.body;
         }
 
-        currentStep++;
-        loadScenario();
+        document.getElementById("feedback-container").classList.add("hidden");
+        document.getElementById("action-buttons").classList.remove("hidden");
+        questionStartTime = Date.now();
       }
 
-      async function finishQuiz() {
-        quizSection.innerHTML = `<h2 style="text-align:center">¡Quiz Terminado, ${alias}!</h2><p style="text-align:center">Tu puntuación: ${score}/100. Cargando estadísticas globales...</p>`;
-        await saveResult();
-        await renderDashboard();
-        dashboard.style.display = 'block';
+      function handleAnswer(userSaidPhishing) {
+        const timeTaken = (Date.now() - questionStartTime) / 1000;
+        const scenario = currentScenarios[currentIndex];
+        
+        timeData.push(timeTaken);
+        scenarioTimes.push({ id: scenario.id, time: timeTaken });
+
+        const isCorrect = userSaidPhishing === scenario.isPhishing;
+        if (isCorrect) score++;
+        else failedScenariosLocal.push(scenario.id);
+
+        // Feedback
+        document.getElementById("action-buttons").classList.add("hidden");
+        const fbContainer = document.getElementById("feedback-container");
+        fbContainer.classList.remove("hidden");
+        
+        const title = document.getElementById("feedback-title");
+        title.innerText = isCorrect ? "¡Correcto!" : "Incorrecto.";
+        title.style.color = isCorrect ? "var(--success)" : "var(--danger)";
+        document.getElementById("feedback-desc").innerText = scenario.isPhishing ? "Era un ataque de Phishing:" : "Era Legítimo y seguro:";
+        
+        const ul = document.getElementById("feedback-points");
+        ul.innerHTML = "";
+        scenario.feedback.forEach(point => {
+          const li = document.createElement("li"); li.innerText = point; ul.appendChild(li);
+        });
       }
 
-      // --- Lógica de Firebase (ÚNICO USUARIO) ---
-      async function saveResult() {
-        const avgTime = (reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length).toFixed(1);
-        const efficiency = score >= 70 ? "Seguro" : "Vulnerable";
+      document.getElementById("btn-is-phishing").addEventListener("click", () => handleAnswer(true));
+      document.getElementById("btn-is-safe").addEventListener("click", () => handleAnswer(false));
+      document.getElementById("btn-next").addEventListener("click", () => { currentIndex++; loadQuestion(); });
 
-        try {
-            // BUSCAR SI EL USUARIO YA EXISTE
-            const q = query(collection(db, "ranking"), where("alias", "==", alias));
-            const querySnapshot = await getDocs(q);
+      // 5. ENVÍO DE DATOS A FIREBASE
+      function finishQuiz() {
+        document.getElementById("quiz-section").classList.add("hidden");
+        document.getElementById("dashboard-section").classList.remove("hidden");
+        
+        const finalScore100 = (score / 10) * 100;
+        const avgTime = timeData.reduce((a, b) => a + b, 0) / timeData.length;
+        
+        document.getElementById("ind-score-value").innerText = `${finalScore100} / 100`;
+        document.getElementById("ind-time-value").innerText = avgTime.toFixed(1);
 
-            if (!querySnapshot.empty) {
-                // Si existe, actualizamos el documento existente
-                const userDoc = querySnapshot.docs[0];
-                const existingData = userDoc.data();
-                
-                // Solo actualizamos si el nuevo score es mejor o para refrescar estadísticas
-                await updateDoc(doc(db, "ranking", userDoc.id), {
-                    puntaje: score, // Puedes poner una lógica de: Math.max(score, existingData.puntaje)
-                    eficiencia: efficiency,
-                    tiempoPromedio: `${avgTime}s`,
-                    fallos: failedScenarios // Guardamos qué escenarios falló este usuario
-                });
-            } else {
-                // Si no existe, creamos uno nuevo
-                await addDoc(collection(db, "ranking"), {
-                    alias: alias,
-                    puntaje: score,
-                    eficiencia: efficiency,
-                    tiempoPromedio: `${avgTime}s`,
-                    fallos: failedScenarios,
-                    fecha: new Date()
-                });
-            }
-        } catch (e) {
-            console.error("Error al guardar:", e);
+        // Subir a Firebase
+        const updates = {};
+        const newUserId = push(ref(db, 'users')).key;
+        
+        updates[`users/${newUserId}`] = {
+          name: currentUser, score: finalScore100, time: Number(avgTime.toFixed(1)), timestamp: Date.now()
+        };
+
+        failedScenariosLocal.forEach(id => { updates[`stats/failures/E${id}`] = increment(1); });
+        scenarioTimes.forEach(st => {
+          updates[`stats/times/E${st.id}/totalTime`] = increment(st.time);
+          updates[`stats/times/E${st.id}/count`] = increment(1);
+        });
+
+        update(ref(db), updates);
+      }
+
+      // 6. ACTUALIZACIÓN DEL DASHBOARD EN TIEMPO REAL
+      onValue(ref(db, '/'), (snapshot) => {
+        const data = snapshot.val();
+        if (!data) return;
+
+        // Tabla de Ranking
+        if (data.users) {
+          const usersArr = Object.values(data.users).sort((a, b) => {
+            if (b.score !== a.score) return b.score - a.score;
+            return a.time - b.time;
+          });
+          
+          const tbody = document.getElementById("ranking-body");
+          tbody.innerHTML = "";
+          usersArr.forEach((u, index) => {
+            const tr = document.createElement("tr");
+            const efficiency = u.score >= 80 ? '<span class="badge seguro">Seguro</span>' : '<span class="badge vulnerable">Vulnerable</span>';
+            tr.innerHTML = `<td>#${index + 1}</td><td>${u.name}</td><td>${u.score} / 100</td><td>${efficiency}</td><td>${u.time}s</td>`;
+            tbody.appendChild(tr);
+          });
         }
-      }
 
-      async function renderDashboard() {
-        const q = query(collection(db, "ranking"), orderBy("puntaje", "desc"), limit(10));
-        const snap = await getDocs(q);
-        const tbody = document.getElementById('ranking-body');
-        tbody.innerHTML = '';
-
-        let globalFailures = new Array(10).fill(0);
-        let count = 1;
-
-        snap.forEach(doc => {
-            const d = doc.data();
-            // Lógica para tabla
-            tbody.innerHTML += `
-                <tr>
-                    <td>#${count++}</td>
-                    <td>${d.alias}</td>
-                    <td>${d.puntaje} / 100</td>
-                    <td class="${d.eficiencia === 'Seguro' ? 'status-safe' : 'status-vulnerable'}">${d.eficiencia}</td>
-                    <td>${d.tiempoPromedio}</td>
-                </tr>
-            `;
-
-            // Acumular fallos para la gráfica global
-            if(d.fallos) {
-                d.fallos.forEach((f, i) => { if(f === 1) globalFailures[i]++; });
-            }
+        // Preparar etiquetas E1 a E10
+        const labels = Array.from({length: 10}, (_, i) => `E${i+1}`);
+        
+        // Gráfica de Fallos
+        const failuresData = labels.map(label => (data.stats && data.stats.failures && data.stats.failures[label]) || 0);
+        if(chartFallos) chartFallos.destroy();
+        chartFallos = new Chart(document.getElementById('failuresChart'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{ label: 'Veces Fallado', data: failuresData, backgroundColor: '#ef4444' }]
+          },
+          options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1, color: '#888' } }, x: { ticks: { color: '#888' } } } }
         });
 
-        initCharts(globalFailures);
-      }
-
-      function initCharts(failData) {
-        // Gráfica de Barras (Escenarios fallados)
-        new Chart(document.getElementById('failedScenariosChart'), {
-            type: 'bar',
-            data: {
-                labels: ['E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'E10'],
-                datasets: [{
-                    label: 'Veces Fallado',
-                    data: failData,
-                    backgroundColor: '#ef4444'
-                }]
-            },
-            options: { plugins: { legend: { display: false } } }
+        // Gráfica de Tiempos
+        const timesData = labels.map(label => {
+          if(data.stats && data.stats.times && data.stats.times[label]) {
+            const node = data.stats.times[label];
+            return (node.totalTime / node.count).toFixed(1);
+          }
+          return 0;
         });
-
-        // Gráfica de Línea (Tiempos de reacción del usuario actual)
-        new Chart(document.getElementById('reactionTimeChart'), {
-            type: 'line',
-            data: {
-                labels: ['E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'E10'],
-                datasets: [{
-                    label: 'Segundos',
-                    data: reactionTimes,
-                    borderColor: '#2563eb',
-                    tension: 0.4,
-                    fill: true,
-                    backgroundColor: 'rgba(37, 99, 235, 0.1)'
-                }]
-            }
+        if(chartTiempos) chartTiempos.destroy();
+        chartTiempos = new Chart(document.getElementById('timeChart'), {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{ label: 'Tiempo Promedio (s)', data: timesData, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.2)', fill: true, tension: 0.4 }]
+          },
+          options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { color: '#888' } }, x: { ticks: { color: '#888' } } } }
         });
-      }
+      });
     </script>
   </body>
 </html>
