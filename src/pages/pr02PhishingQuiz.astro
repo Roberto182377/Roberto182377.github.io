@@ -96,19 +96,9 @@ import Footer from "../components/Footer.astro";
           </p>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;">
             <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
-              <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">⏱️</span>
-              <strong style="display: block; font-size: 0.9rem;">No te preocupes por hacer clic en los links (puedes hacerlo paracomprobar si es real o falso)</strong>
-              <span style="font-size: 0.8rem; opacity: 0.7;">Tiempo estimado</span>
-            </div>
-            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
-              <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">📊</span>
-              <strong style="display: block; font-size: 0.9rem;">Compruba tu resultados y tiempo de reacción</strong>
-              <span style="font-size: 0.8rem; opacity: 0.7;">Análisis de tu nivel de riesgo</span>
-            </div>
-            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
-              <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">🛡️</span>
-              <strong style="display: block; font-size: 0.9rem;">Entorno Seguro</strong>
-              <span style="font-size: 0.8rem; opacity: 0.7;">Sin captura de datos reales</span>
+              <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;"></span>
+              <strong style="display: block; font-size: 0.9rem;">Especificaciones antes de comenzar (puedes hacerlo paracomprobar si es real o falso)</strong>
+              <span style="font-size: 0.8rem; opacity: 0.7;">No te preocupes al dar click o inspeccionar algun link ninguno de estos contiene algo malicioso\nNo se compratira o usara información personal que brindes\nAcepta los terminos mencionados en la parte inferior antes de empezar este quiz</span>
             </div>
           </div>
           <div style="text-align: left; max-width: 500px; margin: 0 auto;">
@@ -116,7 +106,7 @@ import Footer from "../components/Footer.astro";
             <input type="text" id="username" placeholder="Ej. tester123" required />
             <label style="display: flex; gap: 0.5rem; align-items: start; font-size: 0.85rem; margin-bottom: 1.5rem;">
               <input type="checkbox" id="consent" required />
-              <span>Otorgo mi consentimiento informado para participar. [cite: 58] No se capturan credenciales reales. [cite: 59]</span>
+              <span>Otorgo mi consentimiento informado para participar. No se capturan ni hara uso de cualquier credencial real.</span>
             </label>
             <button class="btn btn-primary" id="btn-start" style="font-size: 1.1rem; padding: 1rem;">Comenzar Simulación</button>
           </div>
@@ -176,19 +166,19 @@ import Footer from "../components/Footer.astro";
         <div class="table-container">
           <table>
             <thead><tr><th>Rango</th><th>Participante</th><th>Puntaje</th><th>Eficiencia</th><th>Tiempo Prom.</th></tr></thead>
-            <tbody id="ranking-body"><tr><td colspan="5" style="text-align:center;">Cargando datos en tiempo real... [cite: 68]</td></tr></tbody>
+            <tbody id="ranking-body"><tr><td colspan="5" style="text-align:center;">Espera mientras os datos de la base de datos son cargados</td></tr></tbody>
           </table>
         </div>
 
         <div class="dashboard-grid">
           <div class="dash-card">
             <h3>Escenarios más Fallados</h3>
-            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Identificación de los vectores con mayor tasa de éxito. [cite: 69]</p>
+            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Identificación de los vectores con mayor tasa de éxito.</p>
             <canvas id="failuresChart"></canvas>
           </div>
           <div class="dash-card">
             <h3>Tiempo de Reacción (seg)</h3>
-            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Análisis de duda: Escenarios que requirieron mayor tiempo. [cite: 70]</p>
+            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:1rem;">Análisis de duda: Escenarios que requirieron mayor tiempo.</p>
             <canvas id="timeChart"></canvas>
           </div>
         </div>
