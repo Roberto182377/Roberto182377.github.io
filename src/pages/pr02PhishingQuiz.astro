@@ -283,7 +283,6 @@ import Footer from "../components/Footer.astro";
 
       document.getElementById("btn-start").addEventListener("click", () => {
         const nameInput = document.getElementById("username").value.trim();
-        const consent = document.getElementById("consent").checked;
         if (!nameInput) return alert("Ingresa tu nombre o alías");
 
         currentUser = nameInput;
