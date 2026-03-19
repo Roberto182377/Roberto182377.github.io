@@ -92,22 +92,18 @@ import Footer from "../components/Footer.astro";
         <h2>Phishing Quiz</h2>
         <div class="dash-card" style="max-width: 800px; margin: 0 auto; padding: 2.5rem; text-align: center;">
           <p style="margin-bottom: 2rem; opacity: 0.9; font-size: 1.1rem; line-height: 1.5;">
-            Pon a prueba tus habilidades para detectar correos y mensajes fraudulentos. Analiza 10 escenarios que te pondran a prueba y descubre tu nivel de conocimiento frente a ataques de ingeniería social.
+            Pon a prueba tu intuición en ciberseguridad. A continuación, te presentaremos 10 escenarios reales donde deberás identificar si se trata de una comunicación legítima o de un intento de fraude.
           </p>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;">
             <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
               <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;"></span>
-              <strong style="display: block; font-size: 0.9rem;">Especificaciones antes de comenzar (puedes hacerlo paracomprobar si es real o falso)</strong>
-              <span style="font-size: 0.8rem; opacity: 0.7;">No te preocupes al dar click o inspeccionar algun link ninguno de estos contiene algo malicioso\nNo se compratira o usara información personal que brindes\nAcepta los terminos mencionados en la parte inferior antes de empezar este quiz</span>
+              <strong style="display: block; font-size: 0.9rem;">Importante</strong>
+              <span style="font-size: 0.8rem; opacity: 0.7;">Al registrar tu alias y dar clic en comenzar, tu precisión y tiempo de respuesta se registrarán en nuestra base de datos en tiempo real. ¡Demuestra que tienes el mejor ojo y compite en la clasificación global!</span>
             </div>
           </div>
           <div style="text-align: left; max-width: 500px; margin: 0 auto;">
             <label for="username">Ingresa tu Alias / Nombre:</label>
             <input type="text" id="username" placeholder="Ej. tester123" required />
-            <label style="display: flex; gap: 0.5rem; align-items: start; font-size: 0.85rem; margin-bottom: 1.5rem;">
-              <input type="checkbox" id="consent" required />
-              <span>Otorgo mi consentimiento informado para participar. No se capturan ni hara uso de cualquier credencial real.</span>
-            </label>
             <button class="btn btn-primary" id="btn-start" style="font-size: 1.1rem; padding: 1rem;">Comenzar Simulación</button>
           </div>
         </div>
@@ -236,7 +232,7 @@ import Footer from "../components/Footer.astro";
         {
           id: 5, type: "email", senderName: "Software Team", senderEmail: "softwareteam@gmail.com",
           subject: "Presentación Proyecto",
-          body: "Hola te brindo el link con la presteacion que realizaremos mañana.\nEchale un vistazo, comprueba que todo este en orden:\n\nPor favor, revisa detalladamente que las especificaciones de la arquitectura cumplan con los puntos 4 al 7 del estándar IEEE-1012 para no tener problemas en la revisión de V&V.\n\n<div style='text-align: center; margin: 2rem 0;'>\n  <img src='/assets/images/projects/escenario05_2.png' style='width200px;' class='scenario-img img-clickable' onclick='return inspectLink(\"http://drive-google-secure-login.com/auth\")' alt='Google Drive Logo'>\n  <br>\n  <a href='#' onclick='return inspectLink(\"http://drive-google-secure-login.com/auth\")>Presentación Importante.pptx</a>\n</div>\n\nSaludos cordiales,\nEquipo de Desarrollo.",
+          body: "Hola te brindo el link con la presteacion que realizaremos mañana.\nEchale un vistazo, comprueba que todo este en orden:\n\nPor favor, revisa detalladamente que las especificaciones de la arquitectura cumplan con los puntos 4 al 7 del estándar IEEE-1012 para no tener problemas en la revisión de V&V.\n\n<div style='text-align: center; margin: 2rem 0;'>\n  <img src='/assets/images/projects/escenario05_2.png' style='width350px;' class='scenario-img img-clickable' onclick='return inspectLink(\"http://drive-google-secure-login.com/auth\")' alt='Google Drive Logo'>\n  <br>\n  <a href='#' onclick='return inspectLink(\"http://drive-google-secure-login.com/auth\")>Presentación Importante.pptx</a>\n</div>\n\nSaludos cordiales,\nEquipo de Desarrollo.",
           isPhishing: true, feedback: ["El remitente utiliza una cuenta genérica '@gmail.com' en lugar de un dominio oficial.", "Errores de redacción sospechosos ('presteacion', faltas de acentos).", "El enlace visualmente dice ser de Drive, pero redirige a un dominio fraudulento (http) de recolección de credenciales."]
         },
         {
@@ -252,10 +248,10 @@ import Footer from "../components/Footer.astro";
           isPhishing: true, feedback: ["Pánico instantáneo por cargo no reconocido.", "Redirección real a página HTTP falsa."]
         },
         {
-          id: 8, type: "email", senderName: "Soporte Microsoft", senderEmail: "alertas@rnicrosoft.com",
-          subject: "Producto desactivado",
-          body: "<img src='/assets/images/projects/escenario08_1.png' style='width:150px; margin-bottom:1.5rem;' class='scenario-img' alt='365 Logo'>\n\n<h2 style='color:#2b579a; font-size:1.8rem; border:none; margin-bottom:1rem; padding:0;'>Producto desactivado</h2>\n\nLo sentimos, un error ha sucedio con sus credenciales de Office 365 en su maquina, para continuar usando Word sin interrupción, elija una de las siguientes opciones para reactivarlo.\n\n<div style='margin: 2rem 0; border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; background: var(--card);'>\n  <div style='display: flex; gap: 1rem; margin-bottom: 0.8rem;'>\n    <button style='padding: 0.5rem 1rem; border: 1px solid #a6a6a6; background: #e1dfdd; cursor: not-allowed;'>Comprar</button>\n    <span style='align-self: center; color: #666;'>Deseo renovar o comprar Office.</span>\n  </div>\n  <div style='display: flex; gap: 1rem; margin-bottom: 0.8rem;'>\n    <button style='padding: 0.5rem 1rem; border: 1px solid #a6a6a6; background: white; cursor: not-allowed;'>Escribir clave</button>\n    <span style='align-self: center; color: #666;'>Tengo una clave de producto.</span>\n  </div>\n  <div style='display: flex; gap: 1rem;'>\n    <a href='#' onclick='return inspectLink(\"http://login.rnicrosoft-update-secure.com/\")' class='btn btn-primary' style='text-decoration: none; padding: 0.5rem 1rem; font-weight: normal; border: 1px solid #a6a6a6; color: #333; background: white;'>Iniciar sesión</a>\n    <span style='align-self: center; color: #666;'>Agregue este equipo a una cuenta activa.</span>\n  </div>\n</div>",
-          isPhishing: true, feedback: ["Ataque de Typosquatting: El dominio de correo es 'rnicrosoft.com' (con 'r' y 'n') en lugar de 'microsoft.com'.", "Genera un sentido de urgencia indicando que el producto ha sido desactivado.", "El botón de inicio de sesión dirige a un portal falso diseñado para robar credenciales de Office 365."]
+          id: 8, type: "email", senderName: "Soporte de Cuentas Microsoft", senderEmail: "seguridad@rnicrosoft-soporte.com",
+          subject: "Acción requerida: Su suscripción a Office 365 será suspendida",
+          body: "<div style='max-width: 500px; margin: 0 auto; font-family: \"Segoe UI\", Tahoma, Geneva, Verdana, sans-serif; color: #333; border: 1px solid #e1dfdd; border-top: 5px solid #d83b01; padding: 20px; background-color: #ffffff; text-align: left;'>\n  <img src='' style='width: 120px; margin-bottom: 20px;' class='scenario-img' alt='Microsoft Logo'>\n  <h2 style='font-size: 1.4rem; color: #d83b01; margin-top: 0; border: none; padding: 0;'>Aviso de suspensión de cuenta</h2>\n  <p style='font-size: 1rem; line-height: 1.5;'>Estimado usuario,</p>\n  <p style='font-size: 1rem; line-height: 1.5;'>Hemos detectado un problema con las credenciales asociadas a su cuenta de Microsoft Office 365. Si no actualiza su información pronto, perderá el acceso a servicios como Word, Excel y su almacenamiento en la nube.</p>\n  <div style='background-color: #f3f2f1; padding: 15px; margin: 20px 0; border-left: 4px solid #0078d4;'>\n    <p style='margin: 0; font-size: 0.95rem;'><strong>Estado:</strong> <span style='color: #d83b01;'>Pendiente de verificación</span></p>\n    <p style='margin: 5px 0 0 0; font-size: 0.95rem;'><strong>Fecha límite:</strong> Hoy</p>\n  </div>\n  <p style='font-size: 1rem; line-height: 1.5;'>Por favor, inicie sesión en nuestro portal seguro para validar sus credenciales y evitar la interrupción del servicio.</p>\n  <div style='text-align: center; margin: 30px 0 10px 0;'>\n    <a href='#' onclick='return inspectLink(\"http://login.rnicrosoft-update-secure.com/auth\")' class='phish-link' style='background-color: #0078d4; color: #ffffff; text-decoration: none; padding: 12px 24px; font-weight: bold; border-radius: 4px; display: inline-block; font-size: 1rem;'>Validar credenciales ahora</a>\n  </div>\n  <hr style='border: none; border-top: 1px solid #e1dfdd; margin: 20px 0;'>\n  <p style='font-size: 0.8rem; color: #605e5c; margin: 0;'>Este es un mensaje automático. Por favor no responda a este correo. &copy; 2026 Corporación rnicrosoft.</p>\n</div>",
+          isPhishing: true, feedback: ["Ataque de Typosquatting: El dominio de correo y del enlace es 'rnicrosoft-soporte.com' (con 'r' y 'n') en lugar de 'microsoft.com'.", "Genera un sentido de urgencia extremo indicando que la suscripción será suspendida 'Hoy'.", "Uso de colores de alerta (rojo/naranja) típicos de ingeniería social para generar pánico antes de que la víctima lea detenidamente."]
         },
         {
           id: 9, type: "sms", senderName: "TELCEL", senderEmail: "TELCEL",
