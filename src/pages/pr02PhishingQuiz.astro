@@ -284,7 +284,7 @@ import Footer from "../components/Footer.astro";
       document.getElementById("btn-start").addEventListener("click", () => {
         const nameInput = document.getElementById("username").value.trim();
         const consent = document.getElementById("consent").checked;
-        if (!nameInput || !consent) return alert("Ingresa tu nombre y acepta el consentimiento.");
+        if (!nameInput) return alert("Ingresa tu nombre o alías");
 
         currentUser = nameInput;
         userEmail = `${currentUser.toLowerCase().replace(/\s/g, '')}@gmail.com`;
