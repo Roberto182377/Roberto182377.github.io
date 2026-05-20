@@ -2,14 +2,13 @@
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 
-// Definición de tus 7 certificados con sus respectivas insignias y PDFs
 const certificaciones = [
   {
     id: "cert-1",
     titulo: "Introducción a la Ciberseguridad",
     resena: "Este certificado marcó un punto de inflexión en mi formación y fue mi primer contacto formal con este complejo ecosistema. A nivel técnico, logré interiorizar los pilares fundamentales: la tríada CIA y las bases de la gestión de riesgos. El aprendizaje más revelador fue comprender que las vulnerabilidades críticas no siempre provienen de fallas de software, sino del factor humano a través de la ingeniería social.",
     pdfUrl: "/docs/cert-ciberseguridad.pdf",
-    badgeUrl: "https://placehold.co/60x60/151515/ededed?text=🔒", // Reemplaza con la ruta de tu insignia/badge
+    badgeUrl: "https://placehold.co/60x60/151515/ededed?text=🔒",
   },
   {
     id: "cert-2",
@@ -37,7 +36,7 @@ const certificaciones = [
     titulo: "Hacker Ético",
     resena: "Fase práctica enfocada en metodologías de penetration testing de caja negra y caja blanca. Identificación, explotación y posterior documentación responsable de vulnerabilidades críticas en entornos controlados.",
     pdfUrl: "/docs/cert-hacking.pdf",
-    badgeUrl: "/assets/images/about/badgeC5.png",
+    badgeUrl: "https://placehold.co/60x60/151515/ededed?text=🥷",
   },
   {
     id: "cert-6",
@@ -62,7 +61,6 @@ const certificaciones = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Certificaciones | Portafolio</title>
     <style>
-      /* Variables Base de Soporte (Mecanismo de Modo Claro/Oscuro) */
       :root {
         --bg-main: #ffffff;
         --bg-card: #f8f9fa;
@@ -75,7 +73,6 @@ const certificaciones = [
         --dot-color: rgba(0, 0, 0, 0.08);
       }
 
-      /* Inversión automática al detectar clases oscuras comunes en portafolios Astro */
       :global(html.dark), :global(html[data-theme="dark"]), :global(body.dark) {
         --bg-main: #0a0a0a;
         --bg-card: #141414;
@@ -98,7 +95,7 @@ const certificaciones = [
         background-size: 24px 41.57px;
         background-position: 0 0, 12px 20.78px;
         background-attachment: fixed;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        transition: background-color 0.4s ease, color 0.4s ease;
       }
 
       .container {
@@ -107,19 +104,16 @@ const certificaciones = [
         padding: 5rem 1.5rem;
       }
 
-      header { 
-        margin-bottom: 3.5rem; 
-      }
+      header { margin-bottom: 3.5rem; }
       
       h1 { 
         font-size: 2.6rem; 
-        font-weight: 800; /* Tipografía bien marcada */
+        font-weight: 800; 
         letter-spacing: -0.03em; 
         color: var(--text-title);
         margin: 0; 
       }
 
-      /* Distribución en Grid Lateral */
       .cert-layout {
         display: grid;
         grid-template-columns: 340px 1fr;
@@ -127,14 +121,14 @@ const certificaciones = [
         align-items: start;
       }
 
-      /* PANEL IZQUIERDO: Estilo Lista Compacta Grupal */
+      /* PANEL IZQUIERDO */
       .cert-sidebar {
         display: flex;
         flex-direction: column;
         background: var(--bg-card);
         border: 1px solid var(--border-ui);
         border-radius: 12px;
-        overflow: hidden; /* Mantiene la cohesión de la lista */
+        overflow: hidden; 
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
       }
 
@@ -145,14 +139,14 @@ const certificaciones = [
         color: var(--text-body);
         padding: 1.1rem 1.4rem;
         text-align: left;
-        font-weight: 600; /* Texto firme y marcado */
+        font-weight: 600; 
         font-size: 0.95rem;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición más fluida */
         position: relative;
+        z-index: 1;
       }
 
-      /* Eliminar el borde inferior del último elemento de la lista */
       .cert-btn:last-child {
         border-bottom: none;
       }
@@ -160,26 +154,34 @@ const certificaciones = [
       .cert-btn:hover {
         background-color: var(--bg-hover);
         color: var(--text-title);
-        padding-left: 1.6rem; /* Sutil feedback de desplazamiento */
+        padding-left: 1.8rem; /* Desplazamiento más notorio al hover */
       }
 
       .cert-btn.active {
         background-color: var(--bg-hover);
         color: var(--accent-color);
+        padding-left: 1.8rem;
       }
 
-      /* Indicador lateral minimalista para el botón activo */
-      .cert-btn.active::before {
+      /* Indicador dinámico que "crece" */
+      .cert-btn::before {
         content: '';
         position: absolute;
         left: 0;
-        top: 0;
-        bottom: 0;
+        top: 50%;
+        transform: translateY(-50%);
         width: 4px;
+        height: 0%; /* Inicia invisible */
         background-color: var(--accent-color);
+        transition: height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efecto rebote suave */
+        border-radius: 0 4px 4px 0;
       }
 
-      /* PANEL DERECHO: Visualizador de Contenido */
+      .cert-btn.active::before {
+        height: 100%; /* Crece a tamaño completo al estar activo */
+      }
+
+      /* PANEL DERECHO */
       .cert-viewer {
         background: var(--bg-card);
         border: 1px solid var(--border-ui);
@@ -187,6 +189,7 @@ const certificaciones = [
         padding: 2.5rem;
         min-height: 380px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
       }
 
       .cert-content {
@@ -197,18 +200,56 @@ const certificaciones = [
         display: block;
       }
 
-      /* Animación coordinada de entrada */
-      .cert-content.active .viewer-header,
+      /* =========================================
+         ANIMACIONES EN CASCADA (STAGGERED)
+         ========================================= */
+      
+      /* 1. La insignia salta (Pop In) */
+      .cert-content.active .cert-badge-img {
+        animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        opacity: 0;
+      }
+
+      /* 2. El título entra desde la izquierda */
+      .cert-content.active h2 {
+        animation: slideInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+        opacity: 0;
+      }
+
+      /* 3. El botón PDF entra desde la derecha */
+      .cert-content.active .btn-pdf {
+        animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+        opacity: 0;
+      }
+
+      /* 4. La reseña sube suavemente al final */
       .cert-content.active .resena-box {
-        animation: fadeInReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
+        opacity: 0;
       }
 
-      @keyframes fadeInReveal {
-        from { opacity: 0; transform: translateY(8px); }
-        to { opacity: 1; transform: translateY(0); }
+      /* Keyframes para las físicas */
+      @keyframes popIn {
+        0% { opacity: 0; transform: scale(0.5) translateY(10px); }
+        100% { opacity: 1; transform: scale(1) translateY(0); }
       }
 
-      /* Cabecera Interna: Título integrado con la Insignia/Badge */
+      @keyframes slideInLeft {
+        0% { opacity: 0; transform: translateX(-20px); }
+        100% { opacity: 1; transform: translateX(0); }
+      }
+
+      @keyframes slideInRight {
+        0% { opacity: 0; transform: translateX(20px); }
+        100% { opacity: 1; transform: translateX(0); }
+      }
+
+      @keyframes slideUpFade {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Elementos internos del visualizador */
       .viewer-header {
         display: flex;
         justify-content: space-between;
@@ -226,10 +267,9 @@ const certificaciones = [
         flex: 1;
       }
 
-      /* Dimensiones controladas para la insignia */
       .cert-badge-img {
-        width: 110pxpx;
-        height: 110px;
+        width: 52px;
+        height: 52px;
         object-fit: contain;
         flex-shrink: 0;
         filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
@@ -238,13 +278,12 @@ const certificaciones = [
       .viewer-header h2 {
         margin: 0;
         font-size: 1.6rem;
-        font-weight: 700; /* Marcado fuerte */
+        font-weight: 700;
         letter-spacing: -0.02em;
         color: var(--text-title);
         line-height: 1.3;
       }
 
-      /* Botón de descarga de PDF */
       .btn-pdf {
         background: #dc2626;
         color: #ffffff;
@@ -256,16 +295,20 @@ const certificaciones = [
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        transition: background 0.2s ease, transform 0.2s ease;
+        transition: background 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
         flex-shrink: 0;
       }
 
       .btn-pdf:hover {
         background: #b91c1c;
-        transform: translateY(-1px);
+        transform: translateY(-3px) scale(1.02); /* Se eleva y crece un poco */
+        box-shadow: 0 6px 12px rgba(220, 38, 38, 0.2);
+      }
+      
+      .btn-pdf:active {
+        transform: translateY(0) scale(0.98); /* Sensación de ser presionado */
       }
 
-      /* Bloque de Reseña */
       .resena-box {
         line-height: 1.7;
         color: var(--text-body);
@@ -276,7 +319,6 @@ const certificaciones = [
         margin: 0;
       }
 
-      /* Responsividad para pantallas móviles */
       @media (max-width: 850px) {
         .cert-layout { 
           grid-template-columns: 1fr; 
@@ -355,7 +397,9 @@ const certificaciones = [
           const targetContent = document.getElementById(targetId);
           
           if (targetContent) {
-            void targetContent.offsetWidth; // Fuerza el reinicio de la animación limpia
+            // Este void fuerza al navegador a recalcular el DOM, 
+            // permitiendo que las animaciones de CSS (popIn, slideIn) vuelvan a ejecutarse desde cero.
+            void targetContent.offsetWidth; 
             targetContent.classList.add('active');
           }
         });
