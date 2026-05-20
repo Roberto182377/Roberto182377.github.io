@@ -8,49 +8,49 @@ const certificaciones = [
     titulo: "Introducción a la Ciberseguridad",
     resena: "Este certificado marcó un punto de inflexión en mi formación y fue mi primer contacto formal con este complejo ecosistema. A nivel técnico, logré interiorizar los pilares fundamentales: la tríada CIA y las bases de la gestión de riesgos. El aprendizaje más revelador fue comprender que las vulnerabilidades críticas no siempre provienen de fallas de software, sino del factor humano a través de la ingeniería social.",
     pdfUrl: "/docs/cert-ciberseguridad.pdf",
-    badgeUrl: "https://placehold.co/60x60/151515/ededed?text=🔒",
+    badgeUrl: "/assets/images/about/badgeC1.png",
   },
   {
     id: "cert-2",
-    titulo: "Administración de amenazas cibernéticas",
+    titulo: "Conceptos básicos de redes",
     resena: "Esta certificación representó la transición de una visión operativa a una postura de defensa estratégica y táctica. El aprendizaje fundamental fue la implementación de modelos de inteligencia como el Diamond Model of Intrusion Analysis y el análisis de cadenas de exterminio para desarticular ataques complejos. Me capacitó para gestionar el ciclo de vida de un incidente bajo estándares internacionales.",
     pdfUrl: "/docs/cert-amenazas.pdf",
-    badgeUrl: "https://placehold.co/60x60/151515/ededed?text=🛡️",
+    badgeUrl: "/assets/images/about/badgeC2.png",
   },
   {
     id: "cert-3",
-    titulo: "Seguridad en Terminales",
+    titulo: "Dispositivos de red y Configuración inicial",
     resena: "Análisis técnico centrado en el endurecimiento de endpoints y sistemas operativos. Implementación avanzada de políticas de control de acceso, monitoreo de integridad de archivos y mitigación de malware en tiempo real.",
     pdfUrl: "/docs/cert-endpoints.pdf",
-    badgeUrl: "https://placehold.co/60x60/151515/ededed?text=💻",
+    badgeUrl: "/assets/images/about/badgeC3.png",
   },
   {
     id: "cert-4",
-    titulo: "Conceptos básicos de redes",
+    titulo: "Seguridad en Terminales",
     resena: "Comprensión profunda de la arquitectura de redes, protocolos TCP/IP, enrutamiento y conmutación. Base indispensable para mapear flujos de tráfico e identificar posibles puntos de interceptación o exfiltración de datos.",
     pdfUrl: "/docs/cert-redes.pdf",
-    badgeUrl: "https://placehold.co/60x60/151515/ededed?text=🌐",
+    badgeUrl: "/assets/images/about/badgeC4.png",
   },
   {
     id: "cert-5",
-    titulo: "Hacker Ético",
+    titulo: "Administración de amenazas cibernéticas",
     resena: "Fase práctica enfocada en metodologías de penetration testing de caja negra y caja blanca. Identificación, explotación y posterior documentación responsable de vulnerabilidades críticas en entornos controlados.",
     pdfUrl: "/docs/cert-hacking.pdf",
-    badgeUrl: "https://placehold.co/60x60/151515/ededed?text=🥷",
+    badgeUrl: "/assets/images/about/badgeC5.png",
   },
   {
     id: "cert-6",
-    titulo: "Carrera Profesional de Analista Jr",
+    titulo: "Carrera Profesional de Analista Jr en Ciberseguridad",
     resena: "Integración de competencias analíticas para el trabajo dentro de un SOC (Security Operations Center). Clasificación de alertas, correlación de eventos en SIEM y ejecución de playbooks defensivos.",
     pdfUrl: "/docs/cert-analista.pdf",
-    badgeUrl: "https://placehold.co/60x60/151515/ededed?text=📈",
+    badgeUrl: "/assets/images/about/badgeC6.png",
   },
   {
     id: "cert-7",
-    titulo: "Dispositivos y Defensa Perimetral",
+    titulo: "Hacking Ético",
     resena: "Configuración y auditoría de firewalls de próxima generación (NGFW), sistemas de prevención de intrusos (IDS/IPS) y pasarelas seguras para blindar el perímetro corporativo.",
     pdfUrl: "/docs/cert-dispositivos.pdf",
-    badgeUrl: "https://placehold.co/60x60/151515/ededed?text=🧱",
+    badgeUrl: "/assets/images/about/badgeC7.png",
   }
 ];
 ---
@@ -61,19 +61,8 @@ const certificaciones = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Certificaciones | Portafolio</title>
     <style>
+      /* Variables Base - Ahora por defecto es Modo Oscuro */
       :root {
-        --bg-main: #ffffff;
-        --bg-card: #f8f9fa;
-        --bg-hover: #f1f3f5;
-        --text-title: #111111;
-        --text-body: #333333;
-        --text-muted: #6c757d;
-        --border-ui: #e9ecef;
-        --accent-color: #2563eb;
-        --dot-color: rgba(0, 0, 0, 0.08);
-      }
-
-      :global(html.dark), :global(html[data-theme="dark"]), :global(body.dark) {
         --bg-main: #0a0a0a;
         --bg-card: #141414;
         --bg-hover: #1e1e1e;
@@ -81,7 +70,20 @@ const certificaciones = [
         --text-body: #d1d1d1;
         --text-muted: #888888;
         --border-ui: rgba(255, 255, 255, 0.08);
+        --accent-color: #2563eb;
         --dot-color: rgba(255, 255, 255, 0.15);
+      }
+
+      /* Cambia a Modo Claro si el portafolio activa una clase o atributo "light" */
+      :global(html.light), :global(html[data-theme="light"]), :global(body.light) {
+        --bg-main: #ffffff;
+        --bg-card: #f8f9fa;
+        --bg-hover: #f1f3f5;
+        --text-title: #111111;
+        --text-body: #333333;
+        --text-muted: #6c757d;
+        --border-ui: #e9ecef;
+        --dot-color: rgba(0, 0, 0, 0.08);
       }
 
       body {
@@ -285,7 +287,7 @@ const certificaciones = [
       }
 
       .btn-pdf {
-        background: #dc2626;
+        background: #950000;
         color: #ffffff;
         text-decoration: none;
         padding: 0.6rem 1.1rem;
