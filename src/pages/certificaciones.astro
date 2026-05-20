@@ -6,51 +6,58 @@ const certificaciones = [
   {
     id: "cert-1",
     titulo: "🔒 Introducción a la Ciberseguridad",
-    resena: "Este certificado marcó un punto de inflexión en mi formación y fue mi primer contacto formal con este complejo ecosistema. A nivel técnico, logré interiorizar los pilares fundamentales: la tríada CIA y las bases de la gestión de riesgos. El aprendizaje más revelador fue comprender que las vulnerabilidades críticas no siempre provienen de fallas de software, sino del factor humano a través de la ingeniería social.",
+    resena: "si",
     pdfUrl: "/assets/certificaciones/182377_introduccion a la ciberseguridad.pdf",
     badgeUrl: "/assets/images/about/badgeC1.png",
+    iconUrl: "/assets/images/about/add moderator.png",
   },
   {
     id: "cert-2",
     titulo: "🛜 Conceptos básicos de redes",
-    resena: "Esta certificación representó la transición de una visión operativa a una postura de defensa estratégica y táctica. El aprendizaje fundamental fue la implementación de modelos de inteligencia como el Diamond Model of Intrusion Analysis y el análisis de cadenas de exterminio para desarticular ataques complejos. Me capacitó para gestionar el ciclo de vida de un incidente bajo estándares internacionales.",
+    resena: "no",
     pdfUrl: "/assets/certificaciones/182377_conceptos basicos de redes.pdf",
     badgeUrl: "/assets/images/about/badgeC2.png",
+    iconUrl: "/assets/images/about/add moderator.png",
   },
   {
     id: "cert-3",
     titulo: "Dispositivos de red y Configuración inicial",
-    resena: "Análisis técnico centrado en el endurecimiento de endpoints y sistemas operativos. Implementación avanzada de políticas de control de acceso, monitoreo de integridad de archivos y mitigación de malware en tiempo real.",
+    resena: " real.",
     pdfUrl: "/assets/certificaciones/182377_dispositivos de red y conf ini.pdf",
     badgeUrl: "/assets/images/about/badgeC3.png",
+    iconUrl: "/assets/images/about/add moderator.png",
   },
   {
     id: "cert-4",
     titulo: "Seguridad en Terminales",
-    resena: "Comprensión profunda de la arquitectura de redes, protocolos TCP/IP, enrutamiento y conmutación. Base indispensable para mapear flujos de tráfico e identificar posibles puntos de interceptación o exfiltración de datos.",
+    resena: "e interceptación o exfiltración de datos.",
     pdfUrl: "/assets/certificaciones/182377_seguridad de terminales.pdf",
     badgeUrl: "/assets/images/about/badgeC4.png",
+    iconUrl: "/assets/images/about/add moderator.png",
   },
   {
     id: "cert-5",
     titulo: "Administración de amenazas cibernéticas",
-    resena: "Fase práctica enfocada en metodologías de penetration testing de caja negra y caja blanca. Identificación, explotación y posterior documentación responsable de vulnerabilidades críticas en entornos controlados.",
+    resena: "ontrolados.",
     pdfUrl: "/assets/certificaciones/182377_administrador de amenazas.pdf",
     badgeUrl: "/assets/images/about/badgeC5.png",
+    iconUrl: "/assets/images/about/add moderator.png",
   },
   {
     id: "cert-6",
     titulo: "Carrera Profesional de Analista Jr en Ciberseguridad",
-    resena: "Integración de competencias analíticas para el trabajo dentro de un SOC (Security Operations Center). Clasificación de alertas, correlación de eventos en SIEM y ejecución de playbooks defensivos.",
+    resena: "deos.",
     pdfUrl: "/assets/certificaciones/182377_analista jr.pdf",
     badgeUrl: "/assets/images/about/badgeC6.png",
+    iconUrl: "/assets/images/about/add moderator.png",
   },
   {
     id: "cert-7",
     titulo: "Hacking Ético",
-    resena: "Configuración y auditoría de firewalls de próxima generación (NGFW), sistemas de prevención de intrusos (IDS/IPS) y pasarelas seguras para blindar el perímetro corporativo.",
+    resena: "io.",
     pdfUrl: "/assets/certificaciones/182377_hacking Etico.pdf",
     badgeUrl: "/assets/images/about/badgeC7.png",
+    iconUrl: "/assets/images/about/add moderator.png",
   }
 ];
 ---
@@ -147,6 +154,23 @@ const certificaciones = [
         transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición más fluida */
         position: relative;
         z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem; /* Espaciado entre el logo y el texto */
+      }
+
+      /* NUEVA CLASE: Controla las dimensiones del logo en la lista */
+      .cert-btn-icon {
+        width: 24px;         /* Tamaño compacto ideal para la lista */
+        height: 24px;
+        object-fit: contain; /* Evita que el PNG se deforme */
+        flex-shrink: 0;      /* Evita que el logo se aplaste si el texto es largo */
+        transition: transform 0.2s ease;
+      }
+
+      /* Opcional: Un pequeño efecto de escala en el logo al pasar el cursor */
+      .cert-btn:hover .cert-btn-icon {
+        transform: scale(1.1);
       }
 
       .cert-btn:last-child {
@@ -353,7 +377,8 @@ const certificaciones = [
               class={`cert-btn ${index === 0 ? 'active' : ''}`} 
               data-target={cert.id}
             >
-              {cert.titulo}
+              <img src={cert.iconUrl} alt="" class="cert-btn-icon" loading="lazy" />
+              <span>{cert.titulo}</span>
             </button>
           ))}
         </aside>
