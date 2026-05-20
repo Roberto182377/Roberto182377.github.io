@@ -9,8 +9,7 @@ const certificaciones = [
     titulo: "Introducción a la Ciberseguridad",
     resena: "Este certificado marca el inicio de mi trayectoria en seguridad informática. Aprendí conceptos fundamentales sobre la tríada de la CIA (Confidencialidad, Integridad y Disponibilidad) y la importancia del factor humano en la seguridad.",
     pdfUrl: "/docs/cert-ciberseguridad.pdf",
-    imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+1", // Reemplaza con tus imágenes
-    activo: true
+    imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+1",
   },
   {
     id: "cert-2",
@@ -18,7 +17,6 @@ const certificaciones = [
     resena: "En este módulo profundicé en el ciclo de vida de las amenazas, desde la identificación hasta la mitigación. Se cubrieron temas de análisis de logs y detección de anomalías en tráfico de red.",
     pdfUrl: "/docs/cert-amenazas.pdf",
     imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+2",
-    activo: false
   },
   {
     id: "cert-3",
@@ -26,40 +24,34 @@ const certificaciones = [
     resena: "Análisis técnico de endurecimiento (hardening) de sistemas operativos. Implementación de políticas de grupo, EDR y control de privilegios mínimos para usuarios finales.",
     pdfUrl: "/docs/cert-endpoints.pdf",
     imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+3",
-    activo: false
   },
-  // Agrega los otros 4 certificados aquí siguiendo la misma estructura...
   {
     id: "cert-4",
     titulo: "Certificado de Redes Seguras",
-    resena: "Configuración de firewalls y segmentación de redes mediante VLANs.",
+    resena: "Configuración de firewalls y segmentación de redes mediante VLANs. Creación de reglas estrictas para aislar tráfico y prevenir ataques laterales.",
     pdfUrl: "/docs/cert-redes.pdf",
     imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+4",
-    activo: false
   },
   {
     id: "cert-5",
     titulo: "Hacker Ético Junior",
-    resena: "Prácticas controladas de pentesting y explotación de vulnerabilidades conocidas.",
+    resena: "Prácticas controladas de pentesting y explotación de vulnerabilidades conocidas, documentando el alcance e impacto de cada vulnerabilidad encontrada.",
     pdfUrl: "/docs/cert-hacking.pdf",
     imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+5",
-    activo: false
   },
   {
     id: "cert-6",
     titulo: "Analista de Junior de SOC",
-    resena: "Gestión de incidentes y respuesta inmediata ante brechas de seguridad.",
+    resena: "Gestión de incidentes y respuesta inmediata ante brechas de seguridad. Implementación de playbooks y triage de alertas críticas.",
     pdfUrl: "/docs/cert-soc.pdf",
     imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+6",
-    activo: false
   },
   {
     id: "cert-7",
     titulo: "Defensa en la Nube",
-    resena: "Principios de seguridad en entornos AWS y Azure.",
+    resena: "Principios de seguridad en entornos distribuidos. Manejo de roles, identidades y permisos (IAM) para asegurar la arquitectura en la nube.",
     pdfUrl: "/docs/cert-cloud.pdf",
     imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+7",
-    activo: false
   }
 ];
 ---
@@ -101,7 +93,6 @@ const certificaciones = [
       header { text-align: center; margin-bottom: 3rem; }
       h1 { font-size: 2.5rem; letter-spacing: -1px; margin: 0; }
 
-      /* Layout Principal */
       .cert-layout {
         display: grid;
         grid-template-columns: 320px 1fr;
@@ -109,11 +100,13 @@ const certificaciones = [
         align-items: start;
       }
 
-      /* Panel Izquierdo: Botones */
+      /* PANEL IZQUIERDO: Animaciones en botones */
       .cert-sidebar {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        /* Padding derecho para que el botón tenga espacio al desplazarse */
+        padding-right: 15px; 
       }
 
       .cert-btn {
@@ -121,27 +114,33 @@ const certificaciones = [
         border: 1px solid var(--border);
         color: var(--text);
         padding: 1.2rem;
-        border-radius: 50px; /* Estilo ovalado de tu dibujo */
+        border-radius: 50px;
         cursor: pointer;
         text-align: left;
         font-weight: 500;
-        transition: all 0.3s ease;
         font-size: 0.95rem;
+        /* Transición suave y elástica */
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                    background-color 0.3s ease, 
+                    border-color 0.3s ease, 
+                    box-shadow 0.3s ease;
       }
 
       .cert-btn:hover {
         border-color: var(--accent);
         background: #1a1a1a;
+        transform: translateX(8px); /* Desplazamiento a la derecha al pasar el mouse */
       }
 
       .cert-btn.active {
         background: var(--accent);
         border-color: var(--accent);
         color: white;
-        box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+        transform: translateX(12px) scale(1.02); /* Se resalta más cuando está activo */
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
       }
 
-      /* Panel Derecho: Visualizador */
+      /* PANEL DERECHO: Visualizador y animaciones en cascada */
       .cert-viewer {
         background: var(--card);
         border: 1px solid var(--border);
@@ -149,23 +148,44 @@ const certificaciones = [
         padding: 2.5rem;
         min-height: 500px;
         position: relative;
+        overflow: hidden; /* Evita desbordes durante la animación */
       }
 
       .cert-content {
-        display: none; /* Oculto por defecto */
-        animation: fadeIn 0.4s ease-out;
+        display: none;
       }
 
       .cert-content.active {
-        display: block; /* Visible cuando está activo */
+        display: block;
       }
 
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
+      /* Staggered Animations (Animación por partes) */
+      .cert-content.active .viewer-header {
+        animation: slideInFade 0.5s ease-out forwards;
+      }
+      
+      .cert-content.active .cert-image {
+        animation: slideInFade 0.5s ease-out 0.15s forwards; /* Inicia un poco después */
+        opacity: 0; 
+      }
+      
+      .cert-content.active .resena-box {
+        animation: slideInFade 0.5s ease-out 0.3s forwards; /* Inicia al final */
+        opacity: 0;
       }
 
-      /* Estructura del contenido derecho */
+      @keyframes slideInFade {
+        from { 
+          opacity: 0; 
+          transform: translateY(20px) scale(0.98); 
+        }
+        to { 
+          opacity: 1; 
+          transform: translateY(0) scale(1); 
+        }
+      }
+
+      /* Elementos internos */
       .viewer-header {
         display: flex;
         justify-content: space-between;
@@ -181,6 +201,7 @@ const certificaciones = [
         flex: 1;
       }
 
+      /* Efectos 3D en el botón PDF */
       .btn-pdf {
         background: #dc2626;
         color: white;
@@ -192,11 +213,19 @@ const certificaciones = [
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        transition: 0.3s;
-        flex-shrink: 0;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
       }
 
-      .btn-pdf:hover { background: #b91c1c; }
+      .btn-pdf:hover { 
+        background: #ef4444; 
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(220, 38, 38, 0.4);
+      }
+      
+      .btn-pdf:active {
+        transform: translateY(1px);
+        box-shadow: 0 4px 6px rgba(220, 38, 38, 0.4);
+      }
 
       .viewer-main {
         display: grid;
@@ -204,11 +233,18 @@ const certificaciones = [
         gap: 2rem;
       }
 
+      /* Efecto hover sobre la imagen del certificado */
       .cert-image {
         width: 100%;
         border-radius: 12px;
         border: 1px solid var(--border);
         margin-bottom: 1.5rem;
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
+      }
+
+      .cert-image:hover {
+        transform: scale(1.02) translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
       }
 
       .resena-box {
@@ -219,13 +255,24 @@ const certificaciones = [
         padding: 1.5rem;
         border-radius: 12px;
         border-left: 4px solid var(--accent);
+        transition: background 0.3s ease;
+      }
+      
+      .resena-box:hover {
+        background: rgba(255,255,255,0.06);
       }
 
       /* Responsividad */
       @media (max-width: 850px) {
         .cert-layout { grid-template-columns: 1fr; }
-        .cert-sidebar { flex-direction: row; overflow-x: auto; padding-bottom: 1rem; }
-        .cert-btn { white-space: nowrap; }
+        .cert-sidebar { flex-direction: row; overflow-x: auto; padding-bottom: 1rem; padding-right: 0;}
+        .cert-btn { 
+          white-space: nowrap; 
+          transform: none !important; /* Desactiva el desplazamiento lateral en móviles */
+        }
+        .cert-btn:hover, .cert-btn.active {
+          transform: translateY(-4px) !important; /* En móviles se mueve hacia arriba */
+        }
       }
     </style>
   </head>
@@ -235,7 +282,7 @@ const certificaciones = [
     <main class="container">
       <header>
         <h1>Mis Certificaciones</h1>
-        <p style="color: #888; margin-top: 0.5rem;">Haz clic en un módulo para ver los detalles.</p>
+        <p style="color: #888; margin-top: 0.5rem; font-size: 1.1rem;">Haz clic en un módulo para visualizar los detalles.</p>
       </header>
 
       <div class="cert-layout">
@@ -261,7 +308,7 @@ const certificaciones = [
               </div>
               
               <div class="viewer-main">
-                <img src={cert.imgUrl} alt={cert.titulo} class="cert-image" />
+                <img src={cert.imgUrl} alt={cert.titulo} class="cert-image" loading="lazy" />
                 <div class="resena-box">
                   <p>{cert.resena}</p>
                 </div>
@@ -280,18 +327,24 @@ const certificaciones = [
 
       buttons.forEach(button => {
         button.addEventListener('click', () => {
-          // 1. Quitar clase active de todos los botones
+          // Si el botón ya está activo, no hacemos nada (evita re-animar innecesariamente)
+          if(button.classList.contains('active')) return;
+
+          // 1. Quitar clase active de todos
           buttons.forEach(btn => btn.classList.remove('active'));
-          // 2. Quitar clase active de todos los contenidos
           contents.forEach(content => content.classList.remove('active'));
 
-          // 3. Activar el botón clicado
+          // 2. Activar botón clicado
           button.classList.add('active');
 
-          // 4. Activar el contenido correspondiente
+          // 3. Mostrar el contenido con animación reiniciada
           const targetId = button.getAttribute('data-target');
           const targetContent = document.getElementById(targetId);
+          
           if (targetContent) {
+            // Este truco fuerza al navegador a "repintar", asegurando que 
+            // la animación de CSS se ejecute desde cero cada vez que cambias de pestaña.
+            void targetContent.offsetWidth; 
             targetContent.classList.add('active');
           }
         });
