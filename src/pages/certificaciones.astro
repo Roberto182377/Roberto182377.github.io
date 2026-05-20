@@ -1,0 +1,301 @@
+---
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+
+// Definición de los 7 certificados
+const certificaciones = [
+  {
+    id: "cert-1",
+    titulo: "Introducción a la Ciberseguridad",
+    resena: "Este certificado marca el inicio de mi trayectoria en seguridad informática. Aprendí conceptos fundamentales sobre la tríada de la CIA (Confidencialidad, Integridad y Disponibilidad) y la importancia del factor humano en la seguridad.",
+    pdfUrl: "/docs/cert-ciberseguridad.pdf",
+    imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+1", // Reemplaza con tus imágenes
+    activo: true
+  },
+  {
+    id: "cert-2",
+    titulo: "Administración de Amenazas",
+    resena: "En este módulo profundicé en el ciclo de vida de las amenazas, desde la identificación hasta la mitigación. Se cubrieron temas de análisis de logs y detección de anomalías en tráfico de red.",
+    pdfUrl: "/docs/cert-amenazas.pdf",
+    imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+2",
+    activo: false
+  },
+  {
+    id: "cert-3",
+    titulo: "Seguridad en Terminales (Endpoints)",
+    resena: "Análisis técnico de endurecimiento (hardening) de sistemas operativos. Implementación de políticas de grupo, EDR y control de privilegios mínimos para usuarios finales.",
+    pdfUrl: "/docs/cert-endpoints.pdf",
+    imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+3",
+    activo: false
+  },
+  // Agrega los otros 4 certificados aquí siguiendo la misma estructura...
+  {
+    id: "cert-4",
+    titulo: "Certificado de Redes Seguras",
+    resena: "Configuración de firewalls y segmentación de redes mediante VLANs.",
+    pdfUrl: "/docs/cert-redes.pdf",
+    imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+4",
+    activo: false
+  },
+  {
+    id: "cert-5",
+    titulo: "Hacker Ético Junior",
+    resena: "Prácticas controladas de pentesting y explotación de vulnerabilidades conocidas.",
+    pdfUrl: "/docs/cert-hacking.pdf",
+    imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+5",
+    activo: false
+  },
+  {
+    id: "cert-6",
+    titulo: "Analista de Junior de SOC",
+    resena: "Gestión de incidentes y respuesta inmediata ante brechas de seguridad.",
+    pdfUrl: "/docs/cert-soc.pdf",
+    imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+6",
+    activo: false
+  },
+  {
+    id: "cert-7",
+    titulo: "Defensa en la Nube",
+    resena: "Principios de seguridad en entornos AWS y Azure.",
+    pdfUrl: "/docs/cert-cloud.pdf",
+    imgUrl: "https://placehold.co/600x400/151515/ededed?text=Certificado+7",
+    activo: false
+  }
+];
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Certificaciones | Portafolio</title>
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --text: #ededed;
+        --card: #151515;
+        --accent: #2563eb;
+        --border: #33333340;
+        --dot-color: #ffffff20;
+      }
+
+      body {
+        margin: 0;
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', system-ui, sans-serif;
+        background-image: 
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px),
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+        background-size: 24px 41.57px;
+        background-position: 0 0, 12px 20.78px;
+        background-attachment: fixed;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 6rem 1.5rem;
+      }
+
+      header { text-align: center; margin-bottom: 3rem; }
+      h1 { font-size: 2.5rem; letter-spacing: -1px; margin: 0; }
+
+      /* Layout Principal */
+      .cert-layout {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 2rem;
+        align-items: start;
+      }
+
+      /* Panel Izquierdo: Botones */
+      .cert-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .cert-btn {
+        background: var(--card);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 1.2rem;
+        border-radius: 50px; /* Estilo ovalado de tu dibujo */
+        cursor: pointer;
+        text-align: left;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+      }
+
+      .cert-btn:hover {
+        border-color: var(--accent);
+        background: #1a1a1a;
+      }
+
+      .cert-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: white;
+        box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+      }
+
+      /* Panel Derecho: Visualizador */
+      .cert-viewer {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 2.5rem;
+        min-height: 500px;
+        position: relative;
+      }
+
+      .cert-content {
+        display: none; /* Oculto por defecto */
+        animation: fadeIn 0.4s ease-out;
+      }
+
+      .cert-content.active {
+        display: block; /* Visible cuando está activo */
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Estructura del contenido derecho */
+      .viewer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        gap: 1rem;
+      }
+
+      .viewer-header h2 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: var(--text);
+        flex: 1;
+      }
+
+      .btn-pdf {
+        background: #dc2626;
+        color: white;
+        text-decoration: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: 0.3s;
+        flex-shrink: 0;
+      }
+
+      .btn-pdf:hover { background: #b91c1c; }
+
+      .viewer-main {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .cert-image {
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        margin-bottom: 1.5rem;
+      }
+
+      .resena-box {
+        line-height: 1.6;
+        color: #d1d1d1;
+        font-size: 1.1rem;
+        background: rgba(255,255,255,0.03);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-left: 4px solid var(--accent);
+      }
+
+      /* Responsividad */
+      @media (max-width: 850px) {
+        .cert-layout { grid-template-columns: 1fr; }
+        .cert-sidebar { flex-direction: row; overflow-x: auto; padding-bottom: 1rem; }
+        .cert-btn { white-space: nowrap; }
+      }
+    </style>
+  </head>
+  <body>
+    <Navigation />
+    
+    <main class="container">
+      <header>
+        <h1>Mis Certificaciones</h1>
+        <p style="color: #888; margin-top: 0.5rem;">Haz clic en un módulo para ver los detalles.</p>
+      </header>
+
+      <div class="cert-layout">
+        <aside class="cert-sidebar">
+          {certificaciones.map((cert, index) => (
+            <button 
+              class={`cert-btn ${index === 0 ? 'active' : ''}`} 
+              data-target={cert.id}
+            >
+              {cert.titulo}
+            </button>
+          ))}
+        </aside>
+
+        <section class="cert-viewer">
+          {certificaciones.map((cert, index) => (
+            <div id={cert.id} class={`cert-content ${index === 0 ? 'active' : ''}`}>
+              <div class="viewer-header">
+                <h2>{cert.titulo}</h2>
+                <a href={cert.pdfUrl} download class="btn-pdf">
+                  📄 Descargar PDF
+                </a>
+              </div>
+              
+              <div class="viewer-main">
+                <img src={cert.imgUrl} alt={cert.titulo} class="cert-image" />
+                <div class="resena-box">
+                  <p>{cert.resena}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </section>
+      </div>
+    </main>
+
+    <Footer />
+
+    <script is:inline>
+      const buttons = document.querySelectorAll('.cert-btn');
+      const contents = document.querySelectorAll('.cert-content');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          // 1. Quitar clase active de todos los botones
+          buttons.forEach(btn => btn.classList.remove('active'));
+          // 2. Quitar clase active de todos los contenidos
+          contents.forEach(content => content.classList.remove('active'));
+
+          // 3. Activar el botón clicado
+          button.classList.add('active');
+
+          // 4. Activar el contenido correspondiente
+          const targetId = button.getAttribute('data-target');
+          const targetContent = document.getElementById(targetId);
+          if (targetContent) {
+            targetContent.classList.add('active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
