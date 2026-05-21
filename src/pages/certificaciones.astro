@@ -8,7 +8,7 @@ const certificaciones = [
     titulo: "Introducción a la Ciberseguridad",
     resena: [
       "El certificado de 'Introducción a la Ciberseguridad' ofrece una exploración exhaustiva y bien estructurada de los fundamentos defensivos y ofensivos en el entorno digital.",
-      "A lo largo de sus módulos, el contenido abarca desde la protección de la privacidad de los datos, hasta el análisis de vulnerabilidades de red y las tácticas empleadas por los atacantes en la actualidad.",
+      "A lo largo de sus módulos, el contenido abarca desde la protección de la privacidad de los datos, hasta el análisis de vulnerabilidades de red y las tácticas empleadas por los atacantes en la actualidad."\n,
       "Lo más destacable de este curso es su capacidad para desglosar la anatomía de los ciberataques, examinando métodos de infiltración específicos, como las diversas variantes de malware y las estrategias de ingeniería social.",
       "Asentar esta base teórica resulta indispensable para la aplicación técnica; por ejemplo, la comprensión de estos vectores de ataque facilita enormemente el diseño de proyectos orientados a la concientización, como la programación de simuladores de phishing educativos, o la resolución práctica de máquinas vulnerables en entornos controlados.",
       "Los cuestionarios y el análisis de casos refuerzan la capacidad de detectar y clasificar estas amenazas.",
@@ -351,6 +351,11 @@ const certificaciones = [
 
       .resena-box p {
         margin: 0;
+        margin-bottom: 1.2rem;
+      }
+
+      .resena-box p:last-child {
+        margin-bottom: 0;
       }
 
       @media (max-width: 850px) {
@@ -406,7 +411,9 @@ const certificaciones = [
               </div>
               
               <div class="resena-box">
-                <p>{cert.resena}</p>
+                {cert.resena.map((parrafo) => (
+                  <p>{parrafo}</p>
+                ))}
               </div>
             </div>
           ))}
