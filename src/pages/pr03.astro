@@ -23,8 +23,8 @@ const menuLateral = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ISO 27001 SEER | Portafolio</title>
     <style>
-      /* Variables Base: MODO OSCURO POR DEFECTO */
-      :root {
+      /* Variables Base: MODO OSCURO ESTRICTO POR DEFECTO */
+      :root, :global(html.dark), :global(html[data-theme="dark"]) {
         --bg-main: #0a0a0a;
         --bg-card: #141414;
         --bg-hover: #1e1e1e;
@@ -40,8 +40,8 @@ const menuLateral = [
         --danger: #ef4444;
       }
 
-      /* INTERRUPTOR DE MODO CLARO */
-      :global(html:not(.dark)), :global(html.light), :global(html[data-theme="light"]) {
+      /* INTERRUPTOR DE MODO CLARO: Solo se activa bajo órdenes explícitas de tu menú */
+      :global(html.light), :global(html[data-theme="light"]), :global(body.light) {
         --bg-main: #ffffff;
         --bg-card: #f8f9fa;
         --bg-hover: #f1f3f5;
