@@ -1,135 +1,200 @@
+ chat
+Buscar chats
+Biblioteca
+Nuevo cuaderno
+The Architecture and Rationality of Intelligent Agents
+PDF a Markdown Conversión de Reporte
+Implementar Tabs Dinámicos en Web
+Mitigación de Ataques de VLAN
+Reseñas de Certificados de Ciberseguridad
+Validación Cruzada 5 Pliegues con Scikit-learn
+Realizar Predicciones con Modelo
+Apoyo en Actividad de Ingeniería del Software
+Leyes de Fraude y Abuso Informático
+SEER Ciberseguridad ISO 27001 Corporativo
+U-Matrix y Mapas Auto-Organizados
+Revisión de Preguntas de Seguridad Informática
+Preparación Examen IA: Lógica y Resolución
+Completa la siguiente plantilla ieee 730, en base al pdf que te adjunto
+Análisis de Avance de Proyecto SEER
+Desarrollo IEEE-1012 V&V App Android
+Administración de Configuración de Software
+Dilemas Éticos en Ciberseguridad: Análisis
+Negación de Conclusión Lógica de Primer Orden
+Aislamiento Lógico de Instancia en Nube
+Lógica de Predicados: Cuantificadores y Skolemización
+Eres un funcionario que busca ayudar a los ciudadanos mexicanos que se quiere dar de alta en el INFONAVIT, por lo que tu misión es crear una presentación con el paso a paso de como hacerlo, bríndame la información de esa presentacion
+Completar Código de Red Neuronal ReLU
+Análisis de Código y Web Components
+Diseño de Banner Profesional Ciberseguridad
+Necesito que me ayudes a realizar un banner profesional, con las especificaciones brindadas que se encuentran adjuntadas en la segunda imagen, el portafolio referente es el siguiente, el link: https://roberto182377.github.io/ En base al diseño del banner busco que sea de un estilo como la primera imagen que te brindo que sirva como idea de lo que busco, enfócate que se vea profesional, tenga una frase atrapante y breve descripción que sirva, que sea un banner profesional cumpliendo con las normas
+Banner Profesional Estilo Cibernético
+Lógica de Mamíferos y Sistemas Expertos
+Revisión de Lógica de Resolución de Acertijo
+Acertijo "4 Fotos 1 Palabra": Líquido
+Conversión a Forma Normal Conjuntiva
+ISO 27001:2022 SEER Alcance, Referencias, Términos
+Liga MX Predictions with Random Forest
+Reporte de Phishing con SET y Postfix
+Replicar Página Web para GitHub
+Proyecto Clasificación Dígitos Manuscritos
+Resolver error de renderizado de Colab en GitHub
+Algoritmo de Resolución Lógica Proposicional
+Preguntas Entrevista Desarrollo Web
+Predicción Liga MX con Random Forest
+Demostración Lógica de Argumento Condicional
+Corregir Código Python Pandas
+Gestión de Calidad en Desarrollo de Software
+Fraude Millonario de Criptomonedas Revelado
+Modelos de Calidad de Software Explicados
+Determinación de Red Local con AND Binario
+Simulación Ransomware y Anti-Análisis
+Dividir Datos Iris para Entrenamiento/Prueba
+Problema DHCP en PC Específica
+En base a la información de los dos pdfs adjuntos, puedes ayudarme a redactar y realizar el documento que se me solicita (en el caso del punto 2 ya fueron implementadas en el código), enfócate en el punto 3: Tabla de Contenido Introducción Marco teórico − Arquitectura orientada a servicios (SOA) − Web Services vs SOA − Diseño y desarrollo de SOA bajo REST • Características • Ventajas • Desventajas Implementación del Web Services bajo REST – API Rest (ofrecer el servicio y para consumo) • Arquitectura REST • Lenguaje seleccionado, librería, framework. • Implementar el servicio • Integrar servicio en desarrollo web Resultados y Conclusiones Referencias bibliográficas
+Identificar Enlaces Troncales en Redes
+Corregir Error de Módulo pynput
+Scikit-learn Import Error Solved
+Algoritmo Greedy: Camino S a G
+Cálculo de Gasto de Clientes Premium
+Analyzing CSV and Image Data
+Importar Pandas con Alias
+¿Qué es realmente TTY?
+Análisis de Preguntas de Pentesting
+Análisis de Gráfica Matplotlib y Técnicas
+Netacad Minería de Datos
+Clases de Comunicación Empresarial Explicadas
+Algoritmo Genético para Optimización Financiera
+Solucionario IA con Justificaciones
+Evaluación de Phishing Quiz y Score
+Corrección de Scripts de Configuración de Red
+Red Team Report: Napping Machine Pentesting
+Napping 101: Pentesting Paso a Paso
+Actualización de Escenarios para Quiz Phishing
+Tabnabbing: Explotación y Prevención
+Algoritmo Genético para Optimización de Inversiones
+Phishing Quiz con Imágenes y Links
+Mejorando Diseño de Quiz Phishing
+Desarrollo de Quiz y Sistema de Puntuación
+Guardar y Mostrar Datos Web
+Phishing Quiz y Sistema de Puntuación
+Diseño de Quiz y Scoreboard Web
+Web Components a Android: Mapeo Técnico
+BFS Funcional en F#
+Descargar e Instalar Scrcpy en Windows
+Búsqueda Voraz: Árbol de Estados
+Comparación de Búsquedas Greedy y A*
+Ciberseguridad: Quid Pro Quo Explicado
+Creación de DataFrame de Colores
+Análisis de Datos de Islas Grandes
+Descargar Infografía de Piktochart
+Evaluación de Infografía de Ciberseguridad
+Infografía Ciberseguridad: Ataques y Mitigación
+Vectores de Ataque a Contraseñas Recientes
+Resumen Detallado Ciberseguridad CISCO
+Evaluación Infografía Ciberseguridad Módulo 3
+Adaptación de Laboratorios SQLi a Astro
+Comparativa de Plataformas de Phishing
+Implementar Fichas Interactivas en Web
+Ayuda con Laboratorios SQL Injection Portswigger
+Análisis de Cuaderno de Minería de Datos
+Conversación con Gemini
+Dela siguiente actividad (pdf adjuntado), transforma el contenido de esta en formato .md te dejo algunos ejemplos .md para que te des una idea
+
+Tu archivo en formato .md ya está listo y generado siguiendo la estructura y el estilo de los ejemplos proporcionados.
+Ícono de MD
+ act09-Equipo1 
+MD
+
+Tus cargas podrían ser demasiado grandes para obtener los mejores resultados. Más informaciónSe abrirá en una ventana nueva
+De misma manera genera el .md para el pdf adjunto
+
+El archivo en formato .md para la actividad correspondiente ha sido generado exitosamente, siguiendo la estructura y estilo solicitados.
+Ícono de MD
+ act10-Equipo1 
+MD
+
+De misma manera genera el .md para el pdf adjunto
+
+El archivo en formato .md para la actividad 11 (Pentesting de Napping101) ha sido generado exitosamente, manteniendo el mismo formato y estilo que los anteriores.
+Ícono de MD
+ act11-Equipo1 
+MD
+
+
+
+
+Gemini es una IA y puede cometer errores.
+
 ---
-title: "Actividad 06 - Implementación de IPSec VPN"
-description: "Creación de topología en Packet Tracer implmentando IPSec"
-date: "2026-02-16"
-readTime: ""
-image: "/assets/images/posts/ipsecVPN.png"
-slug: "act06-182377"
+title: "Red Team Report: Pentesting de Napping101"
+description: "Informe de resultados de la prueba de penetración realizada sobre el sistema Napping101."
+date: "2026-03-22"
+slug: "red-team-report-napping101"
 ---
 
-<div align="right">
-  <a href="/assets/images/docs_P1/182377-act06.pdf" download>
-    📄Descargar PDF
-  </a>
-</div> 
-<div align="right">
-  <a href="/assets/images/docs_P1/182377-act06.pkt" download>
-    💻Descargar Topología
-  </a>
-</div>
+## 📄 Resumen Ejecutivo
+Este informe detalla las actividades y hallazgos obtenidos durante la prueba de penetración realizada al sistema **Napping101**. El objetivo fue evaluar la seguridad de la aplicación frente a ataques de cliente y escalada de privilegios local.
+
+Durante el análisis, se identificaron vulnerabilidades críticas que permitieron la ejecución de vectores de ataque como **Reverse Tabnabbing**, además de la explotación de configuraciones permisivas que facilitaron la escalada de privilegios. Se han definido recomendaciones estratégicas para mitigar estos riesgos y mejorar la postura de seguridad global.
 
 ---
 
-## 💾 Introducción
-
-El IPSec se pude definir como el "Protocolo de Internet seguro", con el cual se ayuda a mantener seguros los datos enviados a través de las redes públicas, esto al agregar cifrado y autenticación para hacer que el protocolo sea más seguro.
-
-Un VPN (red privada virtual), es una conexión encriptada entre variso equipos, estas conexiones se efetúan en redes públicas, donde los daros que se intercambian atraves de esa red se mantienen privados al estar encriptados.
-
-Muchas VPN (no todas), hacen uso de los protocolos IPSec al establecer y ejecutar estas conexiones privadas, ya que esta se permite la encriptacion de los paquetes IP, además de autenticar la fuente de donde proceden los paquetes.
+## 🎯 Alcance (Scope)
+El alcance de esta evaluación se limitó al entorno de laboratorio controlado que hospeda la máquina virtual **Napping101**, enfocándose en la superficie de ataque expuesta mediante servicios web y configuraciones del sistema operativo.
 
 ---
 
-## 💾 Desarrollo
-### Funcionamiento de IPSec
+## 🛠 Metodología Aplicada
+Se siguió un enfoque estructurado basado en fases estándar de la industria (PTES):
 
-Las conexiones IPsec incluyen los siguientes pasos:
-* **Intercambio de claves**
-  Se establece un intercambio de claves (necesarios para encriptar y desencriptar), entre dispositivos conectados, para que cada dispositivo pueda desencriptar los mensajes del otro.
-
-* **Encabezados y tráileres de los paquetes**
-  Los datos envíados pasan por una red de division, haciendolos trozos mas pequeños (paquetes), con una carga útil , datos reales o encabezados, información de esos datos que permita al destinatario saber qué hacer con ellos. 
-  IPsec añade varios encabezados a los paquetes de datos que contienen información de autenticación y encriptación. IPsec también añade tráilers, que van después de la carga útil de cada paquete y no antes
-
-* **Autenticación**
-    IPSec la proporciona por cada paquete, esto en un sello en un artículo coleccionable, garantizando que los paquetes provengan de una fuente de confianza.
-
-* **Encriptación**
-    IPsec encripta las cargas útiles dentro de cada paquete y el encabezado IP de cada paquete (a menos que se utilice el modo de transporte en lugar del modo túnel), manteniendo los datos seguros y privados.
-
-* **Transmisión**
-     IPsec se diferencia del tráfico IP normal en que suele utilizar UDP como protocolo de transporte, en lugar de TCP, al no establecer conexiones específicas, por lo que IPsec utiliza UDP ya que permite que los paquetes IPsec atraviesen los firewalls.
-
-* **Desencriptación**
-    En el otro extremo de la comunicación, los paquetes se desencriptan, y las aplicaciones (por ejemplo, un navegador) pueden utilizar ahora los datos entregados.
-
-### Protocolos empleados
-En redes , un protocolo es una forma específica de formatear datos para que cualquier computadora en red pueda interpretarlos. IPsec no es un solo protocolo, sino un conjunto
-
-| **Protocolo** | **Descripción** |
-| :- | :- |
-|**Encabezado de Autenticación (AH)**| Garantiza que los paquetes de datos provengan de una fuente confiable y que no hayan sido manipulados, como un sello de seguridad en un producto de consumo.  |
-|**Carga Útil de Seguridad Encapsulada (ESP)**|Cifra el encabezado IP y la carga útil de cada paquete, a menos que se utilice el modo de transporte, en cuyo caso solo cifra la carga útil. ESP añade su propio encabezado y un finalizador a cada paquete de datos.  |
-|**Asociación de Seguridad (SA)**|Serie de protocolos utilizados para negociar claves y algoritmos de cifrado. Uno de los protocolos SA más comunes es el Intercambio de Claves por Internet (IKE)|
-
-### Modo túnel y Modo Transorte
-
-El **modo túnel** IPsec se utiliza entre dos enrutadores dedicados, donde cada enrutador actúa como un extremo de un *"túnel"* virtual a través de una red pública. En el modo túnel IPsec, se cifra el encabezado IP original que contiene el destino final del paquete, además de su carga útil. Para indicar a los enrutadores intermediarios dónde reenviar los paquetes, IPsec añade un nuevo encabezado IP. En cada extremo del túnel, los enrutadores descifran los encabezados IP para entregar los paquetes a sus destinos.
-
-En el modo de transporte, la carga útil de cada paquete se cifra, pero no el encabezado IP original. Por lo tanto, los enrutadores intermediarios pueden ver el destino final de cada paquete, a menos que se utilice un protocolo de tunelización independiente.
-
-### Glosario de comandos
-
-| **Comando**                  | **Función**                          |
-| ---------------------------- | -------------------------------- |
-| <code>hostname</code>                   | Asigna un nombre al router       |
-| ```interface g0/x```             | Accede a una interfaz            |
-| `ip address`                 | Configura IP y máscara           |
-| `no shutdown`                | Activa la interfaz               |
-| `ip route 0.0.0.0 0.0.0.0`   | Define ruta por defecto          |
-| `crypto isakmp policy`       | Crea política IKE (fase 1)       |
-| `encryption aes 256`         | Define cifrado fuerte            |
-| `authentication pre-share`   | Usa clave compartida             |
-| `crypto isakmp key`          | Establece la clave precompartida |
-| `crypto ipsec transform-set` | Define protección de datos       |
-| `crypto map`                 | Asocia IPSec al tráfico          |
-| `set peer`                   | Define el router remoto          |
-| `set pfs`                    | Habilita Perfect Forward Secrecy |
-| `match address`              | Asocia ACL al túnel              |
-| `access-list permit ip`      | Define tráfico cifrado           |
-| `show crypto isakmp sa`      | Verifica fase 1                  |
-| `show crypto ipsec sa`       | Verifica fase 2                  |
-
+| Fase | Descripción |
+| :--- | :--- |
+| **Reconocimiento** | Mapeo de la infraestructura y servicios disponibles. |
+| **Enumeración** | Análisis detallado de servicios, usuarios y puntos de entrada (web). |
+| **Explotación** | Ejecución controlada de exploits (e.g., Reverse Tabnabbing). |
+| **Post-Explotación** | Escalada de privilegios y análisis de persistencia. |
 
 ---
 
-## 💾 Material Multimedia
+## 🔍 Pentesting Aplicado (Walkthrough)
 
-### Topología realizada
+### 1. Fase de Reconocimiento y Enumeración
+Se realizó un escaneo inicial identificando servicios web vulnerables. La enumeración permitió detectar vectores de ataque relacionados con la interacción del usuario y la configuración del servidor web.
 
-![Act 06](/assets/images/posts/topologia-act06.png)
+### 2. Fase de Explotación
+* **Vulnerabilidad principal**: **Reverse Tabnabbing**. Se identificó que los enlaces con `target="_blank"` no contaban con las protecciones `rel="noopener noreferrer"`.
+* **Impacto**: Esta vulnerabilidad permite que una página abierta en una nueva pestaña pueda redirigir la página original a un sitio malicioso, comprometiendo la sesión del usuario.
 
-### Manual Comandos IPSec
-<embed 
-  src="/assets/images/docs_P1/14140-manual.pdf" 
-  type="application/pdf" 
-  width="100%" 
-  height="600px"
-/>
-
-### Configuración IPSec - Práctica Packet Tracer (YouTube)
-<iframe width="560" height="315" src="https://youtu.be/U9Qm92SbVME?si=AYYYaEim2xCuqC53" title="Configuracion practica IPSec" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+### 3. Escalada de Privilegios
+* Se identificaron configuraciones inseguras que permitían la ejecución de comandos con privilegios elevados (`sudo`).
+* Se logró comprometer la cuenta de usuario `daniel` y escalar privilegios aprovechando binarios mal configurados.
 
 ---
 
-## 💾 Reflexión
-
-VPN IPSec es una gran funcionalidad en el ambito del manejo de las redes, ya que, proporciona una estrucutra robusta, al emplear un conjunto de protocolos y herramientas que permiten un transporte seguro de datos entre paquetes.
-
-Al realizar la topología planteada se puede observar que aunque lleve un tiempo y sea necesario cumplir con ciertos puntos para su funcionalidad, el manejo de encriptación, transporte, etc. valgan la pena, con las opciones que brinda para un sistema de red. 
+## 📊 Análisis de Impacto (Modelo CIA)
+* **Confidencialidad**: Comprometida al exponer tokens de sesión y credenciales.
+* **Integridad**: Riesgo crítico; un atacante puede modificar la navegación del usuario o alterar archivos del sistema.
+* **Disponibilidad**: Potencialmente afectada mediante la modificación de configuraciones críticas del sistema.
 
 ---
 
-## 💾 PDF
-<embed 
-  src="/assets/images/docs_P1/182377-act06.pdf" 
-  type="application/pdf" 
-  width="100%" 
-  height="600px"
-/>
-## 💾 Referencias
-* Amazon AWS (s.f.), ¿Qué es IPsec? . https://aws.amazon.com/es/what-is/ipsec/
-* Cisco (Abril, 2024). Comprensión del protocolo IPsec IKEv1,
-https://www.cisco.com/c/es_mx/support/docs/security-vpn/ipsec-negotiation-ikeprotocols/217432-understand-ipsec-ikev1-protocol.html#toc-hId--1746390828
-* CloudFlare (s.f.), What is IPsec? | How IPsec VPNs work.
-https://www.cloudflare.com/learning/network-layer/what-is-ipsec/
+## 💡 Recomendaciones Estratégicas
+1. **Corto Plazo (0-30 días)**: Implementar `rel="noopener noreferrer"` en todos los enlaces externos y realizar una rotación obligatoria de credenciales.
+2. **Mediano Plazo (30-60 días)**: Establecer programas de capacitación en "Desarrollo Seguro" para mitigar vulnerabilidades frontend.
+3. **Largo Plazo (60-90 días)**: Implementar una solución de monitoreo de logs (**SIEM**) para alertar sobre actividades anómalas (creación de cuentas, uso indebido de `sudo`).
+
+---
+
+## 💾 Integrantes
+* Aguilar Carrizales Miguel Ángel - 182318
+* Aznar Cuevas Luis Eduardo - 179880
+* Beltrán Reyna David - 183636
+* Gómez Arreguin Donaldo Demián - 179822
+* Morales Hernández Roberto Emiliano - 182377
+* Rosales Ramírez Josué Emiliano - 181760
+
+---
+## 📚 Referencias
+* OWASP (s.f.). *Reverse Tabnabbing*. https://owasp.org/www-community/attacks/Reverse_Tabnabbing
+* NIST (2024). *Guide to Penetration Testing*.
