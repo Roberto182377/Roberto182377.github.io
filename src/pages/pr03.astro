@@ -335,11 +335,11 @@ const menuLateral = [
       </header>
 
       <div class="global-actions">
-        <a href="/docs/PR03-Equipo1.pdf" download class="btn-download">
+        <a href="/assets/pr03/PR03-Equipo1_SI.pdf" download class="btn-download">
           Documento de Investigación (PDF)
         </a>
-        <a href="/docs/PR03-Presentacion.pdf" download class="btn-download">
-          Presentación Ejecutiva (PDF)
+        <a href="/assets/pr03/COMUNICADO DE SEGURIDAD Incidente de Phishing en Office 365 (SEER).png" download class="btn-download">
+          Comunicado de Seguridad (png)
         </a>
       </div>
 
@@ -560,7 +560,7 @@ const menuLateral = [
               </table>
             </div>
             <div class="image-container">
-              [Mapa de Calor: Matriz de Distribución de Riesgos Internos]
+              <img src="/assets/pr03/mapaCalor01.png" alt="mapa calor 01">
             </div>
 
             <h3>Matriz de Riesgos Externos</h3>
@@ -579,7 +579,7 @@ const menuLateral = [
               </table>
             </div>
             <div class="image-container">
-              [Mapa de Calor: Matriz de Distribución de Riesgos Externos]
+              <img src="/assets/pr03/mapaCalor02.png" alt="mapa calor 02">
             </div>
           </div>
 
@@ -614,19 +614,19 @@ const menuLateral = [
 
             <h3>Paso 1: Restricción de Dominios Genéricos</h3>
             <p>Se inhabilitó por completo el acceso a las plataformas centrales de Recursos Humanos desde cuentas de correo personales. Toda autenticación requiere obligatoriamente una cuenta bajo el dominio institucional.</p>
-            <div class="image-container step-img">[Evidencia Técnica: Bloqueo de inicios de sesión desde correos personales]</div>
+            <div class="image-container step-img"><img src="/assets/pr03/paso01.png" alt="paso 01"></div>
 
             <h3>Paso 2: Activación Mandatoria de Doble Factor (2FA)</h3>
             <p>Se configuraron las directivas globales de seguridad de Office 365 para exigir el enrolamiento de un segundo factor de autenticación en todos los puestos administrativos.</p>
-            <div class="image-container step-img">[Evidencia Técnica: Interfaz de solicitud de token de autenticación multifactor]</div>
+            <div class="image-container step-img"><img src="/assets/pr03/paso02.png" alt="paso 02"></div>
 
             <h3>Paso 3: Instalación Corporativa de Microsoft Authenticator</h3>
             <p>Despliegue forzado de la aplicación de autenticación en las terminales móviles autorizadas, eliminando el uso de SMS tradicionales debido a vulnerabilidades de SIM Swapping.</p>
-            <div class="image-container step-img">[Evidencia Técnica: Configuración de la llave criptográfica en la aplicación móvil]</div>
+            <div class="image-container step-img"><img src="/assets/pr03/paso03.png" alt="paso 03"></div>
 
             <h3>Paso 4: Vinculación Estricta de Cuentas de Nómina</h3>
             <p>Fase final del flujo operativo, donde las llaves de acceso a las bases de datos de personal quedaron completamente enlazadas al identificador del doble factor verificado.</p>
-            <div class="image-container step-img">[Evidencia Técnica: Bitácora de acceso exitoso con validación de identidad 2FA]</div>
+            <div class="image-container step-img"><img src="/assets/pr03/paso04.png" alt="paso 04"></div>
           </div>
 
           <div id="sec-9" class="clause-content">
@@ -659,7 +659,7 @@ const menuLateral = [
               <p>Acciones correctivas ante incidentes y optimización proactiva del SGSI.</p>
             </div>
             <div class="image-container large">
-              [Diagrama de Flujo: Ciclo Deming (PHVA) Aplicado a Incidentes de Recursos Humanos]
+              <img src="/assets/pr03/COMUNICADO DE SEGURIDAD Incidente de Phishing en Office 365 (SEER).png" alt="diagranma">
             </div>
             <h3>Gestión de No Conformidades</h3>
             <p>Cuando un indicador de auditoría cae por debajo del umbral mínimo aceptable, o se detecta una brecha de seguridad simulada en los talleres, se activa de forma automática el protocolo de análisis post-mortem.</p>
