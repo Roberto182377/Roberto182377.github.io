@@ -1,0 +1,171 @@
+---
+export const frontmatter = {
+  title: "Actividad 18 - Análisis de Intrusión con Modelo Diamante",
+  description: "Estructuración de inteligencia de amenazas desglosando eventos en base a vectores APT y técnicas de Pivoting.",
+  date: "2026-05-15",
+  readTime: "7 min",
+  image: "/assets/images/posts/diamond-model.jpg",
+  slug: "act18-182377"
+};
+---
+
+<div class="diamond-wrapper">
+  <div class="download-container">
+    <a href="/assets/images/docs_P1/act18-Equipo1.pdf" download class="btn-download">
+      ⚡ Exportar Inteligencia (PDF)
+    </a>
+  </div>
+
+  <section class="section-card">
+    <h2>Introducción al Modelo Diamante</h2>
+    <p>
+      El <strong>Modelo Diamante</strong> es una metodología fundamental para el análisis de intrusiones informáticas. Su propósito es representar un evento de seguridad correlacionando de manera gráfica y lógica cuatro ejes principales interconectados. Al mapear estos puntos, los analistas de incidentes pueden comprender las capacidades del adversario y la infraestructura explotada durante la campaña.
+    </p>
+  </section>
+
+  <section class="section-card box-center">
+    <h3>Los Cuatro Vértices del Evento</h3>
+    <div class="diamond-graphic">
+      <div class="node node-top"><strong>Adversario</strong><small>Grupo APT Financiado</small></div>
+      <div class="node node-left"><strong>Capacidad</strong><small>Malware & Phishing</small></div>
+      <div class="node node-right"><strong>Infraestructura</strong><small>Servidores C2 Proxy</small></div>
+      <div class="node node-bottom"><strong>Víctima</strong><small>Admin / Host Interno</small></div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <h3>Hilos de Actividad e Intrusión (Kill Chain)</h3>
+    
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-badge">Hilo 1</div>
+        <h4>Compromiso Inicial (Víctima 1)</h4>
+        <p>El atacante envía un correo electrónico malicioso (Phishing) dirigido al administrador. Al ejecutarse el payload, el malware se instala de manera local y establece un canal persistente de comunicación hacia el servidor de Comando y Control (C2).</p>
+      </div>
+      
+      <div class="timeline-item animate-pivoting">
+        <div class="timeline-badge badge-alert">Pivoting</div>
+        <h4>Movimiento Lateral (Víctima 2)</h4>
+        <p>Utilizando el primer host comprometido como puente o proxy inverso, el atacante escanea el segmento interno y realiza conexiones remotas hacia hosts restringidos, logrando la descarga del payload en una segunda infraestructura crítica de la red corporativa.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-card border-left-highlight">
+    <h3>Conclusiones Analíticas</h3>
+    <p>
+      El escenario estudiado ejemplifica cómo el Modelo Diamante complementa frameworks como la <strong>Cyber Kill Chain</strong>. No solo nos dice qué fases atravesó el atacante, sino cómo mutaron sus capacidades técnicas e infraestructuras en cada fase del movimiento lateral, permitiendo el despliegue de firmas de detección preventivas más robustas en el perímetro empresarial.
+    </p>
+  </section>
+</div>
+
+<style>
+  .diamond-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--text-color, #1f2937);
+  }
+  .download-container {
+    text-align: right;
+    margin-bottom: 2rem;
+  }
+  .btn-download {
+    background: #059669;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+  .section-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  :global(.dark) .section-card {
+    background: #111827;
+    border-color: #1f2937;
+    color: #f3f4f6;
+  }
+  h2, h3 {
+    margin-top: 0;
+    color: #111827;
+  }
+  :global(.dark) h2, :global(.dark) h3 {
+    color: #ffffff;
+  }
+  
+  /* Gráfico del Diamante hecho en bloques tradicionales CSS */
+  .box-center {
+    text-align: center;
+  }
+  .diamond-graphic {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    margin: 2rem auto;
+    border: 2px dashed #94a3b8;
+    transform: rotate(45deg);
+    border-radius: 4px;
+  }
+  .node {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: #1e293b;
+    border: 2px solid #059669;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-45deg);
+    padding: 5px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  .node strong { font-size: 0.85rem; }
+  .node small { font-size: 0.65rem; color: #10b981; text-align: center; margin-top: 4px; }
+  
+  .node-top { top: -60px; left: 100px; }
+  .node-left { top: 100px; left: -60px; }
+  .node-right { top: 100px; right: -60px; }
+  .node-bottom { bottom: -60px; left: 100px; }
+
+  /* Timeline */
+  .timeline {
+    border-left: 2px solid #e5e7eb;
+    padding-left: 1.5rem;
+    margin-left: 0.5rem;
+  }
+  :global(.dark) .timeline { border-left-color: #374151; }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  .timeline-badge {
+    position: absolute;
+    left: -2.3rem;
+    background: #3b82f6;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .badge-alert {
+    background: #ef4444;
+  }
+  .animate-pivoting {
+    border-left: 3px solid #ef4444;
+    padding-left: 1rem;
+    margin-left: -1rem;
+  }
+  .border-left-highlight {
+    border-left: 4px solid #059669;
+  }
+</style>
