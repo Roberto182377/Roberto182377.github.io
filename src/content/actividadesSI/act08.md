@@ -3,7 +3,7 @@ title: "Actividad 08 - Road to Hall of Fame (SQL Injection)"
 description: "Resolución y análisis técnico de 18 laboratorios de SQL Injection en PortSwigger Academy."
 date: "2026-03-20"
 readTime: ""
-image: "/assets/images/posts/img_Act02_portada.png"
+image: "/assets/images/posts/portadad_act08.png"
 slug: "act08-182377"
 ---
 

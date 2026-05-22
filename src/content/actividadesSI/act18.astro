@@ -1,171 +1,258 @@
 ---
 export const frontmatter = {
-  title: "Actividad 18 - Análisis de Intrusión con Modelo Diamante",
-  description: "Estructuración de inteligencia de amenazas desglosando eventos en base a vectores APT y técnicas de Pivoting.",
-  date: "2026-05-15",
-  readTime: "",
+  title: "Actividad 18 - Análisis de intrusión con Modelo Diamante",
+  description: "Estudio de un incidente de malware correlacionando los vértices del Modelo Diamante y las fases de la Cyber Kill Chain.",
+  date: "2026-04-22",
+  readTime: "6 min",
   image: "/assets/images/posts/portadad_act18.jpg",
   slug: "act18-182377"
 };
 ---
 
-<div class="diamond-wrapper">
+<div class="content-wrapper">
   <div class="download-container">
     <a href="/assets/images/docs_P1/act18-Equipo1.pdf" download class="btn-download">
-      ⚡ Exportar Inteligencia (PDF)
+      📄 Descargar PDF Original (Actividad 18)
     </a>
   </div>
 
-  <section class="section-card">
-    <h2>Introducción al Modelo Diamante</h2>
+  <section class="info-section">
+    <div class="section-badge">Introducción</div>
+    <h2>Correlación de Modelos de Intrusión</h2>
     <p>
-      El <strong>Modelo Diamante</strong> es una metodología fundamental para el análisis de intrusiones informáticas. Su propósito es representar un evento de seguridad correlacionando de manera gráfica y lógica cuatro ejes principales interconectados. Al mapear estos puntos, los analistas de incidentes pueden comprender las capacidades del adversario y la infraestructura explotada durante la campaña.
+      El análisis de intrusiones permite mapear cómo operan los atacantes en una red. Esta actividad examina un caso de compromiso por malware utilizando el <strong>Modelo Diamante</strong> para estructurar los elementos del ataque (Adversario, Capacidad, Infraestructura, Víctima) y la <strong>Cyber Kill Chain</strong> para trazar su desarrollo temporal y lateralización.
     </p>
   </section>
 
-  <section class="section-card box-center">
-    <h3>Los Cuatro Vértices del Evento</h3>
-    <div class="diamond-graphic">
-      <div class="node node-top"><strong>Adversario</strong><small>Grupo APT Financiado</small></div>
-      <div class="node node-left"><strong>Capacidad</strong><small>Malware & Phishing</small></div>
-      <div class="node node-right"><strong>Infraestructura</strong><small>Servidores C2 Proxy</small></div>
-      <div class="node node-bottom"><strong>Víctima</strong><small>Admin / Host Interno</small></div>
+  <section class="info-section">
+    <div class="section-badge">Fundamentos</div>
+    <h2>El Modelo Diamante</h2>
+    <div class="grid-cards">
+      <div class="card-item">
+        <h3>👿 Adversario</h3>
+        <p>Grupo APT o ciberdelincuente externo que dirige la campaña de malware y controla el ataque.</p>
+      </div>
+      <div class="card-item">
+        <h3>⚔️ Capacidad</h3>
+        <p>Técnicas empleadas: Ingeniería social (Phishing), ejecución de payload, conexión C2 y pivoting lateral.</p>
+      </div>
+      <div class="card-item">
+        <h3>🌐 Infraestructura</h3>
+        <p>Dominios maliciosos, direcciones IP externas y servidores de Comando y Control (C2) habilitados.</p>
+      </div>
+      <div class="card-item">
+        <h3>🎯 Víctima</h3>
+        <p>Usuario inicial comprometido y equipos secundarios alcanzados mediante movimiento lateral.</p>
+      </div>
     </div>
   </section>
 
-  <section class="section-card">
-    <h3>Hilos de Actividad e Intrusión (Kill Chain)</h3>
+  <section class="info-section">
+    <div class="section-badge">Análisis del Escenario</div>
+    <h2>Relación con la Cyber Kill Chain</h2>
+    <p>El SOC detectó actividad anómala, resoluciones DNS hacia dominios C2 y múltiples hosts conectándose a direcciones IP externas. La progresión se categoriza de la siguiente forma:</p>
     
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-badge">Hilo 1</div>
-        <h4>Compromiso Inicial (Víctima 1)</h4>
-        <p>El atacante envía un correo electrónico malicioso (Phishing) dirigido al administrador. Al ejecutarse el payload, el malware se instala de manera local y establece un canal persistente de comunicación hacia el servidor de Comando y Control (C2).</p>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Evento Analizado</th>
+            <th>Fase Kill Chain</th>
+            <th>Justificación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Envío de phishing</strong></td>
+            <td>Entrega (Delivery)</td>
+            <td>El adversario transmite la carga útil a la víctima inicial mediante un correo engañoso.</td>
+          </tr>
+          <tr>
+            <td><strong>Ejecución del malware</strong></td>
+            <td>Explotación / Ejecución</td>
+            <td>El código malicioso se activa en el sistema comprometiendo la máquina local.</td>
+          </tr>
+          <tr>
+            <td><strong>Conexión a C2</strong></td>
+            <td>Comando y Control</td>
+            <td>El malware establece un canal saliente a IPs externas para recibir instrucciones o descargar más payloads.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="section-badge">Progresión del Ataque</div>
+    <h2>Hilos de Actividad (Activity Threads)</h2>
+    
+    <div class="threads-container">
+      <div class="thread-box">
+        <h3>Hilo 1: Brecha Inicial (Víctima 1)</h3>
+        <ol>
+          <li>El atacante envía un correo phishing al administrador.</li>
+          <li>El administrador ejecuta el archivo adjunto/enlace malicioso.</li>
+          <li>Instalación y persistencia del malware en el equipo.</li>
+          <li>Establecimiento de conexión remota con el servidor C2.</li>
+        </ol>
       </div>
-      
-      <div class="timeline-item animate-pivoting">
-        <div class="timeline-badge badge-alert">Pivoting</div>
-        <h4>Movimiento Lateral (Víctima 2)</h4>
-        <p>Utilizando el primer host comprometido como puente o proxy inverso, el atacante escanea el segmento interno y realiza conexiones remotas hacia hosts restringidos, logrando la descarga del payload en una segunda infraestructura crítica de la red corporativa.</p>
+
+      <div class="thread-box">
+        <h3>Hilo 2: Movimiento Lateral (Víctima 2)</h3>
+        <ol>
+          <li>El atacante utiliza la Víctima 1 como pivote (proxy interno).</li>
+          <li>Se escanea la red y se efectúan conexiones internas a otros hosts.</li>
+          <li>Una segunda máquina es vulnerada y recibe la carga útil.</li>
+          <li>Este segundo host también reporta directamente al servidor C2.</li>
+        </ol>
       </div>
     </div>
   </section>
 
-  <section class="section-card border-left-highlight">
-    <h3>Conclusiones Analíticas</h3>
+  <section class="info-section conclusion-box">
+    <h2>Conclusiones</h2>
     <p>
-      El escenario estudiado ejemplifica cómo el Modelo Diamante complementa frameworks como la <strong>Cyber Kill Chain</strong>. No solo nos dice qué fases atravesó el atacante, sino cómo mutaron sus capacidades técnicas e infraestructuras en cada fase del movimiento lateral, permitiendo el despliegue de firmas de detección preventivas más robustas en el perímetro empresarial.
+      El escenario evidencia un ataque persistente (tipo APT) estructurado. Integrar el Modelo Diamante con la Kill Chain no solo facilita entender <em>quién</em> y <em>con qué</em> nos ataca, sino <em>en qué momento exacto</em> de la intrusión nos encontramos. Este enfoque metodológico es vital para diseñar alertas tempranas y bloquear el movimiento lateral antes de la exfiltración de datos.
     </p>
   </section>
 </div>
 
 <style>
-  .diamond-wrapper {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    color: var(--text-color, #1f2937);
+  :root {
+    --accent: #2563eb;
+    --card-bg: #f9f9f9;
+    --border-color: #e5e7eb;
+    --text-main: #171717;
+    --badge-bg: rgba(37, 99, 235, 0.1);
+  }
+  
+  :global(.dark) :root {
+    --accent: #60a5fa;
+    --card-bg: #151515;
+    --border-color: #333333;
+    --text-main: #ededed;
+    --badge-bg: rgba(96, 165, 250, 0.1);
+  }
+
+  .content-wrapper {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text-main);
+    line-height: 1.7;
   }
   .download-container {
     text-align: right;
     margin-bottom: 2rem;
   }
   .btn-download {
-    background: #059669;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: bold;
-  }
-  .section-card {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    padding: 2rem;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  }
-  :global(.dark) .section-card {
-    background: #0c0c0c;
-    border-color: #0a0a0a;
-    color: #f3f4f6;
-  }
-  h2, h3 {
-    margin-top: 0;
-    color: #080808;
-  }
-  :global(.dark) h2, :global(.dark) h3 {
-    color: #ffffff;
-  }
-  
-  /* Gráfico del Diamante hecho en bloques tradicionales CSS */
-  .box-center {
-    text-align: center;
-  }
-  .diamond-graphic {
-    position: relative;
-    width: 320px;
-    height: 320px;
-    margin: 2rem auto;
-    border: 2px dashed #94a3b8;
-    transform: rotate(45deg);
-    border-radius: 4px;
-  }
-  .node {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    background: #171717;
-    border: 2px solid #059669;
-    color: white;
+    background: transparent;
+    color: var(--accent);
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--accent);
     border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transform: rotate(-45deg);
-    padding: 5px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
   }
-  .node strong { font-size: 0.85rem; }
-  .node small { font-size: 0.65rem; color: #10b981; text-align: center; margin-top: 4px; }
-  
-  .node-top { top: -60px; left: 100px; }
-  .node-left { top: 100px; left: -60px; }
-  .node-right { top: 100px; right: -60px; }
-  .node-bottom { bottom: -60px; left: 100px; }
-
-  /* Timeline */
-  .timeline {
-    border-left: 2px solid #e5e7eb;
-    padding-left: 1.5rem;
-    margin-left: 0.5rem;
+  .btn-download:hover {
+    background: var(--accent);
+    color: #fff;
   }
-  :global(.dark) .timeline { border-left-color: #374151; }
-  .timeline-item {
-    position: relative;
+  .info-section {
+    margin-bottom: 3.5rem;
+  }
+  .section-badge {
+    display: inline-block;
+    background: var(--badge-bg);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    margin-bottom: 0.8rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+  .grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
     margin-bottom: 2rem;
   }
-  .timeline-badge {
-    position: absolute;
-    left: -2.3rem;
-    background: #3b82f6;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: bold;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    text-transform: uppercase;
+  .card-item {
+    background: var(--card-bg);
+    border-top: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
   }
-  .badge-alert {
-    background: #ef4444;
+  .card-item h3 {
+    margin-top: 0;
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
   }
-  .animate-pivoting {
-    border-left: 3px solid #ef4444;
-    padding-left: 1rem;
-    margin-left: -1rem;
+  .threads-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
   }
-  .border-left-highlight {
-    border-left: 4px solid #059669;
+  .thread-box {
+    flex: 1;
+    min-width: 300px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  .thread-box h3 {
+    color: var(--accent);
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  .thread-box ol {
+    padding-left: 1.2rem;
+    margin: 0;
+  }
+  .thread-box li {
+    margin-bottom: 0.6rem;
+  }
+  .table-responsive {
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-top: 1.5rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    font-size: 0.9rem;
+  }
+  th, td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+  }
+  th {
+    background: rgba(0,0,0,0.03);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  :global(.dark) th {
+    background: rgba(255,255,255,0.03);
+  }
+  .conclusion-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent);
+    padding: 2rem;
+    border-radius: 8px;
   }
 </style>

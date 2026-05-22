@@ -1,177 +1,254 @@
 ---
 export const frontmatter = {
-  title: "Actividad 17 - Evaluación de Vulnerabilidades con CVSS v3.1",
-  description: "Cálculo matemático de impacto y severidad de fallos de seguridad informática mediante métricas base.",
-  date: "2026-05-02",
-  readTime: "",
-  image: "/assets/images/posts/portadad_act17.png",
+  title: "Actividad 17 - Evaluación de Vulnerabilidades",
+  description: "Uso del modelo CVSS v3.1 para evaluar y priorizar la gravedad de una vulnerabilidad en un sistema web interno.",
+  date: "2026-04-20",
+  readTime: "5 min",
+  image: "/assets/images/posts/portadad_act17.jpg",
   slug: "act17-182377"
 };
 ---
 
-<div class="cvss-container">
+<div class="content-wrapper">
   <div class="download-container">
     <a href="/assets/images/docs_P1/act17-Equipo1.pdf" download class="btn-download">
-      📄 Descargar Reporte CVSS (PDF)
+      📄 Descargar PDF Original (Actividad 17)
     </a>
   </div>
 
-  <section class="cvss-panel">
-    <div class="badge-critical">Score CVSS: 7.2 (Alta)</div>
-    <h2>Análisis Crítico de Severidad</h2>
+  <section class="info-section">
+    <div class="section-badge">Resumen Ejecutivo</div>
+    <h2>Evaluación con CVSS v3.1</h2>
     <p>
-      Este módulo se enfoca en la evaluación estandarizada de una vulnerabilidad mediante el uso del <strong>Common Vulnerability Scoring System (CVSS v3.1)</strong>, permitiendo priorizar ventanas de mitigación e identificar vectores de explotación realistas.
+      La correcta evaluación de vulnerabilidades es esencial para la gestión de riesgos en ciberseguridad. En esta actividad se analiza un escenario de vulnerabilidad en un sistema web interno utilizando el estándar <strong>CVSS v3.1 (Common Vulnerability Scoring System)</strong>, construyendo su cadena de vector y justificando la priorización del riesgo a nivel organizacional.
     </p>
   </section>
 
-  <section class="cvss-panel">
-    <h3>Construcción del Vector Base</h3>
-    <div class="vector-string">
-      <code>CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H</code>
-    </div>
+  <section class="info-section">
+    <div class="section-badge">Escenario y Métricas</div>
+    <h2>Desglose Técnico del Vector</h2>
     
-    <div class="metrics-grid">
-      <div class="metric-box">
-        <span class="m-title">AV: Attack Vector</span>
-        <span class="m-value">Network (N)</span>
+    <div class="grid-cards">
+      <div class="card-item">
+        <h3>Condiciones del Escenario</h3>
+        <ul>
+          <li>Explotable a través de la red sin interacción del usuario.</li>
+          <li>Baja complejidad, pero requiere de <strong>privilegios elevados</strong>.</li>
+          <li>El alcance de seguridad no cambia (Unchanged).</li>
+          <li>Impacto bajo en Confidencialidad, Integridad y Disponibilidad.</li>
+        </ul>
       </div>
-      <div class="metric-box">
-        <span class="m-title">AC: Attack Complexity</span>
-        <span class="m-value">Low (L)</span>
+
+      <div class="card-item highlight-card">
+        <h3>Resultado CVSS</h3>
+        <div class="score-display">
+          <span class="score-number">4.7</span>
+          <span class="score-label">Severidad Media</span>
+        </div>
+        <p class="vector-string"><strong>Vector:</strong> CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:L/I:L/A:L</p>
       </div>
-      <div class="metric-box">
-        <span class="m-title">PR: Privileges Required</span>
-        <span class="m-value">High (H)</span>
+    </div>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Métrica Base</th>
+            <th>Valor Asignado</th>
+            <th>Justificación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Attack Vector (AV)</strong></td>
+            <td>Network (N)</td>
+            <td>La vulnerabilidad puede explotarse a través de la red remota.</td>
+          </tr>
+          <tr>
+            <td><strong>Attack Complexity (AC)</strong></td>
+            <td>Low (L)</td>
+            <td>No existen condiciones especiales ni evasiones complejas requeridas.</td>
+          </tr>
+          <tr>
+            <td><strong>Privileges Required (PR)</strong></td>
+            <td>High (H)</td>
+            <td>El atacante requiere privilegios administrativos para la ejecución.</td>
+          </tr>
+          <tr>
+            <td><strong>Impacto (C / I / A)</strong></td>
+            <td>Low (L) en todas</td>
+            <td>La exposición, modificación e interrupción del servicio es parcial y limitada.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="section-badge">Análisis de Riesgo</div>
+    <h2>Interpretación del Impacto</h2>
+    <div class="grid-cards">
+      <div class="card-item">
+        <h3>¿Sigue siendo relevante pese a requerir altos privilegios?</h3>
+        <p>Sí. Aunque reduce la amenaza de atacantes externos no autenticados, representa un grave riesgo frente a <em>insider threats</em>, administradores maliciosos o atacantes que ya han escalado privilegios en la red (movimientos laterales).</p>
       </div>
-      <div class="metric-box">
-        <span class="m-title">UI: User Interaction</span>
-        <span class="m-value">None (N)</span>
+      <div class="card-item">
+        <h3>Significado de "Impacto Bajo"</h3>
+        <p>Un impacto bajo en las tres dimensiones indica que la fuga o alteración de datos es restringida y no tumba el servicio por completo. Sin embargo, en un ataque encadenado, esta vulnerabilidad podría ser el puente hacia activos más críticos.</p>
       </div>
     </div>
   </section>
 
-  <section class="cvss-panel text-block">
-    <h3>Preguntas Clave e Interpretación</h3>
-    <div class="qa-item">
-      <h4>¿Por qué sigue siendo crítica una vulnerabilidad si requiere privilegios elevados?</h4>
-      <p>
-        Porque los privilegios elevados pueden obtenerse previamente mediante otros vectores (como Ingeniería Social o reutilización de credenciales). Una vez dentro, la vulnerabilidad permite un desbordamiento o compromiso absoluto de los componentes de confidencialidad e integridad sin requerir interacción del usuario.
-      </p>
-    </div>
-    <div class="qa-item">
-      <h4>¿Qué perfil de atacante podría explotarla?</h4>
-      <p>
-        Un atacante interno (Insider Amenaza) o un actor externo persistente (APT) que ya haya comprometido una cuenta de administración básica dentro del entorno de red.
-      </p>
-    </div>
-  </section>
-
-  <section class="cvss-panel footer-summary">
-    <h3>Conclusión de Gestión</h3>
+  <section class="info-section conclusion-box">
+    <h2>Conclusiones</h2>
     <p>
-      El uso del marco CVSS v3.1 es una práctica indispensable en el ciclo de vulnerabilidades. Evita valoraciones subjetivas y asienta métricas reproducibles para optimizar los recursos del departamento de seguridad, mitigando los vectores de mayor exposición antes de que sean explotados de forma maliciosa.
+      El uso de CVSS v3.1 estandariza la comunicación del riesgo y optimiza recursos de mitigación. El análisis demostró que vulnerabilidades de "Severidad Media" y con "Impacto Bajo" no deben subestimarse en el ámbito corporativo, ya que su explotación remota y baja complejidad las hacen herramientas útiles para atacantes con persistencia y accesos comprometidos.
     </p>
   </section>
 </div>
 
 <style>
-  .cvss-container {
-    font-family: 'Courier New', Courier, monospace;
-    color: #e2e8f0;
+  :root {
+    --accent: #2563eb;
+    --card-bg: #f9f9f9;
+    --border-color: #e5e7eb;
+    --text-main: #171717;
+    --badge-bg: rgba(37, 99, 235, 0.1);
+  }
+  
+  :global(.dark) :root {
+    --accent: #60a5fa;
+    --card-bg: #151515;
+    --border-color: #333333;
+    --text-main: #ededed;
+    --badge-bg: rgba(96, 165, 250, 0.1);
+  }
+
+  .content-wrapper {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text-main);
+    line-height: 1.7;
   }
   .download-container {
     text-align: right;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
   .btn-download {
-    background: #dc2626;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    background: transparent;
+    color: var(--accent);
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
   }
-  .cvss-panel {
-    background: #0f172a;
-    border: 1px solid #1e293b;
-    padding: 1.5rem;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
+  .btn-download:hover {
+    background: var(--accent);
+    color: #fff;
   }
-  :global(.light) .cvss-panel {
-    background: #f8fafc;
-    border-color: #cbd5e1;
-    color: #1e293b;
+  .info-section {
+    margin-bottom: 3.5rem;
   }
-  .badge-critical {
+  .section-badge {
     display: inline-block;
-    background: #ea580c;
-    color: white;
+    background: var(--badge-bg);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
     padding: 0.3rem 0.8rem;
     border-radius: 4px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
   }
-  h2, h3 {
-    color: #f8fafc;
-    margin-top: 0;
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
   }
-  :global(.light) h2, :global(.light) h3 {
-    color: #090c14;
-  }
-  .vector-string {
-    background: #020617;
-    padding: 1rem;
-    border-left: 3px solid #ea580c;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    overflow-x: auto;
-  }
-  :global(.light) .vector-string {
-    background: #e2e8f0;
-  }
-  .metrics-grid {
+  .grid-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
   }
-  .metric-box {
-    background: #0c0c0c;
-    padding: 0.75rem;
-    border-radius: 4px;
+  .card-item {
+    background: var(--card-bg);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  }
+  .card-item h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .highlight-card {
+    border: 1px solid var(--accent);
+    border-left: 6px solid var(--accent);
     text-align: center;
   }
-  :global(.light) .metric-box {
-    background: #cbd5e1;
+  .score-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
   }
-  .m-title {
-    display: block;
-    font-size: 0.75rem;
-    color: #94a3b8;
-    margin-bottom: 0.25rem;
+  .score-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #f59e0b; /* Naranja/Medio */
   }
-  :global(.light) .m-title {
-    color: #161616;
+  .score-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
   }
-  .m-value {
-    font-weight: bold;
-    font-size: 1rem;
-    color: #f8fafc;
+  .vector-string {
+    font-family: monospace;
+    font-size: 0.85rem;
+    background: rgba(0,0,0,0.05);
+    padding: 0.5rem;
+    border-radius: 4px;
+    word-break: break-all;
   }
-  :global(.light) .m-value {
-    color: #0b0b0b;
+  :global(.dark) .vector-string {
+    background: rgba(255,255,255,0.05);
   }
-  .qa-item {
-    margin-bottom: 1.25rem;
+  .table-responsive {
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
   }
-  .qa-item h4 {
-    margin-bottom: 0.25rem;
-    color: #f43f5e;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    font-size: 0.9rem;
   }
-  .footer-summary {
-    border-top: 3px solid #10b981;
+  th, td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+  }
+  th {
+    background: rgba(0,0,0,0.03);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  :global(.dark) th {
+    background: rgba(255,255,255,0.03);
+  }
+  .conclusion-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid #10b981; /* Verde éxito */
+    padding: 2rem;
+    border-radius: 8px;
   }
 </style>

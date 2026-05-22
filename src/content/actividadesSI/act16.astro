@@ -3,13 +3,13 @@ export const frontmatter = {
   title: "Actividad 16 - Dilemas Éticos en Ciberseguridad",
   description: "Análisis de escenarios reales de intrusión y dilemas morales utilizando marcos éticos corporativos y filosóficos.",
   date: "2026-04-18",
-  readTime: "",
+  readTime: "5 min",
   image: "/assets/images/posts/portadad_act16.jpg",
   slug: "act16-182377"
 };
 ---
 
-<div class="ethics-wrapper">
+<div class="content-wrapper">
   <div class="download-container">
     <a href="/assets/images/docs_P1/act16-Equipo1.pdf" download class="btn-download">
       📂 Descargar PDF Original (Actividad 16)
@@ -28,23 +28,23 @@ export const frontmatter = {
     <div class="section-badge">Casos de Estudio</div>
     <h2>Análisis de Escenarios Reales</h2>
     
-    <div class="grid-scenarios">
-      <div class="card-scenario">
-        <h3>Escenario 01: Acceso Interno No Autorizado</h3>
+    <div class="grid-cards">
+      <div class="card-item">
+        <h3>Escenario 01: Acceso No Autorizado</h3>
         <p><strong>Incidente:</strong> Detección de un colega del área de desarrollo consultando directorios de bases de datos de recursos humanos sin justificación operativa.</p>
-        <span class="framework">Enfoque: Derechos individuales vs. Seguridad corporativa</span>
+        <p class="framework-text"><strong>Enfoque:</strong> Derechos individuales vs. Seguridad corporativa</p>
       </div>
 
-      <div class="card-scenario">
-        <h3>Escenario 02: Vulnerabilidad Crítica No Reportada</h3>
+      <div class="card-item">
+        <h3>Escenario 02: Fallo No Reportado</h3>
         <p><strong>Incidente:</strong> Descubrimiento de un fallo de ejecución remota de código (RCE) en un software ampliamente utilizado. El fabricante ignora los reportes iniciales.</p>
-        <span class="framework">Enfoque: Utilitarismo (El mayor bien para el mayor número)</span>
+        <p class="framework-text"><strong>Enfoque:</strong> Utilitarismo (El mayor bien para el mayor número)</p>
       </div>
 
-      <div class="card-scenario">
-        <h3>Escenario 03: Límites de Herramientas OSINT</h3>
+      <div class="card-item">
+        <h3>Escenario 03: Límites de OSINT</h3>
         <p><strong>Incidente:</strong> Recopilación masiva de datos públicos de empleados en redes sociales para estructurar una campaña corporativa de concientización sobre Phishing.</p>
-        <span class="framework">Enfoque: Bien Común y Privacidad Perimetral</span>
+        <p class="framework-text"><strong>Enfoque:</strong> Bien Común y Privacidad Perimetral</p>
       </div>
     </div>
   </section>
@@ -91,115 +91,123 @@ export const frontmatter = {
 </div>
 
 <style>
-  .ethics-wrapper {
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: var(--text-color, #333);
-    line-height: 1.6;
+  :root {
+    --accent: #2563eb;
+    --card-bg: #f9f9f9;
+    --border-color: #e5e7eb;
+    --text-main: #171717;
+    --badge-bg: rgba(37, 99, 235, 0.1);
+  }
+  
+  :global(.dark) :root {
+    --accent: #60a5fa;
+    --card-bg: #151515;
+    --border-color: #333333;
+    --text-main: #ededed;
+    --badge-bg: rgba(96, 165, 250, 0.1);
+  }
+
+  .content-wrapper {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text-main);
+    line-height: 1.7;
   }
   .download-container {
     text-align: right;
     margin-bottom: 2rem;
   }
   .btn-download {
-    background: #1e3a8a;
-    color: #fff;
+    background: transparent;
+    color: var(--accent);
     padding: 0.6rem 1.2rem;
-    border-radius: 6px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: background 0.2s ease;
+    font-weight: 500;
+    transition: all 0.3s ease;
   }
   .btn-download:hover {
-    background: #2563eb;
+    background: var(--accent);
+    color: #fff;
   }
   .info-section {
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
   }
   .section-badge {
     display: inline-block;
-    background: #eff6ff;
-    color: #1e40af;
+    background: var(--badge-bg);
+    color: var(--accent);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    padding: 0.25rem 0.6rem;
+    padding: 0.3rem 0.8rem;
     border-radius: 4px;
-    margin-bottom: 0.5rem;
-  }
-  :global(.dark) .section-badge {
-    background: #1e293b;
-    color: #38bdf8;
+    margin-bottom: 0.8rem;
   }
   h2 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #111827;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
   }
-  :global(.dark) h2 {
-    color: #f9fafb;
+  .grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
   }
-  .grid-scenarios {
-    display: block;
-  }
-  .card-scenario {
-    background: #f9fafb;
-    border-left: 4px solid #1e3a8a;
+  .card-item {
+    background: var(--card-bg);
+    border-top: 4px solid var(--accent);
+    border-radius: 8px;
     padding: 1.5rem;
-    margin-bottom: 1rem;
-    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
   }
-  :global(.dark) .card-scenario {
-    background: #111827;
-    border-left-color: #38bdf8;
-  }
-  .card-scenario h3 {
+  .card-item h3 {
     margin-top: 0;
-    font-size: 1.2rem;
-    color: #1e3a8a;
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
   }
-  :global(.dark) .card-scenario h3 {
-    color: #38bdf8;
-  }
-  .framework {
-    display: inline-block;
-    margin-top: 0.75rem;
+  .framework-text {
+    margin-top: 1rem;
     font-size: 0.85rem;
-    font-style: italic;
-    color: #6b7280;
+    color: var(--accent);
+    background: var(--badge-bg);
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
   }
   .table-responsive {
     overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
   }
   table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
-    text-align: left;
+    background: var(--card-bg);
+    font-size: 0.9rem;
   }
   th, td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #e5e7eb;
-  }
-  :global(.dark) th, :global(.dark) td {
-    border-bottom-color: #374151;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
   }
   th {
-    background: #f3f4f6;
+    background: rgba(0,0,0,0.03);
+    color: var(--accent);
     font-weight: 600;
   }
   :global(.dark) th {
-    background: #1f2937;
+    background: rgba(255,255,255,0.03);
   }
   .conclusion-box {
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent);
     padding: 2rem;
     border-radius: 8px;
-  }
-  :global(.dark) .conclusion-box {
-    background: #064e3b;
-    border-color: #047857;
   }
 </style>
