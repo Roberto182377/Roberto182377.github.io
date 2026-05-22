@@ -1,10 +1,12 @@
-
 ---
-title: "Ciberseguridad Organizacional: Ataques, Conceptos y Técnicas"
+title: "Actividad 10 - Ciberseguridad Organizacional: Ataques, Conceptos y Técnicas"
 description: "Análisis de amenazas cibernéticas, vectores de ataque y estrategias de mitigación en el ámbito organizacional."
 date: "2026-03-15"
-slug: "ciberseguridad-organizacional-ataques-conceptos-y-tecnicas"
+readTime: ""
+image: "/assets/images/posts/pr01-7.png"
+slug: "act10-182377"
 ---
+
 
 ## 🛡 Introducción
 Este documento explora el panorama actual de las amenazas cibernéticas que enfrentan las organizaciones. Analizamos la composición de un entorno de amenazas, desde el software malicioso hasta la ingeniería social, y cómo estas vulnerabilidades pueden comprometer la integridad operativa y financiera de una empresa.
