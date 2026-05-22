@@ -1,6 +1,6 @@
 ---
 export const frontmatter = {
-  title: "Actividad 18 - Análisis de intrusión con Modelo Diamante",
+  title: "Actividad 18 - Análisis de Intrusión con Modelo Diamante",
   description: "Estudio de un incidente de malware correlacionando los vértices del Modelo Diamante y las fases de la Cyber Kill Chain.",
   date: "2026-04-22",
   readTime: "6 min",
@@ -9,73 +9,105 @@ export const frontmatter = {
 };
 ---
 
-<div class="content-wrapper">
+<div class="dark-portfolio-wrapper">
   <div class="download-container">
     <a href="/assets/images/docs_P1/act18-Equipo1.pdf" download class="btn-download">
-      📄 Descargar PDF Original (Actividad 18)
+      Descargar PDF Original (Actividad 18)
     </a>
   </div>
 
   <section class="info-section">
     <div class="section-badge">Introducción</div>
-    <h2>Correlación de Modelos de Intrusión</h2>
+    <h2>Introducción</h2>
     <p>
-      El análisis de intrusiones permite mapear cómo operan los atacantes en una red. Esta actividad examina un caso de compromiso por malware utilizando el <strong>Modelo Diamante</strong> para estructurar los elementos del ataque (Adversario, Capacidad, Infraestructura, Víctima) y la <strong>Cyber Kill Chain</strong> para trazar su desarrollo temporal y lateralización.
+      El análisis moderno de incidentes exige metodologías capaces de vincular aspectos técnicos y relacionales para entender la estrategia del adversario. En este reporte se efectúa una modelación analítica de una intrusión de malware detectada dentro de un entorno corporativo. Utilizando de forma integrada el Modelo Diamante de Análisis de Intrusiones y las fases temporales de la Cyber Kill Chain, se mapean las capacidades, la infraestructura y los vectores de desplazamiento empleados, proveyendo al equipo de respuesta una base estructurada para la contención de amenazas avanzadas.
     </p>
   </section>
 
   <section class="info-section">
-    <div class="section-badge">Fundamentos</div>
-    <h2>El Modelo Diamante</h2>
-    <div class="grid-cards">
-      <div class="card-item">
-        <h3>👿 Adversario</h3>
-        <p>Grupo APT o ciberdelincuente externo que dirige la campaña de malware y controla el ataque.</p>
+    <div class="section-badge">Dirección</div>
+    <h2>Objetivos de la Modelación</h2>
+    <div class="objectives-grid">
+      <div class="objective-card">
+        <h3>Objetivo General</h3>
+        <p>Estructurar de forma analítica el compromiso de seguridad informática del escenario mediante la correlación metodológica del Modelo Diamante y la Cyber Kill Chain para entender la persistencia de la amenaza.</p>
       </div>
-      <div class="card-item">
-        <h3>⚔️ Capacidad</h3>
-        <p>Técnicas empleadas: Ingeniería social (Phishing), ejecución de payload, conexión C2 y pivoting lateral.</p>
-      </div>
-      <div class="card-item">
-        <h3>🌐 Infraestructura</h3>
-        <p>Dominios maliciosos, direcciones IP externas y servidores de Comando y Control (C2) habilitados.</p>
-      </div>
-      <div class="card-item">
-        <h3>🎯 Víctima</h3>
-        <p>Usuario inicial comprometido y equipos secundarios alcanzados mediante movimiento lateral.</p>
+      <div class="objective-card">
+        <h3>Objetivos Específicos</h3>
+        <ul>
+          <li>Identificar y contextualizar los cuatro ejes centrales del Modelo Diamante presentes en la brecha de red.</li>
+          <li>Clasificar cronológicamente las acciones del atacante dentro de los eslabones operativos de la Kill Chain.</li>
+          <li>Mapear el mecanismo de pivoteo técnico (movimiento lateral) desarrollado entre las estaciones víctimas.</li>
+        </ul>
       </div>
     </div>
   </section>
 
   <section class="info-section">
-    <div class="section-badge">Análisis del Escenario</div>
-    <h2>Relación con la Cyber Kill Chain</h2>
-    <p>El SOC detectó actividad anómala, resoluciones DNS hacia dominios C2 y múltiples hosts conectándose a direcciones IP externas. La progresión se categoriza de la siguiente forma:</p>
-    
+    <div class="section-badge">Análisis Estructurado</div>
+    <h2>El Modelo Diamante de Intrusión</h2>
+    <p>
+      El Modelo Diamante es un esquema matemático-analítico que representa un evento de intrusión informática mediante cuatro vértices conectados: Adversario, Capacidad, Infraestructura y Víctima. Estos ejes permiten correlacionar el origen de la amenaza con los recursos técnicos utilizados, facilitando la detección de patrones de ciberespionaje y facilitando la inteligencia de amenazas.
+    </p>
+
+    <div class="diamond-diagram-container">
+      <div class="diamond-layout">
+        <div class="diamond-node top-node">
+          <div class="node-title">Adversario</div>
+          <div class="node-desc">Grupo APT Externo</div>
+        </div>
+        <div class="diamond-axis-lines">
+          <div class="line-h"></div>
+          <div class="line-v"></div>
+        </div>
+        <div class="diamond-node left-node">
+          <div class="node-title">Capacidad</div>
+          <div class="node-desc">Phishing & RAT Malware</div>
+        </div>
+        <div class="diamond-node right-node">
+          <div class="node-title">Infraestructura</div>
+          <div class="node-desc">Servidores C2 & DNS</div>
+        </div>
+        <div class="diamond-node bottom-node">
+          <div class="node-title">Víctima</div>
+          <div class="node-desc">Estaciones de Red Interna</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="section-badge">Parte 1</div>
+    <h2>Comprensión de los Vértices del Diamante</h2>
     <div class="table-responsive">
       <table>
         <thead>
           <tr>
-            <th>Evento Analizado</th>
-            <th>Fase Kill Chain</th>
-            <th>Justificación</th>
+            <th>Vértice Core</th>
+            <th>Definición Operativa del Eje</th>
+            <th>Evidencia Tecnológica Asociada</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Envío de phishing</strong></td>
-            <td>Entrega (Delivery)</td>
-            <td>El adversario transmite la carga útil a la víctima inicial mediante un correo engañoso.</td>
+            <td><strong>Adversario (Adversary)</strong></td>
+            <td>El actor malicioso o grupo de amenaza detrás del ataque.</td>
+            <td>Huellas lógicas, firmas de código y atribución de procedencia de IPs.</td>
           </tr>
           <tr>
-            <td><strong>Ejecución del malware</strong></td>
-            <td>Explotación / Ejecución</td>
-            <td>El código malicioso se activa en el sistema comprometiendo la máquina local.</td>
+            <td><strong>Capacidad (Capability)</strong></td>
+            <td>Herramientas, software, tácticas y malwares ejecutados por el atacante.</td>
+            <td>Payloads maliciosos, técnicas de inyección, scripts de automatización.</td>
           </tr>
           <tr>
-            <td><strong>Conexión a C2</strong></td>
-            <td>Comando y Control</td>
-            <td>El malware establece un canal saliente a IPs externas para recibir instrucciones o descargar más payloads.</td>
+            <td><strong>Infraestructura (Infrastructure)</strong></td>
+            <td>Los canales y sistemas físicos/lógicos que conectan al adversario con la víctima.</td>
+            <td>Dominios maliciosos, servidores proxy, relays SMTP, direcciones de Command & Control.</td>
+          </tr>
+          <tr>
+            <td><strong>Víctima (Victim)</strong></td>
+            <td>El objetivo afectado (usuarios, equipos de cómputo, redes, datos organizacionales).</td>
+            <td>Estaciones de trabajo comprometidas, cuentas comprometidas en sistemas de archivos.</td>
           </tr>
         </tbody>
       </table>
@@ -83,60 +115,157 @@ export const frontmatter = {
   </section>
 
   <section class="info-section">
-    <div class="section-badge">Progresión del Ataque</div>
-    <h2>Hilos de Actividad (Activity Threads)</h2>
-    
-    <div class="threads-container">
-      <div class="thread-box">
-        <h3>Hilo 1: Brecha Inicial (Víctima 1)</h3>
+    <div class="section-badge">Parte 2</div>
+    <h2>Análisis del Evento de Seguridad</h2>
+    <div class="split-layout-v2">
+      <div class="left-text-block">
+        <p>
+          El Centro de Operaciones de Seguridad (SOC) registró alertas severas de persistencia tras identificar resoluciones DNS irregulares generadas desde la estación de un administrador de sistemas corporativos hacia un dominio externo no catalogado. Tras aislar la red, se identificó un canal de balizamiento (beaconing) saliente persistente hacia IPs vinculadas con una campaña de control activo, detonando el flujo de análisis técnico forense.
+        </p>
+      </div>
+      <div class="right-table-block">
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Componente Detectado</th>
+                <th>Clasificación del Evento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>IP Externa / DNS no seguro</td>
+                <td>Infraestructura de Comando y Control (C2)</td>
+              </tr>
+              <tr>
+                <td>Estación de Administrador</td>
+                <td>Víctima Primaria de la Infiltración</td>
+              </tr>
+              <tr>
+                <td>Balizamiento de Red (Beaconing)</td>
+                <td>Capacidad de Comunicación Persistente</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="questions-summary-box">
+      <h3>Cuestionario Analítico Resumido</h3>
+      <div class="q-item">
+        <span class="query-txt">¿Quién es el adversario en este escenario?</span>
+        <p class="ans-txt">Un actor organizado externo (APT) enfocado en la persistencia y la extracción interna de credenciales de red.</p>
+      </div>
+      <div class="q-item">
+        <span class="query-txt">¿Existe evidencia clara de movimiento lateral?</span>
+        <p class="ans-txt">Sí, las trazas del host primario confirmaron el escaneo activo de puertos SMB e intentos de autenticación remota hacia servidores internos secundarios.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="section-badge">Parte 3</div>
+    <h2>Correlación con la Cyber Kill Chain</h2>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Fase de la Línea de Ataque</th>
+            <th>Acción Técnica Desplegada por el Adversario</th>
+            <th>Indicador de Compromiso (IoC)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reconocimiento (Reconnaissance)</td>
+            <td>Identificación de perfiles organizacionales y servidores de correo expuestos.</td>
+            <td>Logs de escaneo web perimetral.</td>
+          </tr>
+          <tr>
+            <td>Entrega (Delivery)</td>
+            <td>Envío de correos electrónicos dirigidos con enlaces de suplantación avanzados.</td>
+            <td>Correos inyectados mediante relay desprotegido.</td>
+          </tr>
+          <tr>
+            <td>Explotación y Ejecución</td>
+            <td>Ejecución local del script malicioso tras la interacción de la víctima inicial.</td>
+            <td>Procesos huérfanos ejecutados en segundo plano.</td>
+          </tr>
+          <tr>
+            <td>Comando y Control (C2)</td>
+            <td>Establecimiento del túnel de red inverso cifrado saliente por puertos comunes.</td>
+            <td>Peticiones DNS periódicas a dominios anómalos.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="section-badge">Parte 4</div>
+    <h2>Hilos de Actividad de la Intrusión</h2>
+    <div class="two-columns-threads">
+      <div class="thread-column left-thread">
+        <h3>Hilo 1: Brecha Inicial e Infiltración</h3>
         <ol>
-          <li>El atacante envía un correo phishing al administrador.</li>
-          <li>El administrador ejecuta el archivo adjunto/enlace malicioso.</li>
-          <li>Instalación y persistencia del malware en el equipo.</li>
-          <li>Establecimiento de conexión remota con el servidor C2.</li>
+          <li>El adversario dirige un correo de phishing dirigido al administrador de red.</li>
+          <li>El usuario ejecuta involuntariamente el ejecutable/macro dentro de la sesión.</li>
+          <li>Se levanta un binario malicioso que inyecta código en procesos legítimos del sistema operativo.</li>
+          <li>El agente realiza una conexión de retorno web estableciendo el canal de comando C2.</li>
         </ol>
       </div>
-
-      <div class="thread-box">
-        <h3>Hilo 2: Movimiento Lateral (Víctima 2)</h3>
+      <div class="thread-column right-thread">
+        <h3>Hilo 2: Pivoteo y Movimiento Lateral</h3>
         <ol>
-          <li>El atacante utiliza la Víctima 1 como pivote (proxy interno).</li>
-          <li>Se escanea la red y se efectúan conexiones internas a otros hosts.</li>
-          <li>Una segunda máquina es vulnerada y recibe la carga útil.</li>
-          <li>Este segundo host también reporta directamente al servidor C2.</li>
+          <li>El adversario utiliza la sesión de la Víctima 1 como un nodo proxy interno de red.</li>
+          <li>Se ejecutan comandos internos de enumeración y escaneo hacia la subred de servidores.</li>
+          <li>Explotación de debilidades de autenticación compartida para comprometer una segunda máquina interna.</li>
+          <li>La Víctima 2 establece conexión paralela expandiendo la red zombie del atacante.</li>
         </ol>
       </div>
     </div>
   </section>
 
   <section class="info-section conclusion-box">
-    <h2>Conclusiones</h2>
+    <h2>Conclusión</h2>
     <p>
-      El escenario evidencia un ataque persistente (tipo APT) estructurado. Integrar el Modelo Diamante con la Kill Chain no solo facilita entender <em>quién</em> y <em>con qué</em> nos ataca, sino <em>en qué momento exacto</em> de la intrusión nos encontramos. Este enfoque metodológico es vital para diseñar alertas tempranas y bloquear el movimiento lateral antes de la exfiltración de datos.
+      La modelación integrada del ataque demostró la efectividad de un enfoque multicapa. Mientras que el Modelo Diamante aporta claridad inmediata para catalogar las entidades involucradas (IPs, herramientas, objetivos), la Cyber Kill Chain traza el progreso temporal del incidente. Entender de forma rigurosa la interconexión de estos elementos permite a los administradores de sistemas cortar la cadena del exploit en fases tempranas, previniendo la exfiltración final de datos corporativos críticos.
     </p>
+  </section>
+
+  <section class="info-section">
+    <div class="section-badge">Documento</div>
+    <h2>Visualización del Reporte Completo</h2>
+    <div class="pdf-preview-container">
+      <iframe src="/assets/images/docs_P1/act18-Equipo1.pdf" class="pdf-iframe" title="Visualizador de PDF Actividad 18"></iframe>
+    </div>
+  </section>
+
+  <section class="info-section references-section">
+    <h2>Referencias Bibliográficas</h2>
+    <ul>
+      <li>Caltagirone, S., Johansen, A., & Williams, D. (2013). <em>The Diamond Model for Intrusion Analysis.</em> Center for Cyber Threat Intelligence and Innovation. Technical Report.</li>
+      <li>Hutchins, E. M., Cloppert, M. J., & Amin, R. M. (2011). <em>Intelligence-driven computer network defense informed by analysis of adversary campaigns and cyber kill chains.</em> Leading Edge Market Space, Lockheed Martin Corporation.</li>
+      <li>Malhotra, A. (2020). <em>Cyber Threat Intelligence: Classifying Adversary Tactics with Diamond Model and MITRE ATT&CK.</em> Journal of Cyber Security Technology, 4(2), 112-128.</li>
+    </ul>
   </section>
 </div>
 
 <style>
-  :root {
-    --accent: #2563eb;
-    --card-bg: #f9f9f9;
-    --border-color: #e5e7eb;
-    --text-main: #171717;
-    --badge-bg: rgba(37, 99, 235, 0.1);
-  }
-  
-  :global(.dark) :root {
-    --accent: #60a5fa;
-    --card-bg: #151515;
-    --border-color: #333333;
-    --text-main: #ededed;
-    --badge-bg: rgba(96, 165, 250, 0.1);
-  }
-
-  .content-wrapper {
+  .dark-portfolio-wrapper {
+    --bg-dark: #09090b;
+    --card-dark: #141416;
+    --border-dark: #27272a;
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --accent-blue: #3b82f6;
+    --accent-blue-bg: rgba(59, 130, 246, 0.1);
+    
     font-family: 'Inter', system-ui, sans-serif;
-    color: var(--text-main);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    padding: 2rem;
     line-height: 1.7;
   }
   .download-container {
@@ -145,16 +274,16 @@ export const frontmatter = {
   }
   .btn-download {
     background: transparent;
-    color: var(--accent);
+    color: var(--accent-blue);
     padding: 0.6rem 1.2rem;
-    border: 1px solid var(--accent);
-    border-radius: 8px;
+    border: 1px solid var(--accent-blue);
+    border-radius: 6px;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
   }
   .btn-download:hover {
-    background: var(--accent);
+    background: var(--accent-blue);
     color: #fff;
   }
   .info-section {
@@ -162,97 +291,220 @@ export const frontmatter = {
   }
   .section-badge {
     display: inline-block;
-    background: var(--badge-bg);
-    color: var(--accent);
+    background: var(--accent-blue-bg);
+    color: var(--accent-blue);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     padding: 0.3rem 0.8rem;
     border-radius: 4px;
     margin-bottom: 0.8rem;
+    border: 1px solid rgba(59, 130, 246, 0.2);
   }
   h2 {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
     font-weight: 800;
     margin-bottom: 1.2rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-dark);
     padding-bottom: 0.5rem;
+    color: var(--text-primary);
   }
-  .grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .card-item {
-    background: var(--card-bg);
-    border-top: 4px solid var(--accent);
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-  }
-  .card-item h3 {
-    margin-top: 0;
-    font-size: 1.15rem;
-    color: var(--accent);
-    margin-bottom: 0.8rem;
-  }
-  .threads-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-  }
-  .thread-box {
-    flex: 1;
-    min-width: 300px;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    padding: 1.5rem;
-    border-radius: 8px;
-  }
-  .thread-box h3 {
-    color: var(--accent);
-    margin-top: 0;
+  h3 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
     margin-bottom: 1rem;
   }
-  .thread-box ol {
+  p, li {
+    color: var(--text-secondary);
+  }
+  .objectives-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .objective-card {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  .objective-card h3 {
+    color: var(--accent-blue);
+    margin-top: 0;
+  }
+  
+  /* ESTILOS DEL DIAGRAMA DIAMANTE CSS */
+  .diamond-diagram-container {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    padding: 3rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+  .diamond-layout {
+    position: relative;
+    width: 450px;
+    height: 300px;
+  }
+  .diamond-node {
+    position: absolute;
+    background: #18181b;
+    border: 1px solid var(--border-dark);
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    text-align: center;
+    width: 140px;
+    z-index: 5;
+  }
+  .node-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--accent-blue);
+  }
+  .node-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+  .top-node { top: 0; left: 50%; transform: translateX(-50%); border-top: 3px solid var(--accent-blue); }
+  .bottom-node { bottom: 0; left: 50%; transform: translateX(-50%); border-bottom: 3px solid var(--accent-blue); }
+  .left-node { left: 0; top: 50%; transform: translateY(-50%); border-left: 3px solid var(--accent-blue); }
+  .right-node { right: 0; top: 50%; transform: translateY(-50%); border-right: 3px solid var(--accent-blue); }
+  
+  .diamond-axis-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  .line-h {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    border-top: 1px dashed var(--border-dark);
+  }
+  .line-v {
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    border-left: 1px dashed var(--border-dark);
+  }
+
+  /* SPLIT LAYOUT PARTE 2 */
+  .split-layout-v2 {
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .questions-summary-box {
+    margin-top: 1.5rem;
+    background: #18181b;
+    border: 1px solid var(--border-dark);
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  .q-item {
+    margin-bottom: 1rem;
+  }
+  .q-item:last-child {
+    margin-bottom: 0;
+  }
+  .query-txt {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--accent-blue);
+  }
+  .ans-txt {
+    margin-top: 0.2rem;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+  }
+
+  /* DOS COLUMNAS HILOS DE ACTIVIDAD */
+  .two-columns-threads {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .thread-column {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  .left-thread { border-left: 4px solid var(--accent-blue); }
+  .right-thread { border-left: 4px solid #10b981; }
+  .thread-column h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  ol {
     padding-left: 1.2rem;
     margin: 0;
   }
-  .thread-box li {
+  li {
     margin-bottom: 0.6rem;
+    font-size: 0.9rem;
   }
+
   .table-responsive {
     overflow-x: auto;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-dark);
     border-radius: 8px;
-    margin-top: 1.5rem;
   }
   table {
     width: 100%;
     border-collapse: collapse;
-    background: var(--card-bg);
+    background: var(--card-dark);
     font-size: 0.9rem;
-  }
-  th, td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
     text-align: left;
   }
+  th, td {
+    padding: 0.85rem;
+    border-bottom: 1px solid var(--border-dark);
+    border-right: 1px solid var(--border-dark);
+  }
   th {
-    background: rgba(0,0,0,0.03);
-    color: var(--accent);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--accent-blue);
     font-weight: 600;
   }
-  :global(.dark) th {
-    background: rgba(255,255,255,0.03);
-  }
   .conclusion-box {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid var(--accent);
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-left: 4px solid #10b981;
     padding: 2rem;
     border-radius: 8px;
+  }
+  .pdf-preview-container {
+    width: 100%;
+    height: 600px;
+    background: var(--card-dark);
+    border: 1px dashed var(--border-dark);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .pdf-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .references-section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .references-section li {
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
   }
 </style>

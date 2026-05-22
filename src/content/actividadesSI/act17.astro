@@ -1,6 +1,6 @@
 ---
 export const frontmatter = {
-  title: "Actividad 17 - Evaluación de Vulnerabilidades",
+  title: "Actividad 17 - Evaluación de Vulnerabilidades con CVSS v3.1",
   description: "Uso del modelo CVSS v3.1 para evaluar y priorizar la gravedad de una vulnerabilidad en un sistema web interno.",
   date: "2026-04-20",
   readTime: "5 min",
@@ -9,75 +9,114 @@ export const frontmatter = {
 };
 ---
 
-<div class="content-wrapper">
+<div class="dark-portfolio-wrapper">
   <div class="download-container">
     <a href="/assets/images/docs_P1/act17-Equipo1.pdf" download class="btn-download">
-      📄 Descargar PDF Original (Actividad 17)
+      Descargar PDF Original (Actividad 17)
     </a>
   </div>
 
   <section class="info-section">
-    <div class="section-badge">Resumen Ejecutivo</div>
-    <h2>Evaluación con CVSS v3.1</h2>
+    <div class="section-badge">Introducción</div>
+    <h2>Resumen Ejecutivo</h2>
     <p>
-      La correcta evaluación de vulnerabilidades es esencial para la gestión de riesgos en ciberseguridad. En esta actividad se analiza un escenario de vulnerabilidad en un sistema web interno utilizando el estándar <strong>CVSS v3.1 (Common Vulnerability Scoring System)</strong>, construyendo su cadena de vector y justificando la priorización del riesgo a nivel organizacional.
+      La gestión predictiva de vulnerabilidades informáticas requiere marcos metodológicos estándar que eliminen la ambigüedad en la asignación de prioridades de parchado. Este documento expone el proceso de análisis y cálculo técnico de severidad de un fallo descubierto en un servidor interno utilizando el estándar CVSS v3.1. Mediante la correcta catalogación de sus métricas base se busca estructurar el vector formal del exploit para guiar planes eficientes de remediación dentro de la infraestructura tecnológica organizacional.
     </p>
   </section>
 
   <section class="info-section">
-    <div class="section-badge">Escenario y Métricas</div>
-    <h2>Desglose Técnico del Vector</h2>
-    
-    <div class="grid-cards">
-      <div class="card-item">
-        <h3>Condiciones del Escenario</h3>
+    <div class="section-badge">Metas</div>
+    <h2>Objetivos de la Evaluación</h2>
+    <div class="objectives-grid">
+      <div class="objective-card">
+        <h3>Objetivo General</h3>
+        <p>Calcular la severidad cuantitativa y cualitativa de una vulnerabilidad de red en un entorno web interno a través del estándar CVSS v3.1 para optimizar la toma de decisiones críticas.</p>
+      </div>
+      <div class="objective-card">
+        <h3>Objetivos Específicos</h3>
         <ul>
-          <li>Explotable a través de la red sin interacción del usuario.</li>
-          <li>Baja complejidad, pero requiere de <strong>privilegios elevados</strong>.</li>
-          <li>El alcance de seguridad no cambia (Unchanged).</li>
-          <li>Impacto bajo en Confidencialidad, Integridad y Disponibilidad.</li>
+          <li>Definir e interpretar las métricas del Grupo Base aplicadas a las condiciones operativas de explotación.</li>
+          <li>Generar la cadena del vector CVSS v3.1 oficial correspondiente al escenario de riesgo.</li>
+          <li>Justificar técnicamente la priorización de mitigación del fallo a pesar de sus restricciones de privilegios.</li>
         </ul>
       </div>
+    </div>
+  </section>
 
-      <div class="card-item highlight-card">
-        <h3>Resultado CVSS</h3>
-        <div class="score-display">
-          <span class="score-number">4.7</span>
-          <span class="score-label">Severidad Media</span>
+  <section class="info-section">
+    <div class="section-badge">Contexto</div>
+    <h2>Descripción del Escenario</h2>
+    <div class="split-layout image-right">
+      <div class="text-column">
+        <p>
+          Se detectó una vulnerabilidad en una aplicación web de contabilidad interna alojada en la infraestructura central. El fallo permite a un atacante remoto alterar registros transaccionales confidenciales de manera selectiva. Para lograr la explotación exitosa, el atacante debe estar autenticado en la red y poseer cuentas con <strong>privilegios de administración elevados</strong> dentro del rol del software, facilitando un ataque de complejidad técnica baja que no altera el alcance perimetral de seguridad pero afecta de forma directa las tres dimensiones de la información corporativa.
+        </p>
+      </div>
+      <div class="image-column">
+        <div class="image-placeholder">
+          <span>Espacio para imagen del escenario (Lado Derecho)</span>
         </div>
-        <p class="vector-string"><strong>Vector:</strong> CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:L/I:L/A:L</p>
       </div>
     </div>
+  </section>
 
+  <section class="info-section">
+    <div class="section-badge">Marco Teórico</div>
+    <h2>El Modelo de Puntuación CVSS v3.1</h2>
+    <p>
+      El Sistema de Puntuación de Vulnerabilidades Comunes (CVSS v3.1) es un marco abierto e industrialmente aceptado que se utiliza para evaluar las características fundamentales de una vulnerabilidad de seguridad. Se compone de tres grupos métricos principales: Base (cualidades intrínsecas del fallo), Temporal (evolución en el tiempo) y Ambiental (condiciones específicas del despliegue del cliente). Su resultado final oscila de 0.0 a 10.0, permitiendo clasificar de manera uniforme la urgencia de mitigación frente a amenazas externas e internas.
+    </p>
+    
+    <h3>Tabla: Identificación de Métricas CVSS v3.1</h3>
     <div class="table-responsive">
       <table>
         <thead>
           <tr>
             <th>Métrica Base</th>
-            <th>Valor Asignado</th>
-            <th>Justificación</th>
+            <th>Valor Identificado</th>
+            <th>Abreviación</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Attack Vector (AV)</strong></td>
-            <td>Network (N)</td>
-            <td>La vulnerabilidad puede explotarse a través de la red remota.</td>
+            <td>Attack Vector (Vector de Ataque)</td>
+            <td>Network (Red Remota)</td>
+            <td>AV:N</td>
           </tr>
           <tr>
-            <td><strong>Attack Complexity (AC)</strong></td>
-            <td>Low (L)</td>
-            <td>No existen condiciones especiales ni evasiones complejas requeridas.</td>
+            <td>Attack Complexity (Complejidad)</td>
+            <td>Low (Baja)</td>
+            <td>AC:L</td>
           </tr>
           <tr>
-            <td><strong>Privileges Required (PR)</strong></td>
-            <td>High (H)</td>
-            <td>El atacante requiere privilegios administrativos para la ejecución.</td>
+            <td>Privileges Required (Privilegios)</td>
+            <td>High (Altos)</td>
+            <td>PR:H</td>
           </tr>
           <tr>
-            <td><strong>Impacto (C / I / A)</strong></td>
-            <td>Low (L) en todas</td>
-            <td>La exposición, modificación e interrupción del servicio es parcial y limitada.</td>
+            <td>User Interaction (Interacción)</td>
+            <td>None (Ninguna)</td>
+            <td>UI:N</td>
+          </tr>
+          <tr>
+            <td>Scope (Alcance)</td>
+            <td>Unchanged (Inalterado)</td>
+            <td>S:U</td>
+          </tr>
+          <tr>
+            <td>Confidentiality Impact (Confidencialidad)</td>
+            <td>Low (Bajo)</td>
+            <td>C:L</td>
+          </tr>
+          <tr>
+            <td>Integrity Impact (Integridad)</td>
+            <td>Low (Bajo)</td>
+            <td>I:L</td>
+          </tr>
+          <tr>
+            <td>Availability Impact (Disponibilidad)</td>
+            <td>Low (Bajo)</td>
+            <td>A:L</td>
           </tr>
         </tbody>
       </table>
@@ -85,48 +124,147 @@ export const frontmatter = {
   </section>
 
   <section class="info-section">
-    <div class="section-badge">Análisis de Riesgo</div>
-    <h2>Interpretación del Impacto</h2>
-    <div class="grid-cards">
-      <div class="card-item">
-        <h3>¿Sigue siendo relevante pese a requerir altos privilegios?</h3>
-        <p>Sí. Aunque reduce la amenaza de atacantes externos no autenticados, representa un grave riesgo frente a <em>insider threats</em>, administradores maliciosos o atacantes que ya han escalado privilegios en la red (movimientos laterales).</p>
+    <div class="section-badge">Análisis Métrico</div>
+    <h2>Construcción del Vector CVSS</h2>
+    <div class="split-layout image-left">
+      <div class="image-column">
+        <div class="image-placeholder">
+          <span>Espacio para imagen de calculadora/vector (Lado Izquierdo)</span>
+        </div>
       </div>
-      <div class="card-item">
-        <h3>Significado de "Impacto Bajo"</h3>
-        <p>Un impacto bajo en las tres dimensiones indica que la fuga o alteración de datos es restringida y no tumba el servicio por completo. Sin embargo, en un ataque encadenado, esta vulnerabilidad podría ser el puente hacia activos más críticos.</p>
+      <div class="text-column">
+        <div class="score-display-card">
+          <div class="score-num font-amber">4.7</div>
+          <div class="score-lbl">Severidad Media</div>
+          <div class="vector-code">CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:L/I:L/A:L</div>
+        </div>
       </div>
+    </div>
+
+    <h3 class="margin-top-sub">Tabla: Desglose Técnico del Vector</h3>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Componente del Vector</th>
+            <th>Significado Técnico</th>
+            <th>Impacto en el Escenario Real</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>AV:N / AC:L</strong></td>
+            <td>Acceso remoto por red con barreras técnicas mínimas.</td>
+            <td>El exploit se puede accionar externamente sin requerir configuraciones complejas en la red local.</td>
+          </tr>
+          <tr>
+            <td><strong>PR:H / UI:N</strong></td>
+            <td>Requiere credenciales administrativas avanzadas sin interacción del usuario objetivo.</td>
+            <td>Filtra los posibles atacantes a personal interno con altos accesos o atacantes que hayan comprometido roles administrativos previos.</td>
+          </tr>
+          <tr>
+            <td><strong>S:U / Impactos (Low)</strong></td>
+            <td>El fallo no corrompe otros sistemas colindantes y genera alteraciones marginales de datos.</td>
+            <td>La afectación se encapsula exclusivamente dentro del módulo web, sin tumbar el sistema de manera global.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
-  <section class="info-section conclusion-box">
-    <h2>Conclusiones</h2>
+  <section class="info-section">
+    <div class="section-badge">Interpretación</div>
+    <h2>Interpretación Técnica Resumida</h2>
     <p>
-      El uso de CVSS v3.1 estandariza la comunicación del riesgo y optimiza recursos de mitigación. El análisis demostró que vulnerabilidades de "Severidad Media" y con "Impacto Bajo" no deben subestimarse en el ámbito corporativo, ya que su explotación remota y baja complejidad las hacen herramientas útiles para atacantes con persistencia y accesos comprometidos.
+      Aunque el requerimiento de altos privilegios (PR:H) reduce de manera drástica el espectro de atacantes externos oportunistas, el fallo adquiere una alta relevancia frente a escenarios de <strong>amenazas internas (Insider Threats)</strong> o ataques dirigidos multifase, donde un intruso realiza primero un movimiento lateral para escalar privilegios y posteriormente acciona este exploit. El impacto bajo unificado (C:L/I:L/A:L) ratifica que no existe una fuga total inmediata ni denegación del servicio masiva, pero abre la puerta al espionaje corporativo hormiga y a modificaciones sutiles en la base de datos contable.
     </p>
+  </section>
+
+  <section class="info-section">
+    <div class="section-badge">Cálculo numérico</div>
+    <h2>Cálculo de Puntuación CVSS</h2>
+    <p>
+      Siguiendo los algoritmos oficiales matemáticos definidos por FIRST, donde el impacto base se pondera contra el factor de explotabilidad modificado por las restricciones del sistema, se obtienen los siguientes puntajes intermedios y finales normalizados de severidad:
+    </p>
+    
+    <h3>Tabla: Resultado Obtenido</h3>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Sub-métrica Analizada</th>
+            <th>Puntuación Intermedia</th>
+            <th>Clasificación de Riesgo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Explotabilidad (Exploitability)</td>
+            <td>1.2</td>
+            <td>Baja debido a la restricción de privilegios requeridos.</td>
+          </tr>
+          <tr>
+            <td>Impacto Combinado (Impact Subscore)</td>
+            <td>3.4</td>
+            <td>Parcializado en las tres dimensiones informáticas.</td>
+          </tr>
+          <tr>
+            <td><strong>Puntuación Base CVSS v3.1</strong></td>
+            <td><strong>4.7</strong></td>
+            <td><strong>Severidad Media (Mitigación Planificada)</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="section-badge">Estrategia</div>
+    <h2>Importancia de la Priorización de Vulnerabilidades</h2>
+    <p>
+      Las organizaciones no disponen de recursos humanos ni de tiempo ilimitados para aplicar parches de seguridad de manera simultánea en toda su red. Utilizar métricas estandarizadas permite priorizar las acciones de remediación enfocando los esfuerzos en fallos críticos o altos primero. Clasificar esta vulnerabilidad con un score de 4.7 ayuda a los administradores a programar su corrección durante ventanas de mantenimiento ordinarias sin sobrecargar los flujos operativos de emergencia.
+    </p>
+  </section>
+
+  <section class="info-section conclusion-box">
+    <h2>Conclusión</h2>
+    <p>
+      El análisis sistemático del escenario mediante CVSS v3.1 demostró que los fallos clasificados con severidades medias o impactos parciales no deben ser desatendidos, sino evaluados dentro del contexto del entorno. El estándar constituye una herramienta primordial de gobierno tecnológico, asegurando que la mitigación del riesgo se realice de manera justificada, transparente y bajo un lenguaje técnico unificado.
+    </p>
+  </section>
+
+  <section class="info-section">
+    <div class="section-badge">Documento</div>
+    <h2>Visualización del Reporte Completo</h2>
+    <div class="pdf-preview-container">
+      <iframe src="/assets/images/docs_P1/act17-Equipo1.pdf" class="pdf-iframe" title="Visualizador de PDF Actividad 17"></iframe>
+    </div>
+  </section>
+
+  <section class="info-section references-section">
+    <h2>Referencias Bibliográficas</h2>
+    <ul>
+      <li>FIRST. (2019). <em>Common Vulnerability Scoring System Version 3.1: Specification Document.</em> Forum of Incident Response and Security Teams. https://www.first.org/cvss/v3-1/specification-document</li>
+      <li>National Institute of Standards and Technology (NIST). (2021). <em>National Vulnerability Database (NVD) CVSS Guide.</em> U.S. Department of Commerce.</li>
+      <li>Scarfone, K., & Mell, P. (2009). <em>Guide to the Vulnerability Management Process.</em> National Institute of Standards and Technology (NIST) Special Publication 800-40 Ver 2.0.</li>
+    </ul>
   </section>
 </div>
 
 <style>
-  :root {
-    --accent: #2563eb;
-    --card-bg: #f9f9f9;
-    --border-color: #e5e7eb;
-    --text-main: #171717;
-    --badge-bg: rgba(37, 99, 235, 0.1);
-  }
-  
-  :global(.dark) :root {
-    --accent: #60a5fa;
-    --card-bg: #151515;
-    --border-color: #333333;
-    --text-main: #ededed;
-    --badge-bg: rgba(96, 165, 250, 0.1);
-  }
-
-  .content-wrapper {
+  .dark-portfolio-wrapper {
+    --bg-dark: #09090b;
+    --card-dark: #141416;
+    --border-dark: #27272a;
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --accent-blue: #3b82f6;
+    --accent-blue-bg: rgba(59, 130, 246, 0.1);
+    
     font-family: 'Inter', system-ui, sans-serif;
-    color: var(--text-main);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    padding: 2rem;
     line-height: 1.7;
   }
   .download-container {
@@ -135,16 +273,16 @@ export const frontmatter = {
   }
   .btn-download {
     background: transparent;
-    color: var(--accent);
+    color: var(--accent-blue);
     padding: 0.6rem 1.2rem;
-    border: 1px solid var(--accent);
-    border-radius: 8px;
+    border: 1px solid var(--accent-blue);
+    border-radius: 6px;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
   }
   .btn-download:hover {
-    background: var(--accent);
+    background: var(--accent-blue);
     color: #fff;
   }
   .info-section {
@@ -152,103 +290,152 @@ export const frontmatter = {
   }
   .section-badge {
     display: inline-block;
-    background: var(--badge-bg);
-    color: var(--accent);
+    background: var(--accent-blue-bg);
+    color: var(--accent-blue);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     padding: 0.3rem 0.8rem;
     border-radius: 4px;
     margin-bottom: 0.8rem;
+    border: 1px solid rgba(59, 130, 246, 0.2);
   }
   h2 {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
     font-weight: 800;
     margin-bottom: 1.2rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-dark);
     padding-bottom: 0.5rem;
+    color: var(--text-primary);
   }
-  .grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .card-item {
-    background: var(--card-bg);
-    border-left: 4px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    padding: 1.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-  }
-  .card-item h3 {
-    margin-top: 0;
+  h3 {
     font-size: 1.2rem;
-    color: var(--accent);
-    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    color: var(--text-primary);
   }
-  .highlight-card {
-    border: 1px solid var(--accent);
-    border-left: 6px solid var(--accent);
+  .margin-top-sub {
+    margin-top: 2rem;
+  }
+  p, li {
+    color: var(--text-secondary);
+  }
+  .objectives-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .objective-card {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  .objective-card h3 {
+    color: var(--accent-blue);
+    margin-top: 0;
+  }
+  .split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .image-placeholder {
+    width: 100%;
+    height: 180px;
+    background: #18181b;
+    border: 2px dashed var(--border-dark);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+  }
+  .image-placeholder span {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  .score-display-card {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-left: 6px solid #f59e0b;
+    padding: 1.5rem;
+    border-radius: 8px;
     text-align: center;
   }
-  .score-display {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  .score-number {
-    font-size: 3rem;
+  .score-num {
+    font-size: 3.5rem;
     font-weight: 900;
-    color: #f59e0b; /* Naranja/Medio */
   }
-  .score-label {
+  .font-amber {
+    color: #f59e0b;
+  }
+  .score-lbl {
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    opacity: 0.8;
+    margin-bottom: 0.8rem;
+    color: var(--text-secondary);
   }
-  .vector-string {
+  .vector-code {
     font-family: monospace;
-    font-size: 0.85rem;
-    background: rgba(0,0,0,0.05);
+    font-size: 0.8rem;
+    background: #18181b;
     padding: 0.5rem;
     border-radius: 4px;
+    border: 1px solid var(--border-dark);
     word-break: break-all;
-  }
-  :global(.dark) .vector-string {
-    background: rgba(255,255,255,0.05);
   }
   .table-responsive {
     overflow-x: auto;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-dark);
     border-radius: 8px;
+    margin-top: 0.75rem;
   }
   table {
     width: 100%;
     border-collapse: collapse;
-    background: var(--card-bg);
+    background: var(--card-dark);
     font-size: 0.9rem;
-  }
-  th, td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
     text-align: left;
   }
+  th, td {
+    padding: 0.85rem;
+    border-bottom: 1px solid var(--border-dark);
+    border-right: 1px solid var(--border-dark);
+  }
   th {
-    background: rgba(0,0,0,0.03);
-    color: var(--accent);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--accent-blue);
     font-weight: 600;
   }
-  :global(.dark) th {
-    background: rgba(255,255,255,0.03);
-  }
   .conclusion-box {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid #10b981; /* Verde éxito */
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-left: 4px solid #10b981;
     padding: 2rem;
     border-radius: 8px;
+  }
+  .pdf-preview-container {
+    width: 100%;
+    height: 600px;
+    background: var(--card-dark);
+    border: 1px dashed var(--border-dark);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .pdf-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .references-section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .references-section li {
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
   }
 </style>
