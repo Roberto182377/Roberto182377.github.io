@@ -1,9 +1,12 @@
 ---
-title: "Red Team Report: Pentesting de My File Server 1"
+title: "Actividad 09 - Red Team Report: Pentesting de My File Server 1"
 description: "Informe de resultados de la prueba de penetración realizada sobre My File Server 1."
-date: "2026-03-10"
-slug: "red-team-report-my-file-server-1"
+date: "2026-03-20"
+readTime: ""
+image: "/assets/images/posts/img_Act08_portada.png"
+slug: "act09-182377"
 ---
+
 
 ## 📄 Resumen Ejecutivo
 Este informe presenta los resultados de una prueba de penetración realizada sobre el sistema **My File Server 1**, con el objetivo de evaluar su nivel de exposición ante posibles ataques y determinar los riesgos que podrían afectar la seguridad de la información.
