@@ -113,9 +113,9 @@ export const proyectosContent = {
     {
       title: "PR03",
       description:
-        "En espera...",
+        "Bajo la lupa: evaluación de ciberseguridad en un corporativo.",
       image: "/assets/images/projects/parcial03.png",
-      href: "#",
+      href: "https://roberto182377.github.io/pr03/",
     },
   ],
 };

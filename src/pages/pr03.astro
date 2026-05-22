@@ -1,0 +1,649 @@
+---
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+
+// Datos extraídos y resumidos de las 10 Secciones del PDF (PR03-Equipo1)
+const seccionesISO = [
+  {
+    id: "sec-1",
+    numero: "I",
+    titulo: "Alcance",
+    icono: "🎯",
+    resumen: "Definición de las fronteras y aplicabilidad del Sistema de Gestión de Seguridad de la Información (SGSI).",
+    metricas: [
+      { titulo: "Departamento Eje", valor: "Recursos Humanos" },
+      { titulo: "Institución", valor: "SEER San Luis Potosí" },
+      { titulo: "Objetivo Crítico", valor: "Proteger datos personales" }
+    ],
+    htmlContent: `
+      <h3>Delimitación del Proyecto</h3>
+      <p>El proyecto establece el perímetro de seguridad enfocado en el <strong>Departamento de Recursos Humanos del SEER</strong>. Se seleccionó este alcance debido a que es el epicentro donde se procesa la información más crítica: expedientes laborales, nóminas, contratos y datos médicos.</p>
+      <div class="alert-box">
+        <strong>Meta Principal:</strong> Garantizar la Confidencialidad, Integridad y Disponibilidad (Triada CIA) de la información frente a amenazas internas y externas.
+      </div>
+    `
+  },
+  {
+    id: "sec-2",
+    numero: "II",
+    titulo: "Referencias Normativas",
+    icono: "📚",
+    resumen: "Marco legal y estándares internacionales que fundamentan y justifican los controles aplicados.",
+    metricas: [
+      { titulo: "Estándar Base", valor: "ISO/IEC 27001:2022" },
+      { titulo: "Controles", valor: "ISO/IEC 27002:2022" },
+      { titulo: "Gestión Riesgos", valor: "ISO/IEC 27005" }
+    ],
+    htmlContent: `
+      <h3>Arquitectura Normativa</h3>
+      <p>Para asegurar que la auditoría tenga validez y rigor corporativo, la evaluación se alinea estrictamente a las versiones más recientes de la familia ISO 27000.</p>
+      <ul class="feature-list">
+        <li><strong>ISO 27001:2022:</strong> Requisitos para establecer e implementar el SGSI.</li>
+        <li><strong>ISO 27002:2022:</strong> Catálogo de controles para mitigar vectores de ataque.</li>
+        <li><strong>ISO 27005:</strong> Metodología estructurada para evaluación de riesgos.</li>
+      </ul>
+    `
+  },
+  {
+    id: "sec-3",
+    numero: "III",
+    titulo: "Términos y Definiciones",
+    icono: "📖",
+    resumen: "Estandarización del vocabulario técnico para alinear a los directivos con el departamento de TI.",
+    metricas: [
+      { titulo: "Vocabulario", valor: "Guía ISO 73:2009" },
+      { titulo: "Conceptos Clave", valor: "Amenaza y Vulnerabilidad" },
+      { titulo: "Enfoque", valor: "Comunicación Ejecutiva" }
+    ],
+    htmlContent: `
+      <h3>Glosario Estratégico</h3>
+      <p>El éxito de un SGSI depende de que la Alta Dirección comprenda la magnitud de las amenazas. Se estandarizaron conceptos críticos para evitar ambigüedades durante la evaluación presupuestal y técnica:</p>
+      <div class="grid-2-cols">
+        <div class="box-card border-accent"><strong>Riesgo:</strong> Efecto de la incertidumbre sobre los objetivos.</div>
+        <div class="box-card border-accent"><strong>Impacto:</strong> Consecuencia financiera u operativa de un incidente.</div>
+      </div>
+    `
+  },
+  {
+    id: "sec-4",
+    numero: "IV",
+    titulo: "Contexto de la Organización",
+    icono: "🏢",
+    resumen: "Análisis exhaustivo del entorno del SEER y mapeo de los activos críticos a proteger.",
+    metricas: [
+      { titulo: "Activos Críticos", valor: "+40 Identificados" },
+      { titulo: "Factores Internos", valor: "Cultura y Sistemas" },
+      { titulo: "Factores Externos", valor: "Normativas Estatales" }
+    ],
+    htmlContent: `
+      <h3>Evaluación del Entorno (FODA de Seguridad)</h3>
+      <p>Se realizó un inventario meticuloso clasificando bases de datos, servidores físicos, expedientes impresos y personal clave. Se identificaron las expectativas de docentes y gobierno respecto a la privacidad de los datos.</p>
+      <div class="grid-2-cols">
+        <div class="box-card border-red"><strong>Vulnerabilidad Interna:</strong> Carencia de cultura de ciberseguridad en el área administrativa.</div>
+        <div class="box-card border-green"><strong>Oportunidad:</strong> Modernización de infraestructura respaldada por presupuesto estatal.</div>
+      </div>
+    `
+  },
+  {
+    id: "sec-5",
+    numero: "V",
+    titulo: "Liderazgo",
+    icono: "👑",
+    resumen: "Compromiso gerencial para estructurar gobernanza, asignar roles y redactar políticas base.",
+    metricas: [
+      { titulo: "Políticas Generales", valor: "Aprobadas" },
+      { titulo: "Políticas Funcionales", valor: "Implementadas" },
+      { titulo: "Roles", valor: "CISO y Auditores" }
+    ],
+    htmlContent: `
+      <h3>Estructura de Gobernanza</h3>
+      <p>La seguridad de la información es una responsabilidad directiva. Se redactaron políticas obligatorias como la <strong>Política de Escritorio Limpio</strong> y <strong>Control de Accesos</strong>, logrando el respaldo de la dirección para la asignación de recursos y personal dedicado a la vigilancia del SGSI.</p>
+    `
+  },
+  {
+    id: "sec-6",
+    numero: "VI",
+    titulo: "Planificación de Riesgos",
+    icono: "⚠️",
+    resumen: "Desarrollo de la Matriz de Riesgos y formulación de planes de tratamiento y mitigación.",
+    metricas: [
+      { titulo: "Metodología", valor: "Matriz Probabilidad vs Impacto" },
+      { titulo: "Posturas", valor: "Mitigar / Transferir" },
+      { titulo: "Enfoque", valor: "Proactivo" }
+    ],
+    htmlContent: `
+      <h3>Matriz de Evaluación (Ejemplos Críticos)</h3>
+      <p>Cada amenaza fue evaluada calculando su nivel de riesgo real para el SEER. Con base en esto, se dictaminó una estrategia de tratamiento específica:</p>
+      <div class="table-container">
+        <table class="styled-table">
+          <thead>
+            <tr><th>Riesgo Identificado</th><th>Nivel</th><th>Plan de Tratamiento</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Uso inseguro de servicios en la Nube</td><td><span class="badge high">Alto</span></td><td><strong>Mitigar:</strong> Políticas estrictas de acceso.</td></tr>
+            <tr><td>Ataques de Ingeniería Social (Phishing)</td><td><span class="badge high">Alto</span></td><td><strong>Mitigar:</strong> Capacitación y filtros Anti-Spam.</td></tr>
+            <tr><td>Falla catastrófica de Hardware local</td><td><span class="badge medium">Medio</span></td><td><strong>Transferir:</strong> Migración a Infraestructura AWS.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    `
+  },
+  {
+    id: "sec-7",
+    numero: "VII",
+    titulo: "Soporte",
+    icono: "🤝",
+    resumen: "Provisión de infraestructura, fomento de la concienciación y control de documentos sensibles.",
+    metricas: [
+      { titulo: "Capacitación", valor: "Minutas y Talleres" },
+      { titulo: "Control Documental", valor: "Gestión de Versiones" },
+      { titulo: "Legales", valor: "Firma de NDAs" }
+    ],
+    htmlContent: `
+      <h3>Cultura y Documentación</h3>
+      <p>La estrategia técnica es inútil si el factor humano falla. Se ejecutaron programas de sensibilización evidenciados mediante minutas de capacitación. Adicionalmente, se estableció un control estricto de versiones para los <strong>Acuerdos de Confidencialidad (NDA)</strong> firmados por todo el personal de RRHH.</p>
+    `
+  },
+  {
+    id: "sec-8",
+    numero: "VIII",
+    titulo: "Operación",
+    icono: "⚙️",
+    resumen: "Implementación técnica paso a paso de los controles seleccionados en la fase de planificación.",
+    metricas: [
+      { titulo: "Control Principal", valor: "Autenticación Multifactor (2FA)" },
+      { titulo: "Restricciones", valor: "Correos Institucionales" },
+      { titulo: "Ejecución", valor: "100% Desplegado" }
+    ],
+    htmlContent: `
+      <h3>Despliegue de Controles (Flujo Operativo)</h3>
+      <div class="timeline">
+        <div class="tl-item"><strong>Fase 1: Bloqueo de Cuentas.</strong> Se inhabilitó el acceso a plataformas desde correos personales (Gmail/Outlook). Todo acceso debe provenir del dominio <em>@seer.gob.mx</em>.</div>
+        <div class="tl-item"><strong>Fase 2: Implementación de 2FA.</strong> Activación obligatoria de métodos de doble factor (App Authenticator) para acceder a bases de nóminas.</div>
+        <div class="tl-item"><strong>Fase 3: Auditoría de Red.</strong> Segmentación de la red de Recursos Humanos mediante VLANs para evitar movimientos laterales de malware.</div>
+      </div>
+    `
+  },
+  {
+    id: "sec-9",
+    numero: "IX",
+    titulo: "Evaluación del Desempeño",
+    icono: "📊",
+    resumen: "Monitorización continua, medición de KPIs y auditorías internas para validar la eficacia del SGSI.",
+    metricas: [
+      { titulo: "Métrica Clave", valor: "Tasa de incidentes" },
+      { titulo: "Auditorías", valor: "Revisiones Periódicas" },
+      { titulo: "Revisión", valor: "Por la Alta Dirección" }
+    ],
+    htmlContent: `
+      <h3>Monitorización y Cumplimiento</h3>
+      <p>No se puede mejorar lo que no se mide. Se establecieron métricas para vigilar el comportamiento de la red, como el número de bloqueos por inicios de sesión fallidos. Las auditorías internas generan reportes de cumplimiento que se presentan trimestralmente al comité de seguridad.</p>
+    `
+  },
+  {
+    id: "sec-10",
+    numero: "X",
+    titulo: "Mejora",
+    icono: "🚀",
+    resumen: "Protocolos de respuesta ante incidentes, análisis de causa raíz y aplicación de acciones correctivas.",
+    metricas: [
+      { titulo: "Enfoque", valor: "Análisis Causa Raíz" },
+      { titulo: "Meta", valor: "Cero Recurrencias" },
+      { titulo: "Post-Mortem", valor: "Obligatorio" }
+    ],
+    htmlContent: `
+      <h3>Gestión de Incidentes y Post-Mortem</h3>
+      <p>El SGSI asume que las brechas pueden ocurrir. Cuando se detecta una "No Conformidad" o incidente, se activa el protocolo de respuesta. Posteriormente se realiza un análisis forense / administrativo para hallar la <strong>Causa Raíz</strong> y aplicar parches normativos o técnicos que eviten que el mismo vector sea explotado dos veces.</p>
+    `
+  }
+];
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ISO 27001 SEER | Portafolio</title>
+    <style>
+      /* Variables Base: MODO OSCURO POR DEFECTO */
+      :root {
+        --bg-main: #0a0a0a;
+        --bg-card: #141414;
+        --bg-hover: #1e1e1e;
+        --text-title: #ededed;
+        --text-body: #d1d1d1;
+        --text-muted: #888888;
+        --border-ui: rgba(255, 255, 255, 0.08);
+        --accent-color: #2563eb;
+        --accent-glow: rgba(37, 99, 235, 0.1);
+        --dot-color: rgba(255, 255, 255, 0.15);
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+      }
+
+      /* DETECCIÓN DE MODO CLARO */
+      :global(html:not(.dark)), :global(html.light), :global(html[data-theme="light"]) {
+        --bg-main: #ffffff;
+        --bg-card: #f8f9fa;
+        --bg-hover: #f1f3f5;
+        --text-title: #111111;
+        --text-body: #333333;
+        --text-muted: #6c757d;
+        --border-ui: #e9ecef;
+        --accent-color: #2563eb;
+        --accent-glow: rgba(37, 99, 235, 0.08);
+        --dot-color: rgba(0, 0, 0, 0.08);
+      }
+
+      body {
+        margin: 0;
+        background-color: var(--bg-main);
+        color: var(--text-body);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        background-image: 
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px),
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+        background-size: 24px 41.57px;
+        background-position: 0 0, 12px 20.78px;
+        background-attachment: fixed;
+        transition: background-color 0.4s ease, color 0.4s ease;
+      }
+
+      .container {
+        max-width: 1250px;
+        margin: 0 auto;
+        padding: 5rem 1.5rem;
+      }
+
+      /* CABECERA */
+      header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+      
+      .badge-top {
+        display: inline-block;
+        background: var(--accent-glow);
+        color: var(--accent-color);
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(37, 99, 235, 0.3);
+      }
+
+      h1 { 
+        font-size: 2.8rem; 
+        font-weight: 800; 
+        letter-spacing: -0.03em; 
+        color: var(--text-title);
+        margin: 0 0 0.5rem 0; 
+      }
+
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 1.15rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* LAYOUT TIPO DASHBOARD */
+      .dashboard-layout {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 2rem;
+        align-items: start;
+      }
+
+      /* BARRA LATERAL (MENU CLÁUSULAS) */
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-card);
+        border: 1px solid var(--border-ui);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: sticky;
+        top: 2rem;
+      }
+
+      .sidebar-header {
+        padding: 1.2rem;
+        border-bottom: 1px solid var(--border-ui);
+        font-weight: 700;
+        color: var(--text-title);
+        font-size: 0.95rem;
+        background: rgba(0,0,0,0.02);
+      }
+
+      .clause-btn {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid var(--border-ui);
+        color: var(--text-body);
+        padding: 1rem 1.2rem;
+        text-align: left;
+        font-weight: 500; 
+        font-size: 0.95rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+      }
+
+      .clause-btn:last-child { border-bottom: none; }
+
+      .clause-btn .num {
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        width: 25px;
+      }
+
+      .clause-btn:hover {
+        background-color: var(--bg-hover);
+        color: var(--text-title);
+        padding-left: 1.6rem;
+      }
+
+      .clause-btn.active {
+        background-color: var(--bg-hover);
+        color: var(--accent-color);
+        padding-left: 1.6rem;
+        font-weight: 700;
+      }
+
+      .clause-btn::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-color: var(--accent-color);
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+        transform-origin: center;
+      }
+
+      .clause-btn.active::before { transform: scaleY(1); }
+
+      /* PANEL DERECHO (CONTENIDO) */
+      .viewer {
+        background: var(--bg-card);
+        border: 1px solid var(--border-ui);
+        border-radius: 14px;
+        padding: 3rem;
+        min-height: 550px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .clause-content { display: none; }
+      .clause-content.active { display: block; }
+
+      /* ANIMACIONES EN CASCADA */
+      .clause-content.active .header-anim { animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+      .clause-content.active .kpis-anim { animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards; opacity: 0; }
+      .clause-content.active .body-anim { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards; opacity: 0; }
+
+      @keyframes slideDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes fadeInScale { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+
+      /* CABECERA INTERNA */
+      .content-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-ui);
+      }
+
+      .content-header h2 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--text-title);
+        margin: 0 0 0.5rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .content-header p {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      /* METRICAS (KPI CARDS) */
+      .kpi-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .kpi-card {
+        background: var(--bg-hover);
+        border: 1px solid var(--border-ui);
+        border-radius: 10px;
+        padding: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        transition: transform 0.2s ease;
+      }
+
+      .kpi-card:hover { transform: translateY(-3px); border-color: rgba(37, 99, 235, 0.4); }
+
+      .kpi-title {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 700;
+      }
+
+      .kpi-value {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--accent-color);
+      }
+
+      /* ESTILOS INTERNOS DE CONTENIDO INYECTADO (HTML) */
+      .html-body {
+        line-height: 1.7;
+        font-size: 1.05rem;
+        color: var(--text-body);
+      }
+
+      .html-body h3 {
+        color: var(--text-title);
+        font-size: 1.3rem;
+        margin-top: 0;
+        margin-bottom: 1.2rem;
+      }
+
+      .html-body p { margin-bottom: 1.2rem; }
+
+      /* Alertas */
+      .alert-box {
+        padding: 1.2rem;
+        background: var(--accent-glow);
+        border-left: 4px solid var(--accent-color);
+        border-radius: 0 8px 8px 0;
+        margin: 1.5rem 0;
+        font-size: 1rem;
+      }
+
+      /* Listas y Grids */
+      .feature-list { padding-left: 1.2rem; margin-bottom: 1.5rem; }
+      .feature-list li { margin-bottom: 0.8rem; }
+      
+      .grid-2-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .box-card {
+        padding: 1.2rem;
+        background: var(--bg-hover);
+        border-radius: 8px;
+        border-left: 4px solid var(--border-ui);
+        font-size: 0.95rem;
+      }
+      .box-card.border-accent { border-color: var(--accent-color); }
+      .box-card.border-red { border-color: var(--danger); }
+      .box-card.border-green { border-color: var(--success); }
+
+      /* Tabla Estilizada */
+      .table-container { overflow-x: auto; margin-top: 1.5rem; }
+      .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+      }
+      .styled-table th {
+        background: var(--bg-hover);
+        color: var(--text-title);
+        text-align: left;
+        padding: 1rem;
+        font-weight: 700;
+        border-bottom: 2px solid var(--border-ui);
+      }
+      .styled-table td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-ui);
+      }
+      .badge {
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .badge.high { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+      .badge.medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+
+      /* Línea de tiempo (Timeline) */
+      .timeline {
+        margin-left: 0.5rem;
+        padding-left: 1.5rem;
+        border-left: 2px solid var(--border-ui);
+        margin-top: 1.5rem;
+      }
+      .tl-item {
+        position: relative;
+        margin-bottom: 1.5rem;
+        padding-top: 0.1rem;
+      }
+      .tl-item:last-child { margin-bottom: 0; }
+      .tl-item::before {
+        content: '';
+        position: absolute;
+        left: -1.86rem;
+        top: 0.4rem;
+        width: 10px;
+        height: 10px;
+        background: var(--accent-color);
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px var(--bg-card);
+      }
+
+      /* RESPONSIVIDAD */
+      @media (max-width: 900px) {
+        .dashboard-layout { grid-template-columns: 1fr; }
+        .sidebar { position: static; max-height: 300px; overflow-y: auto; }
+        .viewer { padding: 2rem 1.5rem; }
+        .grid-2-cols { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <Navigation />
+    
+    <main class="container">
+      <header>
+        <div class="badge-top">Proyecto Universitario</div>
+        <h1>Implementación ISO 27001:2022</h1>
+        <p class="subtitle">Auditoría, Gobernanza y Gestión de Riesgos Cibernéticos aplicados al Sistema Educativo Estatal Regular (SEER).</p>
+      </header>
+
+      <div class="dashboard-layout">
+        <aside class="sidebar">
+          <div class="sidebar-header">Cláusulas ISO 27001</div>
+          {seccionesISO.map((sec, index) => (
+            <button 
+              class={`clause-btn ${index === 0 ? 'active' : ''}`} 
+              data-target={sec.id}
+            >
+              <span class="num">{sec.numero}.</span>
+              <span class="icon">{sec.icono}</span>
+              <span class="title">{sec.titulo}</span>
+            </button>
+          ))}
+        </aside>
+
+        <section class="viewer">
+          {seccionesISO.map((sec, index) => (
+            <div id={sec.id} class={`clause-content ${index === 0 ? 'active' : ''}`}>
+              
+              <div class="content-header header-anim">
+                <h2>{sec.icono} {sec.numero}. {sec.titulo}</h2>
+                <p>{sec.resumen}</p>
+              </div>
+              
+              <div class="kpi-container kpis-anim">
+                {sec.metricas.map((m) => (
+                  <div class="kpi-card">
+                    <span class="kpi-title">{m.titulo}</span>
+                    <span class="kpi-value">{m.valor}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div class="html-body body-anim" set:html={sec.htmlContent}></div>
+
+            </div>
+          ))}
+        </section>
+      </div>
+    </main>
+
+    <Footer />
+
+    <script is:inline>
+      const buttons = document.querySelectorAll('.clause-btn');
+      const contents = document.querySelectorAll('.clause-content');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          if (button.classList.contains('active')) return;
+
+          // Limpiar clases activas
+          buttons.forEach(btn => btn.classList.remove('active'));
+          contents.forEach(content => content.classList.remove('active'));
+
+          // Activar botón presionado
+          button.classList.add('active');
+
+          // Mostrar contenido y reiniciar animaciones
+          const targetId = button.getAttribute('data-target');
+          const targetContent = document.getElementById(targetId);
+          
+          if (targetContent) {
+            void targetContent.offsetWidth; // Truco mágico para reiniciar CSS animations
+            targetContent.classList.add('active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
