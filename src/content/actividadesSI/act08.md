@@ -8,7 +8,7 @@ slug: "act08-182377"
 ---
 
 <div align="right">
-  <a href="/assets/images/docs_P1/182377-act08.pdf" download>
+  <a href="/assets/images/posts/portadad_act08.png" download>
     📄Descargar Reporte Completo (PDF)
   </a>
 </div>

@@ -109,7 +109,7 @@ export function getPostBySlug(slug: string): {
 }
 
 /**
- * Get all slugs for static paths (ESTA ES LA FUNCIÓN QUE FALTABA)
+ * Get all slugs for static paths
  */
 export function getAllPostSlugs() {
   const posts = getAllPosts();

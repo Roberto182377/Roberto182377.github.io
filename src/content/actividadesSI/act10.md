@@ -3,7 +3,7 @@ title: "Actividad 10 - Ciberseguridad Organizacional: Ataques, Conceptos y Técn
 description: "Análisis de amenazas cibernéticas, vectores de ataque y estrategias de mitigación en el ámbito organizacional."
 date: "2026-03-15"
 readTime: ""
-image: "/assets/images/posts/pr01-7.png"
+image: "/assets/images/posts/portadad_act10.jpg"
 slug: "act10-182377"
 ---
 

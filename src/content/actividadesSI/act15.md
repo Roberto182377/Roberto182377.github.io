@@ -3,7 +3,7 @@ title: "Actividad 15 - Red Team Report: Social Engineer Toolkit (SET)"
 description: "Informe de resultados de la simulación de ataque de ingeniería social utilizando SET (Social Engineer Toolkit)."
 date: "2026-04-05"
 readTime: ""
-image: "/assets/images/posts/img_Act04_portada.png"
+image: "/assets/images/posts/portadad_act15.png"
 slug: "red-team-report-social-engineer-toolkit"
 ---
 

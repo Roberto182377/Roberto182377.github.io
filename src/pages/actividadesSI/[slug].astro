@@ -4,30 +4,26 @@ import Footer from "../../components/Footer.astro";
 import { getPostBySlug, getAllPostSlugs } from "../../utils/getPosts";
 
 export async function getStaticPaths() {
-  const slugs = getAllPostSlugs();
-  return slugs.map((slug) => ({
-    params: { slug },
-  }));
+  return getAllPostSlugs();
 }
 
+// Obtenemos el slug desde los parámetros
 const { slug } = Astro.params;
 
+// Si no hay slug, redirigimos
 if (!slug) {
   return Astro.redirect("/actividadesSI/");
 }
 
-const post = getPostBySlug(slug);
+// Obtenemos el post
+const post = getPostBySlug(slug as string);
 
+// Si no existe el post, redirigimos
 if (!post) {
   return Astro.redirect("/actividadesSI/");
 }
 
 const { frontmatter, Content } = post;
-
-if (!Content) {
-  console.error(`Content component not found for slug: ${slug}`);
-  return Astro.redirect("/actividadesSI/");
-}
 ---
 
 <html lang="en">

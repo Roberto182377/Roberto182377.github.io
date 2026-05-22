@@ -3,7 +3,7 @@ title: "Actividad 11 - Red Team Report: Pentesting de Napping101"
 description: "Informe de resultados de la prueba de penetración realizada sobre el sistema Napping101."
 date: "2026-03-22"
 readTime: ""
-image: "/assets/images/posts/img_Act05_portada.png"
+image: "/assets/images/posts/portadad_act11.jpg"
 slug: "act11-182377"
 ---
 

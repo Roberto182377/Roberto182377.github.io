@@ -3,7 +3,7 @@ title: "Actividad 09 - Red Team Report: Pentesting de My File Server 1"
 description: "Informe de resultados de la prueba de penetración realizada sobre My File Server 1."
 date: "2026-03-20"
 readTime: ""
-image: "/assets/images/posts/img_Act01_portada.png"
+image: "/assets/images/posts/portadad_act09.png"
 slug: "act09-182377"
 ---
 
