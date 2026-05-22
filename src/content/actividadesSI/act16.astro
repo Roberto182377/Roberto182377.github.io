@@ -1,0 +1,205 @@
+---
+export const frontmatter = {
+  title: "Actividad 16 - Dilemas Éticos en Ciberseguridad",
+  description: "Análisis de escenarios reales de intrusión y dilemas morales utilizando marcos éticos corporativos y filosóficos.",
+  date: "2026-04-18",
+  readTime: "6 min",
+  image: "/assets/images/posts/ethics-cyber.jpg",
+  slug: "act16-182377"
+};
+---
+
+<div class="ethics-wrapper">
+  <div class="download-container">
+    <a href="/assets/images/docs_P1/act16-Equipo1.pdf" download class="btn-download">
+      📂 Descargar PDF Original (Actividad 16)
+    </a>
+  </div>
+
+  <section class="info-section">
+    <div class="section-badge">Introducción</div>
+    <h2>La Moral en el Espacio Digital</h2>
+    <p>
+      El ejercicio profesional de la ciberseguridad no se limita al despliegue de firewalls o a la ejecución de exploits; se encuentra intrínsecamente ligado a la toma de decisiones críticas donde la línea entre la protección, la legalidad y la moral suele ser delgada. Este reporte analiza tres escenarios complejos utilizando enfoques éticos universales y códigos profesionales como los de la <strong>ACM</strong> e <strong>ISACA</strong>.
+    </p>
+  </section>
+
+  <section class="info-section">
+    <div class="section-badge">Casos de Estudio</div>
+    <h2>Análisis de Escenarios Reales</h2>
+    
+    <div class="grid-scenarios">
+      <div class="card-scenario">
+        <h3>Escenario 01: Acceso Interno No Autorizado</h3>
+        <p><strong>Incidente:</strong> Detección de un colega del área de desarrollo consultando directorios de bases de datos de recursos humanos sin justificación operativa.</p>
+        <span class="framework">Enfoque: Derechos individuales vs. Seguridad corporativa</span>
+      </div>
+
+      <div class="card-scenario">
+        <h3>Escenario 02: Vulnerabilidad Crítica No Reportada</h3>
+        <p><strong>Incidente:</strong> Descubrimiento de un fallo de ejecución remota de código (RCE) en un software ampliamente utilizado. El fabricante ignora los reportes iniciales.</p>
+        <span class="framework">Enfoque: Utilitarismo (El mayor bien para el mayor número)</span>
+      </div>
+
+      <div class="card-scenario">
+        <h3>Escenario 03: Límites de Herramientas OSINT</h3>
+        <p><strong>Incidente:</strong> Recopilación masiva de datos públicos de empleados en redes sociales para estructurar una campaña corporativa de concientización sobre Phishing.</p>
+        <span class="framework">Enfoque: Bien Común y Privacidad Perimetral</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="section-badge">Marcos Filosóficos</div>
+    <h2>Aplicación de Enfoques Éticos</h2>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Enfoque Ético</th>
+            <th>Principio Fundamental</th>
+            <th>Aplicación Práctica en Ciberseguridad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Utilitarismo</strong></td>
+            <td>Maximizar el bienestar general y reducir los daños colaterales.</td>
+            <td>Decidir la liberación responsable de un exploit si mitiga un riesgo mayor latente.</td>
+          </tr>
+          <tr>
+            <td><strong>Enfoque de Derechos</strong></td>
+            <td>Respetar la dignidad, autonomía y privacidad de cada individuo.</td>
+            <td>Garantizar que el monitoreo interno no vulnere la confidencialidad del empleado.</td>
+          </tr>
+          <tr>
+            <td><strong>Bien Común</strong></td>
+            <td>Fortalecer las condiciones comunitarias e institucionales.</td>
+            <td>Compartir inteligencia de amenazas (IoCs) con la comunidad técnica global.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="info-section conclusion-box">
+    <h2>Conclusiones y Cumplimiento</h2>
+    <p>
+      Se concluye que las directrices técnicas deben estar supeditadas a principios éticos rigurosos. Seguir los protocolos establecidos por marcos internacionales (como el código de ética de ACM) blinda al profesional de seguridad ante dilemas legales, promoviendo una cultura de transparencia, responsabilidad y protección integral de los activos y usuarios.
+    </p>
+  </section>
+</div>
+
+<style>
+  .ethics-wrapper {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-color, #333);
+    line-height: 1.6;
+  }
+  .download-container {
+    text-align: right;
+    margin-bottom: 2rem;
+  }
+  .btn-download {
+    background: #1e3a8a;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+  }
+  .btn-download:hover {
+    background: #2563eb;
+  }
+  .info-section {
+    margin-bottom: 3rem;
+  }
+  .section-badge {
+    display: inline-block;
+    background: #eff6ff;
+    color: #1e40af;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+  :global(.dark) .section-badge {
+    background: #1e293b;
+    color: #38bdf8;
+  }
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+  :global(.dark) h2 {
+    color: #f9fafb;
+  }
+  .grid-scenarios {
+    display: block;
+  }
+  .card-scenario {
+    background: #f9fafb;
+    border-left: 4px solid #1e3a8a;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0 8px 8px 0;
+  }
+  :global(.dark) .card-scenario {
+    background: #111827;
+    border-left-color: #38bdf8;
+  }
+  .card-scenario h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #1e3a8a;
+  }
+  :global(.dark) .card-scenario h3 {
+    color: #38bdf8;
+  }
+  .framework {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #6b7280;
+  }
+  .table-responsive {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    text-align: left;
+  }
+  th, td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  :global(.dark) th, :global(.dark) td {
+    border-bottom-color: #374151;
+  }
+  th {
+    background: #f3f4f6;
+    font-weight: 600;
+  }
+  :global(.dark) th {
+    background: #1f2937;
+  }
+  .conclusion-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    padding: 2rem;
+    border-radius: 8px;
+  }
+  :global(.dark) .conclusion-box {
+    background: #064e3b;
+    border-color: #047857;
+  }
+</style>

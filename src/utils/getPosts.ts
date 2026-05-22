@@ -1,3 +1,4 @@
+// Cambiamos el patrón a *.{md,astro} para leer ambos tipos de archivos
 const allMarkdownModules = import.meta.glob<{
   frontmatter: {
     title?: string;
@@ -8,7 +9,7 @@ const allMarkdownModules = import.meta.glob<{
     slug?: string;
   };
   default: any;
-}>('../content/actividadesSI/*.md', { eager: true });
+}>('../content/actividadesSI/*.{md,astro}', { eager: true });
 
 export interface Post {
   title: string;
@@ -36,7 +37,8 @@ export function getAllPosts(): Post[] {
 
     const frontmatter = module.frontmatter || {};
     
-    const pathMatch = filePath.match(/\/([^/]+)\.md$/);
+    // Actualizamos el regex para que soporte tanto .md como .astro
+    const pathMatch = filePath.match(/\/([^/]+)\.(md|astro)$/);
     const fileName = pathMatch ? pathMatch[1] : '';
     
     const slug = frontmatter.slug || fileName;
@@ -61,7 +63,6 @@ export function getAllPosts(): Post[] {
   posts.sort((a, b) =>
     a.slug.localeCompare(b.slug, undefined, { numeric: true })
   );
-
 
   return posts;
 }
@@ -90,25 +91,19 @@ export function getPostBySlug(slug: string): {
 
     const frontmatter = module.frontmatter || {};
     
-    const pathMatch = filePath.match(/\/([^/]+)\.md$/);
+    // Actualizamos el regex aquí también
+    const pathMatch = filePath.match(/\/([^/]+)\.(md|astro)$/);
     const fileName = pathMatch ? pathMatch[1] : '';
     const fileSlug = frontmatter.slug || fileName;
 
     if (fileSlug === slug) {
       return {
         frontmatter,
-        Content: module.default,
+        Content: module.default, // module.default funciona como componente renderizable para ambos
         slug: fileSlug,
       };
     }
   }
 
   return null;
-}
-
-/**
- * Get all post slugs for static generation
- */
-export function getAllPostSlugs(): string[] {
-  return getAllPosts().map((post) => post.slug);
 }
