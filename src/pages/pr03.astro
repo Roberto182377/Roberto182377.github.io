@@ -2,25 +2,25 @@
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 
-// Datos extraídos y resumidos de las 10 Secciones del PDF (PR03-Equipo1)
 const seccionesISO = [
   {
     id: "sec-1",
     numero: "I",
-    titulo: "Alcance",
+    titulo: "Alcance del SGSI",
     icono: "🎯",
-    resumen: "Definición de las fronteras y aplicabilidad del Sistema de Gestión de Seguridad de la Información (SGSI).",
+    resumen: "Definición de las fronteras, exclusiones y aplicabilidad del Sistema de Gestión de Seguridad de la Información.",
     metricas: [
       { titulo: "Departamento Eje", valor: "Recursos Humanos" },
       { titulo: "Institución", valor: "SEER San Luis Potosí" },
-      { titulo: "Objetivo Crítico", valor: "Proteger datos personales" }
+      { titulo: "Objetivo Crítico", valor: "Proteger Datos Personales" }
     ],
     htmlContent: `
-      <h3>Delimitación del Proyecto</h3>
-      <p>El proyecto establece el perímetro de seguridad enfocado en el <strong>Departamento de Recursos Humanos del SEER</strong>. Se seleccionó este alcance debido a que es el epicentro donde se procesa la información más crítica: expedientes laborales, nóminas, contratos y datos médicos.</p>
+      <h3>Delimitación y Justificación del Proyecto</h3>
+      <p>El proyecto establece el perímetro de seguridad enfocado exclusivamente en el <strong>Departamento de Recursos Humanos del SEER</strong>. La justificación radica en que esta área es el epicentro del procesamiento de información crítica y confidencial: expedientes laborales, nóminas, contratos, y datos médicos de docentes y administrativos.</p>
       <div class="alert-box">
-        <strong>Meta Principal:</strong> Garantizar la Confidencialidad, Integridad y Disponibilidad (Triada CIA) de la información frente a amenazas internas y externas.
+        <strong>Objetivo del Alcance:</strong> Garantizar la Confidencialidad, Integridad y Disponibilidad (Triada CIA) de la información frente a amenazas internas y externas, mitigando riesgos relacionados con el robo de identidad y el fraude.
       </div>
+      <p>Se excluyen explícitamente áreas operativas que no procesan directamente la nómina y contratación, para concentrar los controles técnicos en la infraestructura de bases de datos y archivos físicos de RRHH.</p>
     `
   },
   {
@@ -28,19 +28,21 @@ const seccionesISO = [
     numero: "II",
     titulo: "Referencias Normativas",
     icono: "📚",
-    resumen: "Marco legal y estándares internacionales que fundamentan y justifican los controles aplicados.",
+    resumen: "Marco normativo y estándares internacionales de la familia ISO/IEC 27000 que rigen la auditoría.",
     metricas: [
       { titulo: "Estándar Base", valor: "ISO/IEC 27001:2022" },
-      { titulo: "Controles", valor: "ISO/IEC 27002:2022" },
-      { titulo: "Gestión Riesgos", valor: "ISO/IEC 27005" }
+      { titulo: "Controles Técnicos", valor: "ISO/IEC 27002:2022" },
+      { titulo: "Servicios Cloud", valor: "ISO/IEC 27017:2015" }
     ],
     htmlContent: `
-      <h3>Arquitectura Normativa</h3>
-      <p>Para asegurar que la auditoría tenga validez y rigor corporativo, la evaluación se alinea estrictamente a las versiones más recientes de la familia ISO 27000.</p>
+      <h3>Arquitectura Normativa Empleada</h3>
+      <p>Para asegurar el rigor corporativo, el SGSI del SEER se construyó sobre 5 pilares normativos:</p>
       <ul class="feature-list">
-        <li><strong>ISO 27001:2022:</strong> Requisitos para establecer e implementar el SGSI.</li>
-        <li><strong>ISO 27002:2022:</strong> Catálogo de controles para mitigar vectores de ataque.</li>
-        <li><strong>ISO 27005:</strong> Metodología estructurada para evaluación de riesgos.</li>
+        <li><strong>ISO/IEC 27001:2022:</strong> Requisitos formales del SGSI, delimita el alcance y define el ciclo de mejora continua.</li>
+        <li><strong>ISO/IEC 27002:2022:</strong> Catálogo de buenas prácticas (controles preventivos, detectivos y correctivos) aplicables a RRHH.</li>
+        <li><strong>ISO/IEC 27005:2018:</strong> Metodología estructurada para identificar, evaluar y tratar amenazas y vulnerabilidades.</li>
+        <li><strong>ISO/IEC 27017:2015:</strong> Aplicada para regular el uso seguro de servicios en la nube (Microsoft Office 365 y OneDrive).</li>
+        <li><strong>ISO/IEC 27018:2019:</strong> Código de prácticas para la protección de Información de Identificación Personal (PII).</li>
       </ul>
     `
   },
@@ -49,18 +51,20 @@ const seccionesISO = [
     numero: "III",
     titulo: "Términos y Definiciones",
     icono: "📖",
-    resumen: "Estandarización del vocabulario técnico para alinear a los directivos con el departamento de TI.",
+    resumen: "Estandarización del vocabulario técnico (Guía ISO 73:2009) para la Alta Dirección.",
     metricas: [
       { titulo: "Vocabulario", valor: "Guía ISO 73:2009" },
-      { titulo: "Conceptos Clave", valor: "Amenaza y Vulnerabilidad" },
-      { titulo: "Enfoque", valor: "Comunicación Ejecutiva" }
+      { titulo: "Conceptos", valor: "Riesgos y Amenazas" },
+      { titulo: "Enfoque", valor: "Gestión Corporativa" }
     ],
     htmlContent: `
-      <h3>Glosario Estratégico</h3>
-      <p>El éxito de un SGSI depende de que la Alta Dirección comprenda la magnitud de las amenazas. Se estandarizaron conceptos críticos para evitar ambigüedades durante la evaluación presupuestal y técnica:</p>
+      <h3>Glosario Estratégico (Extracto)</h3>
+      <p>El éxito del SGSI depende de evitar ambigüedades técnicas. Se establecieron definiciones base:</p>
       <div class="grid-2-cols">
-        <div class="box-card border-accent"><strong>Riesgo:</strong> Efecto de la incertidumbre sobre los objetivos.</div>
-        <div class="box-card border-accent"><strong>Impacto:</strong> Consecuencia financiera u operativa de un incidente.</div>
+        <div class="box-card border-accent"><strong>Activo (Asset):</strong> Cualquier información, sistema, software o persona que tenga valor para la organización y deba protegerse.</div>
+        <div class="box-card border-red"><strong>Amenaza (Threat):</strong> Causa potencial de un incidente no deseado que puede provocar daños al SEER.</div>
+        <div class="box-card border-warning"><strong>Análisis de Riesgos:</strong> Proceso para comprender la naturaleza de la amenaza y determinar el nivel de impacto operativo/financiero.</div>
+        <div class="box-card border-green"><strong>Checklist:</strong> Lista de apoyo para el auditor que reduce prejuicios y asegura la profundidad de la revisión técnica.</div>
       </div>
     `
   },
@@ -69,35 +73,82 @@ const seccionesISO = [
     numero: "IV",
     titulo: "Contexto de la Organización",
     icono: "🏢",
-    resumen: "Análisis exhaustivo del entorno del SEER y mapeo de los activos críticos a proteger.",
+    resumen: "Mapeo exhaustivo del entorno y la tabla de inventario de activos críticos a proteger.",
     metricas: [
-      { titulo: "Activos Críticos", valor: "+40 Identificados" },
-      { titulo: "Factores Internos", valor: "Cultura y Sistemas" },
-      { titulo: "Factores Externos", valor: "Normativas Estatales" }
+      { titulo: "Total Activos", valor: "40 Identificados" },
+      { titulo: "Clasificación", valor: "Internos y Externos" },
+      { titulo: "Evaluación", valor: "Impacto en Tríada CIA" }
     ],
     htmlContent: `
-      <h3>Evaluación del Entorno (FODA de Seguridad)</h3>
-      <p>Se realizó un inventario meticuloso clasificando bases de datos, servidores físicos, expedientes impresos y personal clave. Se identificaron las expectativas de docentes y gobierno respecto a la privacidad de los datos.</p>
-      <div class="grid-2-cols">
-        <div class="box-card border-red"><strong>Vulnerabilidad Interna:</strong> Carencia de cultura de ciberseguridad en el área administrativa.</div>
-        <div class="box-card border-green"><strong>Oportunidad:</strong> Modernización de infraestructura respaldada por presupuesto estatal.</div>
+      <h3>Inventario de Activos de Información (Extracto Crítico)</h3>
+      <p>Se realizó una clasificación rigurosa de 40 activos críticos. A continuación, se presenta el registro de los elementos de mayor impacto evaluados en Confidencialidad (C), Integridad (I) y Disponibilidad (D).</p>
+      
+      <div class="table-responsive">
+        <table class="styled-table">
+          <thead>
+            <tr><th>ID</th><th>Activo</th><th>Tipo</th><th>Tríada CIA</th><th>Justificación del Riesgo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ACT-01</td><td>Escuelas del S.E.E.R</td><td>Int</td><td>C-Baja, I-Baja, D-Alta</td><td>Disponibilidad de servicios educativos.</td></tr>
+            <tr><td>ACT-02</td><td>Computadoras en salones</td><td>Int</td><td>C-Med, I-Med, D-Alta</td><td>Punto de acceso a red y malware.</td></tr>
+            <tr><td>ACT-03</td><td>Servidores escuela</td><td>Int</td><td>C-Alta, I-Alta, D-Alta</td><td>Fuga de PII (Alumnos/Maestros).</td></tr>
+            <tr><td>ACT-05</td><td>Gestor base de datos</td><td>Int</td><td>C-Alta, I-Alta, D-Alta</td><td>Corrupción de registros académicos.</td></tr>
+            <tr><td>ACT-11</td><td>Redes Institucionales</td><td>Int</td><td>C-Med, I-Alta, D-Alta</td><td>Intercepción de tráfico local.</td></tr>
+            <tr><td>ACT-13</td><td>Expedientes Físicos</td><td>Int</td><td>C-Alta, I-Med, D-Baja</td><td>Robo de documentos físicos.</td></tr>
+            <tr><td>ACT-16</td><td>Software institucional</td><td>Int</td><td>C-Alta, I-Alta, D-Alta</td><td>Compromiso de procesos críticos.</td></tr>
+            <tr><td>ACT-19</td><td>Personal Administrativo</td><td>Int</td><td>C-Baja, I-Med, D-Baja</td><td>Error humano por desconocimiento.</td></tr>
+            <tr><td>ACT-21</td><td>Licencia Office 365</td><td>Ext</td><td>C-Alta, I-Alta, D-Alta</td><td>Secuestro de sesión y PII en nube.</td></tr>
+            <tr><td>ACT-26</td><td>API Autenticación Terceros</td><td>Ext</td><td>C-Alta, I-Alta, D-Alta</td><td>Suplantación de identidad.</td></tr>
+            <tr><td>ACT-37</td><td>Plataformas SEP/SIGED</td><td>Ext</td><td>C-Alta, I-Alta, D-Alta</td><td>Integridad de expediente federal.</td></tr>
+            <tr><td>ACT-40</td><td>Sistemas federales escolar</td><td>Ext</td><td>C-Alta, I-Alta, D-Alta</td><td>Compromiso de base de datos SEP.</td></tr>
+          </tbody>
+        </table>
       </div>
     `
   },
   {
     id: "sec-5",
     numero: "V",
-    titulo: "Liderazgo",
+    titulo: "Liderazgo y Políticas",
     icono: "👑",
-    resumen: "Compromiso gerencial para estructurar gobernanza, asignar roles y redactar políticas base.",
+    resumen: "Compromiso de la Alta Dirección, definición de políticas internas y externas.",
     metricas: [
-      { titulo: "Políticas Generales", valor: "Aprobadas" },
-      { titulo: "Políticas Funcionales", valor: "Implementadas" },
-      { titulo: "Roles", valor: "CISO y Auditores" }
+      { titulo: "Políticas Internas", valor: "10 Aprobadas" },
+      { titulo: "Políticas Externas", valor: "10 Aprobadas" },
+      { titulo: "Alcance", valor: "Obligatorio" }
     ],
     htmlContent: `
-      <h3>Estructura de Gobernanza</h3>
-      <p>La seguridad de la información es una responsabilidad directiva. Se redactaron políticas obligatorias como la <strong>Política de Escritorio Limpio</strong> y <strong>Control de Accesos</strong>, logrando el respaldo de la dirección para la asignación de recursos y personal dedicado a la vigilancia del SGSI.</p>
+      <h3>Políticas Funcionales Internas</h3>
+      <div class="table-responsive">
+        <table class="styled-table">
+          <thead>
+            <tr><th>Política Funcional</th><th>Estándar / Directriz</th><th>Procedimiento / Línea Base</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1. Control de Acceso a BD</td><td>Uso obligatorio de contraseñas de alta complejidad (12+ carácteres).</td><td>Cambio de contraseña cada 90 días naturales.</td></tr>
+            <tr><td>2. Seguridad en Computadoras</td><td>Prohibición de instalación de software no autorizado.</td><td>Bloqueo de puertos USB y privilegios de administrador.</td></tr>
+            <tr><td>3. Gestión de Respaldos</td><td>Garantizar disponibilidad ante fallos críticos.</td><td>Backups diarios automáticos a las 23:00 hrs.</td></tr>
+            <tr><td>4. Seguridad Física de Oficinas</td><td>Política de "Escritorio Limpio" al finalizar jornada.</td><td>Resguardo de papelería en archiveros con llave.</td></tr>
+            <tr><td>5. Redes Institucionales</td><td>Restricción a sitios web de alto riesgo.</td><td>Monitorización de logs de tráfico.</td></tr>
+            <tr><td>10. Capacitación en Seguridad</td><td>Asistencia a sesión de concientización anual.</td><td>100% de asistencia a talleres de Phishing.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top: 2rem;">Políticas Funcionales Externas</h3>
+      <div class="table-responsive">
+        <table class="styled-table">
+          <thead>
+            <tr><th>Política Funcional</th><th>Estándar / Directriz</th><th>Procedimiento / Línea Base</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1. Servicios en la Nube</td><td>Uso estricto de cuentas institucionales Office 365.</td><td>Habilitación obligatoria de 2FA.</td></tr>
+            <tr><td>2. Cumplimiento Normativo</td><td>Alineación total con directrices SEP y SIGED.</td><td>Revisión trimestral de actualizaciones.</td></tr>
+            <tr><td>4. Intercambio Seguro de Datos</td><td>Validación SSL/TLS en servidores federales.</td><td>Bloqueo de conexiones sin cifrado HTTPS.</td></tr>
+            <tr><td>6. Acceso de Terceros</td><td>Contratos deben incluir cláusulas de confidencialidad (NDA).</td><td>Revisión legal antes de otorgar accesos.</td></tr>
+          </tbody>
+        </table>
+      </div>
     `
   },
   {
@@ -105,62 +156,82 @@ const seccionesISO = [
     numero: "VI",
     titulo: "Planificación de Riesgos",
     icono: "⚠️",
-    resumen: "Desarrollo de la Matriz de Riesgos y formulación de planes de tratamiento y mitigación.",
+    resumen: "Catálogo de los 20 riesgos asociados a las políticas implementadas.",
     metricas: [
-      { titulo: "Metodología", valor: "Matriz Probabilidad vs Impacto" },
-      { titulo: "Posturas", valor: "Mitigar / Transferir" },
-      { titulo: "Enfoque", valor: "Proactivo" }
+      { titulo: "Riesgos Internos", valor: "10 Evaluados" },
+      { titulo: "Riesgos Externos", valor: "10 Evaluados" },
+      { titulo: "Estrategias", valor: "Mitigar / Transferir" }
     ],
     htmlContent: `
-      <h3>Matriz de Evaluación (Ejemplos Críticos)</h3>
-      <p>Cada amenaza fue evaluada calculando su nivel de riesgo real para el SEER. Con base en esto, se dictaminó una estrategia de tratamiento específica:</p>
-      <div class="table-container">
-        <table class="styled-table">
-          <thead>
-            <tr><th>Riesgo Identificado</th><th>Nivel</th><th>Plan de Tratamiento</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Uso inseguro de servicios en la Nube</td><td><span class="badge high">Alto</span></td><td><strong>Mitigar:</strong> Políticas estrictas de acceso.</td></tr>
-            <tr><td>Ataques de Ingeniería Social (Phishing)</td><td><span class="badge high">Alto</span></td><td><strong>Mitigar:</strong> Capacitación y filtros Anti-Spam.</td></tr>
-            <tr><td>Falla catastrófica de Hardware local</td><td><span class="badge medium">Medio</span></td><td><strong>Transferir:</strong> Migración a Infraestructura AWS.</td></tr>
-          </tbody>
-        </table>
+      <h3>Mapeo de Matriz de Riesgos</h3>
+      <p>Cada política funcional responde a una amenaza concreta evaluada en la Matriz de Probabilidad vs Impacto:</p>
+      
+      <div class="grid-2-cols">
+        <div class="box-card border-red">
+          <strong>Riesgos Internos (P-I)</strong>
+          <ul style="margin-top:0.5rem; padding-left: 1.2rem;">
+            <li><strong>P-I1:</strong> Acceso no autorizado a BD de nómina.</li>
+            <li><strong>P-I2:</strong> Infección por Malware en PCs.</li>
+            <li><strong>P-I3:</strong> Pérdida de datos por falla de servidor.</li>
+            <li><strong>P-I5:</strong> Exfiltración de datos vía redes sociales.</li>
+            <li><strong>P-I8:</strong> Incendio/Falla eléctrica en el Rack.</li>
+            <li><strong>P-I9:</strong> Explotación de vulnerabilidades (SUID).</li>
+            <li><strong>P-I10:</strong> Error humano por falta de capacitación.</li>
+          </ul>
+        </div>
+        <div class="box-card border-warning">
+          <strong>Riesgos Externos (P-E)</strong>
+          <ul style="margin-top:0.5rem; padding-left: 1.2rem;">
+            <li><strong>P-E1:</strong> Secuestro de sesión en Office 365.</li>
+            <li><strong>P-E2:</strong> Sanciones por incumplimiento (SEP).</li>
+            <li><strong>P-E3:</strong> Interrupción del servicio de Internet.</li>
+            <li><strong>P-E4:</strong> Intercepción de datos en tránsito.</li>
+            <li><strong>P-E8:</strong> Compromiso de claves de API externas.</li>
+            <li><strong>P-E9:</strong> Ataque Tabnabbing en eventos externos.</li>
+            <li><strong>P-E10:</strong> Malware en archivos de editoriales.</li>
+          </ul>
+        </div>
       </div>
     `
   },
   {
     id: "sec-7",
     numero: "VII",
-    titulo: "Soporte",
+    titulo: "Soporte y Concientización",
     icono: "🤝",
-    resumen: "Provisión de infraestructura, fomento de la concienciación y control de documentos sensibles.",
+    resumen: "Capacitación de los recursos humanos y control estricto de los documentos probatorios.",
     metricas: [
-      { titulo: "Capacitación", valor: "Minutas y Talleres" },
-      { titulo: "Control Documental", valor: "Gestión de Versiones" },
-      { titulo: "Legales", valor: "Firma de NDAs" }
+      { titulo: "Capacitación", valor: "Talleres Anti-Phishing" },
+      { titulo: "Control Documental", valor: "Bitácoras Físicas" },
+      { titulo: "Legales", valor: "Firmas de NDAs" }
     ],
     htmlContent: `
-      <h3>Cultura y Documentación</h3>
-      <p>La estrategia técnica es inútil si el factor humano falla. Se ejecutaron programas de sensibilización evidenciados mediante minutas de capacitación. Adicionalmente, se estableció un control estricto de versiones para los <strong>Acuerdos de Confidencialidad (NDA)</strong> firmados por todo el personal de RRHH.</p>
+      <h3>Factor Humano y Documentación</h3>
+      <p>La tecnología es vulnerable si el usuario final carece de entrenamiento. Las acciones de soporte se enfocaron en robustecer el cortafuegos humano.</p>
+      <ul class="feature-list">
+        <li><strong>Minutas de Sensibilización:</strong> Registro obligatorio de asistencia del personal de RRHH a capacitaciones sobre Ingeniería Social y Phishing.</li>
+        <li><strong>Firma de Acuerdos (NDA):</strong> Refuerzo de las cláusulas legales y de confidencialidad para todo el personal con acceso a expedientes de docentes.</li>
+        <li><strong>Control de Archivo:</strong> Implementación de bitácoras de registro de entrada/salida para el acceso al archivo físico de expedientes.</li>
+      </ul>
     `
   },
   {
     id: "sec-8",
     numero: "VIII",
-    titulo: "Operación",
+    titulo: "Operación Técnica",
     icono: "⚙️",
-    resumen: "Implementación técnica paso a paso de los controles seleccionados en la fase de planificación.",
+    resumen: "Despliegue de los controles técnicos preventivos en la infraestructura de red.",
     metricas: [
-      { titulo: "Control Principal", valor: "Autenticación Multifactor (2FA)" },
-      { titulo: "Restricciones", valor: "Correos Institucionales" },
-      { titulo: "Ejecución", valor: "100% Desplegado" }
+      { titulo: "Cuentas", valor: "Dominios Restringidos" },
+      { titulo: "Autenticación", valor: "2FA Desplegado" },
+      { titulo: "Hardening", valor: "Bloqueo de Puertos" }
     ],
     htmlContent: `
-      <h3>Despliegue de Controles (Flujo Operativo)</h3>
+      <h3>Flujo de Despliegue de Seguridad Operativa</h3>
       <div class="timeline">
-        <div class="tl-item"><strong>Fase 1: Bloqueo de Cuentas.</strong> Se inhabilitó el acceso a plataformas desde correos personales (Gmail/Outlook). Todo acceso debe provenir del dominio <em>@seer.gob.mx</em>.</div>
-        <div class="tl-item"><strong>Fase 2: Implementación de 2FA.</strong> Activación obligatoria de métodos de doble factor (App Authenticator) para acceder a bases de nóminas.</div>
-        <div class="tl-item"><strong>Fase 3: Auditoría de Red.</strong> Segmentación de la red de Recursos Humanos mediante VLANs para evitar movimientos laterales de malware.</div>
+        <div class="tl-item"><strong>Fase 1: Control de Identidad.</strong> Transición obligatoria a correos institucionales. Se bloquearon inicios de sesión a plataformas gubernamentales desde cuentas genéricas (Gmail/Outlook).</div>
+        <div class="tl-item"><strong>Fase 2: Autenticación Robusta.</strong> Implementación de políticas de contraseñas de alta complejidad (12 caracteres) y activación de MFA/2FA para acceso a bases de datos.</div>
+        <div class="tl-item"><strong>Fase 3: Endurecimiento (Hardening) de Endpoints.</strong> Desactivación de puertos USB masivos en equipos de captura y revocación de privilegios de administrador a usuarios estándar.</div>
       </div>
     `
   },
@@ -169,31 +240,40 @@ const seccionesISO = [
     numero: "IX",
     titulo: "Evaluación del Desempeño",
     icono: "📊",
-    resumen: "Monitorización continua, medición de KPIs y auditorías internas para validar la eficacia del SGSI.",
+    resumen: "Auditorías continuas y métricas de rendimiento para validar el cumplimiento del SGSI.",
     metricas: [
-      { titulo: "Métrica Clave", valor: "Tasa de incidentes" },
-      { titulo: "Auditorías", valor: "Revisiones Periódicas" },
-      { titulo: "Revisión", valor: "Por la Alta Dirección" }
+      { titulo: "Frecuencia", valor: "Revisiones Trimestrales" },
+      { titulo: "Evidencia", valor: "Logs y Bitácoras" },
+      { titulo: "Supervisión", valor: "Dirección General" }
     ],
     htmlContent: `
-      <h3>Monitorización y Cumplimiento</h3>
-      <p>No se puede mejorar lo que no se mide. Se establecieron métricas para vigilar el comportamiento de la red, como el número de bloqueos por inicios de sesión fallidos. Las auditorías internas generan reportes de cumplimiento que se presentan trimestralmente al comité de seguridad.</p>
+      <h3>Métricas y Monitoreo Continuo</h3>
+      <p>Para asegurar que los controles no sean letra muerta, se instauró un sistema de revisión de desempeño basado en evidencias tangibles:</p>
+      <div class="grid-2-cols">
+        <div class="box-card border-accent"><strong>Auditoría de Sistemas:</strong> Revisión de logs en firewalls y Active Directory para detectar intentos de inicio de sesión fallidos o conexiones anómalas.</div>
+        <div class="box-card border-accent"><strong>Auditoría Administrativa:</strong> Verificación física de que la política de "Escritorio Limpio" se cumpla al final de cada turno en las oficinas del SEER.</div>
+      </div>
     `
   },
   {
     id: "sec-10",
     numero: "X",
-    titulo: "Mejora",
+    titulo: "Mejora Continua",
     icono: "🚀",
-    resumen: "Protocolos de respuesta ante incidentes, análisis de causa raíz y aplicación de acciones correctivas.",
+    resumen: "Protocolos de respuesta ante incidentes y análisis de causa raíz para evitar recurrencias.",
     metricas: [
-      { titulo: "Enfoque", valor: "Análisis Causa Raíz" },
-      { titulo: "Meta", valor: "Cero Recurrencias" },
-      { titulo: "Post-Mortem", valor: "Obligatorio" }
+      { titulo: "Enfoque", valor: "Acciones Correctivas" },
+      { titulo: "Triage", valor: "Clasificación de Incidentes" },
+      { titulo: "Post-Mortem", valor: "Reportes Detallados" }
     ],
     htmlContent: `
-      <h3>Gestión de Incidentes y Post-Mortem</h3>
-      <p>El SGSI asume que las brechas pueden ocurrir. Cuando se detecta una "No Conformidad" o incidente, se activa el protocolo de respuesta. Posteriormente se realiza un análisis forense / administrativo para hallar la <strong>Causa Raíz</strong> y aplicar parches normativos o técnicos que eviten que el mismo vector sea explotado dos veces.</p>
+      <h3>Gestión de Incidentes (Respuesta Post-Brecha)</h3>
+      <p>El estándar ISO 27001 exige estar preparados para cuando los controles fallan. El proceso de mejora se basa en la retroalimentación tras una anomalía:</p>
+      <ul class="feature-list">
+        <li><strong>Análisis de Causa Raíz:</strong> Investigar a profundidad el <em>¿Qué ocurrió?</em> y <em>¿Por qué ocurrió?</em> en lugar de culpar únicamente al usuario final.</li>
+        <li><strong>Contención Inmediata:</strong> Aislar equipos infectados o suspender cuentas comprometidas en Office 365 para evitar movimientos laterales.</li>
+        <li><strong>Acciones Correctivas:</strong> Modificar los controles técnicos (ej. actualizar reglas del firewall) basándose en las lecciones aprendidas del post-mortem.</li>
+      </ul>
     `
   }
 ];
@@ -205,7 +285,6 @@ const seccionesISO = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ISO 27001 SEER | Portafolio</title>
     <style>
-      /* Variables Base: MODO OSCURO POR DEFECTO */
       :root {
         --bg-main: #0a0a0a;
         --bg-card: #141414;
@@ -222,7 +301,6 @@ const seccionesISO = [
         --danger: #ef4444;
       }
 
-      /* DETECCIÓN DE MODO CLARO */
       :global(html:not(.dark)), :global(html.light), :global(html[data-theme="light"]) {
         --bg-main: #ffffff;
         --bg-card: #f8f9fa;
@@ -251,16 +329,12 @@ const seccionesISO = [
       }
 
       .container {
-        max-width: 1250px;
+        max-width: 1350px;
         margin: 0 auto;
-        padding: 5rem 1.5rem;
+        padding: 4rem 1.5rem;
       }
 
-      /* CABECERA */
-      header {
-        text-align: center;
-        margin-bottom: 4rem;
-      }
+      header { text-align: center; margin-bottom: 4rem; }
       
       .badge-top {
         display: inline-block;
@@ -289,7 +363,6 @@ const seccionesISO = [
         margin: 0 auto;
       }
 
-      /* LAYOUT TIPO DASHBOARD */
       .dashboard-layout {
         display: grid;
         grid-template-columns: 320px 1fr;
@@ -297,7 +370,6 @@ const seccionesISO = [
         align-items: start;
       }
 
-      /* BARRA LATERAL (MENU CLÁUSULAS) */
       .sidebar {
         display: flex;
         flex-direction: column;
@@ -345,41 +417,20 @@ const seccionesISO = [
         width: 25px;
       }
 
-      .clause-btn:hover {
-        background-color: var(--bg-hover);
-        color: var(--text-title);
-        padding-left: 1.6rem;
-      }
-
-      .clause-btn.active {
-        background-color: var(--bg-hover);
-        color: var(--accent-color);
-        padding-left: 1.6rem;
-        font-weight: 700;
-      }
-
+      .clause-btn:hover { background-color: var(--bg-hover); color: var(--text-title); padding-left: 1.6rem; }
+      .clause-btn.active { background-color: var(--bg-hover); color: var(--accent-color); padding-left: 1.6rem; font-weight: 700; }
       .clause-btn::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 4px;
-        background-color: var(--accent-color);
-        transform: scaleY(0);
-        transition: transform 0.3s ease;
-        transform-origin: center;
+        content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+        background-color: var(--accent-color); transform: scaleY(0); transition: transform 0.3s ease; transform-origin: center;
       }
-
       .clause-btn.active::before { transform: scaleY(1); }
 
-      /* PANEL DERECHO (CONTENIDO) */
       .viewer {
         background: var(--bg-card);
         border: 1px solid var(--border-ui);
         border-radius: 14px;
         padding: 3rem;
-        min-height: 550px;
+        min-height: 700px; /* Aumentado para las tablas grandes */
         box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
         overflow: hidden;
       }
@@ -387,7 +438,6 @@ const seccionesISO = [
       .clause-content { display: none; }
       .clause-content.active { display: block; }
 
-      /* ANIMACIONES EN CASCADA */
       .clause-content.active .header-anim { animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
       .clause-content.active .kpis-anim { animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards; opacity: 0; }
       .clause-content.active .body-anim { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards; opacity: 0; }
@@ -396,168 +446,62 @@ const seccionesISO = [
       @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes fadeInScale { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
 
-      /* CABECERA INTERNA */
-      .content-header {
-        margin-bottom: 2rem;
-        padding-bottom: 1.5rem;
-        border-bottom: 1px solid var(--border-ui);
-      }
+      .content-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-ui); }
+      .content-header h2 { font-size: 2.2rem; font-weight: 800; color: var(--text-title); margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 0.8rem; }
+      .content-header p { color: var(--text-muted); font-size: 1.1rem; margin: 0; line-height: 1.6; }
 
-      .content-header h2 {
-        font-size: 2.2rem;
-        font-weight: 800;
-        color: var(--text-title);
-        margin: 0 0 0.5rem 0;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-      }
-
-      .content-header p {
-        color: var(--text-muted);
-        font-size: 1.1rem;
-        margin: 0;
-        line-height: 1.6;
-      }
-
-      /* METRICAS (KPI CARDS) */
-      .kpi-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-        margin-bottom: 2.5rem;
-      }
-
-      .kpi-card {
-        background: var(--bg-hover);
-        border: 1px solid var(--border-ui);
-        border-radius: 10px;
-        padding: 1.2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.4rem;
-        transition: transform 0.2s ease;
-      }
-
+      .kpi-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+      .kpi-card { background: var(--bg-hover); border: 1px solid var(--border-ui); border-radius: 10px; padding: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem; transition: transform 0.2s ease; }
       .kpi-card:hover { transform: translateY(-3px); border-color: rgba(37, 99, 235, 0.4); }
+      .kpi-title { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+      .kpi-value { font-size: 1.1rem; font-weight: 800; color: var(--accent-color); }
 
-      .kpi-title {
-        font-size: 0.75rem;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-weight: 700;
-      }
-
-      .kpi-value {
-        font-size: 1.1rem;
-        font-weight: 800;
-        color: var(--accent-color);
-      }
-
-      /* ESTILOS INTERNOS DE CONTENIDO INYECTADO (HTML) */
-      .html-body {
-        line-height: 1.7;
-        font-size: 1.05rem;
-        color: var(--text-body);
-      }
-
-      .html-body h3 {
-        color: var(--text-title);
-        font-size: 1.3rem;
-        margin-top: 0;
-        margin-bottom: 1.2rem;
-      }
-
+      .html-body { line-height: 1.7; font-size: 1.05rem; color: var(--text-body); }
+      .html-body h3 { color: var(--text-title); font-size: 1.4rem; margin-top: 0; margin-bottom: 1.2rem; border-left: 4px solid var(--accent-color); padding-left: 10px;}
       .html-body p { margin-bottom: 1.2rem; }
 
-      /* Alertas */
-      .alert-box {
-        padding: 1.2rem;
-        background: var(--accent-glow);
-        border-left: 4px solid var(--accent-color);
-        border-radius: 0 8px 8px 0;
-        margin: 1.5rem 0;
-        font-size: 1rem;
-      }
-
-      /* Listas y Grids */
+      .alert-box { padding: 1.2rem; background: var(--accent-glow); border-left: 4px solid var(--accent-color); border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-size: 1rem; }
+      
       .feature-list { padding-left: 1.2rem; margin-bottom: 1.5rem; }
       .feature-list li { margin-bottom: 0.8rem; }
       
-      .grid-2-cols {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-        margin-top: 1.5rem;
-      }
-
-      .box-card {
-        padding: 1.2rem;
-        background: var(--bg-hover);
-        border-radius: 8px;
-        border-left: 4px solid var(--border-ui);
-        font-size: 0.95rem;
-      }
+      .grid-2-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+      
+      .box-card { padding: 1.2rem; background: var(--bg-hover); border-radius: 8px; border-left: 4px solid var(--border-ui); font-size: 0.95rem; }
       .box-card.border-accent { border-color: var(--accent-color); }
       .box-card.border-red { border-color: var(--danger); }
+      .box-card.border-warning { border-color: var(--warning); }
       .box-card.border-green { border-color: var(--success); }
 
-      /* Tabla Estilizada */
-      .table-container { overflow-x: auto; margin-top: 1.5rem; }
-      .styled-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.95rem;
+      /* Tablas Mejoradas y Responsivas */
+      .table-responsive {
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid var(--border-ui);
+        border-radius: 8px;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        background: var(--bg-card);
       }
-      .styled-table th {
-        background: var(--bg-hover);
-        color: var(--text-title);
-        text-align: left;
-        padding: 1rem;
-        font-weight: 700;
-        border-bottom: 2px solid var(--border-ui);
-      }
-      .styled-table td {
-        padding: 1rem;
-        border-bottom: 1px solid var(--border-ui);
-      }
-      .badge {
-        padding: 0.3rem 0.6rem;
-        border-radius: 4px;
-        font-size: 0.75rem;
-        font-weight: 800;
-        text-transform: uppercase;
-      }
-      .badge.high { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
-      .badge.medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+      
+      /* Estilo para la barra de desplazamiento (Scrollbar) en las tablas */
+      .table-responsive::-webkit-scrollbar { width: 8px; height: 8px; }
+      .table-responsive::-webkit-scrollbar-track { background: var(--bg-hover); border-radius: 8px; }
+      .table-responsive::-webkit-scrollbar-thumb { background: var(--border-ui); border-radius: 8px; }
+      .table-responsive::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-      /* Línea de tiempo (Timeline) */
-      .timeline {
-        margin-left: 0.5rem;
-        padding-left: 1.5rem;
-        border-left: 2px solid var(--border-ui);
-        margin-top: 1.5rem;
-      }
-      .tl-item {
-        position: relative;
-        margin-bottom: 1.5rem;
-        padding-top: 0.1rem;
-      }
+      .styled-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+      .styled-table thead { position: sticky; top: 0; background: var(--bg-hover); z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+      .styled-table th { color: var(--text-title); text-align: left; padding: 1rem; font-weight: 700; border-bottom: 2px solid var(--border-ui); white-space: nowrap; }
+      .styled-table td { padding: 1rem; border-bottom: 1px solid var(--border-ui); color: var(--text-body); }
+      .styled-table tbody tr:hover { background-color: rgba(255, 255, 255, 0.02); }
+      :global(html:not(.dark)) .styled-table tbody tr:hover { background-color: rgba(0, 0, 0, 0.02); }
+
+      .timeline { margin-left: 0.5rem; padding-left: 1.5rem; border-left: 2px solid var(--border-ui); margin-top: 1.5rem; }
+      .tl-item { position: relative; margin-bottom: 1.5rem; padding-top: 0.1rem; }
       .tl-item:last-child { margin-bottom: 0; }
-      .tl-item::before {
-        content: '';
-        position: absolute;
-        left: -1.86rem;
-        top: 0.4rem;
-        width: 10px;
-        height: 10px;
-        background: var(--accent-color);
-        border-radius: 50%;
-        box-shadow: 0 0 0 4px var(--bg-card);
-      }
+      .tl-item::before { content: ''; position: absolute; left: -1.86rem; top: 0.4rem; width: 10px; height: 10px; background: var(--accent-color); border-radius: 50%; box-shadow: 0 0 0 4px var(--bg-card); }
 
-      /* RESPONSIVIDAD */
       @media (max-width: 900px) {
         .dashboard-layout { grid-template-columns: 1fr; }
         .sidebar { position: static; max-height: 300px; overflow-y: auto; }
@@ -571,14 +515,14 @@ const seccionesISO = [
     
     <main class="container">
       <header>
-        <div class="badge-top">Proyecto Universitario</div>
+        <div class="badge-top">Auditoría Ciberseguridad S.E.E.R</div>
         <h1>Implementación ISO 27001:2022</h1>
-        <p class="subtitle">Auditoría, Gobernanza y Gestión de Riesgos Cibernéticos aplicados al Sistema Educativo Estatal Regular (SEER).</p>
+        <p class="subtitle">Análisis de Riesgos, Gobernanza y Controles Operativos aplicados al Departamento de Recursos Humanos.</p>
       </header>
 
       <div class="dashboard-layout">
         <aside class="sidebar">
-          <div class="sidebar-header">Cláusulas ISO 27001</div>
+          <div class="sidebar-header">Cláusulas del Proyecto</div>
           {seccionesISO.map((sec, index) => (
             <button 
               class={`clause-btn ${index === 0 ? 'active' : ''}`} 
@@ -594,12 +538,10 @@ const seccionesISO = [
         <section class="viewer">
           {seccionesISO.map((sec, index) => (
             <div id={sec.id} class={`clause-content ${index === 0 ? 'active' : ''}`}>
-              
               <div class="content-header header-anim">
                 <h2>{sec.icono} {sec.numero}. {sec.titulo}</h2>
                 <p>{sec.resumen}</p>
               </div>
-              
               <div class="kpi-container kpis-anim">
                 {sec.metricas.map((m) => (
                   <div class="kpi-card">
@@ -608,9 +550,7 @@ const seccionesISO = [
                   </div>
                 ))}
               </div>
-
               <div class="html-body body-anim" set:html={sec.htmlContent}></div>
-
             </div>
           ))}
         </section>
@@ -626,20 +566,13 @@ const seccionesISO = [
       buttons.forEach(button => {
         button.addEventListener('click', () => {
           if (button.classList.contains('active')) return;
-
-          // Limpiar clases activas
           buttons.forEach(btn => btn.classList.remove('active'));
           contents.forEach(content => content.classList.remove('active'));
-
-          // Activar botón presionado
           button.classList.add('active');
-
-          // Mostrar contenido y reiniciar animaciones
           const targetId = button.getAttribute('data-target');
           const targetContent = document.getElementById(targetId);
-          
           if (targetContent) {
-            void targetContent.offsetWidth; // Truco mágico para reiniciar CSS animations
+            void targetContent.offsetWidth;
             targetContent.classList.add('active');
           }
         });
