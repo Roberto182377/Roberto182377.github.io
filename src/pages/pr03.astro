@@ -2,18 +2,18 @@
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 
-// Solo guardamos los datos del menú lateral aquí para mantenerlo limpio.
+// Índice lateral simplificado para el manejo de los estados activos
 const menuLateral = [
-  { id: "sec-1", numero: "I", titulo: "Alcance del SGSI", icono: "🎯" },
-  { id: "sec-2", numero: "II", titulo: "Referencias Normativas", icono: "📚" },
-  { id: "sec-3", numero: "III", titulo: "Términos y Definiciones", icono: "📖" },
-  { id: "sec-4", numero: "IV", titulo: "Contexto de la Organización", icono: "🏢" },
-  { id: "sec-5", numero: "V", titulo: "Liderazgo y Políticas", icono: "👑" },
-  { id: "sec-6", numero: "VI", titulo: "Planificación de Riesgos", icono: "⚠️" },
-  { id: "sec-7", numero: "VII", titulo: "Soporte y Concientización", icono: "🤝" },
-  { id: "sec-8", numero: "VIII", titulo: "Operación Técnica", icono: "⚙️" },
-  { id: "sec-9", numero: "IX", titulo: "Evaluación del Desempeño", icono: "📊" },
-  { id: "sec-10", numero: "X", titulo: "Mejora Continua", icono: "🚀" }
+  { id: "sec-1", numero: "I", titulo: "Alcance del SGSI" },
+  { id: "sec-2", numero: "II", titulo: "Referencias Normativas" },
+  { id: "sec-3", numero: "III", titulo: "Términos y Definiciones" },
+  { id: "sec-4", numero: "IV", titulo: "Contexto de la Organización" },
+  { id: "sec-5", numero: "V", titulo: "Liderazgo y Políticas" },
+  { id: "sec-6", numero: "VI", titulo: "Planificación de Riesgos" },
+  { id: "sec-7", numero: "VII", titulo: "Soporte" },
+  { id: "sec-8", numero: "VIII", titulo: "Operación" },
+  { id: "sec-9", numero: "IX", titulo: "Evaluación del Desempeño" },
+  { id: "sec-10", numero: "X", titulo: "Mejora" }
 ];
 ---
 
@@ -23,7 +23,7 @@ const menuLateral = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ISO 27001 SEER | Portafolio</title>
     <style>
-      /* Variables y MODO OSCURO (Mismo funcionamiento de tu portafolio) */
+      /* Variables Base: MODO OSCURO POR DEFECTO */
       :root {
         --bg-main: #0a0a0a;
         --bg-card: #141414;
@@ -35,8 +35,12 @@ const menuLateral = [
         --accent-color: #2563eb;
         --accent-glow: rgba(37, 99, 235, 0.1);
         --dot-color: rgba(255, 255, 255, 0.15);
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
       }
 
+      /* INTERRUPTOR DE MODO CLARO */
       :global(html:not(.dark)), :global(html.light), :global(html[data-theme="light"]) {
         --bg-main: #ffffff;
         --bg-card: #f8f9fa;
@@ -51,79 +55,274 @@ const menuLateral = [
       }
 
       body {
-        margin: 0; background-color: var(--bg-main); color: var(--text-body);
-        font-family: 'Inter', system-ui, sans-serif;
-        background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px), radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
-        background-size: 24px 41.57px; background-position: 0 0, 12px 20.78px; background-attachment: fixed;
+        margin: 0;
+        background-color: var(--bg-main);
+        color: var(--text-body);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        background-image: 
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px),
+          radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+        background-size: 24px 41.57px;
+        background-position: 0 0, 12px 20.78px;
+        background-attachment: fixed;
         transition: background-color 0.4s ease, color 0.4s ease;
       }
 
-      .container { max-width: 1350px; margin: 0 auto; padding: 4rem 1.5rem; }
-      header { text-align: center; margin-bottom: 4rem; }
-      h1 { font-size: 2.8rem; font-weight: 800; color: var(--text-title); margin: 0 0 0.5rem 0; }
-      .subtitle { color: var(--text-muted); font-size: 1.15rem; max-width: 600px; margin: 0 auto; }
+      .container {
+        max-width: 1350px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+      }
 
-      .dashboard-layout { display: grid; grid-template-columns: 320px 1fr; gap: 2rem; align-items: start; }
+      header { text-align: center; margin-bottom: 2.5rem; }
+      
+      h1 { 
+        font-size: 2.8rem; 
+        font-weight: 800; 
+        letter-spacing: -0.03em; 
+        color: var(--text-title);
+        margin: 0 0 0.5rem 0; 
+      }
+
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 1.15rem;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      /* ÁREA GLOBAL DE ACCIONES (TOP) */
+      .global-actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 3.5rem;
+      }
+
+      .btn-download {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--bg-card);
+        color: var(--text-title);
+        border: 1px solid var(--border-ui);
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      }
+
+      .btn-download:hover {
+        background: var(--bg-hover);
+        border-color: var(--accent-color);
+        transform: translateY(-2px);
+      }
+
+      /* LAYOUT PRINCIPAL */
+      .dashboard-layout {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 2.5rem;
+        align-items: start;
+        margin-bottom: 4rem;
+      }
 
       /* SIDEBAR */
       .sidebar {
-        display: flex; flex-direction: column; background: var(--bg-card);
-        border: 1px solid var(--border-ui); border-radius: 12px;
-        position: sticky; top: 2rem;
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-card);
+        border: 1px solid var(--border-ui);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: sticky;
+        top: 2rem;
       }
-      .sidebar-header { padding: 1.2rem; border-bottom: 1px solid var(--border-ui); font-weight: 700; color: var(--text-title); background: rgba(0,0,0,0.02); }
+
+      .sidebar-header {
+        padding: 1.2rem;
+        border-bottom: 1px solid var(--border-ui);
+        font-weight: 700;
+        color: var(--text-title);
+        font-size: 0.95rem;
+        background: rgba(0,0,0,0.02);
+      }
+
       .clause-btn {
-        background: transparent; border: none; border-bottom: 1px solid var(--border-ui);
-        color: var(--text-body); padding: 1rem 1.2rem; text-align: left; font-weight: 500; font-size: 0.95rem;
-        cursor: pointer; display: flex; align-items: center; gap: 0.8rem; transition: all 0.3s ease; position: relative;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid var(--border-ui);
+        color: var(--text-body);
+        padding: 1.1rem 1.2rem;
+        text-align: left;
+        font-weight: 500; 
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
       }
+
       .clause-btn:last-child { border-bottom: none; }
-      .clause-btn:hover { background-color: var(--bg-hover); color: var(--text-title); padding-left: 1.6rem; }
-      .clause-btn.active { background-color: var(--bg-hover); color: var(--accent-color); padding-left: 1.6rem; font-weight: 700; }
-      .clause-btn::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background-color: var(--accent-color); transform: scaleY(0); transition: transform 0.3s ease; }
+      .clause-btn .num { font-weight: 700; color: var(--text-muted); width: 24px; }
+      .clause-btn:hover { background-color: var(--bg-hover); color: var(--text-title); padding-left: 1.5rem; }
+      .clause-btn.active { background-color: var(--bg-hover); color: var(--accent-color); padding-left: 1.5rem; font-weight: 700; }
+      
+      .clause-btn::before {
+        content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+        background-color: var(--accent-color); transform: scaleY(0); transition: transform 0.3s ease;
+      }
       .clause-btn.active::before { transform: scaleY(1); }
 
-      /* VIEWER PRINCIPAL */
+      /* PANEL DERECHO (VIEWER DE HTML LIBRE) */
       .viewer {
-        background: var(--bg-card); border: 1px solid var(--border-ui);
-        border-radius: 14px; padding: 3rem; min-height: 700px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-ui);
+        border-radius: 14px;
+        padding: 3rem;
+        min-height: 600px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
       }
-      .clause-content { display: none; animation: fadeIn 0.4s ease forwards; }
-      .clause-content.active { display: block; }
-      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-      /* NUEVOS ESTILOS PARA CONTENIDO LIBRE (Imágenes, Grids, Botones) */
-      .content-header { border-bottom: 1px solid var(--border-ui); padding-bottom: 1rem; margin-bottom: 2rem; }
-      .content-header h2 { color: var(--text-title); font-size: 2rem; margin: 0; display: flex; align-items: center; gap: 10px;}
-      .content-header p { color: var(--text-muted); font-size: 1.1rem; }
+      .clause-content { display: none; }
+      .clause-content.active { display: block; animation: fadeIn 0.4s ease forwards; }
 
-      /* Grid para texto e imagen lado a lado */
-      .content-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; align-items: start; margin-bottom: 2rem; }
-      @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
-      
-      .content-img { width: 100%; border-radius: 8px; border: 1px solid var(--border-ui); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-      
-      /* Botones de acción (PDFs, Docs) */
-      .btn-action {
-        display: inline-flex; align-items: center; gap: 8px;
-        background: var(--accent-color); color: white; padding: 0.8rem 1.5rem;
-        border-radius: 8px; text-decoration: none; font-weight: 600;
-        transition: transform 0.2s, background 0.2s;
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+      /* ESTILOS INTERNOS DE CONTENIDO */
+      .content-header {
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid var(--border-ui);
       }
-      .btn-action:hover { transform: translateY(-2px); background: #1d4ed8; }
-      .btn-action.secondary { background: var(--bg-hover); color: var(--text-title); border: 1px solid var(--border-ui); }
-      .btn-action.secondary:hover { background: var(--border-ui); }
 
-      /* Elementos HTML Comunes */
-      .html-body h3 { color: var(--text-title); font-size: 1.4rem; border-left: 4px solid var(--accent-color); padding-left: 10px; margin-top: 2rem;}
-      .html-body p { line-height: 1.7; font-size: 1.05rem; }
-      .alert-box { padding: 1.2rem; background: var(--accent-glow); border-left: 4px solid var(--accent-color); border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
-      
-      /* Tablas */
-      .table-responsive { overflow-x: auto; max-height: 500px; border: 1px solid var(--border-ui); border-radius: 8px; margin-top: 1rem; }
-      .styled-table { width: 100%; border-collapse: collapse; text-align: left; }
-      .styled-table th { background: var(--bg-hover); color: var(--text-title); padding: 1rem; position: sticky; top: 0; }
-      .styled-table td { padding: 1rem; border-bottom: 1px solid var(--border-ui); }
+      .content-header h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-title);
+        margin: 0 0 0.4rem 0;
+      }
+
+      .content-header p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin: 0;
+      }
+
+      .html-body { line-height: 1.7; font-size: 1.05rem; color: var(--text-body); }
+      .html-body h3 { color: var(--text-title); font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+      .html-body p { margin: 0 0 1.2rem 0; }
+
+      /* GRIDS Y DISTRIBUCIONES */
+      .grid-2-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: start;
+        margin-bottom: 1.5rem;
+      }
+
+      .box-card {
+        padding: 1.2rem;
+        background: var(--bg-hover);
+        border-radius: 8px;
+        border-left: 4px solid var(--border-ui);
+        font-size: 0.95rem;
+      }
+      .box-card.border-accent { border-color: var(--accent-color); }
+      .box-card.border-red { border-color: var(--danger); }
+      .box-card.border-warning { border-color: var(--warning); }
+
+      /* ENTORNO DE IMÁGENES Y PLACEHOLDERS */
+      .image-container {
+        width: 100%;
+        background: var(--bg-hover);
+        border: 1px dashed var(--border-ui);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        font-weight: 500;
+        min-height: 220px;
+        margin: 1.5rem 0;
+      }
+      .image-container.large { min-height: 350px; margin-top: 0; margin-bottom: 2rem; }
+      .image-container.step-img { min-height: 180px; margin: 1rem 0 2rem 0; }
+
+      /* TABLAS DE ALTO RENDIMIENTO */
+      .table-responsive {
+        max-height: 480px;
+        overflow-y: auto;
+        border: 1px solid var(--border-ui);
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        background: var(--bg-main);
+      }
+
+      .table-responsive::-webkit-scrollbar { width: 6px; height: 6px; }
+      .table-responsive::-webkit-scrollbar-track { background: var(--bg-hover); }
+      .table-responsive::-webkit-scrollbar-thumb { background: var(--border-ui); border-radius: 4px; }
+
+      .styled-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left; }
+      .styled-table thead { position: sticky; top: 0; background: var(--bg-hover); z-index: 5; }
+      .styled-table th { color: var(--text-title); padding: 1rem; font-weight: 700; border-bottom: 2px solid var(--border-ui); }
+      .styled-table td { padding: 0.9rem 1rem; border-bottom: 1px solid var(--border-ui); }
+      .styled-table tbody tr:hover { background-color: rgba(255, 255, 255, 0.01); }
+
+      .badge-cia {
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid var(--border-ui);
+      }
+
+      /* SECCIÓN DOCUMENTAL Y REFERENCIAS FINALES */
+      .document-viewer-section {
+        background: var(--bg-card);
+        border: 1px solid var(--border-ui);
+        border-radius: 12px;
+        padding: 2.5rem;
+        margin-top: 3rem;
+      }
+
+      .iframe-container {
+        width: 100%;
+        border: 1px solid var(--border-ui);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #1e1e1e;
+        margin-top: 1.5rem;
+      }
+
+      .references-section {
+        border-top: 1px solid var(--border-ui);
+        margin-top: 4rem;
+        padding-top: 2.5rem;
+      }
+
+      .references-list {
+        padding-left: 1.2rem;
+        line-height: 1.8;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+      .references-list li { margin-bottom: 0.8rem; }
+
+      @media (max-width: 950px) {
+        .dashboard-layout { grid-template-columns: 1fr; }
+        .sidebar { position: static; max-height: 280px; overflow-y: auto; }
+        .grid-2-cols { grid-template-columns: 1fr; gap: 1rem; }
+      }
     </style>
   </head>
   <body>
@@ -131,17 +330,27 @@ const menuLateral = [
     
     <main class="container">
       <header>
-        <h1>Implementación ISO 27001:2022</h1>
-        <p class="subtitle">Auditoría y Gestión de Riesgos en el Sistema Educativo Estatal Regular (SEER).</p>
+        <h1>Implementación de la Norma ISO 27001:2022 en el SEER</h1>
+        <p class="subtitle">Auditoría de Seguridad de la Información, Evaluación del Contexto y Tratamiento de Riesgos en Recursos Humanos</p>
       </header>
+
+      <div class="global-actions">
+        <a href="/docs/PR03-Equipo1.pdf" download class="btn-download">
+          Documento de Investigación (PDF)
+        </a>
+        <a href="/docs/PR03-Presentacion.pdf" download class="btn-download">
+          Presentación Ejecutiva (PDF)
+        </a>
+      </div>
 
       <div class="dashboard-layout">
         
         <aside class="sidebar">
-          <div class="sidebar-header">Cláusulas del Proyecto</div>
+          <div class="sidebar-header">Cláusulas ISO 27001</div>
           {menuLateral.map((sec, index) => (
             <button class={`clause-btn ${index === 0 ? 'active' : ''}`} data-target={sec.id}>
-              <span class="num">{sec.numero}.</span><span class="icon">{sec.icono}</span><span class="title">{sec.titulo}</span>
+              <span class="num">{sec.numero}</span>
+              <span class="title">{sec.titulo}</span>
             </button>
           ))}
         </aside>
@@ -150,105 +359,341 @@ const menuLateral = [
           
           <div id="sec-1" class="clause-content active">
             <div class="content-header">
-              <h2>🎯 I. Alcance del SGSI</h2>
-              <p>Definición de las fronteras y aplicabilidad del Sistema de Gestión.</p>
+              <h2>Cláusula I: Alcance del SGSI</h2>
+              <p>Fronteras y aplicabilidad del Sistema de Gestión de Seguridad de la Información.</p>
             </div>
-            
-            <div class="content-grid">
+            <div class="grid-2-cols">
               <div>
-                <h3>Delimitación del Proyecto</h3>
-                <p>El proyecto establece el perímetro de seguridad enfocado exclusivamente en el <strong>Departamento de Recursos Humanos del SEER</strong>.</p>
-                <div class="alert-box">
-                  <strong>Objetivo Crítico:</strong> Proteger datos personales, expedientes laborales y nóminas de amenazas internas y externas.
-                </div>
-                <div style="display: flex; gap: 10px; margin-top: 1.5rem;">
-                  <a href="/docs/PR03-Equipo1.pdf" download class="btn-action">📄 Descargar Investigación (PDF)</a>
-                  <a href="#" class="btn-action secondary">📊 Ver Anexos</a>
-                </div>
+                <h3>Contexto</h3>
+                <p>El Sistema Educativo Estatal Regular (SEER) gestiona datos sumamente sensibles de personal docente y administrativo en el estado de San Luis Potosí, lo que exige un marco formal de resguardo normativo.</p>
               </div>
-              <div>
-                <img src="https://placehold.co/600x400/151515/ededed?text=Diagrama+de+Alcance" alt="Diagrama de Alcance" class="content-img" />
+              <div class="image-container" style="margin:0;">
+                [Espacio para Imagen: Contexto Operativo del SEER]
               </div>
             </div>
+            <h3>Delimitación</h3>
+            <p>El perímetro del SGSI se restringe de forma exclusiva a la infraestructura tecnológica, bases de datos lógicas y archivos documentales físicos pertenecientes al Departamento de Recursos Humanos de la institución.</p>
+            <h3>Justificación</h3>
+            <p>Se prioriza este departamento debido a la alta concentración de datos de identificación personal (PII), transacciones bancarias de nómina y expedientes laborales, cuya vulneración comprometería la continuidad operativa institucional.</p>
           </div>
 
           <div id="sec-2" class="clause-content">
-            <div class="content-header"><h2>📚 II. Referencias Normativas</h2><p>Estándares internacionales aplicados.</p></div>
-            <p>Para asegurar el rigor corporativo, el SGSI del SEER se construyó sobre 5 pilares normativos:</p>
-            <ul>
-              <li><strong>ISO/IEC 27001:2022:</strong> Requisitos formales del SGSI.</li>
-              <li><strong>ISO/IEC 27002:2022:</strong> Catálogo de controles técnicos y organizacionales.</li>
-              <li><strong>ISO/IEC 27005:2018:</strong> Gestión de riesgos de seguridad.</li>
-              <li><strong>ISO/IEC 27017 & 27018:</strong> Controles para servicios en la nube (Office 365) y protección de PII.</li>
-            </ul>
+            <div class="content-header">
+              <h2>Cláusula II: Referencias Normativas</h2>
+              <p>Estándares y guías internacionales de cumplimiento obligatorio.</p>
+            </div>
+            <p>Para la correcta implementación del SGSI en el SEER, se aplican las siguientes normativas de la familia ISO/IEC 27000, utilizadas como guías rectoras y de cumplimiento obligatorio en el diseño de los controles:</p>
+            
+            <div class="box-card border-accent" style="margin-bottom: 1rem;">
+              <strong>1) ISO/IEC 27001:2022 (Information security, cybersecurity and privacy protection - Information security management systems - Requirements)</strong>
+              <p style="margin: 0.3rem 0 0 0; font-size:0.95rem;">Norma base certificable. Se utiliza para establecer los requisitos formales del SGSI en el SEER, delimitar el alcance y definir el ciclo de mejora continua.</p>
+            </div>
+
+            <div class="box-card border-accent" style="margin-bottom: 1rem;">
+              <strong>2) ISO/IEC 27002:2022 (Information security controls)</strong>
+              <p style="margin: 0.3rem 0 0 0; font-size:0.95rem;">Catálogo de controles de seguridad. Se utiliza para seleccionar las buenas prácticas (controles preventivos, detectivos y correctivos) aplicables a los activos de Recursos Humanos.</p>
+            </div>
+
+            <div class="box-card border-accent" style="margin-bottom: 1rem;">
+              <strong>3) ISO/IEC 27005:2018 (Information security risk management)</strong>
+              <p style="margin: 0.3rem 0 0 0; font-size:0.95rem;">Se emplea como metodología estructurada para identificar, evaluar y tratar los riesgos (amenazas y vulnerabilidades) específicos del departamento de Recursos Humanos.</p>
+            </div>
+
+            <div class="box-card border-accent" style="margin-bottom: 1rem;">
+              <strong>4) ISO/IEC 27017:2015 (Code of practice for information security controls based on ISO/IEC 27002 for cloud services)</strong>
+              <p style="margin: 0.3rem 0 0 0; font-size:0.95rem;">Aplicada específicamente para regular el uso seguro de Microsoft Office 365 y OneDrive por parte de los administrativos.</p>
+            </div>
+
+            <div class="box-card border-accent">
+              <strong>5) ISO/IEC 27018:2019 (Code of practice for protection of personally identifiable information (PII) in public clouds)</strong>
+              <p style="margin: 0.3rem 0 0 0; font-size:0.95rem;">Esencial para garantizar que los datos personales de los docentes subidos a la nube cumplan con parámetros de privacidad.</p>
+            </div>
           </div>
 
           <div id="sec-3" class="clause-content">
-            <div class="content-header"><h2>📖 III. Términos y Definiciones</h2><p>Estandarización del vocabulario (Guía ISO 73:2009).</p></div>
-            <h3>Glosario Estratégico</h3>
+            <div class="content-header">
+              <h2>Cláusula III: Términos y Definiciones</h2>
+              <p>Vocabulario estandarizado bajo los criterios de auditoría de la norma base.</p>
+            </div>
             <div class="table-responsive">
               <table class="styled-table">
-                <thead><tr><th>Término</th><th>Definición en el contexto del SEER</th></tr></thead>
+                <thead>
+                  <tr><th>Término</th><th>Definición Breve y Concisa</th></tr>
+                </thead>
                 <tbody>
-                  <tr><td><strong>Activo</strong></td><td>Cualquier información, sistema o persona con valor para la organización.</td></tr>
-                  <tr><td><strong>Amenaza</strong></td><td>Causa potencial de un incidente no deseado.</td></tr>
-                  <tr><td><strong>Vulnerabilidad</strong></td><td>Debilidad en un activo que puede ser explotada.</td></tr>
+                  <tr><td><strong>Acción Preventiva</strong></td><td>Medida proactiva orientada a mitigar potenciales no conformidades antes de su ocurrencia.</td></tr>
+                  <tr><td><strong>Activo (Asset)</strong></td><td>Cualquier elemento o sistema físico, lógico o humano con valor explícito para la institución.</td></tr>
+                  <tr><td><strong>Amenaza (Threat)</strong></td><td>Causa potencial de un incidente adverso capaz de dañar los activos del SEER.</td></tr>
+                  <tr><td><strong>Análisis de Riesgos</strong></td><td>Proceso sistemático orientado a comprender la naturaleza y nivel de riesgo de un vector de ataque.</td></tr>
+                  <tr><td><strong>Checklist</strong></td><td>Herramienta documental del auditor para asegurar la continuidad, profundidad y objetividad de la evaluación.</td></tr>
+                  <tr><td><strong>Identificación de Riesgos</strong></td><td>Proceso para encontrar, reconocer y clasificar fuentes de riesgo junto con sus causas y consecuencias.</td></tr>
+                  <tr><td><strong>Inventario de Activos</strong></td><td>Registro formal de recursos protegidos bajo el alcance del SGSI del departamento de Recursos Humanos.</td></tr>
                 </tbody>
               </table>
             </div>
           </div>
 
           <div id="sec-4" class="clause-content">
-            <div class="content-header"><h2>🏢 IV. Contexto de la Organización</h2><p>Mapeo de los 40 activos críticos.</p></div>
-            
-            <div class="content-grid">
-              <div>
-                <p>Se realizó una clasificación rigurosa evaluando el impacto de cada activo en la <strong>Tríada CIA</strong> (Confidencialidad, Integridad y Disponibilidad).</p>
-              </div>
-              <div>
-                <img src="https://placehold.co/600x300/151515/ededed?text=Grafico+de+Activos" alt="Gráfico de Activos" class="content-img" />
-              </div>
+            <div class="content-header">
+              <h2>Cláusula IV: Contexto de la Organización</h2>
+              <p>Inventario completo de los 40 activos críticos mapeados en el alcance de la auditoría.</p>
             </div>
-
-            <h3>Inventario de Activos (Extracto)</h3>
             <div class="table-responsive">
               <table class="styled-table">
                 <thead>
-                  <tr><th>ID</th><th>Activo</th><th>Tipo</th><th>Tríada CIA</th><th>Justificación</th></tr>
+                  <tr><th>ID</th><th>Activo</th><th>Ubicación</th><th>Tríada CIA</th><th>Justificación del Riesgo</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>ACT-03</td><td>Servidores escuela</td><td>Interno</td><td>C-Alta, I-Alta, D-Alta</td><td>Fuga de PII (Alumnos/Maestros).</td></tr>
-                  <tr><td>ACT-05</td><td>Gestor base de datos</td><td>Interno</td><td>C-Alta, I-Alta, D-Alta</td><td>Corrupción de registros.</td></tr>
-                  <tr><td>ACT-21</td><td>Licencia Office 365</td><td>Externo</td><td>C-Alta, I-Alta, D-Alta</td><td>Secuestro de sesión en nube.</td></tr>
-                  <tr><td>ACT-37</td><td>Plataformas SIGED</td><td>Externo</td><td>C-Alta, I-Alta, D-Alta</td><td>Integridad de expediente federal.</td></tr>
+                  <tr><td>ACT-01</td><td>Escuelas del S.E.E.R</td><td>Interno</td><td>C-Baja, I-Baja, D-Alta</td><td>Disponibilidad de servicios de control escolar descentralizados.</td></tr>
+                  <tr><td>ACT-02</td><td>Computadoras en salones</td><td>Interno</td><td>C-Media, I-Media, D-Alta</td><td>Punto de acceso a red desprotegido y vector de malware.</td></tr>
+                  <tr><td>ACT-03</td><td>Servidores escuela</td><td>Interno</td><td>C-Alta, I-Alta, D-Alta</td><td>Almacenamiento crítico, riesgo de fuga de datos de identificación.</td></tr>
+                  <tr><td>ACT-04</td><td>Impresoras Empresariales</td><td>Interno</td><td>C-Media, I-Baja, D-Media</td><td>Riesgo de fuga de información por documentos impresos huérfanos.</td></tr>
+                  <tr><td>ACT-05</td><td>Gestor base de datos</td><td>Interno</td><td>C-Alta, I-Alta, D-Alta</td><td>Corrupción o secuestro de registros académicos históricos.</td></tr>
+                  <tr><td>ACT-06</td><td>Datos alumno</td><td>Interno</td><td>C-Alta, I-Alta, D-Alta</td><td>Fuga de datos de menores y expedientes de control escolar.</td></tr>
+                  <tr><td>ACT-07</td><td>Expedientes personal</td><td>Interno</td><td>C-Alta, I-Alta, D-Media</td><td>Acceso no autorizado a registros financieros y médicos de empleados.</td></tr>
+                  <tr><td>ACT-08</td><td>Contratos empleado</td><td>Interno</td><td>C-Alta, I-Alta, D-Baja</td><td>Filtración de términos laborales o vulneración de confidencialidad.</td></tr>
+                  <tr><td>ACT-09</td><td>Sistemas de control escolar</td><td>Interno</td><td>C-Alta, I-Alta, D-Alta</td><td>Alteración maliciosa de calificaciones y estatus académico.</td></tr>
+                  <tr><td>ACT-10</td><td>Respaldos de BD</td><td>Interno</td><td>C-Alta, I-Alta, D-Alta</td><td>Destrucción o encriptación por ransomware sin almacenamiento alterno.</td></tr>
+                  <tr><td>ACT-11</td><td>Redes locales e inalámbricas</td><td>Interno</td><td>C-Media, I-Alta, D-Alta</td><td>Intercepción de tráfico de red interna por falta de segmentación.</td></tr>
+                  <tr><td>ACT-12</td><td>Material de oficina</td><td>Interno</td><td>C-Baja, I-Media, D-Baja</td><td>Falsificación de documentos mediante uso indebido de sellos físicos.</td></tr>
+                  <tr><td>ACT-13</td><td>Libros/Manuales proc.</td><td>Interno</td><td>C-Media, I-Media, D-Baja</td><td>Pérdida de continuidad por ausencia de manuales operativos documentados.</td></tr>
+                  <tr><td>ACT-14</td><td>Infraestructura física</td><td>Interno</td><td>C-Baja, I-Baja, D-Alta</td><td>Ingreso no autorizado al site o racks debido a carencia de control biométrico.</td></tr>
+                  <tr><td>ACT-15</td><td>Políticas control escolar</td><td>Interno</td><td>C-Baja, I-Alta, D-Baja</td><td>Incumplimiento normativo por falta de actualización ante leyes estatales.</td></tr>
+                  <tr><td>ACT-16</td><td>Software institucional</td><td>Interno</td><td>C-Alta, I-Alta, D-Alta</td><td>Compromiso total de los flujos de trabajo administrativos automatizados.</td></tr>
+                  <tr><td>ACT-17</td><td>Protocolos de seguridad</td><td>Interno</td><td>C-Alta, I-Alta, D-Media</td><td>Falta de aplicación operativa de políticas de control de acceso lógico.</td></tr>
+                  <tr><td>ACT-18</td><td>Manuales normatividad</td><td>Interno</td><td>C-Baja, I-Media, D-Baja</td><td>Alineación deficiente ante auditorías externas de gobierno.</td></tr>
+                  <tr><td>ACT-19</td><td>Capacitación personal</td><td>Interno</td><td>C-Baja, I-Media, D-Baja</td><td>Vulnerabilidad ante ingeniería social por desconocimiento técnico.</td></tr>
+                  <tr><td>ACT-20</td><td>Conocimiento administrativo</td><td>Interno</td><td>C-Media, I-Baja, D-Media</td><td>Fuga de experiencia institucional (know-how) tras la rotación de personal.</td></tr>
+                  <tr><td>ACT-21</td><td>Licencia Office 365</td><td>Externo</td><td>C-Alta, I-Alta, D-Alta</td><td>Secuestro de sesiones y fuga de PII alojada en la nube corporativa.</td></tr>
+                  <tr><td>ACT-22</td><td>Certificaciones</td><td>Externo</td><td>C-Baja, I-Alta, D-Baja</td><td>Falsificación o alteración de validez oficial en plataformas externas.</td></tr>
+                  <tr><td>ACT-23</td><td>Plataformas Normativa Fed.</td><td>Externo</td><td>C-Baja, I-Alta, D-Alta</td><td>Pérdida del enlace o sincronización de datos con la federación.</td></tr>
+                  <tr><td>ACT-24</td><td>Regulaciones Est/Fed</td><td>Externo</td><td>C-Baja, I-Media, D-Baja</td><td>Sanciones administrativas por desfase ante nuevas leyes de privacidad.</td></tr>
+                  <tr><td>ACT-25</td><td>Infraestructura ISP</td><td>Externo</td><td>C-Baja, I-Baja, D-Alta</td><td>Pérdida de conectividad al servidor por fallas del proveedor de internet.</td></tr>
+                  <tr><td>ACT-26</td><td>API Autenticación Terceros</td><td>Externo</td><td>C-Alta, I-Alta, D-Alta</td><td>Vulneración de tokens y suplantación de identidad administrativa.</td></tr>
+                  <tr><td>ACT-27</td><td>Equipos arrendados</td><td>Externo</td><td>C-Media, I-Media, D-Media</td><td>Fuga residual de datos confidenciales al término del contrato de renta.</td></tr>
+                  <tr><td>ACT-28</td><td>Servicios de Hosting Web</td><td>Externo</td><td>C-Media, I-Alta, D-Alta</td><td>Defatigamiento del sitio (defacement) o denegación de servicios distribuida.</td></tr>
+                  <tr><td>ACT-29</td><td>Token de acceso a nubes</td><td>Externo</td><td>C-Alta, I-Alta, D-Media</td><td>Fuga de claves criptográficas y exposición de repositorios de respaldo.</td></tr>
+                  <tr><td>ACT-30</td><td>Correo externo proveedores</td><td>Externo</td><td>C-Media, I-Baja, D-Media</td><td>Phishing dirigido (Spear Phishing) originado desde dominios suplantados.</td></tr>
+                  <tr><td>ACT-31</td><td>Pasarelas de pago nómina</td><td>Externo</td><td>C-Alta, I-Alta, D-Alta</td><td>Intercepción de transacciones financieras o desvío ilícito de fondos.</td></tr>
+                  <tr><td>ACT-32</td><td>Soporte técnico externo</td><td>Externo</td><td>C-Media, I-Media, D-Media</td><td>Ingeniería social inversa mediante falsos técnicos de TI de soporte.</td></tr>
+                  <tr><td>ACT-33</td><td>Respaldos externos en la nube</td><td>Externo</td><td>C-Alta, I-Alta, D-Alta</td><td>Exposición de bases de datos por mala configuración de cubetas de almacenamiento.</td></tr>
+                  <tr><td>ACT-34</td><td>Vehículos oficiales comp.</td><td>Externo</td><td>C-Baja, I-Baja, D-Media</td><td>Pérdida de activos físicos móviles por robo o siniestros viales.</td></tr>
+                  <tr><td>ACT-35</td><td>Centros atención trámites</td><td>Externo</td><td>C-Media, I-Media, D-Media</td><td>Fuga de datos de aspirantes en ventanillas de atención externas.</td></tr>
+                  <tr><td>ACT-36</td><td>Certificaciones Fed/Est</td><td>Externo</td><td>C-Media, I-Alta, D-Baja</td><td>Uso indebido o clonación de sellos de certificación oficial digital.</td></tr>
+                  <tr><td>ACT-37</td><td>Plataformas SEP/SIGED</td><td>Externo</td><td>C-Alta, I-Alta, D-Alta</td><td>Alteración técnica del expediente único del alumno a nivel nacional.</td></tr>
+                  <tr><td>ACT-38</td><td>Convenios instituciones</td><td>Externo</td><td>C-Media, I-Media, D-Media</td><td>Incumplimiento de convenios de confidencialidad cruzada.</td></tr>
+                  <tr><td>ACT-39</td><td>Contratos proveedores SW</td><td>Externo</td><td>C-Media, I-Media, D-Media</td><td>Inyección de código malicioso mediante vulnerabilidades en la cadena de suministro.</td></tr>
+                  <tr><td>ACT-40</td><td>Sistemas federales escolar</td><td>Externo</td><td>C-Alta, I-Alta, D-Alta</td><td>Compromiso de sincronización y bases de datos espejo ante la SEP.</td></tr>
                 </tbody>
               </table>
             </div>
           </div>
 
           <div id="sec-5" class="clause-content">
-            <div class="content-header"><h2>👑 V. Liderazgo y Políticas</h2><p>Estructura de gobernanza.</p></div>
-            <h3>Políticas Funcionales</h3>
+            <div class="content-header">
+              <h2>Cláusula V: Liderazgo y Políticas</h2>
+              <p>Estructura de gobernanza y directrices institucionales aprobadas.</p>
+            </div>
+            
+            <h3>Políticas Funcionales Internas</h3>
             <div class="table-responsive">
               <table class="styled-table">
-                <thead><tr><th>Política</th><th>Directriz</th><th>Procedimiento</th></tr></thead>
+                <thead>
+                  <tr><th>ID</th><th>Política Interna</th><th>Directriz de Seguridad</th><th>Línea Base Operativa</th></tr>
+                </thead>
                 <tbody>
-                  <tr><td>1. Control de Acceso</td><td>Contraseñas complejas (12+ caracteres).</td><td>Cambio obligatorio cada 90 días.</td></tr>
-                  <tr><td>4. Seguridad Física</td><td>"Escritorio Limpio" al final de la jornada.</td><td>Archiveros con llave obligatoria.</td></tr>
-                  <tr><td>Externo: Cloud</td><td>Cuentas institucionales obligatorias.</td><td>Uso estricto de 2FA/MFA.</td></tr>
+                  <tr><td>P-I1</td><td>Acceso a Bases de Datos</td><td>Contraseñas complejas (12+ caracteres)</td><td>Cambio forzado cada 90 días naturales</td></tr>
+                  <tr><td>P-I2</td><td>Seguridad en Equipos</td><td>Prohibición de instalación de software libre</td><td>Bloqueo de puertos USB por GPO corporativa</td></tr>
+                  <tr><td>P-I3</td><td>Gestión de Respaldos</td><td>Garantizar alta disponibilidad de nómina</td><td>Backups automatizados diarios a las 23:00 hrs</td></tr>
+                  <tr><td>P-I4</td><td>Seguridad Física</td><td>Criterios estrictos de Escritorio Limpio</td><td>Resguardo de sellos en archiveros con llave</td></tr>
+                  <tr><td>P-I5</td><td>Uso de Redes locales</td><td>Restricción total a portales de alto riesgo</td><td>Monitoreo semanal de logs de navegación web</td></tr>
+                  <tr><td>P-I6</td><td>Expedientes Físicos</td><td>Acceso restringido a personal de guardia</td><td>Bitácora obligatoria de firmas de revisión</td></tr>
+                  <tr><td>P-I7</td><td>Seguridad en Contratación</td><td>Validación rigurosa de antecedentes</td><td>Cotejo formal de títulos ante cédulas profesionales</td></tr>
+                  <tr><td>P-I8</td><td>Mantenimiento de Infraestructura</td><td>Reporte proactivo de fallas en site</td><td>Mantenimiento preventivo trimestral a racks</td></tr>
+                  <tr><td>P-I9</td><td>Actualización de Sistemas</td><td>Mitigación de vulnerabilidades de código</td><td>Despliegue de parches críticos cada fin de mes</td></tr>
+                  <tr><td>P-I10</td><td>Capacitación General</td><td>Robustecimiento del factor humano</td><td>Talleres obligatorios de Phishing una vez al año</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Políticas Funcionales Externas</h3>
+            <div class="table-responsive">
+              <table class="styled-table">
+                <thead>
+                  <tr><th>ID</th><th>Política Externa</th><th>Directriz de Seguridad</th><th>Línea Base Operativa</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>P-E1</td><td>Servicios en la Nube</td><td>Uso estricto de Microsoft Office 365</td><td>Activación mandatoria de autenticación 2FA</td></tr>
+                  <tr><td>P-E2</td><td>Cumplimiento SEP</td><td>Alineación total con directrices de federación</td><td>Auditoría interna trimestral de cumplimiento</td></tr>
+                  <tr><td>P-E3</td><td>Proveedores ISP</td><td>Garantizar disponibilidad del servicio web</td><td>Monitoreo de SLA con requerimiento de 99.9%</td></tr>
+                  <tr><td>P-E4</td><td>Intercambio de Datos</td><td>Cifrado estricto de datos en tránsito</td><td>Bloqueo automatizado a enlaces sin HTTPS</td></tr>
+                  <tr><td>P-E5</td><td>Equipos Arrendados</td><td>Cumplimiento idéntico al estándar interno</td><td>Borrado seguro certificado antes de devolución</td></tr>
+                  <tr><td>P-E6</td><td>Acceso de Terceros</td><td>Regulación de conexiones remotas</td><td>Firma mandatoria de contratos de confidencialidad NDA</td></tr>
+                  <tr><td>P-E7</td><td>Sedes de Respaldo</td><td>Diversificación geográfica de backups</td><td>Transferencia cifrada semanal a servidores estatales</td></tr>
+                  <tr><td>P-E8</td><td>Autenticación APIs</td><td>Seguridad en consumo de APIs externas</td><td>Auditoría semestral de tokens y llaves API</td></tr>
+                  <tr><td>P-E9</td><td>Eventos Externos</td><td>Protección de terminales en redes Wi-Fi</td><td>Uso forzado de VPN institucional activa</td></tr>
+                  <tr><td>P-E10</td><td>Material Editorial</td><td>Control de malware en archivos externos</td><td>Escaneo obligatorio en sandbox aislado</td></tr>
                 </tbody>
               </table>
             </div>
           </div>
 
-          <div id="sec-6" class="clause-content"><div class="content-header"><h2>⚠️ VI. Planificación de Riesgos</h2></div><p>Contenido libre aquí...</p></div>
-          <div id="sec-7" class="clause-content"><div class="content-header"><h2>🤝 VII. Soporte y Concientización</h2></div><p>Contenido libre aquí...</p></div>
-          <div id="sec-8" class="clause-content"><div class="content-header"><h2>⚙️ VIII. Operación Técnica</h2></div><p>Contenido libre aquí...</p></div>
-          <div id="sec-9" class="clause-content"><div class="content-header"><h2>📊 IX. Evaluación del Desempeño</h2></div><p>Contenido libre aquí...</p></div>
-          <div id="sec-10" class="clause-content"><div class="content-header"><h2>🚀 X. Mejora Continua</h2></div><p>Contenido libre aquí...</p></div>
+          <div id="sec-6" class="clause-content">
+            <div class="content-header">
+              <h2>Cláusula VI: Planificación de Riesgos</h2>
+              <p>Mapeo taxonómico de los riesgos internos y externos identificados.</p>
+            </div>
+            
+            <h3>Matriz de Riesgos Internos</h3>
+            <div class="table-responsive">
+              <table class="styled-table">
+                <thead>
+                  <tr><th>ID</th><th>Riesgo Identificado</th><th>Probabilidad</th><th>Impacto</th><th>Nivel de Riesgo</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>P-I1</td><td>Acceso no autorizado a BD de nómina</td><td>Baja</td><td>Muy Alto</td><td><span class="badge-cia" style="color:var(--warning)">Medio</span></td></tr>
+                  <tr><td>P-I2</td><td>Infección por Malware en computadoras de oficina</td><td>Alta</td><td>Alto</td><td><span class="badge-cia" style="color:var(--danger)">Alto</span></td></tr>
+                  <tr><td>P-I3</td><td>Pérdida de datos por fallas de hardware local</td><td>Baja</td><td>Muy Alto</td><td><span class="badge-cia" style="color:var(--warning)">Medio</span></td></tr>
+                  <tr><td>P-I5</td><td>Exfiltración de datos sensibles vía redes sociales</td><td>Media</td><td>Alto</td><td><span class="badge-cia" style="color:var(--danger)">Alto</span></td></tr>
+                  <tr><td>P-I10</td><td>Error humano por falta de concientización técnica</td><td>Alta</td><td>Alto</td><td><span class="badge-cia" style="color:var(--danger)">Alto</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="image-container">
+              [Mapa de Calor: Matriz de Distribución de Riesgos Internos]
+            </div>
+
+            <h3>Matriz de Riesgos Externos</h3>
+            <div class="table-responsive">
+              <table class="styled-table">
+                <thead>
+                  <tr><th>ID</th><th>Riesgo Identificado</th><th>Probabilidad</th><th>Impacto</th><th>Nivel de Riesgo</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>P-E1</td><td>Secuestro de sesión en cuentas de Office 365</td><td>Media</td><td>Muy Alto</td><td><span class="badge-cia" style="color:var(--danger)">Alto</span></td></tr>
+                  <tr><td>P-E3</td><td>Interrupción prolongada del enlace de Internet por ISP</td><td>Alta</td><td>Media</td><td><span class="badge-cia" style="color:var(--warning)">Medio</span></td></tr>
+                  <tr><td>P-E4</td><td>Intercepción de credenciales de nómina en tránsito</td><td>Media</td><td>Alto</td><td><span class="badge-cia" style="color:var(--danger)">Alto</span></td></tr>
+                  <tr><td>P-E6</td><td>Acceso malintencionado por credenciales de terceros</td><td>Media</td><td>Alto</td><td><span class="badge-cia" style="color:var(--danger)">Alto</span></td></tr>
+                  <tr><td>P-E10</td><td>Ingreso de malware mediante archivos de editoriales</td><td>Alta</td><td>Media</td><td><span class="badge-cia" style="color:var(--warning)">Medio</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="image-container">
+              [Mapa de Calor: Matriz de Distribución de Riesgos Externos]
+            </div>
+          </div>
+
+          <div id="sec-7" class="clause-content">
+            <div class="content-header">
+              <h2>Cláusula VII: Soporte</h2>
+              <p>Asignación de recursos esenciales, concientización y control de la información documentada.</p>
+            </div>
+            <p>La viabilidad operativa del SGSI dentro del SEER se sustenta en tres líneas de soporte estrictamente estructuradas:</p>
+            
+            <div class="box-card border-accent" style="margin-bottom: 1.2rem;">
+              <strong>Concienciación del Factor Humano</strong>
+              <p style="margin:0.2rem 0 0 0;">Se formalizaron minutas de capacitación enfocadas de manera exclusiva en contrarrestar ataques de Phishing e Ingeniería Social, convirtiendo al personal de Recursos Humanos en la primera línea de defensa de la institución.</p>
+            </div>
+
+            <div class="box-card border-accent" style="margin-bottom: 1.2rem;">
+              <strong>Información Documentada Obligatoria</strong>
+              <p style="margin:0.2rem 0 0 0;">Todo flujo operacional requiere controles de evidencia trazables. Esto incluye la firma mandatoria de acuerdos de confidencialidad (NDAs) por parte de los operadores de cómputo y el llenado riguroso de bitácoras físicas de acceso al archivo.</p>
+            </div>
+
+            <div class="box-card border-accent">
+              <strong>Asignación de Recursos de Red</strong>
+              <p style="margin:0.2rem 0 0 0;">La administración aprobó el presupuesto requerido para la modernización de la infraestructura local, permitiendo la integración de firewalls perimetrales y el aislamiento lógico de las terminales críticas de nómina.</p>
+            </div>
+          </div>
+
+          <div id="sec-8" class="clause-content">
+            <div class="content-header">
+              <h2>Cláusula VIII: Operación</h2>
+              <p>Flujo secuencial de la implementación técnica de los controles preventivos.</p>
+            </div>
+
+            <h3>Paso 1: Restricción de Dominios Genéricos</h3>
+            <p>Se inhabilitó por completo el acceso a las plataformas centrales de Recursos Humanos desde cuentas de correo personales. Toda autenticación requiere obligatoriamente una cuenta bajo el dominio institucional.</p>
+            <div class="image-container step-img">[Evidencia Técnica: Bloqueo de inicios de sesión desde correos personales]</div>
+
+            <h3>Paso 2: Activación Mandatoria de Doble Factor (2FA)</h3>
+            <p>Se configuraron las directivas globales de seguridad de Office 365 para exigir el enrolamiento de un segundo factor de autenticación en todos los puestos administrativos.</p>
+            <div class="image-container step-img">[Evidencia Técnica: Interfaz de solicitud de token de autenticación multifactor]</div>
+
+            <h3>Paso 3: Instalación Corporativa de Microsoft Authenticator</h3>
+            <p>Despliegue forzado de la aplicación de autenticación en las terminales móviles autorizadas, eliminando el uso de SMS tradicionales debido a vulnerabilidades de SIM Swapping.</p>
+            <div class="image-container step-img">[Evidencia Técnica: Configuración de la llave criptográfica en la aplicación móvil]</div>
+
+            <h3>Paso 4: Vinculación Estricta de Cuentas de Nómina</h3>
+            <p>Fase final del flujo operativo, donde las llaves de acceso a las bases de datos de personal quedaron completamente enlazadas al identificador del doble factor verificado.</p>
+            <div class="image-container step-img">[Evidencia Técnica: Bitácora de acceso exitoso con validación de identidad 2FA]</div>
+          </div>
+
+          <div id="sec-9" class="clause-content">
+            <div class="content-header">
+              <h2>Cláusula IX: Evaluación del Desempeño</h2>
+              <p>Mecanismos de supervisión, auditoría y métricas de cumplimiento.</p>
+            </div>
+            <p>Se implementaron metodologías de control numérico y revisión ejecutiva para auditar el funcionamiento real de los parches de seguridad y el cumplimiento de las políticas de escritorio limpio.</p>
+            
+            <h3>Resultados de Cumplimiento Técnico de Controles</h3>
+            <div class="table-responsive">
+              <table class="styled-table">
+                <thead>
+                  <tr><th>Métrica de Control Evaluada</th><th>Estatus Operativo</th><th>Nivel de Cumplimiento</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Uso estricto de cuenta institucional (@seer.gob.mx)</td><td>Validado</td><td>100% de efectividad</td></tr>
+                  <tr><td>Activación obligatoria de Autenticación 2FA</td><td>Validado</td><td>100% de efectividad</td></tr>
+                  <tr><td>Restricción de software y bloqueo de almacenamiento USB</td><td>En Monitoreo</td><td>92% de cumplimiento por excepciones temporales</td></tr>
+                  <tr><td>Resguardo de sellos institucionales bajo llave en oficina</td><td>Auditado</td><td>100% de cumplimiento en revisiones sorpresa</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Las bitácoras resultantes son consolidadas por el equipo de TI y presentadas de manera trimestral ante la Dirección General del SEER para autorizar los ajustes correctivos anuales correspondientes.</p>
+          </div>
+
+          <div id="sec-10" class="clause-content">
+            <div class="content-header">
+              <h2>Cláusula X: Mejora Continua</h2>
+              <p>Acciones correctivas ante incidentes y optimización proactiva del SGSI.</p>
+            </div>
+            <div class="image-container large">
+              [Diagrama de Flujo: Ciclo Deming (PHVA) Aplicado a Incidentes de Recursos Humanos]
+            </div>
+            <h3>Gestión de No Conformidades</h3>
+            <p>Cuando un indicador de auditoría cae por debajo del umbral mínimo aceptable, o se detecta una brecha de seguridad simulada en los talleres, se activa de forma automática el protocolo de análisis post-mortem.</p>
+            <p>Se ejecuta una metodología de análisis de causa raíz para identificar fallas en las líneas base normativas, reconfigurar las políticas en el firewall perimetral y asegurar que los vectores de ataque explotados queden sellados permanentemente de cara al siguiente ciclo operativo.</p>
+          </div>
 
         </section>
       </div>
+
+      <section class="document-viewer-section">
+        <h3>Repositorio de Documentación Técnica</h3>
+        <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom: 1.5rem;">Carga o consulta de manera directa el reporte completo de la auditoría y los anexos normativos del proyecto dentro de la plataforma.</p>
+        
+        <div class="iframe-container">
+          <iframe 
+            src="/docs/PR03-Equipo1.pdf" 
+            width="100%" 
+            height="650px" 
+            style="border:none;"
+            title="Visualizador del Reporte Técnico ISO 27001">
+            Tu navegador no soporta la visualización de archivos PDF embebidos. Puedes descargarlo desde la sección superior.
+          </iframe>
+        </div>
+      </section>
+
+      <section class="references-section">
+        <h3 style="color: var(--text-title); font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">Referencias Bibliográficas</h3>
+        <ol class="references-list">
+          <li>International Organization for Standardization. (2022). <em>Information security, cybersecurity and privacy protection — Information security management systems — Requirements</em> (ISO/IEC Standard No. 27001:2022). https://www.iso.org/standard/73906.html</li>
+          <li>International Organization for Standardization. (2022). <em>Information security, cybersecurity and privacy protection — Information security controls</em> (ISO/IEC Standard No. 27002:2022).</li>
+          <li>International Organization for Standardization. (2018). <em>Information technology — Security techniques — Information security risk management</em> (ISO/IEC Standard No. 27005:2018).</li>
+          <li>Sistema Educativo Estatal Regular (SEER). (2024). <em>Estructura orgánica y manual de procedimientos del departamento de Recursos Humanos</em>. Gobierno del Estado de San Luis Potosí.</li>
+        </ol>
+      </section>
     </main>
 
     <Footer />
@@ -260,12 +705,21 @@ const menuLateral = [
       buttons.forEach(button => {
         button.addEventListener('click', () => {
           if (button.classList.contains('active')) return;
+
+          // Apagar estados activos previos
           buttons.forEach(btn => btn.classList.remove('active'));
           contents.forEach(content => content.classList.remove('active'));
-          
+
+          // Encender el botón presionado
           button.classList.add('active');
+
+          // Mostrar el bloque de HTML correspondiente y reiniciar sus animaciones en cascada
           const targetId = button.getAttribute('data-target');
-          document.getElementById(targetId)?.classList.add('active');
+          const targetContent = document.getElementById(targetId);
+          if (targetContent) {
+            void targetContent.offsetWidth; // Forzado de repintado en el motor del navegador
+            targetContent.classList.add('active');
+          }
         });
       });
     </script>
