@@ -22,6 +22,9 @@ export const frontmatter = {
     <p>
       El análisis moderno de incidentes exige metodologías capaces de vincular aspectos técnicos y relacionales para entender la estrategia del adversario. En este reporte se efectúa una modelación analítica de una intrusión de malware detectada dentro de un entorno corporativo. Utilizando de forma integrada el Modelo Diamante de Análisis de Intrusiones y las fases temporales de la Cyber Kill Chain, se mapean las capacidades, la infraestructura y los vectores de desplazamiento empleados, proveyendo al equipo de respuesta una base estructurada para la contención de amenazas avanzadas.
     </p>
+    <p>
+      <span><img src="/assets/pr03/modeloDiamods.png" alt="Modelo Diamante"></span>
+    </p>
   </section>
 
   <section class="info-section">
@@ -227,6 +230,32 @@ export const frontmatter = {
     </div>
   </section>
 
+<section class="info-section">
+    <div class="section-badge">Multimedia</div>
+    <h2>Material Multimedia/h2>
+    <p>
+      Material audiovisual, gráfico y documental de apoyo para profundizar en el análisis de esta actividad.
+    </p>
+    
+    <div class="multimedia-grid">
+      <div class="media-card">
+        <div class="media-info">
+          <h4>Explicación Modelo Diamante en Ciberseguridad</h4>
+        </div>
+        <div class="media-placeholder">
+          <span><iframe width="560" height="315" src="https://youtu.be/zht0IKkcwAg?si=9bbAisw8qJGXuhN2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section conclusion-box">
+    <h2>Conclusión</h2>
+    <p>
+      La modelación integrada del ataque demostró la efectividad de un enfoque multicapa. Mientras que el Modelo Diamante aporta claridad inmediata para catalogar las entidades involucradas (IPs, herramientas, objetivos), la Cyber Kill Chain traza el progreso temporal del incidente. Entender de forma rigurosa la interconexión de estos elementos permite a los administradores de sistemas cortar la cadena del exploit en fases tempranas, previniendo la exfiltración final de datos corporativos críticos.
+    </p>
+  </section>
+
   <section class="info-section conclusion-box">
     <h2>Conclusión</h2>
     <p>
@@ -294,7 +323,7 @@ export const frontmatter = {
     background: var(--accent-blue-bg);
     color: var(--accent-blue);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 900;
     text-transform: uppercase;
     padding: 0.3rem 0.8rem;
     border-radius: 4px;
@@ -506,5 +535,50 @@ export const frontmatter = {
   .references-section li {
     margin-bottom: 0.8rem;
     font-size: 0.9rem;
+  }
+  /* ESTILOS DE LA SECCIÓN MULTIMEDIA */
+  .multimedia-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .media-card {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+  }
+  .media-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(59, 130, 246, 0.5); /* Acento azul sutil al pasar el mouse */
+  }
+  .media-placeholder {
+    width: 100%;
+    height: 180px;
+    background: #18181b; /* Fondo aún más oscuro para contrastar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-dark);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .media-info {
+    padding: 1.2rem;
+  }
+  .media-info h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: var(--accent-blue);
+  }
+  .media-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
   }
 </style>
