@@ -47,34 +47,44 @@ export const frontmatter = {
   </section>
 
   <section class="info-section">
-    <div class="section-badge">Análisis Estructurado</div>
+    <div class="section-badge">Infraestructura</div>
     <h2>El Modelo Diamante de Intrusión</h2>
     <p>
-      El Modelo Diamante es un esquema matemático-analítico que representa un evento de intrusión informática mediante cuatro vértices conectados: Adversario, Capacidad, Infraestructura y Víctima. Estos ejes permiten correlacionar el origen de la amenaza con los recursos técnicos utilizados, facilitando la detección de patrones de ciberespionaje y facilitando la inteligencia de amenazas.
+      Representación de las relaciones interdependientes entre las cuatro características principales de un evento de intrusión.
     </p>
 
-    <div class="diamond-diagram-container">
-      <div class="diamond-layout">
-        <div class="diamond-node top-node">
-          <div class="node-title">Adversario</div>
-          <div class="node-desc">Grupo APT Externo</div>
-        </div>
-        <div class="diamond-axis-lines">
-          <div class="line-h"></div>
-          <div class="line-v"></div>
-        </div>
-        <div class="diamond-node left-node">
-          <div class="node-title">Capacidad</div>
-          <div class="node-desc">Phishing & RAT Malware</div>
-        </div>
-        <div class="diamond-node right-node">
-          <div class="node-title">Infraestructura</div>
-          <div class="node-desc">Servidores C2 & DNS</div>
-        </div>
-        <div class="diamond-node bottom-node">
-          <div class="node-title">Víctima</div>
-          <div class="node-desc">Estaciones de Red Interna</div>
-        </div>
+    <div class="diamond-container">
+      <svg class="diamond-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <line x1="50" y1="5"  x2="95" y2="50" />
+        <line x1="95" y1="50" x2="50" y2="95" />
+        <line x1="50" y1="95" x2="5"  y2="50" />
+        <line x1="5"  y2="50" x2="50" y2="5"  />
+        <line x1="50" y1="5"  x2="50" y2="95" stroke-dasharray="2,2" />
+        <line x1="5"  y1="50" x2="95" y2="50" stroke-dasharray="2,2" />
+      </svg>
+
+      <div class="diamond-node node-adversary">
+        <div class="node-icon">👤</div>
+        <h3>Adversario</h3>
+        <p>APT u operador externo que dirige la intrusión.</p>
+      </div>
+
+      <div class="diamond-node node-infrastructure">
+        <div class="node-icon">🌐</div>
+        <h3>Infraestructura</h3>
+        <p>Servidores C2, IPs y dominios utilizados.</p>
+      </div>
+
+      <div class="diamond-node node-capability">
+        <div class="node-icon">⚡</div>
+        <h3>Capacidad</h3>
+        <p>Malware, exploits y herramientas de intrusión.</p>
+      </div>
+
+      <div class="diamond-node node-victim">
+        <div class="node-icon">🎯</div>
+        <h3>Víctima</h3>
+        <p>Administradores y hosts de la red afectada.</p>
       </div>
     </div>
   </section>
@@ -232,11 +242,7 @@ export const frontmatter = {
 
 <section class="info-section">
     <div class="section-badge">Multimedia</div>
-    <h2>Material Multimedia/h2>
-    <p>
-      Material audiovisual, gráfico y documental de apoyo para profundizar en el análisis de esta actividad.
-    </p>
-    
+    <h2>Material Multimedia</h2>
     <div class="multimedia-grid">
       <div class="media-card">
         <div class="media-info">
@@ -580,5 +586,142 @@ export const frontmatter = {
     margin: 0;
     font-size: 0.85rem;
     line-height: 1.5;
+  }
+
+  /* CONTENEDOR GEOMÉTRICO DEL DIAMANTE */
+  .diamond-container {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    height: 550px;
+    margin: 3rem auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  /* CAPA DE LÍNEAS SVG DE INTERCONEXIÓN */
+  .diamond-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none; /* No interfiere con clics o interacciones */
+  }
+  .diamond-lines line {
+    stroke: rgba(255, 255, 255, 0.15); /* Color de línea base sutil */
+    stroke-width: 1.5;
+  }
+  :global(.dark) .diamond-lines line {
+    stroke: rgba(255, 255, 255, 0.2);
+  }
+
+  /* ESTILO GENERAL DE LOS RECUADROS / NODOS */
+  .diamond-node {
+    position: absolute;
+    width: 190px;
+    background: var(--card-dark, #141416);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .diamond-node:hover {
+    transform: scale(1.05);
+  }
+  .diamond-node h3 {
+    margin: 0.5rem 0 0.25rem 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .diamond-node p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--text-secondary, #a1a1aa);
+    line-height: 1.4;
+  }
+  .node-icon {
+    font-size: 1.5rem;
+  }
+
+  /* POSICIONAMIENTO COORDENADO DE LOS CUATRO EXTREMOS */
+  .node-adversary {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid #22c55e; /* CONTORNO VERDE */
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.15);
+  }
+  .node-adversary:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+  }
+
+  .node-infrastructure {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    border: 2px solid #a855f7; /* CONTORNO MORADO */
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.15);
+  }
+  .node-infrastructure:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+
+  .node-capability {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    border: 2px solid #ef4444; /* CONTORNO ROJO */
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.15);
+  }
+  .node-capability:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+  }
+
+  .node-victim {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid #3b82f6; /* CONTORNO AZUL */
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.15);
+  }
+  .node-victim:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+
+  /* RESPONSIVIDAD PARA PANTALLAS PEQUEÑAS (MÓVILES) */
+  @media (max-width: 600px) {
+    .diamond-container {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      margin: 1.5rem auto;
+    }
+    .diamond-lines {
+      display: none; /* Ocultamos líneas en móviles para evitar desfases */
+    }
+    .diamond-node {
+      position: relative;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: none !important;
+      width: 100%;
+      max-width: 280px;
+    }
+    .diamond-node:hover {
+      transform: scale(1.02) !important;
+    }
   }
 </style>
