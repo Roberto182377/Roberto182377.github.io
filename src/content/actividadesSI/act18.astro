@@ -240,7 +240,7 @@ export const frontmatter = {
     </div>
   </section>
 
-<section class="info-section">
+  <section class="info-section">
     <h2>Material Multimedia</h2>
       <h4>Explicación del funcionamiento del Modelo Diamante</h4>
       <span><iframe width="560" height="315" src="https://youtu.be/zht0IKkcwAg?si=9bbAisw8qJGXuhN2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></span>
@@ -571,5 +571,142 @@ export const frontmatter = {
     margin: 0;
     font-size: 0.85rem;
     line-height: 1.5;
+  }
+
+  /* CONTENEDOR GEOMÉTRICO DEL DIAMANTE */
+  .diamond-container {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    height: 550px;
+    margin: 3rem auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  /* CAPA DE LÍNEAS SVG DE INTERCONEXIÓN */
+  .diamond-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none; /* No interfiere con clics o interacciones */
+  }
+  .diamond-lines line {
+    stroke: rgba(255, 255, 255, 0.15); /* Color de línea base sutil */
+    stroke-width: 1.5;
+  }
+  :global(.dark) .diamond-lines line {
+    stroke: rgba(255, 255, 255, 0.2);
+  }
+
+  /* ESTILO GENERAL DE LOS RECUADROS / NODOS */
+  .diamond-node {
+    position: absolute;
+    width: 190px;
+    background: var(--card-dark, #141416);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .diamond-node:hover {
+    transform: scale(1.05);
+  }
+  .diamond-node h3 {
+    margin: 0.5rem 0 0.25rem 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .diamond-node p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--text-secondary, #a1a1aa);
+    line-height: 1.4;
+  }
+  .node-icon {
+    font-size: 1.5rem;
+  }
+
+  /* POSICIONAMIENTO COORDENADO DE LOS CUATRO EXTREMOS */
+  .node-adversary {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid #22c55e; /* CONTORNO VERDE */
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.15);
+  }
+  .node-adversary:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+  }
+
+  .node-infrastructure {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    border: 2px solid #a855f7; /* CONTORNO MORADO */
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.15);
+  }
+  .node-infrastructure:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+
+  .node-capability {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    border: 2px solid #ef4444; /* CONTORNO ROJO */
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.15);
+  }
+  .node-capability:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+  }
+
+  .node-victim {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid #3b82f6; /* CONTORNO AZUL */
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.15);
+  }
+  .node-victim:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+
+  /* RESPONSIVIDAD PARA PANTALLAS PEQUEÑAS (MÓVILES) */
+  @media (max-width: 600px) {
+    .diamond-container {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      margin: 1.5rem auto;
+    }
+    .diamond-lines {
+      display: none; /* Ocultamos líneas en móviles para evitar desfases */
+    }
+    .diamond-node {
+      position: relative;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: none !important;
+      width: 100%;
+      max-width: 280px;
+    }
+    .diamond-node:hover {
+      transform: scale(1.02) !important;
+    }
   }
 </style>
